@@ -1,0 +1,45 @@
+#!/bin/bash
+source $(dirname $0)/stack-helpers.sh
+LOG=/tmp/log/$(basename $0).log
+mkdir -p /tmp/log
+
+(
+  [ $# -eq 2 ] || abort usage: $(basename $0) VERSION SCRIPT
+
+  VERSION=$1
+  SCRIPT=$2
+  MNT=/tmp/cedar64-$VERSION-build
+
+  [ $UID = 0 ]     || abort fatal: must be called with sudo
+  [[ -f $SCRIPT ]] || abort fatal: script "$SCRIPT" not found
+  [[ -d $MNT ]]    && abort fatal: dir "$MNT" already exists
+
+  function on_exit() {
+    display Cleaning up. Logs at $LOG
+    umount $MNT/dev $MNT/proc 2>&1 | indent
+  }
+  trap on_exit EXIT
+
+  display Starting build at $(date)
+  display Installing build tools
+  (
+    apt-get update
+    apt-get install -y build-essential debootstrap git-core
+  ) 2>&1 | indent
+
+  display Bootstrapping build env $MNT
+  (
+    mkdir -p $MNT
+    debootstrap --variant=minbase lucid $MNT
+  ) | indent
+
+  display Mounting host in build env
+  (
+    mount --bind /dev  $MNT/dev
+    mount --bind /proc $MNT/proc
+    cp $SCRIPT $MNT/tmp/build.sh
+  ) | indent
+
+  display Building inside build env
+  chroot $MNT /tmp/build.sh | indent
+) 2>&1 | tee $LOG

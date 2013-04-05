@@ -1,0 +1,4 @@
+tar-ignore = .hg
+tar-ignore = .git
+tar-ignore = .git*
+tar-ignore = .build

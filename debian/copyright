@@ -1,0 +1,8 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: cedar
+Source: https://devcenter.heroku.com/articles/stack
+
+Files: *
+Copyright: 2012 Heroku <runtime@heroku.com>
+License: Proprietary
+

@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+PKGNAME=cedar
+PKGDIR=debian/$(PKGNAME)
+INSTALLDIR=$(PKGDIR)/usr/share/stacks
+
+%:
+	dh $@
+
+dist-clean: clean
+	rm -rf /tmp/$(PKGNAME)*
+
+binary-arch:
+	dh_prep
+	dh_installdirs
+	test -d /tmp/cedar64-current-build || sudo bin/build-stack current bin/cedar.sh
+	sudo bin/capture-stack current --no-gzip
+	sudo chmod a+r /tmp/$(PKGNAME)*.img*
+	mkdir -p $(INSTALLDIR)
+	cp /tmp/$(PKGNAME)*.img* $(INSTALLDIR)/
+
+binary: binary-arch

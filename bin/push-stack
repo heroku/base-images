@@ -1,0 +1,54 @@
+#!/bin/bash
+source $(dirname $0)/stack-helpers.sh
+LOG=/tmp/log/$(basename $0).log
+
+(
+  [ $# -eq 2 ] || abort usage: $(basename $0) VERSION BUCKET
+
+  VERSION=$1
+  BUCKET=$2
+  IMG_GZ=/tmp/cedar64-$VERSION.img.gz
+  IMG_MD5=${IMG_GZ%.gz}.md5
+  S3CFG=/tmp/.s3cfg
+  S3_IMG_GZ=$BUCKET/$(basename $IMG_GZ)
+  S3_IMG_MD5=$BUCKET/$(basename $IMG_MD5)
+
+  [[ -f $IMG_GZ ]]  || abort fatal: file "$IMG_GZ" not found
+  [[ -f $IMG_MD5 ]] || abort fatal: file "$IMG_MD5" not found
+  [[ $AWS_ACCESS_KEY_ID = "" ]]     && abort fatal: AWS_ACCESS_KEY_ID not set
+  [[ $AWS_SECRET_ACCESS_KEY = "" ]] && abort fatal: AWS_SECRET_ACCESS_KEY not set
+
+  function on_exit() {
+    display Cleaning up. Logs at $LOG
+    rm $S3CFG
+  }
+  trap on_exit EXIT
+
+  cat >$S3CFG <<EOF
+[default]
+access_key = $AWS_ACCESS_KEY_ID
+secret_key = $AWS_SECRET_ACCESS_KEY
+EOF
+
+  display Starting push at $(date)
+  display Uploading files
+  (
+    # test AWS credentials and bucket
+    set +o pipefail
+    s3cmd -c $S3CFG ls s3://$BUCKET/ 2>&1 | indent | grep ERROR
+  ) && abort fatal: can not access S3
+
+  s3cmd -c $S3CFG --progress --acl-private put $IMG_GZ  s3://$S3_IMG_GZ
+  s3cmd -c $S3CFG --progress --acl-public  put $IMG_MD5 s3://$S3_IMG_MD5
+
+  display Signing URLs
+  (
+    # finally we find something bash is miserable at!
+    EXPIRES=$(date +%s --date "now 100000000 seconds")
+    SIGNATURE=$(s3cmd -c $S3CFG sign $'GET\n\n\n'$EXPIRES$'\n/'$S3_IMG_GZ)
+    SIGNATURE=${SIGNATURE#Signature: }
+    SIGNATURE="$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "$SIGNATURE")"
+    echo "http://s3.amazonaws.com/$S3_IMG_GZ?AWSAccessKeyId=$AWS_ACCESS_KEY_ID&Expires=$EXPIRES&Signature=$SIGNATURE"
+    echo "http://s3.amazonaws.com/$S3_IMG_MD5"
+  ) | indent
+) 2>&1 | tee $LOG
