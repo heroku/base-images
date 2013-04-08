@@ -43,7 +43,7 @@ LOG=/tmp/log/$(basename $0).log
 
   display Modifying image directories and files
   (
-    for d in app tmp proc dev var var/log var/tmp home/group_home mnt/slug-compiler; do
+    for d in app tmp proc dev var var/log var/tmp home/group_home; do
       mkdir -p $IMG_MNT/$d
     done
     chmod 755 $IMG_MNT/home/group_home
