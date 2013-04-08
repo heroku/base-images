@@ -18,7 +18,6 @@ apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev libbz2-dev
 apt-get install -y --force-yes daemontools
 apt-get install -y --force-yes curl netcat telnet
 apt-get install -y --force-yes ed bison
-apt-get install -y --force-yes strace gdb
 apt-get install -y --force-yes openssh-client openssh-server
 apt-get install -y --force-yes imagemagick libmagick9-dev
 apt-get install -y --force-yes ia32-libs
