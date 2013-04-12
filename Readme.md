@@ -1,9 +1,9 @@
 Heroku Stack Images
 =========
 
-The provided bin/cedar.sh is the basis of a cedar stack image.
+The provided `bin/cedar.sh` is the basis of a cedar stack image.
 
-    cd hvm
+    cd stack-images
     vagrant up
     vagrant ssh
 
