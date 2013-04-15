@@ -17,24 +17,17 @@ apt-get install -y --force-yes coreutils tar build-essential autoconf
 apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev libbz2-dev libreadline5-dev zlib1g-dev libevent-dev libssl-dev libpq-dev libncurses5-dev libcurl4-openssl-dev libjpeg-dev libmysqlclient-dev
 apt-get install -y --force-yes daemontools
 apt-get install -y --force-yes curl netcat telnet
+apt-get install -y --force-yes git-core
 apt-get install -y --force-yes ed bison
 apt-get install -y --force-yes openssh-client openssh-server
 apt-get install -y --force-yes imagemagick libmagick9-dev
 apt-get install -y --force-yes ia32-libs
+apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
 
+# need an older squashfs-tools
 cd /tmp
 curl --retry 3 --max-time 60 --write-out %{http_code} --silent -o squashfs-tools_3.3-1ubuntu2_amd64.deb http://launchpadlibrarian.net/11397899/squashfs-tools_3.3-1ubuntu2_amd64.deb
 dpkg -i squashfs-tools_3.3-1ubuntu2_amd64.deb
-
-cd /tmp
-curl -L -o git-1.7.0.tar.gz https://github.com/git/git/tarball/v1.7.0
-mkdir -p git-1.7.0
-cd git-1.7.0
-tar --strip-components 1 -xzvf ../git-1.7.0.tar.gz
-NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make prefix=/usr
-NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make install prefix=/usr
-
-apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
 
 function fetch_verify_tarball() {
     cd /tmp
