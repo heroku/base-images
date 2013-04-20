@@ -43,3 +43,24 @@ Stack images are generally pushed to S3 and installed from there.
     -----> Starting install
     -----> Downloading and gunzipping image
     -----> Mounting image /mnt/stacks/cedar64-2.0.0
+
+Debian Packaging
+----------------
+
+Make sure you have `debhelper` (`debuild`) installed and run all
+commands inside an amd64 linux box.
+
+First, edit the `debian/changelog` file. Make sure you set the correct version
+and distribution (`lucid` or `precise`), `dch` can help:
+
+```
+dch -i
+```
+
+Then, build the package (in a linux amd64 box):
+
+```
+debuild -us -uc
+```
+
+The package will be in the top dir `../`.
