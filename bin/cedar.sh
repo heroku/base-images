@@ -58,15 +58,6 @@ fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p290.tar.
     "1cc817575c4944d3d78959024320ed1d5b7c2b4931a855772dacad7c3f6ebd7e  ruby-1.9.2-p290.tar.gz"
 cd ruby-1.9.2-p290 && ./configure --prefix=/usr/local && make && make install
 
-fetch_verify_tarball "http://www.erlang.org/download/otp_src_R14B04.tar.gz" \
-    "099b35910e635b9148ac90f70fd9dd592920ed02406eb26c349efd8d1e959b6e  otp_src_R14B04.tar.gz"
-cd otp_src_R14B04 && ./configure && make && make install
-
-# remove non-root owned artifacts of erlang
-rm -rf /usr/local/lib/erlang/lib/sasl-2.1.10/examples/
-rm -rf /usr/local/lib/erlang/lib/ssl-4.1.6/examples/
-rm -rf /usr/local/lib/erlang/lib/kernel-2.14.5/examples/
-
 cd /
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
