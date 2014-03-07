@@ -104,7 +104,7 @@ NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make install prefix=/usr
 function fetch_verify_tarball() {
     cd /tmp
     local tarball=$(basename $1)
-    curl -o $tarball $1
+    curl -L -o $tarball $1
     if [ "$(sha256sum $tarball)" != "$2" ]; then
         echo "Checksum mismatch for $1!"
         # exit 1
@@ -112,7 +112,7 @@ function fetch_verify_tarball() {
     tar xzf $tarball
 }
 
-fetch_verify_tarball "http://legacy.python.org/ftp/python/2.7.2/Python-2.7.2.tgz" \
+fetch_verify_tarball "http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tgz" \
     "1d54b7096c17902c3f40ffce7e5b84e0072d0144024184fff184a84d563abbb3  Python-2.7.2.tgz"
 cd Python-2.7.2 && ./configure && make && make install
 
