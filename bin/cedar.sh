@@ -112,7 +112,7 @@ function fetch_verify_tarball() {
     tar xzf $tarball
 }
 
-fetch_verify_tarball "http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tgz" \
+fetch_verify_tarball "http://legacy.python.org/ftp/python/2.7.2/Python-2.7.2.tgz" \
     "1d54b7096c17902c3f40ffce7e5b84e0072d0144024184fff184a84d563abbb3  Python-2.7.2.tgz"
 cd Python-2.7.2 && ./configure && make && make install
 
