@@ -104,7 +104,7 @@ NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make install prefix=/usr
 function fetch_verify_tarball() {
     cd /tmp
     local tarball=$(basename $1)
-    curl -L -o $tarball $1
+    curl --location --output $tarball $1
     if [ "$(sha256sum $tarball)" != "$2" ]; then
         echo "Checksum mismatch for $1!"
         # exit 1
