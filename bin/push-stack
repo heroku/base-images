@@ -39,7 +39,7 @@ EOF
   ) && abort fatal: can not access S3
 
   s3cmd -c $S3CFG --progress --acl-private put $IMG_GZ  s3://$S3_IMG_GZ
-  s3cmd -c $S3CFG --progress --acl-public  put $IMG_MD5 s3://$S3_IMG_MD5
+  s3cmd -c $S3CFG --progress --acl-public put $IMG_MD5 s3://$S3_IMG_MD5
 
   display Signing URLs
   (
