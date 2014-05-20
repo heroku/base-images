@@ -68,7 +68,7 @@ apt-get install -y --force-yes --no-install-recommends language-pack-aa \
     language-pack-zh-hans language-pack-zh-hant language-pack-zu
 
 # pull in a newer libpq
-echo "deb http://apt.postgresql.org/pub/repos/apt/ lucid-pgdg main" >> /etc/apt/sources.list
+echo "deb http://apt.postgresql.org/pub/repos/apt/ lucid-pgdg 9.2" >> /etc/apt/sources.list
 
 cat > /etc/apt/preferences <<EOF
 Package: *
