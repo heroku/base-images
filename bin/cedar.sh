@@ -120,6 +120,7 @@ fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.
     "39a1f046e8756c1885cde42b234bc608196e50feadf1d0f202f7634f4a4b1245  ruby-1.9.2-p320.tar.gz"
 cp -R ruby-1.9.2-p320 ruby-1.9.2-p327
 (cd ruby-1.9.2-p320 && ./configure --prefix=/usr/local && make && make install)
+(cd ruby-1.9.2-p327 && patch </tmp/data/ruby-1.9.2-p327.patch --strip=1 && ./configure --prefix=/usr/local && make && make install)
 
 cd /
 rm -rf /var/cache/apt/archives/*.deb
