@@ -112,9 +112,9 @@ function fetch_verify_tarball() {
     tar xzf $tarball
 }
 
-fetch_verify_tarball "http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tgz" \
-    "1d54b7096c17902c3f40ffce7e5b84e0072d0144024184fff184a84d563abbb3  Python-2.7.2.tgz"
-cd Python-2.7.2 && ./configure && make && make install
+fetch_verify_tarball "http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz" \
+    "99c6860b70977befa1590029fae092ddb18db1d69ae67e8b9385b66ed104ba58  Python-2.7.6.tgz"
+cd Python-2.7.6 && ./configure && make && make install
 
 fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p290.tar.gz" \
     "1cc817575c4944d3d78959024320ed1d5b7c2b4931a855772dacad7c3f6ebd7e  ruby-1.9.2-p290.tar.gz"
