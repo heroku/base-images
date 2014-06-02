@@ -116,9 +116,9 @@ fetch_verify_tarball "http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz" \
     "99c6860b70977befa1590029fae092ddb18db1d69ae67e8b9385b66ed104ba58  Python-2.7.6.tgz"
 cd Python-2.7.6 && ./configure && make && make install
 
-fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p290.tar.gz" \
-    "1cc817575c4944d3d78959024320ed1d5b7c2b4931a855772dacad7c3f6ebd7e  ruby-1.9.2-p290.tar.gz"
-cd ruby-1.9.2-p290 && ./configure --prefix=/usr/local && make && make install
+fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz" \
+    "39a1f046e8756c1885cde42b234bc608196e50feadf1d0f202f7634f4a4b1245  ruby-1.9.2-p320.tar.gz"
+cd ruby-1.9.2-p320 && ./configure --prefix=/usr/local && make && make install
 
 cd /
 rm -rf /var/cache/apt/archives/*.deb
