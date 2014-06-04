@@ -65,3 +65,27 @@ debuild -us -uc
 ```
 
 The package will be in the top dir `../`.
+
+
+Docker images
+-------------
+
+The `Dockerfile` provided here can be used to build a cedar base image to be
+used in Docker:
+
+```
+docker build -t heroku/cedar .
+```
+
+Heroku base images (`heroku/ubuntu:lucid`) are built using the
+`contrib/mkimage-debootstrap.sh` script, included in the docker project:
+
+```
+git clone https://github.com/dotcloud/docker.git
+cd docker/contrib
+# edit mkimage-debootstrap and uncomment/add the following lines:
+# rm etc/dpkg/dpkg.cfg.d/02apt-speedup
+# rm etc/apt/apt.conf.d/no-languages
+./mkimage-debootstrap.sh -i iproute,iputils-ping,gpgv heroku/ubuntu lucid http://archive.ubuntu.com/ubuntu
+```
+
