@@ -93,17 +93,6 @@ cd /tmp
 curl --retry 3 --max-time 60 --write-out %{http_code} --silent -o squashfs-tools_3.3-1ubuntu2_amd64.deb http://launchpadlibrarian.net/11397899/squashfs-tools_3.3-1ubuntu2_amd64.deb
 dpkg -i squashfs-tools_3.3-1ubuntu2_amd64.deb
 
-function fetch_verify_tarball() {
-    cd /tmp
-    local tarball=$(basename $1)
-    curl --location --output $tarball $1
-    if [ "$(sha256sum $tarball)" != "$2" ]; then
-        echo "Checksum mismatch for $1!"
-        # exit 1
-    fi
-    tar xzf $tarball
-}
-
 cd /
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
