@@ -15,14 +15,14 @@ apt-get update
 apt-get install -y --force-yes language-pack-en
 apt-get install -y --force-yes coreutils tar build-essential autoconf
 apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev \
-    libbz2-dev libreadline5-dev zlib1g-dev libevent-dev libssl-dev libpq-dev \
+    libbz2-dev libreadline6-dev zlib1g-dev libevent-dev libssl-dev libpq-dev \
     libncurses5-dev libcurl4-openssl-dev libjpeg-dev libmysqlclient-dev
 apt-get install -y --force-yes daemontools
 apt-get install -y --force-yes curl netcat-openbsd telnet
 apt-get install -y --force-yes iputils-tracepath bind9-host dnsutils socat
 apt-get install -y --force-yes ed bison
 apt-get install -y --force-yes openssh-client openssh-server
-apt-get install -y --force-yes imagemagick libmagick9-dev
+apt-get install -y --force-yes imagemagick libmagickwand-dev
 apt-get install -y --force-yes ia32-libs
 apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
 apt-get install -y --force-yes git
