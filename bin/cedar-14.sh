@@ -26,6 +26,7 @@ apt-get install -y --force-yes imagemagick libmagick9-dev
 apt-get install -y --force-yes ia32-libs
 apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
 apt-get install -y --force-yes git
+apt-get install -y --force-yes python
 
 # for the "gethostip" tool
 apt-get install -y --force-yes syslinux
@@ -101,10 +102,6 @@ function fetch_verify_tarball() {
     fi
     tar xzf $tarball
 }
-
-fetch_verify_tarball "http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz" \
-    "99c6860b70977befa1590029fae092ddb18db1d69ae67e8b9385b66ed104ba58  Python-2.7.6.tgz"
-cd Python-2.7.6 && ./configure && make && make install
 
 fetch_verify_tarball "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz" \
     "39a1f046e8756c1885cde42b234bc608196e50feadf1d0f202f7634f4a4b1245  ruby-1.9.2-p320.tar.gz"
