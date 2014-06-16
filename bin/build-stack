@@ -30,7 +30,7 @@ mkdir -p /tmp/log
   display Bootstrapping build env $MNT
   (
     mkdir -p $MNT
-    debootstrap --variant=minbase lucid $MNT
+    debootstrap --variant=minbase trusty $MNT
   ) | indent
 
   display Mounting host in build env
