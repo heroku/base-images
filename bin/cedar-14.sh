@@ -23,7 +23,6 @@ apt-get install -y --force-yes iputils-tracepath bind9-host dnsutils socat
 apt-get install -y --force-yes ed bison
 apt-get install -y --force-yes openssh-client openssh-server
 apt-get install -y --force-yes imagemagick libmagickwand-dev
-apt-get install -y --force-yes ia32-libs
 apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
 apt-get install -y --force-yes git
 apt-get install -y --force-yes python
