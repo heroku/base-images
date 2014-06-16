@@ -25,6 +25,7 @@ apt-get install -y --force-yes openssh-client openssh-server
 apt-get install -y --force-yes imagemagick libmagick9-dev
 apt-get install -y --force-yes ia32-libs
 apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
+apt-get install -y --force-yes git
 
 # for the "gethostip" tool
 apt-get install -y --force-yes syslinux
@@ -89,17 +90,6 @@ apt-get install -y --force-yes -t lucid-pgdg libpq5 libpq-dev
 cd /tmp
 curl --retry 3 --max-time 60 --write-out %{http_code} --silent -o squashfs-tools_3.3-1ubuntu2_amd64.deb http://launchpadlibrarian.net/11397899/squashfs-tools_3.3-1ubuntu2_amd64.deb
 dpkg -i squashfs-tools_3.3-1ubuntu2_amd64.deb
-
-# git changes important semantics in sub-bugfix version bumps unfortunately:
-# http://git.661346.n2.nabble.com/Git-sideband-hook-output-td5155362.html
-
-cd /tmp
-curl -L -o git-1.7.0.tar.gz https://github.com/git/git/tarball/v1.7.0
-mkdir -p git-1.7.0
-cd git-1.7.0
-tar --strip-components 1 -xzvf ../git-1.7.0.tar.gz
-NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make prefix=/usr
-NO_EXPAT=yes NO_SVN_TESTS=yes NO_IPV6=yes NO_TCLTK=yes make install prefix=/usr
 
 function fetch_verify_tarball() {
     cd /tmp
