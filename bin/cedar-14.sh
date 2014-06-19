@@ -15,7 +15,7 @@ apt-get update
 apt-get install -y --force-yes language-pack-en
 apt-get install -y --force-yes coreutils tar build-essential autoconf
 apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev \
-    libbz2-dev libreadline6-dev zlib1g-dev libevent-dev libssl-dev libpq-dev \
+    libbz2-dev libreadline6-dev zlib1g-dev libevent-dev libssl-dev libpq5 libpq-dev \
     libncurses5-dev libcurl4-openssl-dev libjpeg-dev libmysqlclient-dev
 apt-get install -y --force-yes daemontools
 apt-get install -y --force-yes curl netcat-openbsd telnet
@@ -68,24 +68,6 @@ apt-get install -y --force-yes --no-install-recommends language-pack-aa \
     language-pack-ve language-pack-vi language-pack-wa language-pack-wo \
     language-pack-xh language-pack-yi language-pack-yo \
     language-pack-zh-hans language-pack-zh-hant language-pack-zu
-
-# pull in a newer libpq
-echo "deb http://apt.postgresql.org/pub/repos/apt/ lucid-pgdg 9.2" >> /etc/apt/sources.list
-
-cat > /etc/apt/preferences <<EOF
-Package: *
-Pin: release a=lucid-pgdg
-Pin-Priority: -10
-EOF
-
-curl -o /tmp/postgres.asc http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
-if [ "$(sha256sum /tmp/postgres.asc)" = \
-    "fbdb6c565cd95957b645197686587f7735149383a3d5e1291b6830e6730e672f" ]; then
-    apt-key add /tmp/postgres.asc
-fi
-
-apt-get update
-apt-get install -y --force-yes -t lucid-pgdg libpq5 libpq-dev
 
 # need an older squashfs-tools
 cd /tmp
