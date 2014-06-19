@@ -28,9 +28,6 @@ apt-get install -y --force-yes git
 apt-get install -y --force-yes python
 apt-get install -y --force-yes ruby
 
-# backward compatibility
-apt-get install -y --force-yes libreadline5 libssl0.9.8
-
 # for the "gethostip" tool
 apt-get install -y --force-yes syslinux
 
