@@ -69,11 +69,6 @@ apt-get install -y --force-yes --no-install-recommends language-pack-aa \
     language-pack-xh language-pack-yi language-pack-yo \
     language-pack-zh-hans language-pack-zh-hant language-pack-zu
 
-# need an older squashfs-tools
-cd /tmp
-curl --retry 3 --max-time 60 --write-out %{http_code} --silent -o squashfs-tools_3.3-1ubuntu2_amd64.deb http://launchpadlibrarian.net/11397899/squashfs-tools_3.3-1ubuntu2_amd64.deb
-dpkg -i squashfs-tools_3.3-1ubuntu2_amd64.deb
-
 cd /
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
