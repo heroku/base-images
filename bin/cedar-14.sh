@@ -41,8 +41,6 @@ apt-get install -y --force-yes \
     libxml2-dev \
     libxslt-dev \
     netcat-openbsd \
-    openjdk-6-jdk \
-    openjdk-6-jre-headless \
     openssh-client \
     openssh-server \
     python \
@@ -90,7 +88,6 @@ echo -e "\nRemaining suspicious security bits:"
 echo -e "\nInstalled versions:"
 (
   git --version
-  java -version
   ruby -v
   gem -v
   python -V
