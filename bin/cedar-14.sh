@@ -51,6 +51,7 @@ apt-get install -y --force-yes \
     syslinux \
     tar \
     telnet \
+    zip \
     zlib1g-dev \
     #
 
