@@ -38,7 +38,6 @@ mkdir -p /tmp/log
     mount --bind /dev  $MNT/dev
     mount --bind /proc $MNT/proc
     cp $SCRIPT $MNT/tmp/build.sh
-    cp -r $(dirname $SCRIPT)/../data $MNT/tmp
   ) | indent
 
   display Building inside build env
