@@ -39,7 +39,9 @@ RUN apt-get install -y --force-yes \
     openssh-client \
     openssh-server \
     python \
+    python-dev \
     ruby \
+    ruby-dev \
     socat \
     syslinux \
     tar \
