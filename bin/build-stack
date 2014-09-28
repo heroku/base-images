@@ -8,6 +8,7 @@ mkdir -p /tmp/log
 
   VERSION=$1
   SCRIPT=$2
+  RELEASE=${3-'trusty'}
   MNT=/tmp/cedar64-$VERSION-build
 
   [ $UID = 0 ]     || abort fatal: must be called with sudo
@@ -30,7 +31,7 @@ mkdir -p /tmp/log
   display Bootstrapping build env $MNT
   (
     mkdir -p $MNT
-    debootstrap --variant=minbase trusty $MNT
+    debootstrap --variant=minbase $RELEASE $MNT
   ) | indent
 
   display Mounting host in build env
