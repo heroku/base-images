@@ -8,7 +8,7 @@ The provided `bin/cedar.sh` is the basis of a cedar stack image.
     vagrant up
     vagrant ssh
 
-    sudo /vagrant/bin/build-stack 2.0.0 /vagrant/bin/cedar.sh
+    sudo /vagrant/bin/build-stack 2.0.0 /vagrant/bin/cedar.sh lucid
     -----> Starting build
     -----> Installing build tools
            Hit http://us.archive.ubuntu.com lucid Release.gpg
