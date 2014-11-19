@@ -49,7 +49,7 @@ RUN apt-get install -y --force-yes \
     telnet \
     zip \
     zlib1g-dev \
-    #
+    -
 
 RUN apt-cache search language-pack \
     | cut -d ' ' -f 1 \
