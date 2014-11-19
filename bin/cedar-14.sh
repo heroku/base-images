@@ -43,6 +43,7 @@ apt-get install -y --force-yes \
     netcat-openbsd \
     openssh-client \
     openssh-server \
+    postgresql-server-dev-9.3 \
     python \
     python-dev \
     ruby \
