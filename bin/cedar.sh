@@ -107,7 +107,7 @@ function fetch_verify_tarball() {
     curl --location --output $tarball $1
     if [ "$(sha256sum $tarball)" != "$2" ]; then
         echo "Checksum mismatch for $1!"
-        # exit 1
+        exit 1
     fi
     tar xzf $tarball
 }
