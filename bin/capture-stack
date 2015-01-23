@@ -44,6 +44,7 @@ LOG=/tmp/log/$(basename $0).log
   display Modifying image directories and files
   (
     # etc/heroku is a mountpoint for runtime dyno information
+    # sys is there so users of the stack can mount a sysfs on it (/sys is the default location)
     for d in app tmp proc sys dev var var/log var/tmp home/group_home etc/heroku; do
       mkdir -p $IMG_MNT/$d
     done
