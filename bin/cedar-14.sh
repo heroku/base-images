@@ -12,6 +12,7 @@ deb http://archive.ubuntu.com/ubuntu trusty universe
 EOF
 
 apt-get update
+apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
     autoconf \
     bind9-host \

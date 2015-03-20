@@ -12,6 +12,7 @@ deb http://archive.ubuntu.com/ubuntu lucid universe
 EOF
 
 apt-get update
+apt-get upgrade -y --force-yes
 apt-get install -y --force-yes language-pack-en
 apt-get install -y --force-yes coreutils tar build-essential autoconf
 apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev \
