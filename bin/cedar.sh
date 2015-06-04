@@ -46,6 +46,7 @@ apt-get install -y --force-yes \
     openssh-client \
     openssh-server \
     socat \
+    stunnel \
     syslinux \
     tar \
     telnet \
