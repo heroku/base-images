@@ -49,6 +49,7 @@ apt-get install -y --force-yes \
     syslinux \
     tar \
     telnet \
+    timeout \
     zlib1g-dev \
     #
 
