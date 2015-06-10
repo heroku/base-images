@@ -52,6 +52,7 @@ apt-get install -y --force-yes \
     ruby \
     ruby-dev \
     socat \
+    stunnel \
     syslinux \
     tar \
     telnet \

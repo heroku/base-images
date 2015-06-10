@@ -13,22 +13,45 @@ EOF
 
 apt-get update
 apt-get upgrade -y --force-yes
-apt-get install -y --force-yes language-pack-en
-apt-get install -y --force-yes coreutils tar build-essential autoconf
-apt-get install -y --force-yes libxslt-dev libxml2-dev libglib2.0-dev \
-    libbz2-dev libreadline5-dev zlib1g-dev libevent-dev libssl-dev libpq-dev \
-    libncurses5-dev libcurl4-openssl-dev libjpeg-dev libmysqlclient-dev
-apt-get install -y --force-yes daemontools
-apt-get install -y --force-yes curl netcat-openbsd telnet
-apt-get install -y --force-yes iputils-tracepath bind9-host dnsutils socat
-apt-get install -y --force-yes ed bison
-apt-get install -y --force-yes openssh-client openssh-server
-apt-get install -y --force-yes imagemagick libmagick9-dev
-apt-get install -y --force-yes ia32-libs
-apt-get install -y --force-yes openjdk-6-jdk openjdk-6-jre-headless
-
-# for the "gethostip" tool
-apt-get install -y --force-yes syslinux
+apt-get install -y --force-yes \
+    autoconf \
+    bind9-host \
+    bison \
+    build-essential \
+    coreutils \
+    curl \
+    daemontools \
+    dnsutils \
+    ed \
+    ia32-libs \
+    imagemagick \
+    iputils-tracepath \
+    language-pack-en \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libevent-dev \
+    libglib2.0-dev \
+    libjpeg-dev \
+    libmagick9-dev \
+    libmysqlclient-dev \
+    libncurses5-dev \
+    libpq-dev \
+    libreadline5-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt-dev \
+    netcat-openbsd \
+    openjdk-6-jdk \
+    openjdk-6-jre-headless \
+    openssh-client \
+    openssh-server \
+    socat \
+    stunnel \
+    syslinux \
+    tar \
+    telnet \
+    zlib1g-dev \
+    #
 
 # locales
 apt-get install -y --force-yes --no-install-recommends language-pack-aa \
