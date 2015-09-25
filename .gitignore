@@ -1,6 +1,2 @@
 .vagrant
 tmp/
-debian/*.debhelper.log
-debian/cedar/
-debian/files
-debian/*.substvars
