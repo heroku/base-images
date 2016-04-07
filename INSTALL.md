@@ -4,7 +4,6 @@ Heroku Stack Images
 The provided `bin/cedar.sh` is the basis of a cedar stack image.
 
     cd stack-images
-    mkdir -p tmp/log
     vagrant up
     vagrant ssh
 
