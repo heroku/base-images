@@ -11,11 +11,6 @@ deb http://archive.ubuntu.com/ubuntu trusty-updates main
 deb http://archive.ubuntu.com/ubuntu trusty universe
 
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
-
-# This PPA (and the associated GPG key) contains a fix for CVE-2016-2324 and
-# CVE-2016-2315. When these are fixed upstream, we should revert to Canonical's
-# packages. -oj Mar 2016
-deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
@@ -87,21 +82,6 @@ IIP9up4xwgje9LB7fMxsSkCDTHOk
 -----END PGP PUBLIC KEY BLOCK-----
 PGDG_ACCC4CF8
 
-apt-key add - <<'PPA_GIT_CORE_E1DF1F24'
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-mI0ESXjaGwEEAMA26F3+mnRW8uRqASMsEa5EsmgvUpLD7EKpC7903OpiMGSvZ2sE
-34g7W6nUQY0R//AZS2iW4ZXfvdhQTQuuPlHM6Q3iUAt+nyXcf9xBlscs8Gm722u4
-jAtFtBS4BMQRhRRfWTHwJIOM6OpGIccjPe8pQfIeoRxkKJxlehzw2mU1ABEBAAG0
-KExhdW5jaHBhZCBQUEEgZm9yIFVidW50dSBHaXQgTWFpbnRhaW5lcnOItgQTAQIA
-IAUCSXjaGwIbAwYLCQgHAwIEFQIIAwQWAgMBAh4BAheAAAoJEKFxXYjh3x8k/zMD
-/RKBMjavvFl71YBazSOGl2YfSsZiR/ANsby3+rUaULb8uxzCHXAQnlH5vdtLSPry
-aLBvzCU8C3C02qNT8jRacU2752zsCkCi1SLRSOXdI/ATJHza5aTvYV93rTITBhU4
-sJQeK9RW0CtaDRAxJsn/Dr6J3lL/c9m9cT5fFpxOIsF4
-=33dX
------END PGP PUBLIC KEY BLOCK-----
-PPA_GIT_CORE_E1DF1F24
-
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
@@ -121,6 +101,7 @@ apt-get install -y --force-yes \
     libbz2-dev \
     libcurl4-openssl-dev \
     libevent-dev \
+    libev-dev \
     libglib2.0-dev \
     libjpeg-dev \
     libmagickwand-dev \
@@ -128,10 +109,12 @@ apt-get install -y --force-yes \
     libncurses5-dev \
     libpq-dev \
     libpq5 \
+    librdkafka-dev \
     libreadline6-dev \
     libssl-dev \
     libxml2-dev \
     libxslt-dev \
+    libuv-dev \
     netcat-openbsd \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
