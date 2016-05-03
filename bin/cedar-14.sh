@@ -142,6 +142,17 @@ apt-cache search language-pack \
     | grep -v '\-base$' \
     | xargs apt-get install -y --force-yes --no-install-recommends
 
+# Workaround for CVE-2016–3714 until new ImageMagick packages come out.
+cat > /etc/ImageMagick/policy.xml <<'IMAGEMAGICK_POLICY'
+<policymap>
+  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
+  <policy domain="coder" rights="none" pattern="URL" />
+  <policy domain="coder" rights="none" pattern="HTTPS" />
+  <policy domain="coder" rights="none" pattern="MVG" />
+  <policy domain="coder" rights="none" pattern="MSL" />
+</policymap>
+IMAGEMAGICK_POLICY
+
 cd /
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
