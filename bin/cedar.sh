@@ -177,7 +177,7 @@ echo -e "\nInstalled versions:"
   ruby -v
   gem -v
   python -V
-) | sed -u "s/^/  /"
+) 2>&1 | sed -u "s/^/  /"
 
 echo -e "\nSuccess!"
 exit 0
