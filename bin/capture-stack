@@ -3,10 +3,9 @@ source $(dirname $0)/stack-helpers.sh
 LOG=/tmp/log/$(basename $0).log
 
 (
-  [ $# -ge 1 ] || abort usage: $(basename $0) VERSION [--no-gzip]
+  [ $# -ge 1 ] || abort usage: $(basename $0) VERSION
 
   VERSION=$1
-  NOGZIP=$2
   MNT=/tmp/cedar64-$VERSION-build
   IMG=/tmp/cedar64-$VERSION.img
   IMG_MNT=/tmp/cedar64-$VERSION
@@ -78,6 +77,6 @@ EOF
   display MD5ing and gzipping image
   (
     md5sum $IMG | cut -d ' ' -f 1 | tr -d '\n' | tee $IMG.md5
-    [[ -n $NOGZIP ]] || gzip $IMG
+    gzip $IMG
   ) | indent
 ) 2>&1 | tee $LOG
