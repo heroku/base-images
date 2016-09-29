@@ -8,6 +8,7 @@ LOG=/tmp/log/$(basename $0).log
   VERSION=$1
   MNT=/tmp/cedar64-$VERSION-build
   IMG=/tmp/cedar64-$VERSION.img
+  TGZ=/tmp/cedar64-$VERSION.tar.gz
   IMG_MNT=/tmp/cedar64-$VERSION
 
   [ $UID = 0 ]  || abort fatal: must be called with sudo
@@ -70,6 +71,10 @@ EOF
 EOF
     chmod 644 $IMG_MNT/home/group_home/.gitconfig
   ) | indent
+
+  display Creating tgz image and MD5
+  tar -zcpf $TGZ -C $IMG_MNT ./
+  md5sum $TGZ | cut -d ' ' -f 1 | tr -d '\n' | tee $TGZ.md5 | indent
 
   display Unmounting image
   umount $IMG_MNT
