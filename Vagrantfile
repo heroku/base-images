@@ -10,7 +10,8 @@ Vagrant::Config.run do |config|
   date
 
   apt-get update
-  apt-get install -y curl git-core lxc s3cmd
+  apt-get install -y curl git-core lxc python-pip
+  pip install s3cmd
   mkdir -p /cgroup
   mount none -t cgroup /cgroup
 

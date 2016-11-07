@@ -30,10 +30,11 @@ LOG=/tmp/log/$(basename $0).log
   }
   trap on_exit EXIT
 
+  # empty values means s3cmd reads AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from the environment
   cat >$S3CFG <<EOF
 [default]
-access_key = $AWS_ACCESS_KEY_ID
-secret_key = $AWS_SECRET_ACCESS_KEY
+access_key =
+secret_key =
 EOF
 
   display Starting push at $(date)
