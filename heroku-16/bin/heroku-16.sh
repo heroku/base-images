@@ -85,59 +85,42 @@ PGDG_ACCC4CF8
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
-    autoconf \
     bind9-host \
-    bison \
-    build-essential \
+    bzip2 \
     coreutils \
     curl \
-    daemontools \
     dnsutils \
     ed \
     git \
-    imagemagick \
     iputils-tracepath \
     language-pack-en \
-    libbz2-dev \
-    libcurl4-openssl-dev \
-    libevent-dev \
-    libev-dev \
-    libgcrypt20-dev \
-    libglib2.0-dev \
-    libgnutls-dev \
-    libidn11-dev \
-    libjpeg-dev \
-    libkrb5-dev \
-    libldap2-dev \
-    libmagickwand-dev \
-    libmysqlclient-dev \
-    libncurses5-dev \
-    libpq-dev \
-    libpq5 \
-    librdkafka-dev \
-    libreadline-dev \
-    libssl-dev \
-    libuv-dev \
-    libxml2-dev \
-    libxslt-dev \
-    libyaml-dev \
     netcat-openbsd \
     openssh-client \
-    openssh-server \
     postgresql-client-9.5 \
-    postgresql-server-dev-9.5 \
     python \
-    python-dev \
     ruby \
-    ruby-dev \
     socat \
     stunnel \
     syslinux \
     tar \
     telnet \
     zip \
-    zlib1g-dev \
-    #
+    libcurl3 \
+    libev4 \
+    libevent-2.0-5 \
+    libgnutls-openssl27 \
+    libgnutlsxx28 \
+    libmysqlclient20 \
+    libuv1 \
+    libxslt1.1 \
+    libmemcached11 \
+    libmcrypt4 \
+    
+# avoid ghostscript
+apt-get install -y --force-yes --no-install-recommends \
+    imagemagick \
+    libmagickcore-6.q16-2-extra \
+    netpbm \
 
 # locales
 #apt-cache search language-pack \
