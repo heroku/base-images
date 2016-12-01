@@ -9,12 +9,15 @@ LOG=/tmp/log/$(basename $0).log
   BUCKET=$2
   IMG_GZ=/tmp/cedar64-$VERSION.img.gz
   IMG_MD5=${IMG_GZ%.gz}.md5
+  IMG_SHA256=${IMG_GZ%.gz}.sha256
   S3CFG=/tmp/.s3cfg
   S3_IMG_GZ=$BUCKET/$(basename $IMG_GZ)
   S3_IMG_MD5=$BUCKET/$(basename $IMG_MD5)
+  S3_IMG_SHA256=$BUCKET/$(basename $IMG_SHA256)
 
   [[ -f $IMG_GZ ]]  || abort fatal: file "$IMG_GZ" not found
   [[ -f $IMG_MD5 ]] || abort fatal: file "$IMG_MD5" not found
+  [[ -f $IMG_SHA256 ]] || abort fatal: file "$IMG_SHA256" not found
   [[ $AWS_ACCESS_KEY_ID = "" ]]     && abort fatal: AWS_ACCESS_KEY_ID not set
   [[ $AWS_SECRET_ACCESS_KEY = "" ]] && abort fatal: AWS_SECRET_ACCESS_KEY not set
 
@@ -40,6 +43,7 @@ EOF
 
   s3cmd -c $S3CFG --progress --acl-public put $IMG_GZ  s3://$S3_IMG_GZ
   s3cmd -c $S3CFG --progress --acl-public put $IMG_MD5 s3://$S3_IMG_MD5
+  s3cmd -c $S3CFG --progress --acl-public put $IMG_SHA256 s3://$S3_IMG_SHA256
 
   display Signing URLs
   (
@@ -50,5 +54,6 @@ EOF
     SIGNATURE="$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "$SIGNATURE")"
     echo "http://s3.amazonaws.com/$S3_IMG_GZ?AWSAccessKeyId=$AWS_ACCESS_KEY_ID&Expires=$EXPIRES&Signature=$SIGNATURE"
     echo "http://s3.amazonaws.com/$S3_IMG_MD5"
+    echo "http://s3.amazonaws.com/$S3_IMG_SHA256"
   ) | indent
 ) 2>&1 | tee $LOG

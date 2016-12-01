@@ -74,9 +74,10 @@ EOF
   display Unmounting image
   umount $IMG_MNT
 
-  display MD5ing and gzipping image
+  display MD5ing/SHA256ing and gzipping image
   (
     md5sum $IMG | cut -d ' ' -f 1 | tr -d '\n' | tee $IMG.md5
+    sha256sum $IMG | cut -d ' ' -f 1 | tr -d '\n' | tee $IMG.sha256
     gzip $IMG
   ) | indent
 ) 2>&1 | tee $LOG
