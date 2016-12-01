@@ -100,8 +100,8 @@ apt-get install -y --force-yes \
     language-pack-en \
     libbz2-dev \
     libcurl4-openssl-dev \
-    libevent-dev \
     libev-dev \
+    libevent-dev \
     libglib2.0-dev \
     libjpeg-dev \
     libmagickwand-dev \
@@ -112,9 +112,9 @@ apt-get install -y --force-yes \
     librdkafka-dev \
     libreadline6-dev \
     libssl-dev \
+    libuv-dev \
     libxml2-dev \
     libxslt-dev \
-    libuv-dev \
     netcat-openbsd \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
