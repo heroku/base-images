@@ -41,5 +41,5 @@ Stack images are generally pushed to S3 and installed from there.
     sudo /vagrant/bin/install-stack \
       "http://s3.amazonaws.com/noah_herokustacks/cedar64-2.0.0.img.gz?AWS..."
     -----> Starting install
-    -----> Downloading and gunzipping image
+    -----> Downloading and unzipping image
     -----> Mounting image /mnt/stacks/cedar64-2.0.0
