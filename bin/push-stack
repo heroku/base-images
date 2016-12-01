@@ -40,15 +40,4 @@ EOF
 
   s3cmd -c $S3CFG --progress --acl-public put $IMG_GZ  s3://$S3_IMG_GZ
   s3cmd -c $S3CFG --progress --acl-public put $IMG_MD5 s3://$S3_IMG_MD5
-
-  display Signing URLs
-  (
-    # finally we find something bash is miserable at!
-    EXPIRES=$(date +%s --date "now 100000000 seconds")
-    SIGNATURE=$(s3cmd -c $S3CFG sign $'GET\n\n\n'$EXPIRES$'\n/'$S3_IMG_GZ)
-    SIGNATURE=${SIGNATURE#Signature: }
-    SIGNATURE="$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "$SIGNATURE")"
-    echo "http://s3.amazonaws.com/$S3_IMG_GZ?AWSAccessKeyId=$AWS_ACCESS_KEY_ID&Expires=$EXPIRES&Signature=$SIGNATURE"
-    echo "http://s3.amazonaws.com/$S3_IMG_MD5"
-  ) | indent
 ) 2>&1 | tee $LOG

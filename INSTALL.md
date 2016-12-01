@@ -34,9 +34,6 @@ Stack images are generally pushed to S3 and installed from there.
     -----> Uploading files
            /tmp/cedar64-2.0.0.img.gz -> s3://stacks_bucket/cedar64-2.0.0.img.gz
            ...
-    -----> Signing URLs
-           http://s3.amazonaws.com/noah_herokustacks/cedar64-2.0.0.img.gz?AWS...
-           http://s3.amazonaws.com/noah_herokustacks/cedar64-2.0.0.img.md5
 
     sudo /vagrant/bin/install-stack \
       "http://s3.amazonaws.com/noah_herokustacks/cedar64-2.0.0.img.gz?AWS..."
