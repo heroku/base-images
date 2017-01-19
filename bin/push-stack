@@ -11,15 +11,12 @@ LOG=/tmp/log/$(basename $0).log
   VERSION=$1
   BUCKET=$2
   IMG_GZ=/tmp/cedar64-$VERSION.img.gz
-  IMG_MD5=${IMG_GZ%.gz}.md5
   IMG_SHA256=${IMG_GZ%.gz}.sha256
   S3CFG=/tmp/.s3cfg
   S3_IMG_GZ=$BUCKET/$(basename $IMG_GZ)
-  S3_IMG_MD5=$BUCKET/$(basename $IMG_MD5)
   S3_IMG_SHA256=$BUCKET/$(basename $IMG_SHA256)
 
   [[ -f $IMG_GZ ]]  || abort fatal: file "$IMG_GZ" not found
-  [[ -f $IMG_MD5 ]] || abort fatal: file "$IMG_MD5" not found
   [[ -f $IMG_SHA256 ]] || abort fatal: file "$IMG_SHA256" not found
   [[ $AWS_ACCESS_KEY_ID = "" ]]     && abort fatal: AWS_ACCESS_KEY_ID not set
   [[ $AWS_SECRET_ACCESS_KEY = "" ]] && abort fatal: AWS_SECRET_ACCESS_KEY not set
@@ -46,7 +43,6 @@ EOF
   ) && abort fatal: can not access S3
 
   s3cmd -c $S3CFG --progress --acl-public put $IMG_GZ  s3://$S3_IMG_GZ
-  s3cmd -c $S3CFG --progress --acl-public put $IMG_MD5 s3://$S3_IMG_MD5
   s3cmd -c $S3CFG --progress --acl-public put $IMG_SHA256 s3://$S3_IMG_SHA256
 
   echo "http://s3.amazonaws.com/$S3_IMG_GZ" | indent
