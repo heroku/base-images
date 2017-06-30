@@ -1,0 +1,14 @@
+sudo: required
+dist: trusty
+language: shell
+services:
+  - docker
+env:
+  - STACK=heroku-16
+  - STACK=cedar-14
+script:
+  - bin/docker-build.sh $STACK
+matrix:
+  allow_failures:
+    # Remove once #58 fixed.
+    - env: STACK=cedar-14
