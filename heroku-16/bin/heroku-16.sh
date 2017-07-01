@@ -5,9 +5,9 @@ set -e
 set -x
 
 cat > /etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu xenial main universe
-deb http://archive.ubuntu.com/ubuntu xenial-security main universe
-deb http://archive.ubuntu.com/ubuntu xenial-updates main universe
+deb http://archive.ubuntu.com/ubuntu/ xenial main universe
+deb http://archive.ubuntu.com/ubuntu/ xenial-security main universe
+deb http://archive.ubuntu.com/ubuntu/ xenial-updates main universe
 
 deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
 EOF
