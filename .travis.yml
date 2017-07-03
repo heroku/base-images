@@ -8,7 +8,3 @@ env:
   - STACK=cedar-14
 script:
   - bin/docker-build.sh $STACK
-matrix:
-  allow_failures:
-    # Remove once #58 fixed.
-    - env: STACK=cedar-14

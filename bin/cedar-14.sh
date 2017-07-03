@@ -5,10 +5,9 @@ set -e
 set -x
 
 cat > /etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu trusty main
-deb http://archive.ubuntu.com/ubuntu trusty-security main
-deb http://archive.ubuntu.com/ubuntu trusty-updates main
-deb http://archive.ubuntu.com/ubuntu trusty universe
+deb http://archive.ubuntu.com/ubuntu/ trusty main universe
+deb http://archive.ubuntu.com/ubuntu/ trusty-security main universe
+deb http://archive.ubuntu.com/ubuntu/ trusty-updates main universe
 
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
 EOF
