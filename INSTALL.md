@@ -21,11 +21,6 @@ The provided `bin/cedar-14.sh` is the basis of a cedar stack image.
            ...
     -----> Cleaning up. Logs in /tmp/log/capture-stack.log
 
-    sudo /vagrant/bin/install-stack /tmp/cedar64-14.4.0.img.gz
-    -----> Starting install
-    -----> Gunzipping image /tmp/cedar64-14.4.0.img.gz
-    -----> Mounting image /mnt/stacks/cedar64-14.4.0
-
 Stack images are generally pushed to S3 and installed from there.
 
     sudo /vagrant/bin/push-stack 14.4.0 stacks_bucket \
@@ -34,9 +29,3 @@ Stack images are generally pushed to S3 and installed from there.
     -----> Uploading files
            /tmp/cedar64-14.4.0.img.gz -> s3://stacks_bucket/cedar64-14.4.0.img.gz
            ...
-
-    sudo /vagrant/bin/install-stack \
-      "http://s3.amazonaws.com/noah_herokustacks/cedar64-14.4.0.img.gz?AWS..."
-    -----> Starting install
-    -----> Downloading and gunzipping image
-    -----> Mounting image /mnt/stacks/cedar64-14.4.0
