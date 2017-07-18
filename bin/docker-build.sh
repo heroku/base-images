@@ -3,16 +3,13 @@
 set -euo pipefail
 
 cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
-. bin/stack-helpers.sh
+. cedar-14/bin/stack-helpers.sh
 
 [ $# -eq 1 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
 
 STACK="${1%/}"
 IMAGE_TAG="heroku/${STACK/-/:}"
 DOCKERFILE_DIR="$STACK"
-
-# Remove this when cedar-14 is moved from the repository root to ./cedar-14/.
-[[ "$STACK" = "cedar-14" ]] && DOCKERFILE_DIR="."
 
 [[ -d "$DOCKERFILE_DIR" ]] || abort fatal: stack "$STACK" not found
 
