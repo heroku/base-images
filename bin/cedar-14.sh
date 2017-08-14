@@ -130,6 +130,7 @@ apt-get install -y --force-yes \
     syslinux \
     tar \
     telnet \
+    tzdata \
     zip \
     zlib1g-dev \
     #
