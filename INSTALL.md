@@ -1,9 +1,9 @@
 Heroku Stack Images
 =========
 
-The provided `bin/cedar-14.sh` is the basis of a cedar stack image.
+The provided `cedar-14/bin/cedar-14.sh` is the basis of a cedar stack image.
 
-    cd stack-images
+    cd cedar-14
     vagrant up
     vagrant ssh
 
@@ -23,8 +23,8 @@ The provided `bin/cedar-14.sh` is the basis of a cedar stack image.
 
 Stack images are generally pushed to S3 and installed from there.
 
-    sudo /vagrant/bin/push-stack 14.4.0 stacks_bucket \
-      AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=xxx
+    export AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=xxx
+    sudo -E /vagrant/bin/push-stack 14.4.0 stacks_bucket
     -----> Starting push
     -----> Uploading files
            /tmp/cedar64-14.4.0.img.gz -> s3://stacks_bucket/cedar64-14.4.0.img.gz
