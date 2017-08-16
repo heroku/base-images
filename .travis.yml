@@ -8,3 +8,9 @@ env:
   - STACK=cedar-14
 script:
   - bin/docker-build.sh $STACK
+  - |
+      status="$(git status --porcelain)"
+      if [[ -n "$status" ]]; then
+        echo -e "Regenerated files differ from checked-in versions!\n${status}\n"
+        git diff --exit-code
+      fi
