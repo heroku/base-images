@@ -114,6 +114,7 @@ apt-get install -y --force-yes \
     libuv-dev \
     libxml2-dev \
     libxslt-dev \
+    locales \
     netcat-openbsd \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
