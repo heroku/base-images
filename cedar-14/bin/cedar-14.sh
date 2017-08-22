@@ -101,6 +101,7 @@ apt-get install -y --force-yes \
     libcurl4-openssl-dev \
     libev-dev \
     libevent-dev \
+    libgconf-2-4 \
     libglib2.0-dev \
     libicu52 \
     libjpeg-dev \
