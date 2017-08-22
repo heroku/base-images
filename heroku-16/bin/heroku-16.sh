@@ -111,6 +111,7 @@ apt-get install -y --force-yes \
     librabbitmq4 \
     libuv1 \
     libxslt1.1 \
+    locales \
     make \
     netcat-openbsd \
     openssh-client \
