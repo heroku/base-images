@@ -102,6 +102,7 @@ apt-get install -y --force-yes \
     libev-dev \
     libevent-dev \
     libglib2.0-dev \
+    libgtk-3-0 \
     libicu52 \
     libjpeg-dev \
     libmagickwand-dev \
