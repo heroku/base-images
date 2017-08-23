@@ -125,6 +125,7 @@ apt-get install -y --force-yes \
     openssh-server \
     postgresql-client-9.6 \
     postgresql-server-dev-9.6 \
+    psmisc \
     python \
     python-dev \
     ruby \

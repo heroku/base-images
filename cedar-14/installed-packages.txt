@@ -823,6 +823,7 @@ postgresql-client-common
 postgresql-common
 postgresql-server-dev-9.6
 procps
+psmisc
 python
 python-chardet
 python-dev
