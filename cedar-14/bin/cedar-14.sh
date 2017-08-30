@@ -103,6 +103,7 @@ apt-get install -y --force-yes \
     libevent-dev \
     libgconf-2-4 \
     libglib2.0-dev \
+    libgnome2-0 \
     libgtk-3-0 \
     libicu52 \
     libjpeg-dev \
