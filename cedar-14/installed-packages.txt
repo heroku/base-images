@@ -33,14 +33,18 @@ dconf-gsettings-backend
 dconf-service
 debconf
 debianutils
+desktop-file-utils
 dh-python
 diffutils
+dmsetup
 dnsutils
+dosfstools
 dpkg
 dpkg-dev
 e2fslibs
 e2fsprogs
 ed
+eject
 fakeroot
 file
 findutils
@@ -48,6 +52,7 @@ fontconfig
 fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-extra
+fuse
 g++
 g++-4.8
 gcc
@@ -57,6 +62,7 @@ gcc-4.9-base
 gconf-service
 gconf-service-backend
 gconf2-common
+gdisk
 geoip-database
 ghostscript
 gir1.2-freedesktop
@@ -68,7 +74,12 @@ git-man
 gnupg
 gpgv
 grep
+groff-base
 gsfonts
+gvfs
+gvfs-common
+gvfs-daemons
+gvfs-libs
 gzip
 hicolor-icon-theme
 hostname
@@ -405,6 +416,7 @@ libasn1-8-heimdal
 libasound2
 libasound2-data
 libasyncns0
+libatasmart4
 libatk-bridge2.0-0
 libatk-wrapper-java
 libatk-wrapper-java-jni
@@ -455,6 +467,7 @@ libdbus-1-3
 libdbus-glib-1-2
 libdconf1
 libdebconfclient0
+libdevmapper1.02.1
 libdjvulibre-dev
 libdjvulibre-text
 libdjvulibre21
@@ -487,8 +500,10 @@ libfile-fcntllock-perl
 libflac8
 libfontconfig1
 libfontconfig1-dev
+libfontenc1
 libfreetype6
 libfreetype6-dev
+libfuse2
 libgcc-4.8-dev
 libgcc1
 libgconf-2-4
@@ -631,6 +646,7 @@ libpangocairo-1.0-0
 libpangoft2-1.0-0
 libpaper-utils
 libpaper1
+libparted0debian1
 libpathplan4
 libpciaccess0
 libpcre3
@@ -679,6 +695,8 @@ libsasl2-2
 libsasl2-modules
 libsasl2-modules-db
 libsctp1
+libsecret-1-0
+libsecret-common
 libselinux1
 libsemanage-common
 libsemanage1
@@ -713,6 +731,7 @@ libtool
 libtsan0
 libtxc-dxtn-s2tc0
 libudev1
+libudisks2-0
 libusb-0.1-4
 libusb-1.0-0
 libustr-1.0-1
@@ -737,12 +756,14 @@ libx11-doc
 libx11-xcb1
 libxau-dev
 libxau6
+libxaw7
 libxcb-dri2-0
 libxcb-dri3-0
 libxcb-glx0
 libxcb-present0
 libxcb-render0
 libxcb-render0-dev
+libxcb-shape0
 libxcb-shm0
 libxcb-shm0-dev
 libxcb-sync1
@@ -757,11 +778,13 @@ libxdot4
 libxext-dev
 libxext6
 libxfixes3
+libxft2
 libxi6
 libxinerama1
 libxkbcommon0
 libxml2
 libxml2-dev
+libxmu6
 libxmuu1
 libxpm4
 libxrandr2
@@ -773,6 +796,8 @@ libxslt1.1
 libxt-dev
 libxt6
 libxtst6
+libxv1
+libxxf86dga1
 libxxf86vm1
 libyaml-0-2
 linux-libc-dev
@@ -801,6 +826,7 @@ ncurses-term
 netbase
 netcat-openbsd
 netpbm
+ntfs-3g
 openjdk-7-jdk
 openjdk-7-jre
 openjdk-7-jre-headless
@@ -808,6 +834,7 @@ openssh-client
 openssh-server
 openssh-sftp-server
 openssl
+parted
 passwd
 patch
 perl
@@ -817,6 +844,7 @@ pgdg-keyring
 pkg-config
 plymouth
 policykit-1
+policykit-1-gnome
 poppler-data
 postgresql-client-9.6
 postgresql-client-common
@@ -866,11 +894,13 @@ tzdata-java
 ubuntu-keyring
 ucf
 udev
+udisks2
 unzip
 upstart
 util-linux
 wget
 x11-common
+x11-utils
 x11proto-core-dev
 x11proto-input-dev
 x11proto-kb-dev
