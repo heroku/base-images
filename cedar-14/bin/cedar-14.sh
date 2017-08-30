@@ -94,6 +94,7 @@ apt-get install -y --force-yes \
     dnsutils \
     ed \
     git \
+    gvfs \
     imagemagick \
     iputils-tracepath \
     language-pack-en \
