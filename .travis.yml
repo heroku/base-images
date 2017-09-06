@@ -7,7 +7,7 @@ env:
   - STACK=heroku-16
   - STACK=cedar-14
 script:
-  - bin/docker-build.sh $STACK
+  - ./docker-build.sh $STACK
   - |
       status="$(git status --porcelain)"
       if [[ -n "$status" ]]; then
