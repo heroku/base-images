@@ -13,5 +13,5 @@ function abort() {
 }
 
 function indent() {
-  sed -u "s/^/       /"
+  sed "s/^/       /"
 }
