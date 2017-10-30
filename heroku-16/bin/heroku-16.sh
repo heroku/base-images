@@ -84,6 +84,7 @@ PGDG_ACCC4CF8
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
+    apt-utils \
     bind9-host \
     bzip2 \
     coreutils \

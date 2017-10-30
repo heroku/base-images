@@ -1,6 +1,7 @@
 # List of packages present in the final image. Regenerate using docker-build.sh
 adduser
 apt
+apt-utils
 base-files
 base-passwd
 bash
@@ -61,6 +62,7 @@ language-pack-en-base
 less
 libacl1
 libapparmor1
+libapt-inst2.0
 libapt-pkg5.0
 libasn1-8-heimdal
 libatm1
