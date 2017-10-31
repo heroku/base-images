@@ -173,7 +173,7 @@ echo -e "\nRemaining suspicious security bits:"
   pruned_find -perm /u+s
   pruned_find -perm /g+s
   pruned_find -perm /+t
-) | sed -u "s/^/  /"
+) | sed "s/^/  /"
 
 echo -e "\nInstalled versions:"
 (
@@ -181,7 +181,7 @@ echo -e "\nInstalled versions:"
   ruby -v
   gem -v
   python -V
-) 2>&1 | sed -u "s/^/  /"
+) 2>&1 | sed "s/^/  /"
 
 echo -e "\nSuccess!"
 exit 0
