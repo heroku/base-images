@@ -46,6 +46,5 @@ EOF
   s3cmd -c $S3CFG --progress --acl-public put $IMG_SHA256 s3://$S3_IMG_SHA256
 
   echo "http://s3.amazonaws.com/$S3_IMG_GZ" | indent
-  echo "http://s3.amazonaws.com/$S3_IMG_MD5" | indent
   echo "http://s3.amazonaws.com/$S3_IMG_SHA256" | indent
 ) 2>&1 | tee $LOG
