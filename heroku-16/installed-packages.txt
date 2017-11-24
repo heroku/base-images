@@ -220,6 +220,7 @@ libsemanage-common
 libsemanage1
 libsepol1
 libsmartcols1
+libsodium18
 libsqlite3-0
 libss2
 libssl1.0.0
