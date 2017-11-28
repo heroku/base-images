@@ -109,6 +109,7 @@ apt-get install -y --force-yes \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
+    libsodium18 \
     librabbitmq4 \
     libuv1 \
     libxslt1.1 \

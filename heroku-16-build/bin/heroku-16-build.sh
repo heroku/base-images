@@ -54,6 +54,7 @@ apt-get install -y --force-yes \
     librtmp-dev \
     libselinux1-dev \
     libsemanage1-dev \
+    libsodium-dev \
     libssl-dev \
     libsystemd-dev \
     libudev-dev \

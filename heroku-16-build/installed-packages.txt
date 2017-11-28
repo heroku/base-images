@@ -381,6 +381,8 @@ libsigsegv2
 libsm-dev
 libsm6
 libsmartcols1
+libsodium-dev
+libsodium18
 libsqlite3-0
 libss2
 libssl-dev
