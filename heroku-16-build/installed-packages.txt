@@ -494,10 +494,10 @@ perl-modules-5.22
 pgdg-keyring
 pkg-config
 poppler-data
-postgresql-client-9.6
+postgresql-client-10
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-9.6
+postgresql-server-dev-10
 procps
 python
 python-dev
