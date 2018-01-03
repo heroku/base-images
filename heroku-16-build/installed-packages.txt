@@ -49,6 +49,7 @@ gcc
 gcc-5
 gcc-5-base
 gcc-6-base
+gettext
 geoip-bin
 geoip-database
 ghostscript
