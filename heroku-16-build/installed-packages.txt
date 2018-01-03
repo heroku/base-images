@@ -49,9 +49,10 @@ gcc
 gcc-5
 gcc-5-base
 gcc-6-base
-gettext
 geoip-bin
 geoip-database
+gettext
+libasprintf-dev
 ghostscript
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0
@@ -97,6 +98,8 @@ libapt-pkg-dev
 libapt-pkg5.0
 libasan2
 libasn1-8-heimdal
+libasprintf-dev
+libasprintf0v5
 libatk1.0-0
 libatk1.0-data
 libatm1
@@ -192,6 +195,8 @@ libgdk-pixbuf2.0-common
 libgdk-pixbuf2.0-dev
 libgeoip-dev
 libgeoip1
+libgettextpo-dev
+libgettextpo0
 libgirepository-1.0-1
 libglib2.0-0
 libglib2.0-bin
@@ -408,6 +413,7 @@ libtsan0
 libubsan0
 libudev-dev
 libudev1
+libunistring0
 libusb-0.1-4
 libustr-1.0-1
 libustr-dev
