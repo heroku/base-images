@@ -52,7 +52,6 @@ gcc-6-base
 geoip-bin
 geoip-database
 gettext
-libasprintf-dev
 ghostscript
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0
