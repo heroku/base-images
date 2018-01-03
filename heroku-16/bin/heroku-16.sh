@@ -118,7 +118,7 @@ apt-get install -y --force-yes \
     netcat-openbsd \
     openssh-client \
     openssh-server \
-    postgresql-client-9.6 \
+    postgresql-client-10 \
     python \
     ruby \
     socat \
