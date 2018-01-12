@@ -92,6 +92,7 @@ apt-get install -y --force-yes \
     curl \
     dnsutils \
     ed \
+    ffmpeg \
     git \
     imagemagick \
     iputils-tracepath \
@@ -116,6 +117,7 @@ apt-get install -y --force-yes \
     libxslt1.1 \
     locales \
     make \
+    mupdf \
     netcat-openbsd \
     openssh-client \
     openssh-server \
