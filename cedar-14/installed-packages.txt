@@ -47,6 +47,7 @@ e2fsprogs
 ed
 eject
 fakeroot
+ffmpeg
 file
 findutils
 fontconfig
@@ -85,6 +86,7 @@ gvfs-libs
 gzip
 hicolor-icon-theme
 hostname
+i965-va-driver
 ifupdown
 imagemagick
 imagemagick-common
@@ -417,6 +419,7 @@ libasan0
 libasn1-8-heimdal
 libasound2
 libasound2-data
+libass5
 libasyncns0
 libatasmart4
 libatk-bridge2.0-0
@@ -479,11 +482,13 @@ libdjvulibre-text
 libdjvulibre21
 libdns100
 libdpkg-perl
+libdrm-amdgpu1
 libdrm-intel1
 libdrm-nouveau2
 libdrm-radeon1
 libdrm2
 libedit2
+libegl1-mesa-lts-wily
 libelf1
 libelfg0
 liberror-perl
@@ -500,6 +505,7 @@ libexif12
 libexpat1
 libexpat1-dev
 libfakeroot
+libfdk-aac1
 libffi6
 libfftw3-double3
 libfile-fcntllock-perl
@@ -509,7 +515,9 @@ libfontconfig1-dev
 libfontenc1
 libfreetype6
 libfreetype6-dev
+libfribidi0
 libfuse2
+libgbm1-lts-wily
 libgcc-4.8-dev
 libgcc1
 libgconf-2-4
@@ -523,7 +531,7 @@ libgdk-pixbuf2.0-dev
 libgeoip1
 libgif4
 libgirepository-1.0-1
-libgl1-mesa-dri
+libgl1-mesa-dri-lts-wily
 libgl1-mesa-glx
 libglapi-mesa
 libglib2.0-0
@@ -613,7 +621,7 @@ liblcms2-2
 liblcms2-dev
 libldap-2.4-2
 libldap2-dev
-libllvm3.4
+libllvm3.6
 liblog-message-simple-perl
 liblqr-1-0
 liblqr-1-0-dev
@@ -631,6 +639,7 @@ libmagickwand-dev
 libmagickwand5
 libmodule-pluggable-perl
 libmount1
+libmp3lame0
 libmpc3
 libmpfr4
 libmysqlclient-dev
@@ -644,9 +653,13 @@ libnih1
 libnspr4
 libnss3
 libnss3-nssdb
+libnuma1
 libogg0
+libopencore-amrnb0
+libopencore-amrwb0
 libopenexr-dev
 libopenexr6
+libopus0
 liborbit-2-0
 liborbit2
 libp11-kit-dev
@@ -710,6 +723,7 @@ libsasl2-2
 libsasl2-modules
 libsasl2-modules-db
 libsctp1
+libsdl2-2.0-0
 libsecret-1-0
 libsecret-common
 libselinux1
@@ -721,6 +735,8 @@ libslang2
 libsm-dev
 libsm6
 libsndfile1
+libsoxr0
+libspeex1
 libsqlite3-0
 libss2
 libssl-dev
@@ -737,6 +753,7 @@ libterm-ui-perl
 libtext-soundex-perl
 libthai-data
 libthai0
+libtheora0
 libtiff5
 libtiff5-dev
 libtiffxx5
@@ -756,12 +773,20 @@ libuv-dev
 libuv0.10
 libv4l-0
 libv4lconvert0
+libva-drm1
+libva-x11-1
+libva1
+libvdpau1
+libvidstab1.0
 libvorbis0a
 libvorbisenc2
 libvorbisfile3
 libvpx1
+libwavpack1
 libwayland-client0
 libwayland-cursor0
+libwayland-egl1-mesa-lts-wily
+libwayland-server0
 libwind0-heimdal
 libwmf-dev
 libwmf0.2-7
@@ -771,6 +796,8 @@ libx11-data
 libx11-dev
 libx11-doc
 libx11-xcb1
+libx264-148
+libx265-130
 libxau-dev
 libxau6
 libxaw7
@@ -784,6 +811,7 @@ libxcb-shape0
 libxcb-shm0
 libxcb-shm0-dev
 libxcb-sync1
+libxcb-xfixes0
 libxcb1
 libxcb1-dev
 libxcomposite1
@@ -810,13 +838,16 @@ libxrender1
 libxshmfence1
 libxslt1-dev
 libxslt1.1
+libxss1
 libxt-dev
 libxt6
 libxtst6
 libxv1
+libxvidcore4
 libxxf86dga1
 libxxf86vm1
 libyaml-0-2
+libzimg2
 linux-libc-dev
 lksctp-tools
 locales
@@ -836,6 +867,7 @@ mount
 mountall
 mtools
 multiarch-support
+mupdf
 mysql-common
 ncurses-base
 ncurses-bin
@@ -916,6 +948,8 @@ udisks2
 unzip
 upstart
 util-linux
+va-driver-all
+vdpau-va-driver
 wget
 x11-common
 x11-utils

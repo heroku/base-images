@@ -10,6 +10,7 @@ deb http://archive.ubuntu.com/ubuntu/ trusty-security main universe
 deb http://archive.ubuntu.com/ubuntu/ trusty-updates main universe
 
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+deb http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
@@ -81,6 +82,25 @@ IIP9up4xwgje9LB7fMxsSkCDTHOk
 -----END PGP PUBLIC KEY BLOCK-----
 PGDG_ACCC4CF8
 
+apt-key add - <<'FFMPEG_ED8E640A'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: SKS 1.1.6
+Comment: Hostname: keyserver.ubuntu.com
+
+mI0EUZpuEAEEANNsNCw3jhNddXVg+c1qQEfulNlK1tWkA8nvjLNb7rqCgtQF8lU9xOPsMkKr
+MVvMUSX7mGhLZ+k4ClJWCFw1xshg8Qj6AbZO94/8x10SrtUAQVOotIs691qwB5kfQXgNjUsZ
+AQx0LU1ZCIzGX23moa/W195i+ejNTB6TW4XF6e0rABEBAAG0HkxhdW5jaHBhZCBQUEEgZm9y
+IERvdWcgTWNNYWhvboicBBABAgAGBQJWw3gQAAoJEAQLpOs7f4HaiyQD/A9aLK2PdtZhZGt/
+QHq7do99OoiXU9G9v1P3zfYqbmQNR0CVPNwU7oR6sR1OAOwHp5Sc6PY/Sw8X1fI+uqzIRsYR
+kkkcRvMdzcJ5XeogykrPUoEHrUCPDPTDwRs4txhGCYWrYU3BOnnWDkB4YMFq+tOo1pAWx/tg
+nXjLYHXbnA1ciLgEEwECACIFAlGabhACGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJ
+EJC9fqztjmQKLbgD/jIQBZg7pTB7ITK6/DvE8A2mX+aL7Ewt9344+eTSOXPDac/WEishJmLu
+Er/nnnKjwMWa0HeTeLSz44fEGytZxNiKRwY8XCN5s/uqrfDsNEVrXRP51vyG9w1J7vwFSV9o
+m2Ckao+7mfqyGhfRGeFJDP/BZYsV+FDPiCHX72NfOoba
+=5KmD
+-----END PGP PUBLIC KEY BLOCK-----
+FFMPEG_ED8E640A
+
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
@@ -93,6 +113,7 @@ apt-get install -y --force-yes \
     daemontools \
     dnsutils \
     ed \
+    ffmpeg \
     git \
     gvfs \
     imagemagick \
@@ -120,6 +141,7 @@ apt-get install -y --force-yes \
     libxml2-dev \
     libxslt-dev \
     locales \
+    mupdf \
     netcat-openbsd \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
