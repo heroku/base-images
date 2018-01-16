@@ -64,7 +64,7 @@ apt-get install -y --force-yes \
     libxml2-dev \
     libxslt-dev \
     libyaml-dev \
-    postgresql-server-dev-9.6 \
+    postgresql-server-dev-10 \
     python-dev \
     ruby-dev \
     zlib1g-dev \
