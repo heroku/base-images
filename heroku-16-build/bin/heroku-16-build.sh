@@ -9,6 +9,7 @@ apt-get install -y --force-yes \
     autoconf \
     bison \
     build-essential \
+    gettext \
     libacl1-dev \
     libapparmor-dev \
     libapt-pkg-dev \
