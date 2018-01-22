@@ -85,15 +85,19 @@ apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
     autoconf \
+    acl \
     bind9-host \
     bison \
     build-essential \
     coreutils \
     curl \
     daemontools \
+    dbus \
     dnsutils \
     ed \
+    fuse \
     git \
+    groff-base \
     gvfs \
     imagemagick \
     iputils-tracepath \
@@ -121,6 +125,7 @@ apt-get install -y --force-yes \
     libxslt-dev \
     locales \
     netcat-openbsd \
+    ntfs-3g \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
     openssh-client \
@@ -138,6 +143,7 @@ apt-get install -y --force-yes \
     tar \
     telnet \
     tzdata \
+    xkb-data \
     zip \
     zlib1g-dev \
     #
