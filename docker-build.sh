@@ -3,7 +3,7 @@
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
-. cedar-14/bin/stack-helpers.sh
+. stack-helpers.sh
 
 [ $# -eq 1 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
 
