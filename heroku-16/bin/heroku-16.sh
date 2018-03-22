@@ -85,6 +85,7 @@ apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
     apt-utils \
+    apt-transport-https \
     bind9-host \
     bzip2 \
     coreutils \

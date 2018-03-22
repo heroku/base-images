@@ -86,6 +86,7 @@ apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
     autoconf \
     acl \
+    apt-transport-https \
     bind9-host \
     bison \
     build-essential \

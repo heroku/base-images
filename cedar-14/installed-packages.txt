@@ -2,6 +2,7 @@
 acl
 adduser
 apt
+apt-transport-https
 at-spi2-core
 autoconf
 automake
