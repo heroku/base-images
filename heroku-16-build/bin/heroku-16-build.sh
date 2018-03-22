@@ -6,7 +6,6 @@ set -x
 
 apt-get update
 apt-get install -y --force-yes \
-    apt-transport-https \
     autoconf \
     bison \
     build-essential \
