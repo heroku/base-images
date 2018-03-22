@@ -1,6 +1,7 @@
 # List of packages present in the final image. Regenerate using docker-build.sh
 adduser
 apt
+apt-transport-https
 apt-utils
 base-files
 base-passwd
