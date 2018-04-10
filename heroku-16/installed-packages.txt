@@ -232,7 +232,6 @@ libopenal1
 libopencv-core2.4v5
 libopencv-imgproc2.4v5
 libopenexr22
-libopenjp2-7
 libopenjpeg5
 libopus0
 liborc-0.4-0
@@ -251,6 +250,7 @@ libpcre3
 libperl5.22
 libpixman-1-0
 libpng12-0
+libpoppler58
 libpopt0
 libpostproc-ffmpeg53
 libpq5
@@ -370,7 +370,6 @@ mime-support
 mount
 mtools
 multiarch-support
-mupdf
 mysql-common
 ncurses-base
 ncurses-bin
@@ -389,6 +388,7 @@ perl-base
 perl-modules-5.22
 pgdg-keyring
 poppler-data
+poppler-utils
 postgresql-client-10
 postgresql-client-common
 procps

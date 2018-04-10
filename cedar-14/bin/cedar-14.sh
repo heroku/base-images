@@ -146,13 +146,13 @@ apt-get install -y --force-yes \
     libxml2-dev \
     libxslt-dev \
     locales \
-    mupdf \
     netcat-openbsd \
     ntfs-3g \
     openjdk-7-jdk \
     openjdk-7-jre-headless \
     openssh-client \
     openssh-server \
+    poppler-utils \
     postgresql-client-10 \
     postgresql-server-dev-10 \
     psmisc \

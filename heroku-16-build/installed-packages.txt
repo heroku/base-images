@@ -102,10 +102,10 @@ libapt-pkg-dev
 libapt-pkg5.0
 libasan2
 libasn1-8-heimdal
-libasprintf-dev
-libasprintf0v5
 libasound2
 libasound2-data
+libasprintf-dev
+libasprintf0v5
 libass5
 libasyncns0
 libatk1.0-0
@@ -370,7 +370,6 @@ libopencv-core2.4v5
 libopencv-imgproc2.4v5
 libopenexr-dev
 libopenexr22
-libopenjp2-7
 libopenjpeg5
 libopus0
 liborc-0.4-0
@@ -398,6 +397,7 @@ libpixman-1-0
 libpixman-1-dev
 libpng12-0
 libpng12-dev
+libpoppler58
 libpopt-dev
 libpopt0
 libpostproc-ffmpeg53
@@ -582,7 +582,6 @@ mime-support
 mount
 mtools
 multiarch-support
-mupdf
 mysql-common
 ncurses-base
 ncurses-bin
@@ -603,6 +602,7 @@ perl-modules-5.22
 pgdg-keyring
 pkg-config
 poppler-data
+poppler-utils
 postgresql-client-10
 postgresql-client-common
 postgresql-common

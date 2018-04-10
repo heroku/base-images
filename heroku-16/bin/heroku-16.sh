@@ -117,10 +117,10 @@ apt-get install -y --force-yes \
     libxslt1.1 \
     locales \
     make \
-    mupdf \
     netcat-openbsd \
     openssh-client \
     openssh-server \
+    poppler-utils \
     postgresql-client-10 \
     python \
     ruby \

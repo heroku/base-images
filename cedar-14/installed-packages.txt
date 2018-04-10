@@ -691,6 +691,7 @@ libpod-latex-perl
 libpolkit-agent-1-0
 libpolkit-backend-1-0
 libpolkit-gobject-1-0
+libpoppler44
 libpopt0
 libpq-dev
 libpq5
@@ -868,7 +869,6 @@ mount
 mountall
 mtools
 multiarch-support
-mupdf
 mysql-common
 ncurses-base
 ncurses-bin
@@ -896,6 +896,7 @@ plymouth
 policykit-1
 policykit-1-gnome
 poppler-data
+poppler-utils
 postgresql-client-10
 postgresql-client-common
 postgresql-common
