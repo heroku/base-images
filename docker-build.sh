@@ -5,6 +5,8 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 . stack-helpers.sh
 
+(( $(which tac gtac | wc -l) )) || abort "No 'tac' or 'gtac' found; run 'brew install coreutils' on macOS."
+
 [ $# -eq 1 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
 
 STACK="${1%/}"
@@ -34,9 +36,7 @@ if [[ "$STACK" != "cedar-14" ]]; then
     write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 fi
 
-# MacOS protip: if this step fails, run `brew install coreutils` and follow the
-# directions in the output to update your PATH and MANPATH. `tac` is part of
-# that package.
 display "Size breakdown..."
+# "brew install coreutils" installs tac and friends with a "g" prefix
 docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}" \
-    | grep -E "(ubuntu|heroku)" | tac | indent
+    | grep -E "(ubuntu|heroku)" | $(which gtac tac | head -n1) | indent
