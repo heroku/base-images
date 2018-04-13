@@ -7,8 +7,8 @@ branches:
   only:
     - master
 env:
-  - STACK=heroku-16
   - STACK=cedar-14
+  - STACK=heroku-16
 script:
   - ./docker-build.sh $STACK
   - |
