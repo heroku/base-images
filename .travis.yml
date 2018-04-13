@@ -3,6 +3,9 @@ dist: trusty
 language: shell
 services:
   - docker
+branches:
+  only:
+    - master
 env:
   - STACK=heroku-16
   - STACK=cedar-14
