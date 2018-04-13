@@ -34,9 +34,6 @@ if [[ "$STACK" != "cedar-14" ]]; then
     write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 fi
 
-# MacOS protip: if this step fails, run `brew install coreutils` and follow the
-# directions in the output to update your PATH and MANPATH. `tac` is part of
-# that package.
 display "Size breakdown..."
 docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}" \
-    | grep -E "(ubuntu|heroku)" | tac | indent
+    | grep -E "(ubuntu|heroku)" | sort -k2n | indent
