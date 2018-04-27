@@ -9,3 +9,4 @@ The supported stacks are:
 
 * `cedar-14`
 * `heroku-16` (will also build a `heroku-16-build` image)
+* `heroku-18` (will also build a `heroku-18-build` image)
