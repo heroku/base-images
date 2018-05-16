@@ -103,6 +103,7 @@ apt-get install -y --no-install-recommends \
     git \
     gsfonts \
     imagemagick \
+    iproute2 \
     iputils-tracepath \
     language-pack-en \
     less \
