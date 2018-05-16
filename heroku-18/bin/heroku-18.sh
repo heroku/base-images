@@ -150,11 +150,11 @@ apt-get install -y --no-install-recommends \
     zip \
 
 # install the JDK for certificates, then remove it
-apt-get install -y --no-install-recommends ca-certificates-java openjdk-11-jre-headless
+apt-get install -y --no-install-recommends ca-certificates-java openjdk-8-jre-headless
 apt-get remove -y ca-certificates-java
 apt-get -y --purge autoremove
-apt-get purge -y openjdk-11-jre-headless
-stat /etc/ssl/certs/java/cacerts
+apt-get purge -y openjdk-8-jre-headless
+test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
 cd /
 rm -rf /root/*
