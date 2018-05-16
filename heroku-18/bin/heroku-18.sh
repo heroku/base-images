@@ -154,7 +154,7 @@ apt-get install -y --no-install-recommends ca-certificates-java openjdk-11-jre-h
 apt-get remove -y ca-certificates-java
 apt-get -y --purge autoremove
 apt-get purge -y openjdk-11-jre-headless
-stat /etc/ssl/certs/java/cacerts
+test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
 cd /
 rm -rf /root/*
