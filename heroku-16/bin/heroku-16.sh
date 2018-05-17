@@ -92,6 +92,7 @@ apt-get install -y --force-yes \
     curl \
     dnsutils \
     ed \
+    ffmpeg \
     git \
     imagemagick \
     iputils-tracepath \
@@ -119,6 +120,7 @@ apt-get install -y --force-yes \
     netcat-openbsd \
     openssh-client \
     openssh-server \
+    poppler-utils \
     postgresql-client-10 \
     python \
     ruby \
