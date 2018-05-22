@@ -79,6 +79,7 @@ imagemagick
 imagemagick-6-common
 imagemagick-6.q16
 init-system-helpers
+iproute2
 iputils-tracepath
 krb5-multidev
 language-pack-en
@@ -295,6 +296,7 @@ libmcrypt4
 libmemcached-dev
 libmemcached11
 libmemcachedutil2
+libmnl0
 libmount1
 libmpc3
 libmpdec2
