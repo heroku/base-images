@@ -90,6 +90,8 @@ libacl1-dev
 libapt-inst2.0
 libapt-pkg-dev
 libapt-pkg5.0
+libargon2-0
+libargon2-0-dev
 libasan4
 libasn1-8-heimdal
 libassuan0
