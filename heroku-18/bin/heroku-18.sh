@@ -89,8 +89,8 @@ PGDG_ACCC4CF8
 apt-get update
 apt-get upgrade -y
 apt-get install -y --no-install-recommends \
-    apt-utils \
     apt-transport-https \
+    apt-utils \
     bind9-host \
     bzip2 \
     coreutils \
@@ -122,18 +122,18 @@ apt-get install -y --no-install-recommends \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
-    libsodium23 \
     librabbitmq4 \
+    libsodium23 \
     libuv1 \
     libxslt1.1 \
-    lsb-release \
     locales \
+    lsb-release \
     make \
     netcat-openbsd \
     openssh-client \
     openssh-server \
-    postgresql-client-10 \
     patch \
+    postgresql-client-10 \
     python \
     rename \
     rsync \
