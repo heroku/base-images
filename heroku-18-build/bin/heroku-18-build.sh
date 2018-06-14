@@ -54,6 +54,7 @@ apt-get install -y --force-yes --no-install-recommends \
     librabbitmq-dev \
     libreadline-dev \
     librtmp-dev \
+    libseccomp-dev \
     libselinux1-dev \
     libsemanage1-dev \
     libsodium-dev \
