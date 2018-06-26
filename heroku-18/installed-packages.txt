@@ -191,6 +191,7 @@ libroken18-heimdal
 librtmp1
 libruby2.5
 libsasl2-2
+libsasl2-modules
 libsasl2-modules-db
 libseccomp2
 libselinux1
