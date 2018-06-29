@@ -107,6 +107,7 @@ apt-get install -y --no-install-recommends \
     iputils-tracepath \
     language-pack-en \
     less \
+    libargon2-0 \
     libcurl4 \
     libev4 \
     libevent-2.1-6 \

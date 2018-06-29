@@ -60,6 +60,7 @@ less
 libacl1
 libapt-inst2.0
 libapt-pkg5.0
+libargon2-0
 libasn1-8-heimdal
 libassuan0
 libattr1
