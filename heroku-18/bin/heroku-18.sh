@@ -123,6 +123,7 @@ apt-get install -y --no-install-recommends \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
+    libsasl2-modules \
     libsodium23 \
     librabbitmq4 \
     libuv1 \
