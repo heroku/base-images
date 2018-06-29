@@ -376,6 +376,7 @@ libsasl2-2
 libsasl2-dev
 libsasl2-modules
 libsasl2-modules-db
+libseccomp-dev
 libseccomp2
 libselinux1
 libselinux1-dev

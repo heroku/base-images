@@ -84,8 +84,8 @@ PGDG_ACCC4CF8
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
-    apt-utils \
     apt-transport-https \
+    apt-utils \
     bind9-host \
     bzip2 \
     coreutils \
@@ -110,8 +110,9 @@ apt-get install -y --force-yes \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
-    libsodium18 \
     librabbitmq4 \
+    libseccomp2 \
+    libsodium18 \
     libuv1 \
     libxslt1.1 \
     locales \
