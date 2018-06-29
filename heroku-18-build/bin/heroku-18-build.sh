@@ -13,6 +13,7 @@ apt-get install -y --force-yes --no-install-recommends \
     gettext \
     libacl1-dev \
     libapt-pkg-dev \
+    libargon2-0-dev \
     libattr1-dev \
     libaudit-dev \
     libbsd-dev \
