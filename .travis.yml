@@ -5,7 +5,7 @@ services:
 - docker
 branches:
   only:
-  - master
+  - automation
 env:
   matrix:
   - STACK=cedar-14
