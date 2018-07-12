@@ -5,10 +5,10 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 . stack-helpers.sh
 
-[ $# -eq 1 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
+[ $# -eq 2 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
 
-STACK="${1%/}"
-IMAGE_TAG="heroku/${STACK/-/:}"
+STACK=$1
+IMAGE_TAG=$2
 DOCKERFILE_DIR="$STACK"
 
 [[ -d "$DOCKERFILE_DIR" ]] || abort fatal: stack "$STACK" not found
