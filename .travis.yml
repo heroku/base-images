@@ -5,7 +5,7 @@ services:
 - docker
 branches:
   only:
-  - automation
+  - master
 env:
   matrix:
   - STACK=cedar-14 IMAGE_TAG=herokutest/cedar:14
