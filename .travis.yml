@@ -27,4 +27,4 @@ deploy:
   provider: script
   script: sh bin/publish.sh
   on:
-    branch: automation
+    branch: master
