@@ -14,7 +14,7 @@ apt-get update
 apt-get install -y --no-install-recommends gnupg
 
 cat >>/etc/apt/sources.list <<EOF
-deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
