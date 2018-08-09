@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 . stack-helpers.sh
 
-[ $# -eq 2 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK
+[ $# -eq 2 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME
 
 STACK=$1
 IMAGE_TAG=$2
