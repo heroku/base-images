@@ -227,6 +227,7 @@ libxml2
 libxpm4
 libxslt1.1
 libyaml-0-2
+libzip4
 libzstd1
 locales
 login

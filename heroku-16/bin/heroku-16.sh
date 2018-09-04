@@ -115,6 +115,7 @@ apt-get install -y --force-yes \
     libsodium18 \
     libuv1 \
     libxslt1.1 \
+    libzip4 \
     locales \
     make \
     netcat-openbsd \
