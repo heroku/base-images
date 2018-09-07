@@ -220,6 +220,7 @@ libwrap0
 libx11-6
 libx11-data
 libxau6
+libxcb-shm0
 libxcb1
 libxdmcp6
 libxext6
