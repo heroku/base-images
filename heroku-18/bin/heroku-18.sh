@@ -129,6 +129,7 @@ apt-get install -y --no-install-recommends \
     libsodium23 \
     libuv1 \
     libxslt1.1 \
+    libzip4 \
     locales \
     lsb-release \
     make \
