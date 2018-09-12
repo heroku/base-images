@@ -467,6 +467,8 @@ libxt6
 libxtables11
 libyaml-0-2
 libyaml-dev
+libzip-dev
+libzip4
 linux-libc-dev
 locales
 login

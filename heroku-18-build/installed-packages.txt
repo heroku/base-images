@@ -450,6 +450,8 @@ libxt-dev
 libxt6
 libyaml-0-2
 libyaml-dev
+libzip-dev
+libzip4
 libzstd1
 linux-libc-dev
 locales

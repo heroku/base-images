@@ -130,6 +130,7 @@ apt-get install -y --no-install-recommends \
     libuv1 \
     libxcb-shm0 \
     libxslt1.1 \
+    libzip4 \
     locales \
     lsb-release \
     make \
