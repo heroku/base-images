@@ -128,6 +128,7 @@ apt-get install -y --no-install-recommends \
     libseccomp2 \
     libsodium23 \
     libuv1 \
+    libxcb-shm0 \
     libxslt1.1 \
     libzip4 \
     locales \
