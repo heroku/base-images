@@ -98,6 +98,7 @@ apt-get install -y --no-install-recommends \
     dnsutils \
     ed \
     file \
+    fontconfig \
     geoip-database \
     ghostscript \
     git \
@@ -108,7 +109,12 @@ apt-get install -y --no-install-recommends \
     language-pack-en \
     less \
     libargon2-0 \
+    libcairo2 \
+    libcroco3 \
     libcurl4 \
+    libdatrie1 \
+    libdjvulibre-text \
+    libdjvulibre21 \
     libev4 \
     libevent-2.1-6 \
     libevent-core-2.1-6 \
@@ -117,18 +123,38 @@ apt-get install -y --no-install-recommends \
     libevent-pthreads-2.1-6 \
     libexif12 \
     libgd3 \
+    libgdk-pixbuf2.0-0 \
+    libgdk-pixbuf2.0-common \
+    libglib2.0-data \
     libgnutls-openssl27 \
     libgnutlsxx28 \
+    libgraphite2-3 \
     libgs9 \
+    libharfbuzz0b \
+    libilmbase12 \
+    libkmod2 \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
+    libnetpbm10 \
+    libopenexr22 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libpangoft2-1.0-0 \
+    libpixman-1-0 \
     librabbitmq4 \
+    librsvg2-2 \
+    librsvg2-common \
     libsasl2-modules \
     libseccomp2 \
     libsodium23 \
+    libthai-data \
+    libthai0 \
     libuv1 \
+    libwmf0.2-7 \
+    libxcb-render0 \
     libxcb-shm0 \
+    libxrender1 \
     libxslt1.1 \
     libzip4 \
     locales \
