@@ -113,8 +113,6 @@ apt-get install -y --no-install-recommends \
     libcroco3 \
     libcurl4 \
     libdatrie1 \
-    libdjvulibre-text \
-    libdjvulibre21 \
     libev4 \
     libevent-2.1-6 \
     libevent-core-2.1-6 \
@@ -125,19 +123,14 @@ apt-get install -y --no-install-recommends \
     libgd3 \
     libgdk-pixbuf2.0-0 \
     libgdk-pixbuf2.0-common \
-    libglib2.0-data \
     libgnutls-openssl27 \
     libgnutlsxx28 \
     libgraphite2-3 \
     libgs9 \
     libharfbuzz0b \
-    libilmbase12 \
-    libkmod2 \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
-    libnetpbm10 \
-    libopenexr22 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libpangoft2-1.0-0 \
@@ -151,7 +144,6 @@ apt-get install -y --no-install-recommends \
     libthai-data \
     libthai0 \
     libuv1 \
-    libwmf0.2-7 \
     libxcb-render0 \
     libxcb-shm0 \
     libxrender1 \
