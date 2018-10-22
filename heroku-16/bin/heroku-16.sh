@@ -140,6 +140,22 @@ apt-get -y --purge autoremove
 apt-get purge -y openjdk-8-jre-headless
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
+cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
+<policymap>
+  <policy domain="cache" name="shared-secret" value="passphrase"/>
+  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
+  <policy domain="coder" rights="none" pattern="URL" />
+  <policy domain="coder" rights="none" pattern="HTTPS" />
+  <policy domain="coder" rights="none" pattern="MVG" />
+  <policy domain="coder" rights="none" pattern="MSL" />
+  <policy domain="coder" rights="none" pattern="TEXT" />
+  <policy domain="coder" rights="none" pattern="SHOW" />
+  <policy domain="coder" rights="none" pattern="WIN" />
+  <policy domain="coder" rights="none" pattern="PLT" />
+  <policy domain="path" rights="none" pattern="@*" />
+</policymap>
+IMAGEMAGICK_POLICY
+
 cd /
 rm -rf /root/*
 rm -rf /tmp/*

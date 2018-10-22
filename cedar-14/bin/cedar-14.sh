@@ -156,6 +156,21 @@ apt-cache search language-pack \
     | grep -v '\-base$' \
     | xargs apt-get install -y --force-yes --no-install-recommends
 
+cat > /etc/ImageMagick/policy.xml <<'IMAGEMAGICK_POLICY'
+<policymap>
+  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
+  <policy domain="coder" rights="none" pattern="URL" />
+  <policy domain="coder" rights="none" pattern="HTTPS" />
+  <policy domain="coder" rights="none" pattern="MVG" />
+  <policy domain="coder" rights="none" pattern="MSL" />
+  <policy domain="coder" rights="none" pattern="TEXT" />
+  <policy domain="coder" rights="none" pattern="SHOW" />
+  <policy domain="coder" rights="none" pattern="WIN" />
+  <policy domain="coder" rights="none" pattern="PLT" />
+  <policy domain="path" rights="none" pattern="@*" />
+</policymap>
+IMAGEMAGICK_POLICY
+
 cd /
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
