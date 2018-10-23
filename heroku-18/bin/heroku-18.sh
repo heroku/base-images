@@ -173,6 +173,23 @@ apt-get install -y --no-install-recommends \
     xz-utils \
     zip \
 
+
+cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
+<policymap>
+  <policy domain="resource" name="memory" value="256MiB"/>
+  <policy domain="resource" name="map" value="512MiB"/>
+  <policy domain="resource" name="width" value="16KP"/>
+  <policy domain="resource" name="height" value="16KP"/>
+  <policy domain="resource" name="area" value="128MB"/>
+  <policy domain="resource" name="disk" value="1GiB"/>
+  <policy domain="delegate" rights="none" pattern="URL" />
+  <policy domain="delegate" rights="none" pattern="HTTPS" />
+  <policy domain="delegate" rights="none" pattern="HTTP" />
+  <policy domain="path" rights="none" pattern="@*"/>
+  <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
+</policymap>
+IMAGEMAGICK_POLICY
+
 # install the JDK for certificates, then remove it
 apt-get install -y --no-install-recommends ca-certificates-java openjdk-8-jre-headless
 apt-get remove -y ca-certificates-java
