@@ -5,10 +5,11 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 . stack-helpers.sh
 
-[ $# -eq 2 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME
+[ $# -eq 3 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME BUILD_IMAGE_NAME
 
 STACK=$1
 IMAGE_TAG=$2
+BUILD_IMAGE_TAG=$3
 DOCKERFILE_DIR="$STACK"
 
 [[ -d "$DOCKERFILE_DIR" ]] || abort fatal: stack "$STACK" not found
@@ -26,7 +27,6 @@ write_package_list "$IMAGE_TAG" "$DOCKERFILE_DIR"
 
 if [[ "$STACK" != "cedar-14" ]]; then
     display "Building $STACK build-time image"
-    BUILD_IMAGE_TAG="${IMAGE_TAG}-build"
     BUILD_DOCKERFILE_DIR="${DOCKERFILE_DIR}-build"
     # The --pull option is not used to ensure the build image variant is based on the
     # main stack image built above, rather than the one last published to Docker Hub.
