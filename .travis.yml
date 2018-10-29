@@ -4,6 +4,7 @@ language: shell
 services:
 - docker
 branches:
+  # /!\ Every build will always trigger a deploy
   only:
   - master
   - /^v\d+(\.\d+)?(\.\d+)?(-\S*)?$/
@@ -26,6 +27,3 @@ script:
 deploy:
   provider: script
   script: sh bin/publish.sh
-  on:
-    tags: true
-    branch: master
