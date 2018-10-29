@@ -4,6 +4,7 @@ language: shell
 services:
 - docker
 branches:
+  # /!\ Every build will always trigger a deploy
   only:
   - master
   - /^v\d+(\.\d+)?(\.\d+)?(-\S*)?$/
