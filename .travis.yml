@@ -6,6 +6,7 @@ services:
 branches:
   only:
   - master
+  - /^v\d+(\.\d+)?(\.\d+)?(-\S*)?$/
 env:
   matrix:
   - STACK=cedar-14 IMAGE_TAG=heroku/cedar:14
@@ -22,9 +23,9 @@ script:
     echo -e "Regenerated files differ from checked-in versions!\n${status}\n"
     git diff --exit-code
   fi
-
 deploy:
   provider: script
   script: sh bin/publish.sh
   on:
+    tags: true
     branch: master
