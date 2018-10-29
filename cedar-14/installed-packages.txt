@@ -1,4 +1,4 @@
-# List of packages present in the final image. Regenerate using docker-build.sh
+# List of packages present in the final image. Regenerate using bin/build.sh
 acl
 adduser
 apt

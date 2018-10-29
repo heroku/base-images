@@ -5,7 +5,7 @@ set -ex
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
 
-./docker-build.sh $STACK $nightlyTag $nightlyBuildTag
+bin/build.sh $STACK $nightlyTag $nightlyBuildTag
 
 docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
