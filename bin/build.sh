@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-cd "$(dirname "${BASH_SOURCE[0]}")"
-. stack-helpers.sh
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+. bin/stack-helpers.sh
 
 [ $# -eq 3 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME BUILD_IMAGE_NAME
 
@@ -12,12 +12,14 @@ IMAGE_TAG=$2
 BUILD_IMAGE_TAG=$3
 DOCKERFILE_DIR="$STACK"
 
+echo $DOCKERFILE_DIR
+
 [[ -d "$DOCKERFILE_DIR" ]] || abort fatal: stack "$STACK" not found
 
 write_package_list() {
     local image_tag="$1"
     local output_file="${2}/installed-packages.txt"
-    echo '# List of packages present in the final image. Regenerate using docker-build.sh' > "$output_file"
+    echo '# List of packages present in the final image. Regenerate using bin/build.sh' > "$output_file"
     docker run --rm "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
 }
 

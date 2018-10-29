@@ -2,11 +2,11 @@
 
 To build the stack images locally, run this from the repo root:
 
-    ./docker-build.sh STACK DOCKER_TAG DOCKER_BUILD_TAG
+    bin/build.sh STACK DOCKER_TAG DOCKER_BUILD_TAG
 
 For example:
 
-    ./docker-build.sh heroku-18 heroku/heroku:18 heroku/heroku:18-build
+    bin/build.sh heroku-18 heroku/heroku:18 heroku/heroku:18-build
 
 The supported stacks are:
 

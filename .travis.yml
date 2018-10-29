@@ -15,7 +15,7 @@ env:
   - secure: qsOv8gjVqCeV7kqx8FntMKD51EZCO2j7oTY8fWwqgndRCT5kHtcJA0vGMW0rjGDlDMuEB5wyUc2RT9ZWMslyKWxgS4Su5zSdAlE8D6TXXpHDU1ZPmOA+cnNm4TIMIrcUlGeCWcK4NNe8Vg7VvrTstooLB/ZjgaCKylkxs7zWq2g= # DOCKER_HUB_USERNAME
   - secure: Dlf4eHJVTQ1bCZuLaaNoKjUmS8SL7Jn2BZCdP7UHZhte+RKchCjajhoObT/fAZ3c5EFfV2pd8NKkWPW0REwN/lodgRPeslYiyNaiIRCVoKRGASxHXHO17wwkMNor2Bi7u6InL3WC1t5YbY2abVaeavtz1lAyn1XTNysc+/s1onw= # DOCKER_HUB_PASSWORD
 script:
-- "./docker-build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build"
+- "bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build"
 - |
   status="$(git status --porcelain)"
   if [[ -n "$status" ]]; then
