@@ -28,4 +28,4 @@ deploy:
   provider: script
   script: sh bin/publish.sh
   on:
-    tags: true
+    all_branches: true
