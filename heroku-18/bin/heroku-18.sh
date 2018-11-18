@@ -99,6 +99,7 @@ apt-get install -y --no-install-recommends \
     ed \
     file \
     fontconfig \
+    gcc \
     geoip-database \
     ghostscript \
     git \

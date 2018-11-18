@@ -7,11 +7,16 @@ base-files
 base-passwd
 bash
 bind9-host
+binutils
+binutils-common
+binutils-x86-64-linux-gnu
 bsdutils
 bzip2
 ca-certificates
 ca-certificates-java
 coreutils
+cpp
+cpp-7
 curl
 dash
 debconf
@@ -29,6 +34,9 @@ findutils
 fontconfig
 fontconfig-config
 fonts-dejavu-core
+gcc
+gcc-7
+gcc-7-base
 gcc-8-base
 geoip-database
 ghostscript
@@ -62,8 +70,10 @@ libacl1
 libapt-inst2.0
 libapt-pkg5.0
 libargon2-0
+libasan4
 libasn1-8-heimdal
 libassuan0
+libatomic1
 libattr1
 libaudit-common
 libaudit1
@@ -71,6 +81,7 @@ libavahi-client3
 libavahi-common-data
 libavahi-common3
 libbind9-160
+libbinutils
 libblkid1
 libbsd0
 libbz2-1.0
@@ -79,6 +90,8 @@ libc6
 libcairo2
 libcap-ng0
 libcap2
+libcc1-0
+libcilkrts5
 libcom-err2
 libcroco3
 libcups2
@@ -107,6 +120,7 @@ libffi6
 libfftw3-double3
 libfontconfig1
 libfreetype6
+libgcc-7-dev
 libgcc1
 libgcrypt20
 libgd3
@@ -141,6 +155,8 @@ libirs160
 libisc169
 libisccc160
 libisccfg160
+libisl19
+libitm1
 libjbig0
 libjbig2dec0
 libjpeg-turbo8
@@ -156,6 +172,7 @@ liblcms2-2
 libldap-2.4-2
 libldap-common
 liblqr-1-0
+liblsan0
 libltdl7
 liblwres160
 liblz4-1
@@ -168,7 +185,10 @@ libmcrypt4
 libmemcached11
 libmnl0
 libmount1
+libmpc3
 libmpdec2
+libmpfr6
+libmpx2
 libmysqlclient20
 libncurses5
 libncursesw5
@@ -198,6 +218,7 @@ libpython2.7-stdlib
 libpython3-stdlib
 libpython3.6-minimal
 libpython3.6-stdlib
+libquadmath0
 librabbitmq4
 libreadline7
 libroken18-heimdal
@@ -226,6 +247,8 @@ libthai-data
 libthai0
 libtiff5
 libtinfo5
+libtsan0
+libubsan0
 libudev1
 libunistring2
 libuuid1
