@@ -92,6 +92,7 @@ apt-get install -y --force-yes \
     curl \
     dnsutils \
     ed \
+    gcc \
     git \
     imagemagick \
     iputils-tracepath \
