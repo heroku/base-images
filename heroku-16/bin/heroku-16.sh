@@ -108,6 +108,7 @@ apt-get install -y --force-yes \
     libgd3 \
     libgnutls-openssl27 \
     libgnutlsxx28 \
+    libmagickcore-6.q16-2-extra \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \

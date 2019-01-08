@@ -102,6 +102,8 @@ libdatrie1
 libdb5.3
 libdbus-1-3
 libdebconfclient0
+libdjvulibre-text
+libdjvulibre21
 libdns1100
 libedit2
 libelf1
@@ -151,6 +153,7 @@ libicu60
 libidn11
 libidn2-0
 libijs-0.35
+libilmbase12
 libirs160
 libisc169
 libisccc160
@@ -180,6 +183,7 @@ liblzma5
 libmagic-mgc
 libmagic1
 libmagickcore-6.q16-3
+libmagickcore-6.q16-3-extra
 libmagickwand-6.q16-3
 libmcrypt4
 libmemcached11
@@ -195,6 +199,7 @@ libncursesw5
 libnettle6
 libnghttp2-14
 libnpth0
+libopenexr22
 libp11-kit0
 libpam-modules
 libpam-modules-bin
@@ -255,6 +260,7 @@ libuuid1
 libuv1
 libwebp6
 libwind0-heimdal
+libwmf0.2-7
 libwrap0
 libx11-6
 libx11-data
