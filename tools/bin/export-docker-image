@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+DOCKER_IMAGE="$1"
+MNT="$2"
+
+CONTAINER="$(docker create "$DOCKER_IMAGE")"
+trap 'docker rm "$CONTAINER" > /dev/null' EXIT
+
+docker export "$CONTAINER" | tar -x -C "$MNT" --exclude=lib/modules bin etc lib lib64 sbin usr var/lib

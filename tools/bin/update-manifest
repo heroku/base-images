@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+[ -z "$MANIFEST_APP_URL" ] && echo "Missing manifest app url" && exit 1
+[ -z "$MANIFEST_APP_TOKEN" ] && echo "Missing manifest app token" && exit 1
+
+exit 0

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -e
+
+IMG_GZ="$1"
+IMG_SHA256="$2"
+IMG_MANIFEST="$3"
+STACK=$4
+VERSION="$5"
+SIGNATURE="$6"
+IMG_PKG_VERSIONS="$7"
+
+display Creating Image on $MANIFEST_APP_URL
+
+jq \
+    --null-input \
+    --arg stack "$(echo $STACK | sed 's/\(-\)/64\1/')" \
+    --slurpfile packages $IMG_PKG_VERSIONS \
+    --arg version "$VERSION" \
+    '{
+        stack: $stack,
+        version: $version,
+        packages: $packages
+    }' |
+    curl \
+        --silent --show-error --fail \
+        --user-agent 'Stack Image Tools' \
+        --header "Authorization: Bearer $MANIFEST_APP_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data @- \
+        "$MANIFEST_APP_URL/images" |
+    jq > $IMG_MANIFEST \
+        --arg name "$STACK" \
+        --arg sha256 "$(< "$IMG_SHA256")" \
+        --arg signature "$(< $SIGNATURE)" \
+        '{
+            name: $name,
+            sha256: $sha256,
+            signature: $signature
+        } + .'
+
+display Uploading Image to S3
+PUT_URL=$(jq -r .put_url "$IMG_MANIFEST")
+curl \
+    --silent --show-error \
+    --user-agent 'Stack Image Tools' \
+    --header "Content-Type: application/octet-stream" \
+    --upload-file "$IMG_GZ" \
+    "$PUT_URL"

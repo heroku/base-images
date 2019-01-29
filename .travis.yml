@@ -3,11 +3,6 @@ dist: trusty
 language: shell
 services:
 - docker
-branches:
-  # /!\ Every build will always trigger a deploy
-  only:
-  - master
-  - /^v\d+(\.\d+)?(\.\d+)?(-\S*)?$/
 env:
   matrix:
   - STACK=cedar-14 IMAGE_TAG=heroku/cedar:14 PRIVATE_IMAGE_TAG=heroku/cedar-private:14
@@ -16,8 +11,9 @@ env:
   global:
   - secure: qsOv8gjVqCeV7kqx8FntMKD51EZCO2j7oTY8fWwqgndRCT5kHtcJA0vGMW0rjGDlDMuEB5wyUc2RT9ZWMslyKWxgS4Su5zSdAlE8D6TXXpHDU1ZPmOA+cnNm4TIMIrcUlGeCWcK4NNe8Vg7VvrTstooLB/ZjgaCKylkxs7zWq2g= # DOCKER_HUB_USERNAME
   - secure: Dlf4eHJVTQ1bCZuLaaNoKjUmS8SL7Jn2BZCdP7UHZhte+RKchCjajhoObT/fAZ3c5EFfV2pd8NKkWPW0REwN/lodgRPeslYiyNaiIRCVoKRGASxHXHO17wwkMNor2Bi7u6InL3WC1t5YbY2abVaeavtz1lAyn1XTNysc+/s1onw= # DOCKER_HUB_PASSWORD
+  - secure: qTImKa1qsHdMmreZHEOU1JgY2adQ5E/ZHIJw3Nvm5tDqz5lbG5dUahIj1JvzP+FdIoEo6R+0t8C8xD9mBwnz4nMmnahQMnYzYltC9bO9kA7cSI/dktAjQKSBLwtDacFB6jT0UVf7lE7Cxxy70q8L5lkvbqgCxDvU7C16TinYgKA= # SIGNING_KEY_PASSWORD
 script:
-- "bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build"
+- bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
 - |
   status="$(git status --porcelain)"
   if [[ -n "$status" ]]; then
@@ -25,7 +21,19 @@ script:
     git diff --exit-code
   fi
 deploy:
-  provider: script
-  script: sh bin/publish.sh
-  on:
-    all_branches: true
+  - provider: script
+    script: bin/convert-and-publish-to-heroku.sh
+    on:
+      tags: true
+  - provider: script
+    script: sh bin/publish-to-dockerhub.sh
+    on:
+      all_branches: true
+before_install:
+- |
+  # decrypt private key for signing images
+  openssl aes-256-cbc \
+    -K $encrypted_6cacfc7df997_key \
+    -iv $encrypted_6cacfc7df997_iv \
+    -in ".travis/stack_images.key.enc" \
+    -out /tmp/stack.key -d

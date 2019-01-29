@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -e -o pipefail
+convert-to-heroku-stack-image "$@"

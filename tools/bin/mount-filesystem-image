@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+IMG="$1"
+IMG_MNT="$2"
+
+mkdir -p "$IMG_MNT"
+mount -o loop,noatime,nodiratime "$IMG" "$IMG_MNT"

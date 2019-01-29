@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+if ls /tmp/*64-*.manifest >& /dev/null; then
+    jq --null-input \
+        '[inputs]
+        | map({
+            name: .name,
+            id: .id,
+            sha256: .sha256,
+            signature: .signature
+        }) | {stacks: .}' \
+        /tmp/*64-*.manifest |
+        curl \
+            --fail --user-agent 'Stack Image Tools' \
+            --header "Authorization: Bearer $MANIFEST_APP_TOKEN" \
+            --header "Content-Type: application/json" \
+            --request PATCH \
+            --data @- \
+            "$MANIFEST_APP_URL/manifest/staging"
+fi
