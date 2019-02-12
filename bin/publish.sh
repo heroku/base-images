@@ -4,14 +4,24 @@ set -ex
 
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
+date=`date -u '+%Y-%m-%d-%H.%M.%S'`
+dateTag="${IMAGE_TAG}.${date}"
+dateBuildTag="${IMAGE_TAG}-build.${date}"
 
 bin/build.sh $STACK $nightlyTag $nightlyBuildTag
 
 docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
 docker push $nightlyTag
+
+docker tag $nightlyTag $dateTag
+docker push $dateTag
+
 if [ "$STACK" != "cedar-14" ]; then
   docker push $nightlyBuildTag
+
+  docker tag $nightlyBuildTag $dateBuildTag
+  docker push $dateBuildTag
 fi
 
 if [ -n "$TRAVIS_TAG" ]; then
