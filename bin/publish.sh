@@ -5,8 +5,8 @@ set -ex
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
 date=`date -u '+%Y-%m-%d-%H.%M.%S'`
-dateTag="${IMAGE_TAG}.${date}"
-dateBuildTag="${IMAGE_TAG}-build.${date}"
+dateTag="${PRIVATE_IMAGE_TAG}.${date}"
+dateBuildTag="${PRIVATE_IMAGE_TAG}-build.${date}"
 
 bin/build.sh $STACK $nightlyTag $nightlyBuildTag
 
