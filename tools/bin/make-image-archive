@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+IMG="$1"
+IMG_SHA256="$2"
+
+sha256sum "$IMG" | cut -d ' ' -f 1 | tr -d '\n' > "$IMG_SHA256"
+gzip "$IMG"

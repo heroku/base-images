@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e -o pipefail
+
+DOCKER_IMAGE=$1
+OUTPUT_FILE=$2
+
+docker run --rm -ti heroku/heroku:16 dpkg-query -W -f "\${package},\${version}\n" | jq -s -R -f /usr/local/bin/csv-to-array.jq > $OUTPUT_FILE
