@@ -7,19 +7,20 @@ IMG_SHA256="$2"
 IMG_MANIFEST="$3"
 STACK=$4
 VERSION="$5"
-SIGNATURE="$6"
-IMG_PKG_VERSIONS="$7"
+IMG_PKG_VERSIONS="$6"
 
 display Creating Image on $MANIFEST_APP_URL
 
 jq \
     --null-input \
-    --arg stack "$(echo $STACK | sed 's/\(-\)/64\1/')" \
+    --arg stack "$STACK" \
     --slurpfile packages $IMG_PKG_VERSIONS \
     --arg version "$VERSION" \
+    --arg sha "$(< "$IMG_SHA256")" \
     '{
         stack: $stack,
         version: $version,
+        sha: $sha,
         packages: $packages
     }' |
     curl \
@@ -31,12 +32,8 @@ jq \
         "$MANIFEST_APP_URL/images" |
     jq > $IMG_MANIFEST \
         --arg name "$STACK" \
-        --arg sha256 "$(< "$IMG_SHA256")" \
-        --arg signature "$(< $SIGNATURE)" \
         '{
-            name: $name,
-            sha256: $sha256,
-            signature: $signature
+            name: $name
         } + .'
 
 display Uploading Image to S3
@@ -47,12 +44,3 @@ curl \
     --header "Content-Type: application/octet-stream" \
     --upload-file "$IMG_GZ" \
     "$PUT_URL"
-
-display Uploading SHA to S3
-SHA_PUT_URL=$(jq -r .sha_put_url "$IMG_MANIFEST")
-curl \
-    --silent --show-error \
-    --user-agent 'Stack Image Tools' \
-    --header "Content-Type: application/octet-stream" \
-    --upload-file "$IMG_SHA256" \
-    "$SHA_PUT_URL"

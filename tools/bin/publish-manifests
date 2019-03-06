@@ -7,9 +7,7 @@ if ls /tmp/*64-*.manifest >& /dev/null; then
         '[inputs]
         | map({
             name: .name,
-            id: .id,
-            sha256: .sha256,
-            signature: .signature
+            image_id: .id
         }) | {stacks: .}' \
         /tmp/*64-*.manifest |
         curl \
