@@ -15,3 +15,10 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+
+if update-manifest; then
+  display Publishing manifest update
+  publish-manifests
+else
+  display Skipping manifest update
+fi

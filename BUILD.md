@@ -31,7 +31,6 @@ When building Stack Images for relase locally, you'll need a number of additiona
     # build the stack-image-tooling
     docker build . -t heroku/stack-image-tools
     # SET MANIFEST_APP_URL and MANIFEST_APP_TOKEN values, this is the app that controls the bucket for images and metadata about the images (Cheverny)
-    # You must have a private key (tmp/stack.key) to sign the images with (and a password on that key at $STACK_KEY_PASSWORD)
-    docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/stack.key:/tmp/stack.key -e "SIGNING_KEY_PASSWORD=$STACK_KEY_PASSWORD" -e "MANIFEST_APP_URL=$MANIFEST_APP_URL" -e "MANIFEST_APP_TOKEN=$MANIFEST_APP_TOKEN" heroku/stack-image-tools STACK
+    docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -e "MANIFEST_APP_URL=$MANIFEST_APP_URL" -e "MANIFEST_APP_TOKEN=$MANIFEST_APP_TOKEN" heroku/stack-image-tools STACK
     # this will use your local docker image and convert it to a heroku stack image
     # it will then upload this image and the staging manifest via the MANIFEST_APP

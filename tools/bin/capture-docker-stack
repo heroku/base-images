@@ -18,8 +18,6 @@ IMG_MNT=/tmp/$IMG_BASE
 IMG_GZ=/tmp/$IMG_BASE.img.gz
 IMG_SHA256=/tmp/$IMG_BASE.img.sha256
 IMG_MANIFEST=/tmp/$IMG_BASE.manifest
-SIG=/tmp/$IMG_BASE.img.signature
-PRIVATE_KEY=/tmp/stack.key
 IMG_PKG_VERSIONS=/tmp/$IMG_BASE.pkg.versions
 
 display Starting capture for $STACK $DOCKER_IMAGE_VERSION at $(date)
@@ -39,9 +37,6 @@ install-heroku-files $IMG_MNT |& indent
 display Unmounting image
 umount $IMG_MNT |& indent
 
-display Signing image
-sign-image $IMG $SIG $PRIVATE_KEY
-
 display SHA256ing and gzipping image
 make-image-archive $IMG $IMG_SHA256 |& indent
 cat $IMG_SHA256
@@ -51,11 +46,9 @@ if update-manifest; then
     display Capture Package Versions
     capture-package-versions $DOCKER_IMAGE $IMG_PKG_VERSIONS
     display Uploading files
-    upload-image $IMG_GZ $IMG_SHA256 $IMG_MANIFEST $STACK $DOCKER_IMAGE_VERSION $SIG $IMG_PKG_VERSIONS |& indent
-    display Updating staging manifest
-    publish-manifests
+    upload-image $IMG_GZ $IMG_SHA256 $IMG_MANIFEST $STACK $DOCKER_IMAGE_VERSION $IMG_PKG_VERSIONS |& indent
 else
-    display Skipping push and manifest update
+    display Skipping image upload
 fi
 
 display Finished capture for $STACK $DOCKER_IMAGE_VERSION
