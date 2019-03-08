@@ -864,10 +864,10 @@ plymouth
 policykit-1
 policykit-1-gnome
 poppler-data
-postgresql-client-10
+postgresql-client-11
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-10
+postgresql-server-dev-11
 procps
 psmisc
 python

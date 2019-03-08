@@ -10,6 +10,7 @@ base-files
 base-passwd
 bash
 bind9-host
+binfmt-support
 binutils
 binutils-common
 binutils-x86-64-linux-gnu
@@ -19,6 +20,7 @@ build-essential
 bzip2
 ca-certificates
 ca-certificates-java
+clang-6.0
 comerr-dev
 coreutils
 cpp
@@ -85,6 +87,8 @@ krb5-multidev
 language-pack-en
 language-pack-en-base
 less
+lib32gcc1
+lib32stdc++6
 libacl1
 libacl1-dev
 libapt-inst2.0
@@ -116,6 +120,7 @@ libc-bin
 libc-dev-bin
 libc6
 libc6-dev
+libc6-i386
 libcairo-gobject2
 libcairo-script-interpreter2
 libcairo2
@@ -126,6 +131,8 @@ libcap-ng0
 libcap2
 libcc1-0
 libcilkrts5
+libclang-common-6.0-dev
+libclang1-6.0
 libcom-err2
 libcroco3
 libcups2
@@ -170,6 +177,7 @@ libfontconfig1
 libfontconfig1-dev
 libfreetype6
 libfreetype6-dev
+libgc1c2
 libgcc-7-dev
 libgcc1
 libgcrypt20
@@ -252,6 +260,7 @@ libjpeg-turbo8-dev
 libjpeg8
 libjpeg8-dev
 libjson-c3
+libjsoncpp1
 libk5crypto3
 libkadm5clnt-mit11
 libkadm5srv-mit11
@@ -270,6 +279,7 @@ liblcms2-dev
 libldap-2.4-2
 libldap-common
 libldap2-dev
+libllvm6.0
 liblqr-1-0
 liblqr-1-0-dev
 liblsan0
@@ -315,6 +325,8 @@ libnetpbm10-dev
 libnettle6
 libnghttp2-14
 libnpth0
+libobjc-7-dev
+libobjc4
 libopenexr-dev
 libopenexr22
 libp11-kit-dev
@@ -335,6 +347,7 @@ libpcre3-dev
 libpcre32-3
 libpcrecpp0v5
 libperl5.26
+libpipeline1
 libpixman-1-0
 libpixman-1-dev
 libpng-dev
@@ -454,6 +467,9 @@ libzip-dev
 libzip4
 libzstd1
 linux-libc-dev
+llvm-6.0
+llvm-6.0-dev
+llvm-6.0-runtime
 locales
 login
 lsb-base
@@ -484,10 +500,10 @@ pgdg-keyring
 pinentry-curses
 pkg-config
 poppler-data
-postgresql-client-10
+postgresql-client-11
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-10
+postgresql-server-dev-11
 procps
 python
 python-dev

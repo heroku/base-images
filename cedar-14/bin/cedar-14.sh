@@ -131,8 +131,8 @@ apt-get install -y --force-yes \
     openjdk-7-jre-headless \
     openssh-client \
     openssh-server \
-    postgresql-client-10 \
-    postgresql-server-dev-10 \
+    postgresql-client-11 \
+    postgresql-server-dev-11 \
     psmisc \
     python \
     python-dev \

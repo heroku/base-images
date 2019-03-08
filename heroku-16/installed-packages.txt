@@ -310,7 +310,7 @@ perl-base
 perl-modules-5.22
 pgdg-keyring
 poppler-data
-postgresql-client-10
+postgresql-client-11
 postgresql-client-common
 procps
 python
