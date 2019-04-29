@@ -9,9 +9,9 @@ env:
   - STACK=heroku-16 IMAGE_TAG=heroku/heroku:16 PRIVATE_IMAGE_TAG=heroku/heroku-private:16
   - STACK=heroku-18 IMAGE_TAG=heroku/heroku:18 PRIVATE_IMAGE_TAG=heroku/heroku-private:18
   global:
-  - secure: qsOv8gjVqCeV7kqx8FntMKD51EZCO2j7oTY8fWwqgndRCT5kHtcJA0vGMW0rjGDlDMuEB5wyUc2RT9ZWMslyKWxgS4Su5zSdAlE8D6TXXpHDU1ZPmOA+cnNm4TIMIrcUlGeCWcK4NNe8Vg7VvrTstooLB/ZjgaCKylkxs7zWq2g= # DOCKER_HUB_USERNAME
-  - secure: Dlf4eHJVTQ1bCZuLaaNoKjUmS8SL7Jn2BZCdP7UHZhte+RKchCjajhoObT/fAZ3c5EFfV2pd8NKkWPW0REwN/lodgRPeslYiyNaiIRCVoKRGASxHXHO17wwkMNor2Bi7u6InL3WC1t5YbY2abVaeavtz1lAyn1XTNysc+/s1onw= # DOCKER_HUB_PASSWORD
-  - secure: qTImKa1qsHdMmreZHEOU1JgY2adQ5E/ZHIJw3Nvm5tDqz5lbG5dUahIj1JvzP+FdIoEo6R+0t8C8xD9mBwnz4nMmnahQMnYzYltC9bO9kA7cSI/dktAjQKSBLwtDacFB6jT0UVf7lE7Cxxy70q8L5lkvbqgCxDvU7C16TinYgKA= # SIGNING_KEY_PASSWORD
+  - secure: qsOv8gjVqCeV7kqx8FntMKD51EZCO2j7oTY8fWwqgndRCT5kHtcJA0vGMW0rjGDlDMuEB5wyUc2RT9ZWMslyKWxgS4Su5zSdAlE8D6TXXpHDU1ZPmOA+cnNm4TIMIrcUlGeCWcK4NNe8Vg7VvrTstooLB/ZjgaCKylkxs7zWq2g=
+  - secure: G3A9OqzMggD1DGWivgvo34FS6MeKwOqgzBDa367Gp/xb0ilKrh+sLGwPWOllKtUcgf/itznrsLJre4svj9OUII7X5OdqrMByquCMBX+xck8CiqZQWkNh9FfmTRd7QJtGySdh+tD0Vqjuz1b1wH3YqM+DC740a4veZeW6pDBz9S4=
+  - secure: qTImKa1qsHdMmreZHEOU1JgY2adQ5E/ZHIJw3Nvm5tDqz5lbG5dUahIj1JvzP+FdIoEo6R+0t8C8xD9mBwnz4nMmnahQMnYzYltC9bO9kA7cSI/dktAjQKSBLwtDacFB6jT0UVf7lE7Cxxy70q8L5lkvbqgCxDvU7C16TinYgKA=
 script:
 - bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
 - |
