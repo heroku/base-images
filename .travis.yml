@@ -8,8 +8,6 @@ env:
   - STACK=cedar-14 IMAGE_TAG=heroku/cedar:14 PRIVATE_IMAGE_TAG=heroku/cedar-private:14
   - STACK=heroku-16 IMAGE_TAG=heroku/heroku:16 PRIVATE_IMAGE_TAG=heroku/heroku-private:16
   - STACK=heroku-18 IMAGE_TAG=heroku/heroku:18 PRIVATE_IMAGE_TAG=heroku/heroku-private:18
-  global:
-  - secure: qTImKa1qsHdMmreZHEOU1JgY2adQ5E/ZHIJw3Nvm5tDqz5lbG5dUahIj1JvzP+FdIoEo6R+0t8C8xD9mBwnz4nMmnahQMnYzYltC9bO9kA7cSI/dktAjQKSBLwtDacFB6jT0UVf7lE7Cxxy70q8L5lkvbqgCxDvU7C16TinYgKA=
 script:
 - bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
 - |
