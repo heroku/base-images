@@ -81,6 +81,82 @@ IIP9up4xwgje9LB7fMxsSkCDTHOk
 -----END PGP PUBLIC KEY BLOCK-----
 PGDG_ACCC4CF8
 
+
+# Confgure ESM
+
+# ESM uses HTTPS sources, which Ubuntu 14.04 doesn't support out of the box.
+apt-get update
+apt-get install -y --force-yes apt apt-transport-https apt-utils libapt-inst1.5 libapt-pkg4.12
+
+# heroku-buildpack-apt uses /etc/apt/sources.list as the basis for its own APT sources
+# list, so the ESM sources must be stored separately to prevent authentication errors
+# from the buildpack trying to connect to esm.ubuntu.com without credentials.
+cat > /etc/apt/sources.list.d/ubuntu-esm-trusty.list <<EOF
+deb https://esm.ubuntu.com/ubuntu trusty-security main
+deb https://esm.ubuntu.com/ubuntu trusty-updates main
+EOF
+
+APT_AUTH_CONFIG_DIR='/etc/apt/auth.conf.d'
+mkdir -p "${APT_AUTH_CONFIG_DIR}"
+cat > "${APT_AUTH_CONFIG_DIR}/90ubuntu-advantage" <<EOF
+machine esm.ubuntu.com login ${ESM_USERNAME} password ${ESM_PASSWORD}
+EOF
+
+apt-key add - <<'ESM_EF1B9BA3'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+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
+=j6go
+-----END PGP PUBLIC KEY BLOCK-----
+ESM_EF1B9BA3
+
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get install -y --force-yes \
@@ -172,9 +248,17 @@ cat > /etc/ImageMagick/policy.xml <<'IMAGEMAGICK_POLICY'
 IMAGEMAGICK_POLICY
 
 cd /
+rm -r "${APT_AUTH_CONFIG_DIR}"
 rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
 rm -rf /tmp/*
+
+# Sanity check that we cleaned up the ESM credentials correctly.
+# xtrace is disabled in the subshell to prevent the password from ending up in the logs.
+if (set +x && grep -qr "${ESM_PASSWORD}" /etc /var); then
+  echo 'Error: ESM credentials not cleaned up correctly!'
+  exit 1
+fi
 
 # remove SUID and SGID flags from all binaries
 function pruned_find() {

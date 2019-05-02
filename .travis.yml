@@ -24,4 +24,6 @@ deploy:
   - provider: script
     script: sh bin/publish-to-dockerhub.sh
     on:
+      # Cedar-14 images must not be published to Docker Hub since they contain ESM updates.
+      condition: $STACK != "cedar-14"
       all_branches: true
