@@ -10,7 +10,7 @@ For example:
 
 The supported stacks are:
 
-* `cedar-14`
+* `cedar-14` (this will fail unless the Ubuntu ESM credentials are set in the local environment)
 * `heroku-16` (will also build a `heroku-16-build` image)
 * `heroku-18` (will also build a `heroku-18-build` image)
 
@@ -24,7 +24,7 @@ When building Stack Images for release, we use the Travis build system.
 
 # Releasing Stack Images Locally (Prime)
 
-When building Stack Images for relase locally, you'll need a number of additional steps.
+When building Stack Images for release locally, you'll need a number of additional steps.
 
     # Build the stack image(s) as you would above
     cd stack-images/tools

@@ -2,6 +2,11 @@
 
 set -ex
 
+if [ "${STACK}" = 'cedar-14' ]; then
+  echo 'Error: Publishing cedar-14 images to Docker Hub is no longer permitted, since they contain ESM updates.'
+  exit 1
+fi
+
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
 date=`date -u '+%Y-%m-%d-%H.%M.%S'`

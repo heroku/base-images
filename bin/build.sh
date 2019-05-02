@@ -23,11 +23,23 @@ write_package_list() {
     docker run --rm "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
 }
 
-display "Building $STACK main image"
-docker build --pull --tag "$IMAGE_TAG" "$DOCKERFILE_DIR" | indent
-write_package_list "$IMAGE_TAG" "$DOCKERFILE_DIR"
+if [[ "${STACK}" = "cedar-14" ]]; then
+    display "Building ${STACK} combined image"
+    if ! [[ -v ESM_USERNAME && -v ESM_PASSWORD ]]; then
+        echo 'Error: ESM_USERNAME and ESM_PASSWORD must be set in the environment!'
+        exit 1
+    fi
+    docker build --pull \
+        --tag "${IMAGE_TAG}" \
+        --build-arg ESM_USERNAME="${ESM_USERNAME}" \
+        --build-arg ESM_PASSWORD="${ESM_PASSWORD}" \
+        "${DOCKERFILE_DIR}" | indent
+    write_package_list "${IMAGE_TAG}" "${DOCKERFILE_DIR}"
+else
+    display "Building ${STACK} main image"
+    docker build --pull --tag "${IMAGE_TAG}" "${DOCKERFILE_DIR}" | indent
+    write_package_list "${IMAGE_TAG}" "${DOCKERFILE_DIR}"
 
-if [[ "$STACK" != "cedar-14" ]]; then
     display "Building $STACK build-time image"
     BUILD_DOCKERFILE_DIR="${DOCKERFILE_DIR}-build"
     # The --pull option is not used to ensure the build image variant is based on the

@@ -3,6 +3,7 @@ acl
 adduser
 apt
 apt-transport-https
+apt-utils
 at-spi2-core
 autoconf
 automake
@@ -412,6 +413,7 @@ libalgorithm-diff-perl
 libalgorithm-diff-xs-perl
 libalgorithm-merge-perl
 libapparmor1
+libapt-inst1.5
 libapt-pkg4.12
 libarchive-extract-perl
 libasan0
