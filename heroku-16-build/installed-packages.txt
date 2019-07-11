@@ -17,6 +17,7 @@ bsdutils
 build-essential
 bzip2
 bzip2-doc
+bzr
 ca-certificates
 ca-certificates-java
 clang-6.0
@@ -32,6 +33,7 @@ debconf
 debianutils
 dh-python
 diffutils
+dirmngr
 distro-info-data
 dnsutils
 dpkg
@@ -64,6 +66,8 @@ gir1.2-rsvg-2.0
 git
 git-man
 gnupg
+gnupg-agent
+gnupg2
 gpgv
 grep
 gsfonts
@@ -105,6 +109,7 @@ libasan2
 libasn1-8-heimdal
 libasprintf-dev
 libasprintf0v5
+libassuan0
 libatk1.0-0
 libatk1.0-data
 libatm1
@@ -157,6 +162,7 @@ libdb-dev
 libdb5.3
 libdb5.3-dev
 libdbus-1-3
+libdbus-glib-1-2
 libdebconfclient0
 libdevmapper1.02.1
 libdjvulibre-dev
@@ -221,6 +227,7 @@ libgnutlsxx28
 libgomp1
 libgpg-error-dev
 libgpg-error0
+libgpgme11
 libgraphite2-3
 libgraphviz-dev
 libgs9
@@ -267,6 +274,7 @@ libjpeg-turbo8
 libjpeg-turbo8-dev
 libjpeg8
 libjpeg8-dev
+libjs-excanvas
 libjs-jquery
 libjsoncpp1
 libk5crypto3
@@ -281,6 +289,7 @@ libkrb5-26-heimdal
 libkrb5-3
 libkrb5-dev
 libkrb5support0
+libksba8
 liblcms2-2
 liblcms2-dev
 libldap-2.4-2
@@ -328,6 +337,7 @@ libncursesw5-dev
 libnetpbm10
 libnetpbm10-dev
 libnettle6
+libnpth0
 libobjc-5-dev
 libobjc4
 libomp-dev
@@ -498,6 +508,8 @@ makedev
 manpages
 manpages-dev
 mawk
+mercurial
+mercurial-common
 mime-support
 mount
 mtools
@@ -520,6 +532,7 @@ perl
 perl-base
 perl-modules-5.22
 pgdg-keyring
+pinentry-curses
 pkg-config
 poppler-data
 postgresql-client-11
@@ -528,8 +541,26 @@ postgresql-common
 postgresql-server-dev-11
 procps
 python
+python-bzrlib
+python-configobj
+python-crypto
+python-dbus
 python-dev
+python-gi
+python-gpgme
+python-httplib2
+python-keyring
+python-launchpadlib
+python-lazr.restfulclient
+python-lazr.uri
 python-minimal
+python-oauth
+python-pkg-resources
+python-secretstorage
+python-simplejson
+python-six
+python-wadllib
+python-zope.interface
 python2.7
 python2.7-dev
 python2.7-minimal
