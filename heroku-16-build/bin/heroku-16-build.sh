@@ -9,7 +9,9 @@ apt-get install -y --force-yes \
     autoconf \
     bison \
     build-essential \
+    bzr \
     gettext \
+    git \
     libacl1-dev \
     libapparmor-dev \
     libapt-pkg-dev \

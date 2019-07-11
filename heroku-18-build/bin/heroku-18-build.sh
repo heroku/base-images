@@ -10,7 +10,9 @@ apt-get install -y --force-yes --no-install-recommends \
     automake \
     bison \
     build-essential \
+    bzr \
     gettext \
+    git \
     libacl1-dev \
     libapt-pkg-dev \
     libargon2-0-dev \
