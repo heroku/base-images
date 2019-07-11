@@ -18,6 +18,7 @@ bison
 bsdutils
 build-essential
 bzip2
+bzr
 ca-certificates
 ca-certificates-java
 clang-6.0
@@ -477,6 +478,8 @@ lsb-release
 m4
 make
 mawk
+mercurial
+mercurial-common
 mime-support
 mount
 mtools
@@ -506,8 +509,11 @@ postgresql-common
 postgresql-server-dev-11
 procps
 python
+python-bzrlib
+python-configobj
 python-dev
 python-minimal
+python-six
 python2.7
 python2.7-dev
 python2.7-minimal
