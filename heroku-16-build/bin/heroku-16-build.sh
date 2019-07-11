@@ -68,6 +68,7 @@ apt-get install -y --force-yes \
     libxslt-dev \
     libyaml-dev \
     libzip-dev \
+    mercurial \
     postgresql-server-dev-11 \
     python-dev \
     ruby-dev \
