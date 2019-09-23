@@ -130,6 +130,7 @@ apt-get install -y --force-yes \
     libxslt1.1 \
     libzip4 \
     locales \
+    lsb-release \
     make \
     netcat-openbsd \
     openssh-client \
