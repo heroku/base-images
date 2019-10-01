@@ -130,6 +130,8 @@ libbsd0
 libbz2-1.0
 libbz2-dev
 libc-bin
+libc-client2007e
+libc-client2007e-dev
 libc-dev-bin
 libc6
 libc6-dev
@@ -511,6 +513,7 @@ mawk
 mercurial
 mercurial-common
 mime-support
+mlock
 mount
 mtools
 multiarch-support

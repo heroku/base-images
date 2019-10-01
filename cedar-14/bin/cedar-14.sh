@@ -191,6 +191,7 @@ apt-get install -y --force-yes \
     iputils-tracepath \
     language-pack-en \
     libbz2-dev \
+    libc-client2007e \
     libcurl4-openssl-dev \
     libev-dev \
     libevent-dev \

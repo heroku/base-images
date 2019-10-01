@@ -108,6 +108,7 @@ apt-get install -y --force-yes \
     imagemagick \
     iputils-tracepath \
     language-pack-en \
+    libc-client2007e \
     libcurl3 \
     libev4 \
     libevent-2.0-5 \
