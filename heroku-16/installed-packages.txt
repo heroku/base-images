@@ -85,6 +85,7 @@ libblkid1
 libbsd0
 libbz2-1.0
 libc-bin
+libc-client2007e
 libc-dev-bin
 libc6
 libc6-dev
@@ -289,6 +290,7 @@ manpages
 manpages-dev
 mawk
 mime-support
+mlock
 mount
 mtools
 multiarch-support

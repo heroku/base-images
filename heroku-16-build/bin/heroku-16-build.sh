@@ -19,6 +19,7 @@ apt-get install -y --force-yes \
     libaudit-dev \
     libbsd-dev \
     libbz2-dev \
+    libc-client2007e-dev \
     libcairo2-dev \
     libcap-dev \
     libcurl4-openssl-dev \

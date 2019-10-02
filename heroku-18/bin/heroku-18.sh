@@ -121,6 +121,7 @@ apt-get install -y --no-install-recommends \
     language-pack-en \
     less \
     libargon2-0 \
+    libc-client2007e \
     libcairo2 \
     libcroco3 \
     libcurl4 \
