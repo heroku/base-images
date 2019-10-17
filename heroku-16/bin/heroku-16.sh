@@ -9,7 +9,17 @@ deb http://archive.ubuntu.com/ubuntu/ xenial main universe
 deb http://archive.ubuntu.com/ubuntu/ xenial-security main universe
 deb http://archive.ubuntu.com/ubuntu/ xenial-updates main universe
 
-deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+# Use the PG11 version of libpq to work around:
+# https://github.com/heroku/stack-images/issues/147
+# We have to specify both 'main' and '11' since the latter only contains a subset of the packages.
+deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main 11
+EOF
+
+# Give priority to the PG11 version of libpq, rather than main's PG12.
+cat >/etc/apt/preferences.d/pgdg.pref <<EOF
+Package: *
+Pin: release o=apt.postgresql.org,c=11
+Pin-Priority: 600
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
