@@ -202,6 +202,7 @@ apt-get install -y --force-yes \
     libicu52 \
     libjpeg-dev \
     libmagickwand-dev \
+    libmcrypt4 \
     libmysqlclient-dev \
     libncurses5-dev \
     libpq-dev \

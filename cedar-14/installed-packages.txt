@@ -633,6 +633,7 @@ libmagickcore5
 libmagickcore5-extra
 libmagickwand-dev
 libmagickwand5
+libmcrypt4
 libmodule-pluggable-perl
 libmount1
 libmpc3
