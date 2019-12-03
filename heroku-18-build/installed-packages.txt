@@ -22,6 +22,8 @@ bzr
 ca-certificates
 ca-certificates-java
 clang-6.0
+cmake
+cmake-data
 comerr-dev
 coreutils
 cpp
@@ -95,6 +97,7 @@ libacl1-dev
 libapt-inst2.0
 libapt-pkg-dev
 libapt-pkg5.0
+libarchive13
 libargon2-0
 libargon2-0-dev
 libasan4
@@ -376,6 +379,7 @@ librabbitmq-dev
 librabbitmq4
 libreadline-dev
 libreadline7
+librhash0
 libroken18-heimdal
 librsvg2-2
 librsvg2-common

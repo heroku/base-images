@@ -10,6 +10,7 @@ apt-get install -y --force-yes \
     bison \
     build-essential \
     bzr \
+    cmake \
     gettext \
     git \
     libacl1-dev \
