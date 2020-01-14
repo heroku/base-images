@@ -306,7 +306,7 @@ perl-modules-5.26
 pgdg-keyring
 pinentry-curses
 poppler-data
-postgresql-client-11
+postgresql-client-12
 postgresql-client-common
 procps
 python

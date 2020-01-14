@@ -74,7 +74,7 @@ apt-get install -y --force-yes --no-install-recommends \
     libyaml-dev \
     libzip-dev \
     mercurial \
-    postgresql-server-dev-11 \
+    postgresql-server-dev-12 \
     python-dev \
     ruby-dev \
     zlib1g-dev \

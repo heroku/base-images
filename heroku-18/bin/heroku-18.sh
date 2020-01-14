@@ -13,18 +13,8 @@ EOF
 apt-get update
 apt-get install -y --no-install-recommends gnupg
 
-# Use the PG11 version of libpq to work around:
-# https://github.com/heroku/stack-images/issues/147
-# We have to specify both 'main' and '11' since the latter only contains a subset of the packages.
 cat >>/etc/apt/sources.list <<EOF
-deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main 11
-EOF
-
-# Give priority to the PG11 version of libpq, rather than main's PG12.
-cat >/etc/apt/preferences.d/pgdg.pref <<EOF
-Package: *
-Pin: release o=apt.postgresql.org,c=11
-Pin-Priority: 600
+deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
@@ -180,7 +170,7 @@ apt-get install -y --no-install-recommends \
     openssh-client \
     openssh-server \
     patch \
-    postgresql-client-11 \
+    postgresql-client-12 \
     python \
     rename \
     rsync \
