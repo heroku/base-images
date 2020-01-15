@@ -510,10 +510,10 @@ pgdg-keyring
 pinentry-curses
 pkg-config
 poppler-data
-postgresql-client-11
+postgresql-client-12
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-11
+postgresql-server-dev-12
 procps
 python
 python-bzrlib
