@@ -333,6 +333,8 @@ libnghttp2-14
 libnpth0
 libobjc-7-dev
 libobjc4
+libonig-dev
+libonig4
 libopenexr-dev
 libopenexr22
 libp11-kit-dev
