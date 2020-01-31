@@ -51,6 +51,7 @@ apt-get install -y --force-yes \
     libncurses5-dev \
     libncursesw5-dev \
     libnetpbm10-dev \
+    libonig-dev \
     libpam0g-dev \
     libpopt-dev \
     libpq-dev \

@@ -145,6 +145,7 @@ apt-get install -y --no-install-recommends \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
+    libonig4 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libpangoft2-1.0-0 \

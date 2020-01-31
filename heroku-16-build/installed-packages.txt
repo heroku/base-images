@@ -347,6 +347,8 @@ libobjc-5-dev
 libobjc4
 libomp-dev
 libomp5
+libonig-dev
+libonig2
 libopenexr-dev
 libopenexr22
 libp11-kit-dev

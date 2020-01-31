@@ -124,6 +124,7 @@ apt-get install -y --force-yes \
     libmcrypt4 \
     libmemcached11 \
     libmysqlclient20 \
+    libonig2 \
     librabbitmq4 \
     libseccomp2 \
     libsodium18 \

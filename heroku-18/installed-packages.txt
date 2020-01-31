@@ -200,6 +200,7 @@ libncursesw5
 libnettle6
 libnghttp2-14
 libnpth0
+libonig4
 libopenexr22
 libp11-kit0
 libpam-modules
