@@ -5,16 +5,16 @@ set -e
 set -x
 
 cat >/etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu/ bionic main universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-security main universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates main universe
+deb http://archive.ubuntu.com/ubuntu/ focal main universe
+deb http://archive.ubuntu.com/ubuntu/ focal-security main universe
+deb http://archive.ubuntu.com/ubuntu/ focal-updates main universe
 EOF
 
 apt-get update
 apt-get install -y --no-install-recommends gnupg
 
 cat >>/etc/apt/sources.list <<EOF
-deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main
 EOF
 
 apt-key add - <<'PGDG_ACCC4CF8'
@@ -120,18 +120,18 @@ apt-get install -y --no-install-recommends \
     iputils-tracepath \
     language-pack-en \
     less \
-    libargon2-0 \
+    libargon2-1 \
     libc-client2007e \
     libcairo2 \
     libcroco3 \
     libcurl4 \
     libdatrie1 \
     libev4 \
-    libevent-2.1-6 \
-    libevent-core-2.1-6 \
-    libevent-extra-2.1-6 \
-    libevent-openssl-2.1-6 \
-    libevent-pthreads-2.1-6 \
+    libevent-2.1-7 \
+    libevent-core-2.1-7 \
+    libevent-extra-2.1-7 \
+    libevent-openssl-2.1-7 \
+    libevent-pthreads-2.1-7 \
     libexif12 \
     libgd3 \
     libgdk-pixbuf2.0-0 \
@@ -144,8 +144,8 @@ apt-get install -y --no-install-recommends \
     libmagickcore-6.q16-3-extra \
     libmcrypt4 \
     libmemcached11 \
-    libmysqlclient20 \
-    libonig4 \
+    libmysqlclient21 \
+    libonig5 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libpangoft2-1.0-0 \
@@ -163,7 +163,7 @@ apt-get install -y --no-install-recommends \
     libxcb-shm0 \
     libxrender1 \
     libxslt1.1 \
-    libzip4 \
+    libzip5 \
     locales \
     lsb-release \
     make \
@@ -172,7 +172,7 @@ apt-get install -y --no-install-recommends \
     openssh-server \
     patch \
     postgresql-client-12 \
-    python \
+    python3 \
     rename \
     rsync \
     ruby \

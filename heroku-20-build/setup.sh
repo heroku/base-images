@@ -16,7 +16,7 @@ apt-get install -y --force-yes --no-install-recommends \
     git \
     libacl1-dev \
     libapt-pkg-dev \
-    libargon2-0-dev \
+    libargon2-dev \
     libattr1-dev \
     libaudit-dev \
     libbsd-dev \
@@ -76,7 +76,7 @@ apt-get install -y --force-yes --no-install-recommends \
     libzip-dev \
     mercurial \
     postgresql-server-dev-12 \
-    python-dev \
+    python3-dev \
     ruby-dev \
     zlib1g-dev \
 

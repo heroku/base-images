@@ -6,13 +6,14 @@ To build the stack images locally, run this from the repo root:
 
 For example:
 
-    bin/build.sh heroku-18 heroku/heroku:18 heroku/heroku:18-build
+    ./bin/build.sh heroku-20 heroku/heroku:20 heroku/heroku:20-build
 
 The supported stacks are:
 
 * `cedar-14` (this will fail unless the Ubuntu ESM credentials are set in the local environment)
 * `heroku-16` (will also build a `heroku-16-build` image)
 * `heroku-18` (will also build a `heroku-18-build` image)
+* `heroku-20` (will also build a `heroku-20-build` image)
 
 
 # Releasing Stack Images
