@@ -8,6 +8,7 @@ env:
   - STACK=cedar-14 IMAGE_TAG=heroku/cedar:14 PRIVATE_IMAGE_TAG=heroku/cedar-private:14
   - STACK=heroku-16 IMAGE_TAG=heroku/heroku:16 PRIVATE_IMAGE_TAG=heroku/heroku-private:16
   - STACK=heroku-18 IMAGE_TAG=heroku/heroku:18 PRIVATE_IMAGE_TAG=heroku/heroku-private:18
+  - STACK=heroku-20 IMAGE_TAG=heroku/heroku:20 PRIVATE_IMAGE_TAG=heroku/heroku-private:20
 script:
 - bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
 - |
