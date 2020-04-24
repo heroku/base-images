@@ -70,7 +70,6 @@ language-pack-en
 language-pack-en-base
 less
 libacl1
-libapt-pkg5.90
 libapt-pkg6.0
 libargon2-1
 libasan5
@@ -321,7 +320,6 @@ readline-common
 rename
 rsync
 ruby
-ruby-did-you-mean
 ruby-minitest
 ruby-net-telnet
 ruby-power-assert

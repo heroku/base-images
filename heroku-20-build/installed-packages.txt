@@ -99,7 +99,6 @@ lib32stdc++6
 libacl1
 libacl1-dev
 libapt-pkg-dev
-libapt-pkg5.90
 libapt-pkg6.0
 libarchive13
 libargon2-1
@@ -551,7 +550,6 @@ rename
 rsync
 ruby
 ruby-dev
-ruby-did-you-mean
 ruby-minitest
 ruby-net-telnet
 ruby-power-assert
