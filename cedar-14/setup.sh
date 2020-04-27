@@ -4,6 +4,9 @@ exec 2>&1
 set -e
 set -x
 
+export DEBIAN_FRONTEND=noninteractive
+export LC_ALL=C
+
 cat > /etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ trusty main universe
 deb http://archive.ubuntu.com/ubuntu/ trusty-security main universe
@@ -260,11 +263,11 @@ cat > /etc/ImageMagick/policy.xml <<'IMAGEMAGICK_POLICY'
 </policymap>
 IMAGEMAGICK_POLICY
 
-cd /
 rm -r "${APT_AUTH_CONFIG_DIR}"
-rm -rf /var/cache/apt/archives/*.deb
 rm -rf /root/*
 rm -rf /tmp/*
+rm -rf /var/cache/apt/archives/*.deb
+rm -rf /var/lib/apt/lists/*
 
 # Sanity check that we cleaned up the ESM credentials correctly.
 # xtrace is disabled in the subshell to prevent the password from ending up in the logs.
