@@ -4,6 +4,9 @@ exec 2>&1
 set -e
 set -x
 
+export DEBIAN_FRONTEND=noninteractive
+export LC_ALL=C
+
 cat > /etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ xenial main universe
 deb http://archive.ubuntu.com/ubuntu/ xenial-security main universe
@@ -172,7 +175,7 @@ cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
 </policymap>
 IMAGEMAGICK_POLICY
 
-cd /
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
+rm -rf /var/lib/apt/lists/*

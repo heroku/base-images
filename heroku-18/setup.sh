@@ -4,6 +4,9 @@ exec 2>&1
 set -e
 set -x
 
+export DEBIAN_FRONTEND=noninteractive
+export LC_ALL=C
+
 cat >/etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ bionic main universe
 deb http://archive.ubuntu.com/ubuntu/ bionic-security main universe
@@ -212,7 +215,7 @@ apt-get -y --purge autoremove
 apt-get purge -y openjdk-8-jre-headless
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
-cd /
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
+rm -rf /var/lib/apt/lists/*

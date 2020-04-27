@@ -4,6 +4,9 @@ exec 2>&1
 set -e
 set -x
 
+export DEBIAN_FRONTEND=noninteractive
+export LC_ALL=C
+
 apt-get update
 apt-get install -y --force-yes --no-install-recommends \
     autoconf \
@@ -80,7 +83,7 @@ apt-get install -y --force-yes --no-install-recommends \
     ruby-dev \
     zlib1g-dev \
 
-cd /
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
+rm -rf /var/lib/apt/lists/*
