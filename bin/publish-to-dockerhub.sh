@@ -16,7 +16,7 @@ dateBuildTag="${PRIVATE_IMAGE_TAG}-build.${date}"
 bin/build.sh $STACK $nightlyTag $nightlyBuildTag
 
 # Disable tracing temporarily to prevent logging DOCKER_HUB_PASSWORD.
-(set +x; echo "${$DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
+(set +x; echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
 
 docker push $nightlyTag
 
