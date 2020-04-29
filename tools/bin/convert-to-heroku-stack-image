@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e -o pipefail
+set -euo pipefail
+
 VERSION_PREFIX=$(date '+%Y%m%d-%H%M%S')
 
 while [ $# -gt 0 ]; do
@@ -17,8 +18,8 @@ while [ $# -gt 0 ]; do
 done
 
 if update-manifest; then
-  display Publishing manifest update
+  display "Publishing manifest update"
   publish-manifests
 else
-  display Skipping manifest update
+  display "Skipping manifest update"
 fi

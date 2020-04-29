@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 IMG="$1"
 
 mkdir -p "$(dirname "$IMG")"
 dd if=/dev/zero of="$IMG" bs=100M count=24
-yes | mkfs -t ext3 -m 1 "$IMG"
+mkfs -t ext3 -m 1 "$IMG"
 tune2fs -c 0 -i 0 "$IMG"

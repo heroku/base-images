@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 if ls /tmp/*64-*.manifest >& /dev/null; then
     jq --null-input \

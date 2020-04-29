@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 exec 2>&1
-set -e
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
@@ -278,7 +279,7 @@ fi
 
 # remove SUID and SGID flags from all binaries
 function pruned_find() {
-  find / -type d \( -name dev -o -name proc \) -prune -o $@ -print
+  find / -type d \( -name dev -o -name proc \) -prune -o "$@" -print
 }
 
 pruned_find -perm /u+s | xargs -r chmod u-s
@@ -306,4 +307,3 @@ echo -e "\nInstalled versions:"
 ) 2>&1 | sed "s/^/  /"
 
 echo -e "\nSuccess!"
-exit 0

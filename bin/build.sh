@@ -5,16 +5,16 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 . bin/stack-helpers.sh
 
-[ $# -eq 3 ] || abort usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME BUILD_IMAGE_NAME
+[ $# -eq 3 ] || abort "usage: $(basename "${BASH_SOURCE[0]}") STACK IMAGE_NAME BUILD_IMAGE_NAME"
 
 STACK=$1
 IMAGE_TAG=$2
 BUILD_IMAGE_TAG=$3
 DOCKERFILE_DIR="$STACK"
 
-echo $DOCKERFILE_DIR
+echo "${DOCKERFILE_DIR}"
 
-[[ -d "$DOCKERFILE_DIR" ]] || abort fatal: stack "$STACK" not found
+[[ -d "${DOCKERFILE_DIR}" ]] || abort "fatal: stack ${STACK} not found"
 
 write_package_list() {
     local image_tag="$1"

@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 IMG_GZ="$1"
 IMG_SHA256="$2"
@@ -9,12 +9,12 @@ STACK=$4
 VERSION="$5"
 IMG_PKG_VERSIONS="$6"
 
-display Creating Image on $MANIFEST_APP_URL
+display "Creating Image on ${MANIFEST_APP_URL}"
 
 jq \
     --null-input \
     --arg stack "$STACK" \
-    --slurpfile packages $IMG_PKG_VERSIONS \
+    --slurpfile packages "${IMG_PKG_VERSIONS}" \
     --arg version "$VERSION" \
     --arg sha "$(< "$IMG_SHA256")" \
     '{
@@ -30,13 +30,13 @@ jq \
         --header "Content-Type: application/json" \
         --data @- \
         "$MANIFEST_APP_URL/images" |
-    jq > $IMG_MANIFEST \
+    jq > "${IMG_MANIFEST}" \
         --arg name "$STACK" \
         '{
             name: $name
         } + .'
 
-display Uploading Image to S3
+display "Uploading Image to S3"
 PUT_URL=$(jq -r .put_url "$IMG_MANIFEST")
 curl \
     --silent --show-error \
