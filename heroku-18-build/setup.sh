@@ -9,7 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 export LC_ALL=C
 
 apt-get update
-apt-get install -y --force-yes --no-install-recommends \
+apt-get install -y --no-install-recommends \
     autoconf \
     automake \
     bison \
