@@ -1,11 +1,12 @@
-set -o pipefail
+# shellcheck shell=bash
 
 function display() {
-  echo -e "\n----->" $*
+  echo -e "\n-----> $1"
 }
 
 function abort() {
-  echo $* ; exit 1
+  echo "$1"
+  exit 1
 }
 
 function indent() {

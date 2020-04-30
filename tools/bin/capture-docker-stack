@@ -1,16 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e -o pipefail
+set -euo pipefail
 
-[ $# -ge 1 ] || abort usage: $(basename $0) STACK [VERSION]
-[ $UID = 0 ] || abort fatal: must be called with sudo
+[ $# -ge 1 ] || abort "usage: $(basename "$0") STACK [VERSION]"
+[ $UID = 0 ] || abort "fatal: must be called with sudo"
 
 STACK=$1
-STACK_NAME=$(echo $STACK | cut -d '-' -f 1)
-STACK_VERSION=$(echo $STACK | cut -d '-' -f 2-)
+STACK_NAME=$(echo "${STACK}" | cut -d '-' -f 1)
+STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
-DOCKER_IMAGE_VERSION=$(docker inspect $DOCKER_IMAGE | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
+DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
 
 IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
@@ -20,35 +20,35 @@ IMG_SHA256=/tmp/$IMG_BASE.img.sha256
 IMG_MANIFEST=/tmp/$IMG_BASE.manifest
 IMG_PKG_VERSIONS=/tmp/$IMG_BASE.pkg.versions
 
-display Starting capture for $STACK $DOCKER_IMAGE_VERSION at $(date)
+display "Starting capture for ${STACK} ${DOCKER_IMAGE_VERSION} at $(date)"
 
-display Creating image file $IMG
-make-filesystem-image $IMG |& indent
+display "Creating image file ${IMG}"
+make-filesystem-image "${IMG}" |& indent
 
-display Mounting image $IMG_MNT
-mount-filesystem-image $IMG $IMG_MNT |& indent
+display "Mounting image ${IMG_MNT}"
+mount-filesystem-image "${IMG}" "${IMG_MNT}" |& indent
 
-display Copying stack to image
-export-docker-image $DOCKER_IMAGE $IMG_MNT |& indent
+display "Copying stack to image"
+export-docker-image "${DOCKER_IMAGE}" "${IMG_MNT}" |& indent
 
-display Modifying image directories and files
-install-heroku-files $IMG_MNT |& indent
+display "Modifying image directories and files"
+install-heroku-files "${IMG_MNT}" |& indent
 
-display Unmounting image
-umount $IMG_MNT |& indent
+display "Unmounting image"
+umount "${IMG_MNT}" |& indent
 
-display SHA256ing and gzipping image
-make-image-archive $IMG $IMG_SHA256 |& indent
-cat $IMG_SHA256
+display "SHA256ing and gzipping image"
+make-image-archive "${IMG}" "${IMG_SHA256}" |& indent
+cat "${IMG_SHA256}"
 
 if update-manifest; then
-    display Starting push at $(date)
-    display Capture Package Versions
-    capture-package-versions $DOCKER_IMAGE $IMG_PKG_VERSIONS
-    display Uploading files
-    upload-image $IMG_GZ $IMG_SHA256 $IMG_MANIFEST $STACK $DOCKER_IMAGE_VERSION $IMG_PKG_VERSIONS |& indent
+    display "Starting push at $(date)"
+    display "Capture Package Versions"
+    capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
+    display "Uploading files"
+    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" |& indent
 else
-    display Skipping image upload
+    display "Skipping image upload"
 fi
 
-display Finished capture for $STACK $DOCKER_IMAGE_VERSION
+display "Finished capture for ${STACK} ${DOCKER_IMAGE_VERSION}"

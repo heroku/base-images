@@ -9,6 +9,7 @@ env:
   - STACK=heroku-18 IMAGE_TAG=heroku/heroku:18 PRIVATE_IMAGE_TAG=heroku/heroku-private:18
   - STACK=heroku-20 IMAGE_TAG=heroku/heroku:20 PRIVATE_IMAGE_TAG=heroku/heroku-private:20
 script:
+- find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
 - bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
 - |
   status="$(git status --porcelain)"
@@ -22,7 +23,7 @@ deploy:
     on:
       tags: true
   - provider: script
-    script: sh bin/publish-to-dockerhub.sh
+    script: bin/publish-to-dockerhub.sh
     on:
       # Cedar-14 images must not be published to Docker Hub since they contain ESM updates.
       condition: ($TRAVIS_BRANCH == "master" || -n $TRAVIS_TAG) && $STACK != "cedar-14"

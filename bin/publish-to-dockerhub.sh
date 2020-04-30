@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -ex
+set -euo pipefail
+set -x
 
 if [ "${STACK}" = 'cedar-14' ]; then
   echo 'Error: Publishing cedar-14 images to Docker Hub is no longer permitted, since they contain ESM updates.'
@@ -9,25 +10,25 @@ fi
 
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
-date=`date -u '+%Y-%m-%d-%H.%M.%S'`
+date=$(date -u '+%Y-%m-%d-%H.%M.%S')
 dateTag="${PRIVATE_IMAGE_TAG}.${date}"
 dateBuildTag="${PRIVATE_IMAGE_TAG}-build.${date}"
 
-bin/build.sh $STACK $nightlyTag $nightlyBuildTag
+bin/build.sh "${STACK}" "${nightlyTag}" "${nightlyBuildTag}"
 
 # Disable tracing temporarily to prevent logging DOCKER_HUB_PASSWORD.
 (set +x; echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
 
-docker push $nightlyTag
+docker push "${nightlyTag}"
 
-docker tag $nightlyTag $dateTag
-docker push $dateTag
+docker tag "${nightlyTag}" "${dateTag}"
+docker push "${dateTag}"
 
 if [ "$STACK" != "cedar-14" ]; then
-  docker push $nightlyBuildTag
+  docker push "${nightlyBuildTag}"
 
-  docker tag $nightlyBuildTag $dateBuildTag
-  docker push $dateBuildTag
+  docker tag "${nightlyBuildTag}" "${dateBuildTag}"
+  docker push "${dateBuildTag}"
 fi
 
 if [ -n "$TRAVIS_TAG" ]; then
@@ -36,20 +37,20 @@ if [ -n "$TRAVIS_TAG" ]; then
   latestTag="${IMAGE_TAG}"
   latestBuildTag="${IMAGE_TAG}-build"
 
-  docker tag $nightlyTag $releaseTag
-  docker tag $nightlyTag $latestTag
+  docker tag "${nightlyTag}" "${releaseTag}"
+  docker tag "${nightlyTag}" "${latestTag}"
 
-  docker push $releaseTag
-  docker push $latestTag
+  docker push "${releaseTag}"
+  docker push "${latestTag}"
 
   if [ "$STACK" != "cedar-14" ]; then
-    docker tag $nightlyBuildTag $releaseBuildTag
-    docker tag $nightlyBuildTag $latestBuildTag
+    docker tag "${nightlyBuildTag}" "${releaseBuildTag}"
+    docker tag "${nightlyBuildTag}" "${latestBuildTag}"
 
-    docker push $releaseBuildTag
-    docker push $latestBuildTag
+    docker push "${releaseBuildTag}"
+    docker push "${latestBuildTag}"
   else
-    docker tag $nightlyTag heroku/cedar:latest
+    docker tag "${nightlyTag}" heroku/cedar:latest
     docker push heroku/cedar:latest
   fi
 fi
