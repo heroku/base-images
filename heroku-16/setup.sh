@@ -97,8 +97,8 @@ Gtz3cydIohvNO9d90+29h0eGEDYti7j7maHkBKUAwlcPvMg5m3Y=
 PGDG_ACCC4CF8
 
 apt-get update
-apt-get upgrade -y --force-yes
-apt-get install -y --force-yes \
+apt-get upgrade -y
+apt-get install -y \
     apt-transport-https \
     apt-utils \
     bind9-host \
