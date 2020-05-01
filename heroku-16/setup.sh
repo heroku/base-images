@@ -153,11 +153,15 @@ apt-get install -y \
     wget \
     zip \
 
-# install the JDK for certificates, then remove it
+# Temporarily install ca-certificates-java to generate the certificates store used
+# by Java apps. Generation occurs in a post-install script which requires a JRE.
+# We're using OpenJDK 8 rather than something newer, to work around:
+# https://github.com/heroku/stack-images/pull/103#issuecomment-389544431
 apt-get install -y --no-install-recommends ca-certificates-java openjdk-8-jre-headless
+# Using remove rather than purge so that the generated certs are left behind.
 apt-get remove -y ca-certificates-java
-apt-get -y --purge autoremove
 apt-get purge -y openjdk-8-jre-headless
+apt-get autoremove -y --purge
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
 cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
