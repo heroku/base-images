@@ -6,7 +6,6 @@ exec 2>&1
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
-export LC_ALL=C
 
 cat >/etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ bionic main universe
