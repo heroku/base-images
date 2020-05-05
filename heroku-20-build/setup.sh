@@ -6,7 +6,6 @@ exec 2>&1
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
-export LC_ALL=C
 
 apt-get update
 apt-get install -y --no-install-recommends \
