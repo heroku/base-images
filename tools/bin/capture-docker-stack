@@ -12,6 +12,8 @@ STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
 DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
 
+GIT_REF=${TRAVIS_TAG:-${TRAVIS_COMMIT:?'Error: Either TRAVIS_TAG or TRAVIS_COMMIT must be set!'}}
+
 IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
 IMG_MNT=/tmp/$IMG_BASE
@@ -46,7 +48,7 @@ if update-manifest; then
     display "Capture Package Versions"
     capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
     display "Uploading files"
-    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" |& indent
+    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" "${GIT_REF}" |& indent
 else
     display "Skipping image upload"
 fi

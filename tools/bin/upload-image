@@ -8,6 +8,7 @@ IMG_MANIFEST="$3"
 STACK=$4
 VERSION="$5"
 IMG_PKG_VERSIONS="$6"
+GIT_REF="$7"
 
 display "Creating Image on ${MANIFEST_APP_URL}"
 
@@ -16,10 +17,12 @@ jq \
     --arg stack "$STACK" \
     --slurpfile packages "${IMG_PKG_VERSIONS}" \
     --arg version "$VERSION" \
+    --arg git_ref "$GIT_REF" \
     --arg sha "$(< "$IMG_SHA256")" \
     '{
         stack: $stack,
         version: $version,
+        git_ref: $git_ref,
         sha: $sha,
         packages: $packages
     }' |
