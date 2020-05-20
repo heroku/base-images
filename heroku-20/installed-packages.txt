@@ -260,6 +260,7 @@ libudev1
 libunistring2
 libuuid1
 libuv1
+libvps-dev
 libwebp6
 libwebpmux3
 libwind0-heimdal
