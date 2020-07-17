@@ -2,12 +2,14 @@
 
 set -euo pipefail
 
+# Redirect stderr to stdout since tracing/apt-get/dpkg spam it for things that aren't errors.
 exec 2>&1
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
 export LC_ALL=C
 
+# Based on ubuntu-debootstrap:14.04's shorter sources list (compared to ubuntu:14.04)
 cat > /etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ trusty main universe
 deb http://archive.ubuntu.com/ubuntu/ trusty-security main universe

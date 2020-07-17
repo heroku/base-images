@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# Redirect stderr to stdout since tracing/apt-get/dpkg spam it for things that aren't errors.
 exec 2>&1
 set -x
 

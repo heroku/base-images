@@ -1,6 +1,6 @@
 ## Heroku Stack Images
 
-[![Build Status](https://travis-ci.org/heroku/stack-images.svg?branch=master)](https://travis-ci.org/heroku/stack-images)
+[![Build Status](https://travis-ci.com/heroku/stack-images.svg?branch=master)](https://travis-ci.com/heroku/stack-images)
 
 This repository holds recipes for building [Heroku stack images](https://devcenter.heroku.com/articles/stack).
 The recipes are also rendered into Docker images that are available on Docker Hub:
