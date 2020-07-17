@@ -2,11 +2,13 @@
 
 set -euo pipefail
 
+# Redirect stderr to stdout since tracing/apt-get/dpkg spam it for things that aren't errors.
 exec 2>&1
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
 
+# The default sources list minus backports, restricted and multiverse.
 cat >/etc/apt/sources.list <<EOF
 deb http://archive.ubuntu.com/ubuntu/ bionic main universe
 deb http://archive.ubuntu.com/ubuntu/ bionic-security main universe
@@ -14,12 +16,18 @@ deb http://archive.ubuntu.com/ubuntu/ bionic-updates main universe
 EOF
 
 apt-get update
+
+# Required by apt-key and does not exist in the base image on newer Ubuntu.
 apt-get install -y --no-install-recommends gnupg
 
+# In order to support all features offered by Heroku Postgres, we need newer postgresql-client
+# than is available in the Ubuntu repository, so use the upstream APT repository instead:
+# https://wiki.postgresql.org/wiki/Apt
 cat >>/etc/apt/sources.list <<EOF
 deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
 EOF
 
+# From https://www.postgresql.org/media/keys/ACCC4CF8.asc
 apt-key add - <<'PGDG_ACCC4CF8'
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
