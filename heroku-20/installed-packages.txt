@@ -90,6 +90,7 @@ libbz2-1.0
 libc-bin
 libc-client2007e
 libc6
+libcairo-gobject2
 libcairo2
 libcap-ng0
 libcap2
