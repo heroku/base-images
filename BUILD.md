@@ -20,7 +20,7 @@ The supported stacks are:
 
 When building Stack Images for release, we use the Travis build system.
 
-* Any push to master will build the images and push the `nightly` tag.
+* Any push to `main` will build the images and push the `nightly` tag.
 * Any new tag will build the image and push the `latest` tag, as well as one with the name of the GIT tag.
 
 # Releasing Stack Images Locally (Prime)
