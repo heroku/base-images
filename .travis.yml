@@ -26,5 +26,5 @@ deploy:
     script: bin/publish-to-dockerhub.sh
     on:
       # Cedar-14 images must not be published to Docker Hub since they contain ESM updates.
-      condition: ($TRAVIS_BRANCH == "master" || -n $TRAVIS_TAG) && $STACK != "cedar-14"
+      condition: ($TRAVIS_BRANCH == "main" || -n $TRAVIS_TAG) && $STACK != "cedar-14"
       all_branches: true
