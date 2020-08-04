@@ -220,6 +220,7 @@ apt-get install -y --force-yes \
     libxml2-dev \
     libxslt-dev \
     locales \
+    mercurial \
     netcat-openbsd \
     ntfs-3g \
     openjdk-7-jdk \

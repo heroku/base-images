@@ -737,6 +737,7 @@ libsystemd-daemon0
 libsystemd-login0
 libtasn1-6
 libtasn1-6-dev
+libtcl8.6
 libtdb1
 libterm-ui-perl
 libtext-soundex-perl
@@ -748,6 +749,7 @@ libtiffxx5
 libtimedate-perl
 libtinfo-dev
 libtinfo5
+libtk8.6
 libtool
 libtsan0
 libtxc-dxtn-s2tc0
@@ -756,6 +758,7 @@ libudisks2-0
 libusb-0.1-4
 libusb-1.0-0
 libustr-1.0-1
+libutempter0
 libuuid1
 libuv-dev
 libuv0.10
@@ -815,6 +818,7 @@ libxrender1
 libxshmfence1
 libxslt1-dev
 libxslt1.1
+libxss1
 libxt-dev
 libxt6
 libxtst6
@@ -835,6 +839,8 @@ makedev
 manpages
 manpages-dev
 mawk
+mercurial
+mercurial-common
 mime-support
 mlock
 module-init-tools
@@ -911,8 +917,12 @@ systemd-shim
 sysv-rc
 sysvinit-utils
 tar
+tcl
+tcl8.6
 tcpd
 telnet
+tk
+tk8.6
 tzdata
 tzdata-java
 ubuntu-keyring
@@ -931,9 +941,11 @@ x11proto-kb-dev
 x11proto-render-dev
 x11proto-xext-dev
 xauth
+xbitmaps
 xkb-data
 xml-core
 xorg-sgml-doctools
+xterm
 xtrans-dev
 xz-utils
 zip
