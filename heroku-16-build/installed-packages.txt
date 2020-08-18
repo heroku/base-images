@@ -90,6 +90,7 @@ iputils-tracepath
 isc-dhcp-client
 isc-dhcp-common
 javascript-common
+jq
 krb5-locales
 krb5-multidev
 language-pack-en

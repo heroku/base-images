@@ -17,6 +17,7 @@ apt-get install -y \
     cmake \
     gettext \
     git \
+    jq \
     libacl1-dev \
     libapparmor-dev \
     libapt-pkg-dev \
