@@ -195,6 +195,7 @@ apt-get install -y --force-yes \
     gvfs \
     imagemagick \
     iputils-tracepath \
+    jq \
     language-pack-en \
     libbz2-dev \
     libc-client2007e \

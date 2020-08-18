@@ -86,6 +86,7 @@ imagemagick-6.q16
 init-system-helpers
 iproute2
 iputils-tracepath
+jq
 krb5-multidev
 language-pack-en
 language-pack-en-base
@@ -265,6 +266,7 @@ libjpeg-turbo8
 libjpeg-turbo8-dev
 libjpeg8
 libjpeg8-dev
+libjq1
 libjson-c3
 libjsoncpp1
 libk5crypto3

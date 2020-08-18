@@ -99,6 +99,7 @@ insserv
 iproute2
 iputils-tracepath
 java-common
+jq
 klibc-utils
 kmod
 krb5-locales
