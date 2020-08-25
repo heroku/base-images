@@ -570,6 +570,8 @@ libgvc6
 libgvc6-plugins-gtk
 libgvpr2
 libharfbuzz0b
+libhashkit-dev
+libhashkit2
 libhcrypto4-heimdal
 libheimbase1-heimdal
 libheimntlm0-heimdal
@@ -635,6 +637,10 @@ libmagickcore5-extra
 libmagickwand-dev
 libmagickwand5
 libmcrypt4
+libmemcached-dev
+libmemcached10
+libmemcachedprotocol0
+libmemcachedutil2
 libmodule-pluggable-perl
 libmount1
 libmpc3
@@ -713,6 +719,7 @@ libruby1.9.1
 libsane
 libsane-common
 libsasl2-2
+libsasl2-dev
 libsasl2-modules
 libsasl2-modules-db
 libsctp1
