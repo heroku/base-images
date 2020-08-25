@@ -234,6 +234,7 @@ apt-get install -y --force-yes \
     psmisc \
     python \
     python-dev \
+    realpath \
     ruby \
     ruby-dev \
     socat \

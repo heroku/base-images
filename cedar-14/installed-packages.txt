@@ -904,6 +904,7 @@ python3-minimal
 python3.4
 python3.4-minimal
 readline-common
+realpath
 rsync
 ruby
 ruby-dev
