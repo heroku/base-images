@@ -210,6 +210,7 @@ apt-get install -y --force-yes \
     libjpeg-dev \
     libmagickwand-dev \
     libmcrypt4 \
+    libmemcached-dev \
     libmysqlclient-dev \
     libncurses5-dev \
     libpq-dev \
