@@ -5,9 +5,9 @@
 This repository holds recipes for building [Heroku stack images](https://devcenter.heroku.com/articles/stack).
 The recipes are also rendered into Docker images that are available on Docker Hub:
 
-* [Heroku-{16,18,20} Docker images](https://registry.hub.docker.com/u/heroku/heroku/)
+* [Heroku-{16,18,20} Docker images](https://registry.hub.docker.com/r/heroku/heroku/)
 
-Note: The [Cedar-14 Docker image](https://registry.hub.docker.com/u/heroku/cedar/) is no longer being updated,
+Note: The [Cedar-14 Docker image](https://registry.hub.docker.com/r/heroku/cedar/) is no longer being updated,
 since the Ubuntu ESM agreement requires that the updates we receive from Canonical are not published publicly.
 
 ### Learn more
