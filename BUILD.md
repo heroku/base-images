@@ -1,5 +1,24 @@
 # Building Stack Images Locally
 
+## Prepare your local environment
+
+The build scripts in this repository require bash 4+. To update to newer bash on OS X, see:
+https://johndjameson.com/blog/updating-your-shell-with-homebrew/
+
+## Adding packages to the stack image
+
+Add the package you want to the approproate `setup.sh` for example `heroku-18/setup.sh`:
+
+```diff
++    libc6-dev \
+```
+
+Once done, run the `bin/build.sh` locally to generate the corresponding `installed-packages.txt`.
+
+The `*-build` variants include all the packages from the non-build variant by default. This means that if you're adding a package to both, you only need to add them to the non-build variant. The example above will add `libc6-dev` to both `heroku-18` and `heroku-18-build`.
+
+## Build
+
 To build the stack images locally, run this from the repo root:
 
     bin/build.sh STACK DOCKER_TAG DOCKER_BUILD_TAG

@@ -133,6 +133,7 @@ apt-get install -y --no-install-recommends \
     less \
     libargon2-1 \
     libc-client2007e \
+    libc6-dev \
     libcairo2 \
     libcroco3 \
     libcurl4 \

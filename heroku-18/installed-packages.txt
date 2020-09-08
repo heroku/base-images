@@ -87,7 +87,9 @@ libbsd0
 libbz2-1.0
 libc-bin
 libc-client2007e
+libc-dev-bin
 libc6
+libc6-dev
 libcairo2
 libcap-ng0
 libcap2
@@ -279,6 +281,7 @@ libxslt1.1
 libyaml-0-2
 libzip4
 libzstd1
+linux-libc-dev
 locales
 login
 lsb-base
