@@ -89,7 +89,9 @@ libbsd0
 libbz2-1.0
 libc-bin
 libc-client2007e
+libc-dev-bin
 libc6
+libc6-dev
 libcairo-gobject2
 libcairo2
 libcap-ng0
@@ -99,6 +101,7 @@ libcbor0.6
 libcc1-0
 libcom-err2
 libcroco3
+libcrypt-dev
 libcrypt1
 libctf-nobfd0
 libctf0
@@ -282,6 +285,7 @@ libxtables12
 libyaml-0-2
 libzip5
 libzstd1
+linux-libc-dev
 locales
 login
 logsave
