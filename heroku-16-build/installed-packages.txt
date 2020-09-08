@@ -618,6 +618,8 @@ ubuntu-keyring
 ucf
 unzip
 util-linux
+vim-common
+vim-tiny
 wget
 x11-common
 x11proto-core-dev

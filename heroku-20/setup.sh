@@ -196,6 +196,7 @@ apt-get install -y --no-install-recommends \
     telnet \
     tzdata \
     unzip \
+    vim-tiny \
     wget \
     xz-utils \
     zip \

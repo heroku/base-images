@@ -155,6 +155,7 @@ apt-get install -y \
     tar \
     telnet \
     tzdata \
+    vim-tiny \
     wget \
     zip \
 

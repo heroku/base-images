@@ -576,6 +576,8 @@ ucf
 unzip
 util-linux
 uuid-dev
+vim-common
+vim-tiny
 wget
 x11-common
 x11proto-core-dev
@@ -583,6 +585,7 @@ x11proto-dev
 x11proto-xext-dev
 xorg-sgml-doctools
 xtrans-dev
+xxd
 xz-utils
 zip
 zlib1g

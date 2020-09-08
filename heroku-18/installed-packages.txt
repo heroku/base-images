@@ -347,7 +347,10 @@ ubuntu-keyring
 ucf
 unzip
 util-linux
+vim-common
+vim-tiny
 wget
+xxd
 xz-utils
 zip
 zlib1g
