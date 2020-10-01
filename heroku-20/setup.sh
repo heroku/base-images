@@ -185,6 +185,7 @@ apt-get install -y --no-install-recommends \
     patch \
     postgresql-client-12 \
     python3 \
+    python-is-python3 \
     rename \
     rsync \
     ruby \

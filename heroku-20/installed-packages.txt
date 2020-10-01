@@ -317,6 +317,7 @@ poppler-data
 postgresql-client-12
 postgresql-client-common
 procps
+python-is-python3
 python3
 python3-minimal
 python3.8
