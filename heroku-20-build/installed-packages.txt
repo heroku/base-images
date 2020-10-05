@@ -525,6 +525,7 @@ postgresql-client-common
 postgresql-common
 postgresql-server-dev-12
 procps
+python-is-python3
 python2
 python2-minimal
 python2.7
