@@ -442,6 +442,8 @@ libuv1-dev
 libvpx-dev
 libvpx5
 libwebp6
+libwebpdemux2
+libwebpmux3
 libwind0-heimdal
 libwmf-dev
 libwmf0.2-7

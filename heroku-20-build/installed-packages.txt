@@ -95,7 +95,6 @@ language-pack-en
 language-pack-en-base
 less
 lib32gcc-s1
-lib32gcc1
 lib32stdc++6
 libacl1
 libacl1-dev
@@ -443,6 +442,7 @@ libuv1-dev
 libvpx-dev
 libvpx6
 libwebp6
+libwebpdemux2
 libwebpmux3
 libwind0-heimdal
 libwmf-dev
