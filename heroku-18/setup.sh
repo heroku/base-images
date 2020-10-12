@@ -171,6 +171,9 @@ apt-get install -y --no-install-recommends \
     libthai-data \
     libthai0 \
     libuv1 \
+    libwebp6 \
+    libwebpdemux2 \
+    libwebpmux3 \
     libxcb-render0 \
     libxcb-shm0 \
     libxrender1 \

@@ -265,6 +265,7 @@ libunistring2
 libuuid1
 libuv1
 libwebp6
+libwebpdemux2
 libwebpmux3
 libwind0-heimdal
 libwmf0.2-7
