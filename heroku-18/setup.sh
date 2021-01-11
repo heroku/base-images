@@ -210,7 +210,7 @@ cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
   <policy domain="resource" name="map" value="512MiB"/>
   <policy domain="resource" name="width" value="16KP"/>
   <policy domain="resource" name="height" value="16KP"/>
-  <policy domain="resource" name="area" value="128MB"/>
+  <policy domain="resource" name="area" value="128MP"/>
   <policy domain="resource" name="disk" value="1GiB"/>
   <policy domain="delegate" rights="none" pattern="URL" />
   <policy domain="delegate" rights="none" pattern="HTTPS" />
