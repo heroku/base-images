@@ -520,10 +520,10 @@ pgdg-keyring
 pinentry-curses
 pkg-config
 poppler-data
-postgresql-client-12
+postgresql-client-13
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-12
+postgresql-server-dev-13
 procps
 python-is-python3
 python2
