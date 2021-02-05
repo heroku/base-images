@@ -80,7 +80,7 @@ apt-get install -y --no-install-recommends \
     libyaml-dev \
     libzip-dev \
     mercurial \
-    postgresql-server-dev-12 \
+    postgresql-server-dev-13 \
     python-dev \
     ruby-dev \
     zlib1g-dev \

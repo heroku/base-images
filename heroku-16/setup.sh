@@ -146,7 +146,7 @@ apt-get install -y \
     netcat-openbsd \
     openssh-client \
     openssh-server \
-    postgresql-client-12 \
+    postgresql-client-13 \
     python \
     ruby \
     socat \
