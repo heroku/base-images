@@ -4,7 +4,6 @@ services:
 - docker
 env:
   matrix:
-  - STACK=cedar-14 IMAGE_TAG=heroku/cedar:14 PRIVATE_IMAGE_TAG=heroku/cedar-private:14
   - STACK=heroku-16 IMAGE_TAG=heroku/heroku:16 PRIVATE_IMAGE_TAG=heroku/heroku-private:16
   - STACK=heroku-18 IMAGE_TAG=heroku/heroku:18 PRIVATE_IMAGE_TAG=heroku/heroku-private:18
   - STACK=heroku-20 IMAGE_TAG=heroku/heroku:20 PRIVATE_IMAGE_TAG=heroku/heroku-private:20
@@ -25,6 +24,5 @@ deploy:
   - provider: script
     script: bin/publish-to-dockerhub.sh
     on:
-      # Cedar-14 images must not be published to Docker Hub since they contain ESM updates.
-      condition: ($TRAVIS_BRANCH == "main" || -n $TRAVIS_TAG) && $STACK != "cedar-14"
+      condition: ($TRAVIS_BRANCH == "main" || -n $TRAVIS_TAG)
       all_branches: true

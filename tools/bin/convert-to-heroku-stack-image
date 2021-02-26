@@ -5,15 +5,8 @@ set -euo pipefail
 VERSION_PREFIX=$(date '+%Y%m%d-%H%M%S')
 
 while [ $# -gt 0 ]; do
-  case "$1" in
-    cedar-14)
-      capture-docker-stack "$1"       "$VERSION_PREFIX"
-      ;;
-    *)
-      capture-docker-stack "$1"       "$VERSION_PREFIX"
-      capture-docker-stack "$1-build" "$VERSION_PREFIX"
-      ;;
-  esac
+  capture-docker-stack "$1"       "$VERSION_PREFIX"
+  capture-docker-stack "$1-build" "$VERSION_PREFIX"
   shift
 done
 

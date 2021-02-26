@@ -3,11 +3,6 @@
 set -euo pipefail
 set -x
 
-if [ "${STACK}" = 'cedar-14' ]; then
-  echo 'Error: Publishing cedar-14 images to Docker Hub is no longer permitted, since they contain ESM updates.'
-  exit 1
-fi
-
 nightlyTag="${IMAGE_TAG}.nightly"
 nightlyBuildTag="${IMAGE_TAG}-build.nightly"
 date=$(date -u '+%Y-%m-%d-%H.%M.%S')
@@ -24,12 +19,10 @@ docker push "${nightlyTag}"
 docker tag "${nightlyTag}" "${dateTag}"
 docker push "${dateTag}"
 
-if [ "$STACK" != "cedar-14" ]; then
-  docker push "${nightlyBuildTag}"
+docker push "${nightlyBuildTag}"
 
-  docker tag "${nightlyBuildTag}" "${dateBuildTag}"
-  docker push "${dateBuildTag}"
-fi
+docker tag "${nightlyBuildTag}" "${dateBuildTag}"
+docker push "${dateBuildTag}"
 
 if [ -n "$TRAVIS_TAG" ]; then
   releaseTag="${IMAGE_TAG}.${TRAVIS_TAG}"
@@ -43,14 +36,9 @@ if [ -n "$TRAVIS_TAG" ]; then
   docker push "${releaseTag}"
   docker push "${latestTag}"
 
-  if [ "$STACK" != "cedar-14" ]; then
-    docker tag "${nightlyBuildTag}" "${releaseBuildTag}"
-    docker tag "${nightlyBuildTag}" "${latestBuildTag}"
+  docker tag "${nightlyBuildTag}" "${releaseBuildTag}"
+  docker tag "${nightlyBuildTag}" "${latestBuildTag}"
 
-    docker push "${releaseBuildTag}"
-    docker push "${latestBuildTag}"
-  else
-    docker tag "${nightlyTag}" heroku/cedar:latest
-    docker push heroku/cedar:latest
-  fi
+  docker push "${releaseBuildTag}"
+  docker push "${latestBuildTag}"
 fi
