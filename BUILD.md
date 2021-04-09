@@ -7,7 +7,7 @@ https://johndjameson.com/blog/updating-your-shell-with-homebrew/
 
 ## Adding packages to the stack image
 
-Add the package you want to the approproate `setup.sh` for example `heroku-18/setup.sh`:
+Add the package you want to the appropriate `setup.sh` for example `heroku-18/setup.sh`:
 
 ```diff
 +    libc6-dev \
@@ -36,7 +36,7 @@ The supported stacks are:
 
 # Releasing Stack Images
 
-When building Stack Images for release, we use the Travis build system.
+When building Stack Images for release, we use the Circle CI build system.
 
 * Any push to `main` will build the images and push the `nightly` tag.
 * Any new tag will build the image and push the `latest` tag, as well as one with the name of the GIT tag.

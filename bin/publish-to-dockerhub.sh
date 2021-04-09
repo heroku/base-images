@@ -24,9 +24,9 @@ docker push "${nightlyBuildTag}"
 docker tag "${nightlyBuildTag}" "${dateBuildTag}"
 docker push "${dateBuildTag}"
 
-if [ -n "$TRAVIS_TAG" ]; then
-  releaseTag="${IMAGE_TAG}.${TRAVIS_TAG}"
-  releaseBuildTag="${IMAGE_TAG}-build.${TRAVIS_TAG}"
+if [[ -v CIRCLE_TAG ]]; then
+  releaseTag="${IMAGE_TAG}.${CIRCLE_TAG}"
+  releaseBuildTag="${IMAGE_TAG}-build.${CIRCLE_TAG}"
   latestTag="${IMAGE_TAG}"
   latestBuildTag="${IMAGE_TAG}-build"
 
