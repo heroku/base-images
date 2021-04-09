@@ -1,0 +1,38 @@
+version: 2.1
+jobs:
+  build:
+    parameters:
+      stack: string
+      image_tag: string
+      private_image_tag: string
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      IMAGE_TAG: << parameters.image_tag >>
+      PRIVATE_IMAGE_TAG: << parameters.private_image_tag >>
+      STACK: << parameters.stack >>
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
+            bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
+            status="$(git status --porcelain)"
+            if [[ -n "$status" ]]; then
+              echo -e "Regenerated files differ from checked-in versions!\n${status}\n"
+              git diff --exit-code
+            fi
+      - run:
+          name: Deploy
+          command: |
+            ./bin/convert-and-publish-to-heroku.sh
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build:
+          parameters:
+            stack: heroku-16
+            image_tag: heroku/heroku:16
+            private_image_tag: heroku/heroku-private:16
