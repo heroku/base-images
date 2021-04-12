@@ -1,0 +1,62 @@
+version: 2.1
+jobs:
+  shellcheck:
+    docker:
+      - image: koalaman/shellcheck-alpine:v0.7.1
+    steps:
+      - checkout
+      - run:
+          name: Run shellcheck
+          command: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
+
+  build-heroku:
+    parameters:
+      stack-version:
+        type: enum
+        enum: ["16", "18", "20"]
+    machine:
+      image: ubuntu-2004:202101-01
+    environment:
+      IMAGE_TAG: heroku/heroku:<< parameters.stack-version >>
+      PRIVATE_IMAGE_TAG: heroku/heroku-private:<< parameters.stack-version >>
+      STACK: heroku-<< parameters.stack-version >>
+    steps:
+      - checkout
+      - run:
+          name: Build images
+          command: bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
+      - run:
+          name: Check that the generated files are in sync
+          command: |
+            status="$(git status --porcelain)"
+            if [[ -n "$status" ]]; then
+              echo "Generated files differ from checked-in versions! Run bin/build.sh to regenerate them locally."
+              echo -e "\nChanged files:\n${status}\n"
+              git diff --exit-code
+            fi
+      - when:
+          condition:
+            or:
+              - equal: [ main, << pipeline.git.branch >> ]
+              - << pipeline.git.tag >>
+          steps:
+            - run:
+                name: Publish to Docker Hub
+                command: bin/publish-to-dockerhub.sh
+      - when:
+          condition: << pipeline.git.tag >>
+          steps:
+            - run:
+                name: Convert docker image and release to Heroku staging
+                command: bin/convert-and-publish-to-heroku.sh
+
+workflows:
+  build:
+    jobs:
+      - shellcheck
+      - build-heroku:
+          requires:
+            - shellcheck
+          matrix:
+            parameters:
+              stack-version: ["16", "18", "20"]
