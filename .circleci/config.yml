@@ -53,10 +53,17 @@ jobs:
 workflows:
   build:
     jobs:
-      - shellcheck
+      - shellcheck:
+          filters:
+            # Enable for release tags (by default all tags are ignored).
+            tags:
+              only: /^v.*/
       - build-heroku:
           requires:
             - shellcheck
+          filters:
+            tags:
+              only: /^v.*/
           matrix:
             parameters:
               stack-version: ["16", "18", "20"]
