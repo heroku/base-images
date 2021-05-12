@@ -501,6 +501,7 @@ libyaml-0-2
 libyaml-dev
 libzip-dev
 libzip4
+libzstd1
 linux-libc-dev
 llvm-6.0
 llvm-6.0-dev

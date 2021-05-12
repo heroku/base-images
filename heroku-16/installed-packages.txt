@@ -280,6 +280,7 @@ libxslt1.1
 libxtables11
 libyaml-0-2
 libzip4
+libzstd1
 linux-libc-dev
 locales
 login
