@@ -1,5 +1,5 @@
   [
-    split("\r\n")[]                  # transform csv input into array
+    split("\n")[]                  # transform csv input into array
   | split(",")                    # where first element has key names
   | select(length==2)              # and other elements have values
   ]
