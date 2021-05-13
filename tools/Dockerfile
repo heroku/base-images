@@ -1,5 +1,4 @@
-# This Docker image is used only for local testing and not by the CI-based releases.
-FROM ubuntu:20.04
+FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install docker.io -y

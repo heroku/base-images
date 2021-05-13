@@ -29,6 +29,7 @@ For example:
 
 The supported stacks are:
 
+* `heroku-16` (will also build a `heroku-16-build` image)
 * `heroku-18` (will also build a `heroku-18-build` image)
 * `heroku-20` (will also build a `heroku-20-build` image)
 
