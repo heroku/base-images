@@ -261,6 +261,7 @@ libjpeg8
 libjpeg8-dev
 libjq1
 libjson-c4
+libjson-perl
 libjsoncpp1
 libk5crypto3
 libkadm5clnt-mit11
