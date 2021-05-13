@@ -5,7 +5,7 @@
 This repository holds recipes for building [Heroku stack images](https://devcenter.heroku.com/articles/stack).
 The recipes are also rendered into Docker images that are available on Docker Hub:
 
-* [Heroku-{16,18,20} Docker images](https://registry.hub.docker.com/r/heroku/heroku/)
+* [Heroku-{18,20} Docker images](https://registry.hub.docker.com/r/heroku/heroku/)
 
 ### Learn more
 
