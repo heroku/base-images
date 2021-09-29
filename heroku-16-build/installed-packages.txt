@@ -155,6 +155,7 @@ libcilkrts5
 libclang-common-6.0-dev
 libclang1-6.0
 libcomerr2
+libcommon-sense-perl
 libcroco3
 libcryptsetup4
 libcups2
@@ -282,6 +283,8 @@ libjpeg8
 libjpeg8-dev
 libjs-excanvas
 libjs-jquery
+libjson-perl
+libjson-xs-perl
 libjsoncpp1
 libk5crypto3
 libkadm5clnt-mit9
@@ -444,6 +447,7 @@ libtinfo-dev
 libtinfo5
 libtool
 libtsan0
+libtypes-serialiser-perl
 libubsan0
 libudev-dev
 libudev1
