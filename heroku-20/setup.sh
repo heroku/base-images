@@ -186,7 +186,7 @@ apt-get install -y --no-install-recommends \
     openssh-client \
     openssh-server \
     patch \
-    postgresql-client-13 \
+    postgresql-client-14 \
     python-is-python3 \
     python3 \
     rename \
