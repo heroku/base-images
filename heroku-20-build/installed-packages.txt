@@ -290,6 +290,8 @@ libltdl-dev
 libltdl7
 liblz4-1
 liblz4-dev
+liblzf-dev
+liblzf1
 liblzma-dev
 liblzma5
 liblzo2-2

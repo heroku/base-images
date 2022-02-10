@@ -185,6 +185,7 @@ liblqr-1-0
 liblsan0
 libltdl7
 liblz4-1
+liblzf1
 liblzma5
 libmagic-mgc
 libmagic1

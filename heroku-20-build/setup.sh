@@ -50,6 +50,7 @@ apt-get install -y --no-install-recommends \
     libkrb5-dev \
     libldap2-dev \
     liblz4-dev \
+    liblzf-dev \
     libmagic-dev \
     libmagickwand-dev \
     libmcrypt-dev \
