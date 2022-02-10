@@ -479,6 +479,7 @@ libyaml-0-2
 libyaml-dev
 libzip-dev
 libzip4
+libzstd-dev
 libzstd1
 linux-libc-dev
 llvm-6.0
@@ -577,3 +578,4 @@ xz-utils
 zip
 zlib1g
 zlib1g-dev
+zstd

@@ -79,6 +79,7 @@ apt-get install -y --no-install-recommends \
     libxslt-dev \
     libyaml-dev \
     libzip-dev \
+    libzstd-dev \
     mercurial \
     postgresql-server-dev-14 \
     python-dev \

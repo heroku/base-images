@@ -50,6 +50,7 @@ apt-get install -y --no-install-recommends \
     libkrb5-dev \
     libldap2-dev \
     liblz4-dev \
+    liblzf-dev \
     libmagic-dev \
     libmagickwand-dev \
     libmcrypt-dev \
@@ -79,6 +80,7 @@ apt-get install -y --no-install-recommends \
     libxslt-dev \
     libyaml-dev \
     libzip-dev \
+    libzstd-dev \
     mercurial \
     postgresql-server-dev-14 \
     python3-dev \
