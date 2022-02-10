@@ -179,6 +179,7 @@ apt-get install -y --no-install-recommends \
     libxrender1 \
     libxslt1.1 \
     libzip4 \
+    libzstd1 \
     locales \
     lsb-release \
     make \
@@ -202,6 +203,7 @@ apt-get install -y --no-install-recommends \
     wget \
     xz-utils \
     zip \
+    zstd \
 
 
 cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'

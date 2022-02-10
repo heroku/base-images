@@ -482,6 +482,7 @@ libz3-4
 libz3-dev
 libzip-dev
 libzip5
+libzstd-dev
 libzstd1
 linux-libc-dev
 llvm-9
@@ -589,3 +590,4 @@ xz-utils
 zip
 zlib1g
 zlib1g-dev
+zstd

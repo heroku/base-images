@@ -353,3 +353,4 @@ wget
 xz-utils
 zip
 zlib1g
+zstd
