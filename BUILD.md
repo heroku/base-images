@@ -31,6 +31,7 @@ The supported stacks are:
 
 * `heroku-18` (will also build a `heroku-18-build` image)
 * `heroku-20` (will also build a `heroku-20-build` image)
+* `heroku-22` (will also build a `heroku-22-build` image)
 
 
 # Releasing Stack Images
