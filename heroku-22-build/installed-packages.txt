@@ -98,6 +98,7 @@ lib32gcc-s1
 lib32stdc++6
 libacl1
 libacl1-dev
+libaom-dev
 libaom3
 libapt-pkg-dev
 libapt-pkg6.0
@@ -156,12 +157,14 @@ libcurl3-gnutls
 libcurl4
 libcurl4-openssl-dev
 libdatrie1
+libdav1d-dev
 libdav1d5
 libdb-dev
 libdb5.3
 libdb5.3-dev
 libdbus-1-3
 libde265-0
+libde265-dev
 libdebconfclient0
 libdeflate-dev
 libdeflate0
@@ -240,6 +243,7 @@ libgssrpc4
 libharfbuzz0b
 libhashkit-dev
 libhashkit2
+libheif-dev
 libheif1
 libhogweed6
 libice-dev
@@ -467,6 +471,7 @@ libx11-6
 libx11-data
 libx11-dev
 libx265-199
+libx265-dev
 libxau-dev
 libxau6
 libxcb-render0

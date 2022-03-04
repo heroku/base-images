@@ -152,6 +152,7 @@ apt-get install -y --no-install-recommends \
     libgraphite2-3 \
     libgs9 \
     libharfbuzz0b \
+    libheif1 \
     liblzf1 \
     libmagickcore-6.q16-3-extra \
     libmcrypt4 \

@@ -42,6 +42,7 @@ apt-get install -y --no-install-recommends \
     libglib2.0-dev \
     libgnutls28-dev \
     libgs-dev \
+    libheif-dev \
     libicu-dev \
     libidn11-dev \
     libjpeg-dev \
