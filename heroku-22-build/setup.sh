@@ -83,7 +83,6 @@ apt-get install -y --no-install-recommends \
     libzip-dev \
     libzstd-dev \
     mercurial \
-    postgresql-server-dev-14 \
     python3-dev \
     ruby-dev \
     zlib1g-dev \

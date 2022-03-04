@@ -23,7 +23,6 @@ bzip2
 bzr
 ca-certificates
 ca-certificates-java
-clang-13
 cmake
 cmake-data
 comerr-dev
@@ -94,8 +93,6 @@ krb5-multidev
 language-pack-en
 language-pack-en-base
 less
-lib32gcc-s1
-lib32stdc++6
 libacl1
 libacl1-dev
 libaom-dev
@@ -132,7 +129,6 @@ libc-client2007e-dev
 libc-dev-bin
 libc6
 libc6-dev
-libc6-i386
 libcairo-gobject2
 libcairo-script-interpreter2
 libcairo2
@@ -144,9 +140,6 @@ libcap2
 libcap2-bin
 libcbor0.8
 libcc1-0
-libclang-common-13-dev
-libclang-cpp13
-libclang1-13
 libcom-err2
 libcrypt-dev
 libcrypt1
@@ -199,7 +192,6 @@ libfreetype-dev
 libfreetype6
 libfreetype6-dev
 libfribidi0
-libgc1
 libgcc-11-dev
 libgcc-s1
 libgcrypt20
@@ -273,7 +265,6 @@ libjs-jquery
 libjs-sphinxdoc
 libjs-underscore
 libjson-c5
-libjson-perl
 libjsoncpp25
 libk5crypto3
 libkadm5clnt-mit12
@@ -292,7 +283,6 @@ liblcms2-dev
 libldap-2.5-0
 libldap-dev
 libldap2-dev
-libllvm13
 liblmdb0
 liblqr-1-0
 liblqr-1-0-dev
@@ -348,8 +338,6 @@ libnpth0
 libnsl-dev
 libnsl2
 libnuma1
-libobjc-11-dev
-libobjc4
 libonig-dev
 libonig5
 libopenexr-dev
@@ -378,7 +366,6 @@ libpcre3-dev
 libpcre32-3
 libpcrecpp0v5
 libperl5.34
-libpfm4
 libpixman-1-0
 libpixman-1-dev
 libpng-dev
@@ -498,18 +485,11 @@ libxtables12
 libxxhash0
 libyaml-0-2
 libyaml-dev
-libz3-4
-libz3-dev
 libzip-dev
 libzip4
 libzstd-dev
 libzstd1
 linux-libc-dev
-llvm-13
-llvm-13-dev
-llvm-13-linker-tools
-llvm-13-runtime
-llvm-13-tools
 locales
 login
 logsave
@@ -546,8 +526,6 @@ pkg-config
 poppler-data
 postgresql-client-14
 postgresql-client-common
-postgresql-common
-postgresql-server-dev-14
 procps
 python-is-python3
 python3
@@ -561,11 +539,8 @@ python3-fastbencode
 python3-lib2to3
 python3-minimal
 python3-patiencediff
-python3-pkg-resources
-python3-pygments
 python3-six
 python3-urllib3
-python3-yaml
 python3.10
 python3.10-dev
 python3.10-minimal
@@ -589,7 +564,6 @@ sed
 sensible-utils
 shared-mime-info
 socat
-ssl-cert
 stunnel4
 syslinux
 sysvinit-utils
