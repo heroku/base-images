@@ -84,7 +84,6 @@ apt-get install -y --no-install-recommends \
     libzstd-dev \
     mercurial \
     python3-dev \
-    ruby-dev \
     zlib1g-dev \
 
 rm -rf /root/*

@@ -193,7 +193,6 @@ apt-get install -y --no-install-recommends \
     python3 \
     rename \
     rsync \
-    ruby \
     shared-mime-info \
     socat \
     stunnel \

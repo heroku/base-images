@@ -237,7 +237,6 @@ libreadline8
 librsvg2-2
 librsvg2-common
 librtmp1
-libruby3.0
 libsasl2-2
 libsasl2-modules
 libsasl2-modules-db
@@ -288,7 +287,6 @@ libxrender1
 libxslt1.1
 libxtables12
 libxxhash0
-libyaml-0-2
 libzip4
 libzstd1
 linux-libc-dev
@@ -328,20 +326,10 @@ python3
 python3-minimal
 python3.10
 python3.10-minimal
-rake
 readline-common
 rename
 rpcsvc-proto
 rsync
-ruby
-ruby-minitest
-ruby-net-telnet
-ruby-power-assert
-ruby-rubygems
-ruby-test-unit
-ruby-xmlrpc
-ruby3.0
-rubygems-integration
 sed
 sensible-utils
 shared-mime-info
