@@ -97,6 +97,7 @@ libacl1
 libacl1-dev
 libaom-dev
 libaom3
+libapparmor1
 libapt-pkg-dev
 libapt-pkg6.0
 libarchive13
@@ -143,6 +144,7 @@ libcc1-0
 libcom-err2
 libcrypt-dev
 libcrypt1
+libcryptsetup12
 libctf-nobfd0
 libctf0
 libcups2
@@ -161,6 +163,7 @@ libde265-dev
 libdebconfclient0
 libdeflate-dev
 libdeflate0
+libdevmapper1.02.1
 libdjvulibre-dev
 libdjvulibre-text
 libdjvulibre21
@@ -250,6 +253,7 @@ libidn2-dev
 libijs-0.35
 libilmbase-dev
 libilmbase25
+libip4tc2
 libisl23
 libitm1
 libjbig-dev
@@ -553,6 +557,7 @@ shared-mime-info
 socat
 stunnel4
 syslinux
+systemd
 sysvinit-utils
 tar
 telnet
