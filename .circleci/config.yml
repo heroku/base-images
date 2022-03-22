@@ -15,7 +15,7 @@ jobs:
         type: enum
         enum: ["18", "20", "22"]
     machine:
-      image: ubuntu-2004:202111-02
+      image: ubuntu-2004:202201-02
     environment:
       IMAGE_TAG: heroku/heroku:<< parameters.stack-version >>
       PRIVATE_IMAGE_TAG: heroku/heroku-private:<< parameters.stack-version >>
