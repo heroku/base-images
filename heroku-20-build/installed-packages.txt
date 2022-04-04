@@ -24,7 +24,7 @@ bzip2
 bzr
 ca-certificates
 ca-certificates-java
-clang-9
+clang-10
 cmake
 cmake-data
 comerr-dev
@@ -141,8 +141,9 @@ libcap2
 libcap2-bin
 libcbor0.6
 libcc1-0
-libclang-common-9-dev
-libclang-cpp9
+libclang-common-10-dev
+libclang-cpp10
+libclang1-10
 libcom-err2
 libcroco3
 libcrypt-dev
@@ -281,7 +282,7 @@ liblcms2-dev
 libldap-2.4-2
 libldap-common
 libldap2-dev
-libllvm9
+libllvm10
 liblmdb0
 liblqr-1-0
 liblqr-1-0-dev
@@ -487,10 +488,10 @@ libzip5
 libzstd-dev
 libzstd1
 linux-libc-dev
-llvm-9
-llvm-9-dev
-llvm-9-runtime
-llvm-9-tools
+llvm-10
+llvm-10-dev
+llvm-10-runtime
+llvm-10-tools
 locales
 login
 logsave
