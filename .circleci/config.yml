@@ -9,7 +9,7 @@ jobs:
           name: Run shellcheck
           command: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
 
-  build-heroku:
+  build-stack:
     parameters:
       stack-version:
         type: enum
@@ -58,7 +58,8 @@ workflows:
             # Enable for release tags (by default all tags are ignored).
             tags:
               only: /^v.*/
-      - build-heroku:
+      - build-stack:
+          name: build-heroku-stack-images
           requires:
             - shellcheck
           filters:
@@ -66,4 +67,14 @@ workflows:
               only: /^v.*/
           matrix:
             parameters:
-              stack-version: ["18", "20", "22", "22-cnb"]
+              stack-version: ["18", "20", "22"]
+      - build-stack:
+          name: build-cnb-stack-images
+          requires:
+            - build-heroku-stack-images
+          filters:
+            tags:
+              only: /^v.*/
+          matrix:
+            parameters:
+              stack-version: ["22-cnb"]
