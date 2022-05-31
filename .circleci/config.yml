@@ -13,7 +13,7 @@ jobs:
     parameters:
       stack-version:
         type: enum
-        enum: ["18", "20", "22"]
+        enum: ["18", "20", "22", "22-cnb"]
     machine:
       image: ubuntu-2204:2022.04.1
     environment:
@@ -66,4 +66,4 @@ workflows:
               only: /^v.*/
           matrix:
             parameters:
-              stack-version: ["18", "20", "22"]
+              stack-version: ["18", "20", "22", "22-cnb"]
