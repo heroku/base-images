@@ -17,6 +17,8 @@ Once done, run the `bin/build.sh` locally to generate the corresponding `install
 
 The `*-build` variants include all the packages from the non-build variant by default. This means that if you're adding a package to both, you only need to add them to the non-build variant. The example above will add `libc6-dev` to both `heroku-18` and `heroku-18-build`.
 
+The `*cnb*` variants inherit the installed packages from the non-`*cnb*` variant. Add packages to a non-`*cnb*` variant to add them to the `*cnb*` variant.
+
 ## Build
 
 To build the stack images locally, run this from the repo root:
@@ -32,6 +34,7 @@ The supported stacks are:
 * `heroku-18` (will also build a `heroku-18-build` image)
 * `heroku-20` (will also build a `heroku-20-build` image)
 * `heroku-22` (will also build a `heroku-22-build` image)
+* `heroku-22-cnb` (will also build a `heroku-22-cnb-build` image)
 
 
 # Releasing Stack Images
@@ -41,9 +44,11 @@ When building Stack Images for release, we use the Circle CI build system.
 * Any push to `main` will build the images and push the `nightly` tag.
 * Any new tag will build the image and push the `latest` tag, as well as one with the name of the GIT tag.
 
-# Releasing Stack Images Locally (Prime)
+# Releasing Heroku Stack Images Locally (Prime)
 
-When building Stack Images for release locally, you'll need a number of additional steps.
+When building Heroku Stack Images for release locally, youll need a number of additional steps.
+
+NOTE: These steps do *not* apply to `*cnb*` images.
 
     # Build the stack image(s) as you would above
     cd stack-images/tools
