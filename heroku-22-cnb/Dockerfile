@@ -2,11 +2,8 @@ FROM heroku/heroku:22
 
 RUN ln -s /workspace /app
 
-ARG pack_uid=1000
-ARG pack_gid=1000
-
-RUN groupadd heroku --gid ${pack_gid} && \
-  useradd heroku -u ${pack_uid} -g ${pack_gid} -s /bin/bash -m
+RUN groupadd heroku --gid 1000 && \
+  useradd heroku -u 1000 -g 1000 -s /bin/bash -m
 
 LABEL io.buildpacks.stack.id="heroku-22"
 USER heroku
