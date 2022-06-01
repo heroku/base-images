@@ -42,8 +42,8 @@ jobs:
               - << pipeline.git.tag >>
           steps:
             - run:
-                name: Publish to Docker Hub
-                command: bin/publish-to-dockerhub.sh
+                name: Publish to image registries
+                command: bin/publish-to-registries.sh
       - when:
           condition: << pipeline.git.tag >>
           steps:
