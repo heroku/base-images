@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   shellcheck:
     docker:
-      - image: koalaman/shellcheck-alpine:v0.7.2
+      - image: koalaman/shellcheck-alpine:v0.8.0
     steps:
       - checkout
       - run:
@@ -15,7 +15,7 @@ jobs:
         type: enum
         enum: ["18", "20", "22"]
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2022.04.1
     environment:
       IMAGE_TAG: heroku/heroku:<< parameters.stack-version >>
       PRIVATE_IMAGE_TAG: heroku/heroku-private:<< parameters.stack-version >>
