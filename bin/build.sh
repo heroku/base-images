@@ -19,7 +19,7 @@ echo "${DOCKERFILE_DIR}"
 write_package_list() {
     local image_tag="$1"
     local output_file="${2}/installed-packages.txt"
-    if [[ $image_tag ~= "-cnb" ]]; then
+    if [[ $image_tag =~ "-cnb" ]]; then
       echo 'Skipping package list for CNB image'
     else
       echo '# List of packages present in the final image. Regenerate using bin/build.sh' > "$output_file"
