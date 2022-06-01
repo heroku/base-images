@@ -32,6 +32,7 @@ jobs:
             if [[ -n "$status" ]]; then
               echo "Generated files differ from checked-in versions! Run bin/build.sh to regenerate them locally."
               echo -e "\nChanged files:\n${status}\n"
+              git diff
               exit 1
             fi
       - when:
