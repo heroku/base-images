@@ -71,9 +71,9 @@ workflows:
       - build-stack:
           name: build-stack-heroku-<< matrix.stack-version >>
           requires:
-            - build-heroku-stack-image-18
-            - build-heroku-stack-image-20
-            - build-heroku-stack-image-22
+            - build-stack-heroku-18
+            - build-stack-heroku-20
+            - build-stack-heroku-22
           filters:
             tags:
               only: /^v.*/
