@@ -13,7 +13,7 @@ jobs:
     parameters:
       stack-version:
         type: enum
-        enum: ["18", "20", "22", "22-cnb"]
+        enum: ["18", "20", "22", "18-cnb", "20-cnb", "22-cnb"]
     machine:
       image: ubuntu-2204:2022.04.1
     environment:
@@ -59,7 +59,7 @@ workflows:
             tags:
               only: /^v.*/
       - build-stack:
-          name: build-heroku-stack-image-<< matrix.stack-version >>
+          name: build-stack-heroku-<< matrix.stack-version >>
           requires:
             - shellcheck
           filters:
@@ -69,12 +69,14 @@ workflows:
             parameters:
               stack-version: ["18", "20", "22"]
       - build-stack:
-          name: build-cnb-stack-image-<< matrix.stack-version >>
+          name: build-stack-heroku-<< matrix.stack-version >>
           requires:
+            - build-heroku-stack-image-18
+            - build-heroku-stack-image-20
             - build-heroku-stack-image-22
           filters:
             tags:
               only: /^v.*/
           matrix:
             parameters:
-              stack-version: ["22-cnb"]
+              stack-version: ["18-cnb", "20-cnb", "22-cnb"]
