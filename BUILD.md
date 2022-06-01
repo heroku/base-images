@@ -32,7 +32,9 @@ For example:
 The supported stacks are:
 
 * `heroku-18` (will also build a `heroku-18-build` image)
+* `heroku-18-cnb` (will also build a `heroku-18-cnb-build` image)
 * `heroku-20` (will also build a `heroku-20-build` image)
+* `heroku-20-cnb` (will also build a `heroku-20-cnb-build` image)
 * `heroku-22` (will also build a `heroku-22-build` image)
 * `heroku-22-cnb` (will also build a `heroku-22-cnb-build` image)
 
