@@ -37,8 +37,8 @@ if [[ -v CIRCLE_TAG ]]; then
   latestBuildTag="${IMAGE_TAG}-build"
   latestBuildTagPrivate="${PRIVATE_REGISTRY_HOST}/s/${SERVICE_USERNAME}/${latestBuildTag}"
 
-  PRIVATE_REGISTRY_TOKEN=$(set +x; curl -f -X POST $SERVICE_TOKEN_ENDPOINT -d "{\"username\":\"$SERVICE_USERNAME\",\"password\":\"$SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token")
-  (set +x; echo "${PRIVATE_REGISTRY_TOKEN}" | docker login $PRIVATE_REGISTRY_HOST -u "$PRIVATE_REGISTRY_USERNAME" --password-stdin)
+  PRIVATE_REGISTRY_TOKEN=$(set +x; curl -f -X POST "$SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$SERVICE_USERNAME\",\"password\":\"$SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token")
+  (set +x; echo "${PRIVATE_REGISTRY_TOKEN}" | docker login "$PRIVATE_REGISTRY_HOST" -u "$PRIVATE_REGISTRY_USERNAME" --password-stdin)
 
   docker tag "${nightlyTag}" "${releaseTag}"
   docker tag "${nightlyTag}" "${releaseTagPrivate}"
