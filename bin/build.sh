@@ -23,11 +23,17 @@ display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} Heroku runtime image"
 docker build --pull --tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
 write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
 
+# The --pull option is not used for variants to ensure they are based on the
+# runtime stack image built above, rather than the one last published to DockerHub.
+
 BUILD_IMAGE_TAG="${RUN_IMAGE_TAG}-build"
 BUILD_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-build"
 display "Building ${BUILD_DOCKERFILE_DIR} / ${BUILD_IMAGE_TAG} Heroku build-time image"
 docker build --tag "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR" | indent
 write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
+
+# write_package_list is not needed for *cnb* variants, as they don't install
+# any additional packages over their non-*cnb* counterparts.
 
 CNB_RUN_IMAGE_TAG="${RUN_IMAGE_TAG}-cnb"
 CNB_RUN_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-cnb"
