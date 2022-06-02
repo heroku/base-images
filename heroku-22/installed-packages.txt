@@ -292,6 +292,8 @@ libxrender1
 libxslt1.1
 libxtables12
 libxxhash0
+libyaml-0-2
+libyaml-dev
 libzip4
 libzstd1
 linux-libc-dev
