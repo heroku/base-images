@@ -3,58 +3,45 @@
 set -euo pipefail
 set -x
 
-nightlyTag="${IMAGE_TAG}.nightly"
-nightlyBuildTag="${IMAGE_TAG}-build.nightly"
-date=$(date -u '+%Y-%m-%d-%H.%M.%S')
-dateTag="${PRIVATE_IMAGE_TAG}.${date}"
-dateBuildTag="${PRIVATE_IMAGE_TAG}-build.${date}"
 
-bin/build.sh "${STACK}" "${nightlyTag}" "${nightlyBuildTag}"
+bin/build.sh "${STACK_VERSION}"
 
-# Disable tracing temporarily to prevent logging DOCKER_HUB_TOKEN.
+# Disable tracing temporarily to prevent logging registry tokens.
 (set +x; echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
+(set +x; curl -f -X POST "$SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$SERVICE_USERNAME\",\"password\":\"$SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
 
-docker push "${nightlyTag}"
+push_group() {
+    local targetTagBase="$1"
+    local targetTagSuffix="$2"
+    for variant in "" "-build" "-cnb" "-cnb-build"; do
+      source="${publicTag}${variant}"
+      target="${targetTagBase}${variant}${targetTagSuffix}"
+      docker tag "${source}" "${target}"
+      docker push "${target}"
+    done
+}
 
-docker tag "${nightlyTag}" "${dateTag}"
-docker push "${dateTag}"
+date=$(date -u '+%Y-%m-%d-%H.%M.%S')
+publicTag="heroku/heroku:${STACK_VERSION}"
+privateTag="heroku/heroku-private:${STACK_VERSION}"
+internalTag="${INTERNAL_REGISTRY_HOST}/s/${SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
-docker push "${nightlyBuildTag}"
+# Push nightly tags to dockerhub (e.g. heroku/heroku:22.nightly)
+push_group ${publicTag} ".nightly"
 
-docker tag "${nightlyBuildTag}" "${dateBuildTag}"
-docker push "${dateBuildTag}"
+# Push date tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
+push_group ${privateTag} "${date}"
 
 if [[ -v CIRCLE_TAG ]]; then
-  releaseTag="${IMAGE_TAG}.${CIRCLE_TAG}"
-  releaseTagPrivate="${PRIVATE_REGISTRY_HOST}/s/${SERVICE_USERNAME}/${releaseTag}"
+  # Push release tags to dockerhub (e.g. heroku/heroku:22.v99)
+  push_group "${publicTag}" ".${CIRCLE_TAG}"
 
-  releaseBuildTag="${IMAGE_TAG}-build.${CIRCLE_TAG}"
-  releaseBuildTagPrivate="${PRIVATE_REGISTRY_HOST}/s/${SERVICE_USERNAME}/${releaseBuildTag}"
+  # Push release tags to internal registry
+  push_group "${internalTag}" ".${CIRCLE_TAG}"
 
-  latestTag="${IMAGE_TAG}"
-  latestTagPrivate="${PRIVATE_REGISTRY_HOST}/s/${SERVICE_USERNAME}/${latestTag}"
+  # Push latest/no-suffix tags to dockerhub (e.g. heroku/heroku:22)
+  push_group "${publicTag}" ""
 
-  latestBuildTag="${IMAGE_TAG}-build"
-  latestBuildTagPrivate="${PRIVATE_REGISTRY_HOST}/s/${SERVICE_USERNAME}/${latestBuildTag}"
-
-  PRIVATE_REGISTRY_TOKEN=$(set +x; curl -f -X POST "$SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$SERVICE_USERNAME\",\"password\":\"$SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token")
-  (set +x; echo "${PRIVATE_REGISTRY_TOKEN}" | docker login "$PRIVATE_REGISTRY_HOST" -u "$PRIVATE_REGISTRY_USERNAME" --password-stdin)
-
-  docker tag "${nightlyTag}" "${releaseTag}"
-  docker tag "${nightlyTag}" "${releaseTagPrivate}"
-  docker tag "${nightlyTag}" "${latestTag}"
-  docker tag "${nightlyTag}" "${latestTagPrivate}"
-
-  docker push "${releaseTag}"
-  docker push "${releaseTagPrivate}"
-  docker push "${latestTag}"
-  docker push "${latestTagPrivate}"
-
-  docker tag "${nightlyBuildTag}" "${releaseBuildTag}"
-  docker tag "${nightlyBuildTag}" "${releaseBuildTagPrivate}"
-  docker tag "${nightlyBuildTag}" "${latestBuildTag}"
-  docker tag "${nightlyBuildTag}" "${latestBuildTagPrivate}"
-
-  docker push "${releaseBuildTag}"
-  docker push "${latestBuildTag}"
+  # Push latest/no-suffix tags to internal registry
+  push_group "${internalTag}" ""
 fi
