@@ -23,21 +23,19 @@ The `*cnb*` variants inherit the installed packages from the non-`*cnb*` variant
 
 To build the stack images locally, run this from the repo root:
 
-    bin/build.sh STACK DOCKER_TAG DOCKER_BUILD_TAG
+    bin/build.sh STACK_VERSION
 
 For example:
 
-    ./bin/build.sh heroku-20 heroku/heroku:20 heroku/heroku:20-build
+    ./bin/build.sh 22
 
-The supported stacks are:
+The supported stacks are: `18`, `20`, and `22`. This script will build a family
+of 4 images:
 
-* `heroku-18` (will also build a `heroku-18-build` image)
-* `heroku-18-cnb` (will also build a `heroku-18-cnb-build` image)
-* `heroku-20` (will also build a `heroku-20-build` image)
-* `heroku-20-cnb` (will also build a `heroku-20-cnb-build` image)
-* `heroku-22` (will also build a `heroku-22-build` image)
-* `heroku-22-cnb` (will also build a `heroku-22-cnb-build` image)
-
+* `heroku/heroku:{STACK_VERSION}` - The runtime stack image for the Heroku platform
+* `heroku/heroku:{STACK_VERSION}-build` - The build-time stack image for the Heroku platform
+* `heroku/heroku:{STACK_VERSION}-cnb` - The runtime stack image for Cloud Native Buildpacks
+* `heroku/heroku:{STACK_VERSION}-cnb-build` - The build-time stack image for Cloud Native Buildpacks
 
 # Releasing Stack Images
 
