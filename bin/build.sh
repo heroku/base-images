@@ -42,8 +42,8 @@ docker build --tag "$CNB_RUN_IMAGE_TAG" "$CNB_RUN_DOCKERFILE_DIR" | indent
 
 CNB_BUILD_IMAGE_TAG="${RUN_IMAGE_TAG}-cnb-build"
 CNB_BUILD_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-cnb-build"
-display "Building ${CNB_BUILD_DOCKERFILE_DIR} / ${CNB_RUN_IMAGE_TAG} CNB build-time image"
-docker build --tag "$CNB_BUILD_IMAGE_TAG" "$CNB_RUN_DOCKERFILE_DIR" | indent
+display "Building ${CNB_BUILD_DOCKERFILE_DIR} / ${CNB_BUILD_IMAGE_TAG} CNB build-time image"
+docker build --tag "$CNB_BUILD_IMAGE_TAG" "$CNB_BUILD_DOCKERFILE_DIR" | indent
 
 display "Size breakdown..."
 docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}" \
