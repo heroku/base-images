@@ -179,7 +179,7 @@ apt-get install -y --no-install-recommends \
     libxcb-shm0 \
     libxrender1 \
     libxslt1.1 \
-    libyaml-dev \
+    libyaml-0-2 \
     libzip4 \
     libzstd1 \
     locales \
