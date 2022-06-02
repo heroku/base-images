@@ -27,10 +27,10 @@ privateTag="heroku/heroku-private:${STACK_VERSION}"
 internalTag="${INTERNAL_REGISTRY_HOST}/s/${SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
 # Push nightly tags to dockerhub (e.g. heroku/heroku:22.nightly)
-push_group ${publicTag} ".nightly"
+push_group "${publicTag}" ".nightly"
 
 # Push date tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
-push_group ${privateTag} "${date}"
+push_group "${privateTag}" "${date}"
 
 if [[ -v CIRCLE_TAG ]]; then
   # Push release tags to dockerhub (e.g. heroku/heroku:22.v99)
