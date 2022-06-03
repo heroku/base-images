@@ -13,18 +13,17 @@ jobs:
     parameters:
       stack-version:
         type: enum
-        enum: ["18", "20", "22", "18-cnb", "20-cnb", "22-cnb"]
+        enum: ["18", "20", "22"]
     machine:
       image: ubuntu-2204:2022.04.1
     environment:
-      IMAGE_TAG: heroku/heroku:<< parameters.stack-version >>
-      PRIVATE_IMAGE_TAG: heroku/heroku-private:<< parameters.stack-version >>
       STACK: heroku-<< parameters.stack-version >>
+      STACK_VERSION: << parameters.stack-version >>
     steps:
       - checkout
       - run:
           name: Build images
-          command: bin/build.sh $STACK $IMAGE_TAG $IMAGE_TAG-build
+          command: bin/build.sh $STACK_VERSION
       - run:
           name: Check that the generated files are in sync
           command: |
@@ -42,8 +41,8 @@ jobs:
               - << pipeline.git.tag >>
           steps:
             - run:
-                name: Publish to Docker Hub
-                command: bin/publish-to-dockerhub.sh
+                name: Publish to image registries
+                command: bin/publish-to-registries.sh
       - when:
           condition: << pipeline.git.tag >>
           steps:
@@ -60,7 +59,6 @@ workflows:
             tags:
               only: /^v.*/
       - build-stack:
-          name: build-stack-heroku-<< matrix.stack-version >>
           requires:
             - shellcheck
           filters:
@@ -69,15 +67,3 @@ workflows:
           matrix:
             parameters:
               stack-version: ["18", "20", "22"]
-      - build-stack:
-          name: build-stack-heroku-<< matrix.stack-version >>
-          requires:
-            - build-stack-heroku-18
-            - build-stack-heroku-20
-            - build-stack-heroku-22
-          filters:
-            tags:
-              only: /^v.*/
-          matrix:
-            parameters:
-              stack-version: ["18-cnb", "20-cnb", "22-cnb"]
