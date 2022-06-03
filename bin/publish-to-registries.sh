@@ -8,7 +8,7 @@ bin/build.sh "${STACK_VERSION}"
 
 # Disable tracing temporarily to prevent logging registry tokens.
 (set +x; echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
-(set +x; curl -f -X POST "$SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$SERVICE_USERNAME\",\"password\":\"$SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
+(set +x; curl -f -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$ID_SERVICE_USERNAME\",\"password\":\"$ID_SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
 
 push_group() {
     local targetTagBase="$1"
@@ -24,7 +24,7 @@ push_group() {
 date=$(date -u '+%Y-%m-%d-%H.%M.%S')
 publicTag="heroku/heroku:${STACK_VERSION}"
 privateTag="heroku/heroku-private:${STACK_VERSION}"
-internalTag="${INTERNAL_REGISTRY_HOST}/s/${SERVICE_USERNAME}/heroku:${STACK_VERSION}"
+internalTag="${INTERNAL_REGISTRY_HOST}/s/${ID_SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
 # Push nightly tags to dockerhub (e.g. heroku/heroku:22.nightly)
 push_group "${publicTag}" ".nightly"
