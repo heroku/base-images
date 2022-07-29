@@ -224,13 +224,6 @@ cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
 </policymap>
 IMAGEMAGICK_POLICY
 
-# until this is backported from Ubuntu kinetic to jammy, we apply by hand
-# see https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/1979639 for details
-# use --force for patch to ensure it fails instead of asking for reversal once upstream has included this change
-curl -s http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/openssl_3.0.4-1ubuntu1.debian.tar.xz \
-    | tar xJO debian/patches/Remove-the-provider-section.patch \
-    | patch --force /etc/ssl/openssl.cnf
-
 # Temporarily install ca-certificates-java to generate the certificates store used
 # by Java apps. Generation occurs in a post-install script which requires a JRE.
 # We're using OpenJDK 8 rather than something newer, to work around:
