@@ -9,6 +9,9 @@ In order to fetch the latest change, please submit PR from the command below
 git checkout master
 git remote add upstream git@github.com:heroku/stack-images.git
 git fetch upstream --prune
+git rebase upstream/main
+git checkout -b <branch-name>
+git push origin <branch-name> # Creating new PR
 ```
 
 ## Heroku Stack Images
