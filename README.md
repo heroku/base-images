@@ -1,3 +1,16 @@
+## Instacart fork 
+
+A fork of repo `heroku/stack-images` for building arm based docker image. 
+
+The naming for heroku-* is conflict with downstream app, so we add prefix of stack-images-heroku-* on each stack's directory name. 
+
+In order to fetch the latest change, please submit PR from the command below
+```
+git checkout master
+git remote add upstream git@github.com:heroku/stack-images.git
+git fetch upstream --prune
+```
+
 ## Heroku Stack Images
 
 [![CircleCI](https://circleci.com/gh/heroku/stack-images.svg?style=svg)](https://circleci.com/gh/heroku/stack-images)
