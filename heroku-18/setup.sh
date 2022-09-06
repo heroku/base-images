@@ -10,9 +10,12 @@ export DEBIAN_FRONTEND=noninteractive
 
 # The default sources list minus backports, restricted and multiverse.
 cat >/etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu/ bionic main universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-security main universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates main universe
+deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic main universe
+deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic-security main universe
+deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic-updates main universe
+deb [arch=arm64] http://ports.ubuntu.com/ bionic main universe
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-security main universe
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates main universe
 EOF
 
 apt-get update
@@ -195,7 +198,7 @@ apt-get install -y --no-install-recommends \
     shared-mime-info \
     socat \
     stunnel \
-    syslinux \
+    syslinux-common \
     tar \
     telnet \
     tzdata \
