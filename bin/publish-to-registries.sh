@@ -3,12 +3,11 @@
 set -euo pipefail
 set -x
 
-
-bin/build.sh "${STACK_VERSION}"
-
 # Disable tracing temporarily to prevent logging registry tokens.
 (set +x; echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
 (set +x; curl -f -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$ID_SERVICE_USERNAME\",\"password\":\"$ID_SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
+
+bin/build.sh "${STACK_VERSION}"
 
 push_group() {
     local targetTagBase="$1"
@@ -38,10 +37,4 @@ if [[ -v CIRCLE_TAG ]]; then
 
   # Push release tags to internal registry
   push_group "${internalTag}" ".${CIRCLE_TAG}"
-
-  # Push latest/no-suffix tags to dockerhub (e.g. heroku/heroku:22)
-  push_group "${publicTag}" ""
-
-  # Push latest/no-suffix tags to internal registry
-  push_group "${internalTag}" ""
 fi
