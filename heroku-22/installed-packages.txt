@@ -306,7 +306,6 @@ mawk
 media-types
 mlock
 mount
-mtools
 mysql-common
 ncurses-base
 ncurses-bin
@@ -341,7 +340,7 @@ sensible-utils
 shared-mime-info
 socat
 stunnel4
-syslinux
+syslinux-common
 systemd
 sysvinit-utils
 tar
