@@ -1,0 +1,44 @@
+name: heroku/stack-images/build
+on:
+  push:
+jobs:
+  shellcheck:
+    runs-on: sfdc-hk-ubuntu-latest
+    container:
+      image: koalaman/shellcheck-alpine:v0.8.0
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run shellcheck
+      run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
+  build-stack:
+    runs-on: sfdc-hk-ubuntu-latest
+    needs:
+    - shellcheck
+    env:
+      STACK: heroku-${{ matrix.stack-version }}
+      STACK_VERSION: "${{ matrix.stack-version }}"
+    strategy:
+      matrix:
+        stack-version:
+        - '18'
+        - '20'
+        - '22'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build images
+      run: bin/build.sh $STACK_VERSION
+    - name: Check that the generated files are in sync
+      run: |-
+        status="$(git status --porcelain)"
+        if [[ -n "$status" ]]; then
+          echo "Generated files differ from checked-in versions! Run bin/build.sh to regenerate them locally."
+          echo -e "\nChanged files:\n${status}\n"
+          git diff
+          exit 1
+        fi
+    - name: Publish to image registries
+      run: bin/publish-to-registries.sh
+      if: "'main' == ${{ github.ref }} || ${{ github.ref }}"
+    - name: Convert docker image and release to Heroku staging
+      run: bin/convert-and-publish-to-heroku.sh
+      if: "${{ github.ref }}"
