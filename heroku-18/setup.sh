@@ -186,6 +186,7 @@ apt-get install -y --no-install-recommends \
     locales \
     lsb-release \
     make \
+    mtools \
     netcat-openbsd \
     openssh-client \
     openssh-server \
@@ -208,6 +209,8 @@ apt-get install -y --no-install-recommends \
     zip \
     zstd \
 
+# Install syslinux for amd64 only
+if [ "$TARGETARCH" == "amd64" ]; then apt-get install -y --no-install-recommends syslinux; fi
 
 cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
 <policymap>
