@@ -15,8 +15,11 @@ push_group() {
     for variant in "" "-build" "-cnb" "-cnb-build"; do
       source="${publicTag}${variant}"
       target="${targetTagBase}${variant}${targetTagSuffix}"
-      docker tag "${source}" "${target}"
-      docker push "${target}"
+      chmod +r $HOME/.docker/config.json
+      docker container run --rm --net host \
+        -v regctl-conf:/home/appuser/.regctl/ \            
+        -v $HOME/.docker/config.json:/home/appuser/.docker/config.json \            
+        regclient/regctl image copy "${source}" "${target}"
     done
 }
 
@@ -37,4 +40,10 @@ if [[ -v CIRCLE_TAG ]]; then
 
   # Push release tags to internal registry
   push_group "${internalTag}" ".${CIRCLE_TAG}"
+
+  # Push latest/no-suffix tags to dockerhub (e.g. heroku/heroku:22)
+  push_group "${publicTag}" ""
+
+  # Push latest/no-suffix tags to internal registry
+  push_group "${internalTag}" ""
 fi
