@@ -6,9 +6,14 @@ set -x
 
 bin/build.sh "${STACK_VERSION}"
 
-# Disable tracing temporarily to prevent logging registry tokens.
+# Disable tracing temporarily (with `set +x`) to prevent logging registry tokens.
+echo "Logging into Docker hub..."
 (set +x; echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
-(set +x; curl -f -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$ID_SERVICE_USERNAME\",\"password\":\"$ID_SERVICE_PASSWORD\"}" -s --retry 3 | jq -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
+echo "Done"
+
+echo "Logging into internal registry..."
+(set +x; curl -f -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$ID_SERVICE_USERNAME\",\"password\":\"$ID_SERVICE_PASSWORD\"}" -sS --retry 3 | jq -e -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
+echo "Done"
 
 push_group() {
     local targetTagBase="$1"
