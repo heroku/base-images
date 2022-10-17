@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/heroku/stack-images.svg?style=svg)](https://circleci.com/gh/heroku/stack-images)
 
+[![CI](https://github.com/heroku/stack-images/actions/workflows/ci.yml/badge.svg)](https://github.com/heroku/stack-images/actions/workflows/ci.yml)
+
 This repository holds recipes for building [Heroku stack images](https://devcenter.heroku.com/articles/stack).
 The recipes are also rendered into Docker images that are available on Docker Hub:
 

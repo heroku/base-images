@@ -1,9 +1,20 @@
-name: heroku/stack-images/build
+name: CI
+
 on:
   push:
+    # Avoid duplicate builds on PRs.
+    branches:
+      - main
+    tags: 
+      - v*
+  pull_request:
+
+permissions:
+  contents: read
+
 jobs:
   shellcheck:
-    runs-on: sfdc-hk-ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: koalaman/shellcheck-alpine:v0.8.0
     steps:
@@ -11,12 +22,15 @@ jobs:
     - name: Run shellcheck
       run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
   build-stack:
-    runs-on: sfdc-hk-ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
     - shellcheck
     env:
       STACK: heroku-${{ matrix.stack-version }}
       STACK_VERSION: "${{ matrix.stack-version }}"
+      DOCKER_HUB_TOKEN: "${{ secrets.DOCKER_HUB_TOKEN }}"
+      ID_SERVICE_PASSWORD: "${{ secrets.ID_SERVICE_PASSWORD }}"
+      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
     strategy:
       matrix:
         stack-version:
