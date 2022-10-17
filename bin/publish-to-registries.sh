@@ -3,17 +3,20 @@
 set -euo pipefail
 set -x
 
-
 bin/build.sh "${STACK_VERSION}"
 
-# Disable tracing temporarily (with `set +x`) to prevent logging registry tokens.
-echo "Logging into Docker hub..."
-(set +x; echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin)
-echo "Done"
+(
+  # Disable tracing (until the end of this subshell) to prevent logging registry tokens.
+  set +x
 
-echo "Logging into internal registry..."
-(set +x; curl -f -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"$ID_SERVICE_USERNAME\",\"password\":\"$ID_SERVICE_PASSWORD\"}" -sS --retry 3 | jq -e -r ".raw_id_token" | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin)
-echo "Done"
+  echo "Logging into Docker Hub..."
+  echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+
+  echo "Logging into internal container registry..."
+  curl -sSf --retry 3 -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"${ID_SERVICE_USERNAME}\",\"password\":\"${ID_SERVICE_PASSWORD}\"}" \
+    | jq -er ".raw_id_token" \
+    | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin
+)
 
 push_group() {
     local targetTagBase="$1"
