@@ -1,4 +1,5 @@
 ## Heroku Stack Images
+
 [![CI](https://github.com/heroku/stack-images/actions/workflows/ci.yml/badge.svg)](https://github.com/heroku/stack-images/actions/workflows/ci.yml)
 
 This repository holds recipes for building [Heroku stack images](https://devcenter.heroku.com/articles/stack).
