@@ -5,7 +5,7 @@ on:
     # Avoid duplicate builds on PRs.
     branches:
       - main
-    tags: 
+    tags:
       - v*
   pull_request:
 
@@ -16,14 +16,14 @@ jobs:
   shellcheck:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Run shellcheck
-      run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run shellcheck
+        run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
   build-stack:
     runs-on: ubuntu-22.04
     needs:
-    - shellcheck
+      - shellcheck
     env:
       STACK: heroku-${{ matrix.stack-version }}
       STACK_VERSION: "${{ matrix.stack-version }}"
@@ -38,29 +38,26 @@ jobs:
       MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     strategy:
       matrix:
-        stack-version:
-        - '18'
-        - '20'
-        - '22'
+        stack-version: ["18", "20", "22"]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Build images
-      run: bin/build.sh $STACK_VERSION
-    - name: Check that the generated files are in sync
-      run: |-
-        status="$(git status --porcelain)"
-        if [[ -n "$status" ]]; then
-          echo "Generated files differ from checked-in versions! Run bin/build.sh to regenerate them locally."
-          echo -e "\nChanged files:\n${status}\n"
-          git diff
-          exit 1
-        fi
-    - name: Publish to image registries
-      run: bin/publish-to-registries.sh
-      if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
-    - name: Convert docker image and release to Heroku staging
-      run: bin/convert-and-publish-to-heroku.sh
-      if: success() && github.ref_type == 'tag'
-      env:
-        GITHUB_TAG: ${{ github.ref_name }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build images
+        run: bin/build.sh $STACK_VERSION
+      - name: Check that the generated files are in sync
+        run: |-
+          status="$(git status --porcelain)"
+          if [[ -n "$status" ]]; then
+            echo "Generated files differ from checked-in versions! Run bin/build.sh to regenerate them locally."
+            echo -e "\nChanged files:\n${status}\n"
+            git diff
+            exit 1
+          fi
+      - name: Publish to image registries
+        run: bin/publish-to-registries.sh
+        if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
+      - name: Convert docker image and release to Heroku staging
+        run: bin/convert-and-publish-to-heroku.sh
+        if: success() && github.ref_type == 'tag'
+        env:
+          GITHUB_TAG: ${{ github.ref_name }}
