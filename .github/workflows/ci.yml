@@ -52,7 +52,9 @@ jobs:
         fi
     - name: Publish to image registries
       run: bin/publish-to-registries.sh
-      if: "'main' == ${{ github.ref }} || ${{ github.ref }}"
+      if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
     - name: Convert docker image and release to Heroku staging
       run: bin/convert-and-publish-to-heroku.sh
-      if: "${{ github.ref }}"
+      if: success() && github.ref_type == 'tag'
+      env:
+        GITHUB_TAG: ${{ github.ref_name }}
