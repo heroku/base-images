@@ -59,5 +59,3 @@ jobs:
       - name: Convert docker image and release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
         if: success() && github.ref_type == 'tag'
-        env:
-          GITHUB_TAG: ${{ github.ref_name }}
