@@ -12,7 +12,11 @@ STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
 DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
 
-[[ ${GITHUB_REF_TYPE} == 'tag' ]] && GIT_REF=${GITHUB_REF_NAME:?'Error: GITHUB_REF_NAME must be set!'} || GIT_REF=${GITHUB_SHA:?'Error: either GITHUB_REF_NAME or GITHUB_SHA must be set!'}
+if [[ ${GITHUB_REF_TYPE} == 'tag' ]]; then
+    GIT_REF=${GITHUB_REF_NAME:?'Error: GITHUB_REF_NAME must be set!'}
+else
+    abort "Error: Cannot publish without a Git tag!"
+fi
 
 IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
