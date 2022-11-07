@@ -39,10 +39,10 @@ of 4 images:
 
 # Releasing Stack Images
 
-When building Stack Images for release, we use the Circle CI build system.
+We use GitHub Actions to build and release Stack Images:
 
-* Any push to `main` will build the images and push the `nightly` tag.
-* Any new tag will build the image and push the `latest` tag, as well as one with the name of the GIT tag.
+* Any push to `main` will build the images and push the nightly Docker tag variants (such as `heroku/heroku:22-build.nightly`).
+* Any new Git tag will build the image and push the latest Docker tag (such as `heroku/heroku:22-build`), as well as a versioned tag (such as `heroku/heroku:22-build.v89`).
 
 # Releasing Heroku Stack Images Locally (Prime)
 

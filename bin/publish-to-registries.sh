@@ -43,12 +43,12 @@ push_group "${publicTag}" ".nightly"
 # Push date tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
 push_group "${privateTag}" ".${date}"
 
-if [[ -v CIRCLE_TAG ]]; then
+if [ "$GITHUB_REF_TYPE" == 'tag' ]; then
   # Push release tags to dockerhub (e.g. heroku/heroku:22.v99)
-  push_group "${publicTag}" ".${CIRCLE_TAG}"
+  push_group "${publicTag}" ".${GITHUB_REF_NAME}"
 
   # Push release tags to internal registry
-  push_group "${internalTag}" ".${CIRCLE_TAG}"
+  push_group "${internalTag}" ".${GITHUB_REF_NAME}"
 
   # Push latest/no-suffix tags to dockerhub (e.g. heroku/heroku:22)
   push_group "${publicTag}" ""
