@@ -37,6 +37,7 @@ jobs:
       MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
       MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     strategy:
+      fail-fast: false
       matrix:
         stack-version: ["18", "20", "22"]
     steps:
