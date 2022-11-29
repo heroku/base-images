@@ -313,7 +313,6 @@ patch
 perl
 perl-base
 perl-modules-5.30
-pgdg-keyring
 pinentry-curses
 poppler-data
 postgresql-client-14
