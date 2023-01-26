@@ -26,8 +26,8 @@ push_group() {
       target="${targetTagBase}${variant}${targetTagSuffix}"
       chmod +r "$HOME"/.docker/config.json
       docker container run --rm --net host \
-        -v regctl-conf:/home/appuser/.regctl/\            
-        -v "$HOME"/.docker/config.json:/home/appuser/.docker/config.json\            
+        -v regctl-conf:/home/appuser/.regctl/ \
+        -v "$HOME"/.docker/config.json:/home/appuser/.docker/config.json \
         regclient/regctl image copy "${source}" "${target}"
     done
 }
