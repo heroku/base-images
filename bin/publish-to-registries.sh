@@ -24,10 +24,10 @@ push_group() {
     for variant in "" "-build" "-cnb" "-cnb-build"; do
       source="${publicTag}${variant}"
       target="${targetTagBase}${variant}${targetTagSuffix}"
-      chmod +r $HOME/.docker/config.json
+      chmod +r "$HOME"/.docker/config.json
       docker container run --rm --net host \
-        -v regctl-conf:/home/appuser/.regctl/ \            
-        -v $HOME/.docker/config.json:/home/appuser/.docker/config.json \            
+        -v regctl-conf:/home/appuser/.regctl/\            
+        -v "$HOME"/.docker/config.json:/home/appuser/.docker/config.json\            
         regclient/regctl image copy "${source}" "${target}"
     done
 }
