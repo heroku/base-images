@@ -523,7 +523,6 @@ patch
 perl
 perl-base
 perl-modules-5.34
-pgdg-keyring
 pinentry-curses
 pkg-config
 poppler-data
