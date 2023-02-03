@@ -524,10 +524,10 @@ perl-modules-5.30
 pinentry-curses
 pkg-config
 poppler-data
-postgresql-client-14
+postgresql-client-15
 postgresql-client-common
 postgresql-common
-postgresql-server-dev-14
+postgresql-server-dev-15
 procps
 python-is-python3
 python2
