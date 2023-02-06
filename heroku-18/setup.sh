@@ -187,7 +187,7 @@ apt-get install -y --no-install-recommends \
     openssh-client \
     openssh-server \
     patch \
-    postgresql-client-14 \
+    postgresql-client-15 \
     python \
     rename \
     rsync \
