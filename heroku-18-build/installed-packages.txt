@@ -103,6 +103,7 @@ libargon2-0
 libargon2-0-dev
 libasan4
 libasn1-8-heimdal
+libass9
 libassuan0
 libatomic1
 libattr1
@@ -184,6 +185,7 @@ libfontconfig1
 libfontconfig1-dev
 libfreetype6
 libfreetype6-dev
+libfribidi0
 libgc1c2
 libgcc-7-dev
 libgcc1
@@ -319,6 +321,7 @@ libmemcached11
 libmemcachedutil2
 libmnl0
 libmount1
+libmp3lame0
 libmpc3
 libmpdec2
 libmpfr6
@@ -334,12 +337,17 @@ libnetpbm10-dev
 libnettle6
 libnghttp2-14
 libnpth0
+libnuma1
 libobjc-7-dev
 libobjc4
+libogg0
 libonig-dev
 libonig4
+libopencore-amrnb0
+libopencore-amrwb0
 libopenexr-dev
 libopenexr22
+libopus0
 libp11-kit-dev
 libp11-kit0
 libpam-modules
@@ -411,6 +419,7 @@ libsm6
 libsmartcols1
 libsodium-dev
 libsodium23
+libspeex1
 libsqlite3-0
 libss2
 libssl-dev
@@ -424,6 +433,7 @@ libtasn1-6
 libtasn1-6-dev
 libthai-data
 libthai0
+libtheora0
 libtiff-dev
 libtiff5
 libtiff5-dev
@@ -440,6 +450,9 @@ libunistring2
 libuuid1
 libuv1
 libuv1-dev
+libvorbis0a
+libvorbisenc2
+libvorbisfile3
 libvpx-dev
 libvpx5
 libwebp6
@@ -453,6 +466,8 @@ libwrap0-dev
 libx11-6
 libx11-data
 libx11-dev
+libx264-152
+libx265-146
 libxau-dev
 libxau6
 libxcb-render0

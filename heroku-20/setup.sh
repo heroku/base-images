@@ -124,6 +124,7 @@ apt-get install -y --no-install-recommends \
     gcc \
     geoip-database \
     ghostscript \
+    gir1.2-harfbuzz-0.0 \
     git \
     gsfonts \
     imagemagick \
@@ -131,7 +132,9 @@ apt-get install -y --no-install-recommends \
     iputils-tracepath \
     language-pack-en \
     less \
+    libaom0 \
     libargon2-1 \
+    libass9 \
     libc-client2007e \
     libc6-dev \
     libcairo2 \
@@ -145,20 +148,32 @@ apt-get install -y --no-install-recommends \
     libevent-openssl-2.1-7 \
     libevent-pthreads-2.1-7 \
     libexif12 \
+    libfreetype6 \
+    libfribidi0 \
     libgd3 \
     libgdk-pixbuf2.0-0 \
     libgdk-pixbuf2.0-common \
     libgnutls-openssl27 \
+    libgnutls30 \
     libgnutlsxx28 \
     libgraphite2-3 \
+    libgraphite2-3 \
     libgs9 \
+    libharfbuzz-gobject0 \
+    libharfbuzz-icu0 \
     libharfbuzz0b \
     liblzf1 \
     libmagickcore-6.q16-3-extra \
     libmcrypt4 \
     libmemcached11 \
+    libmp3lame0 \
     libmysqlclient21 \
+    libnuma1 \
+    libogg0 \
     libonig5 \
+    libopencore-amrnb0 \
+    libopencore-amrwb0 \
+    libopus0 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libpangoft2-1.0-0 \
@@ -169,12 +184,21 @@ apt-get install -y --no-install-recommends \
     libsasl2-modules \
     libseccomp2 \
     libsodium23 \
+    libspeex1 \
     libthai-data \
     libthai0 \
+    libtheora0 \
+    libunistring2 \
     libuv1 \
+    libvorbis0a \
+    libvorbisenc2 \
+    libvorbisfile3 \
+    libvpx6 \
     libwebp6 \
     libwebpdemux2 \
     libwebpmux3 \
+    libx264-155 \
+    libx265-179 \
     libxcb-render0 \
     libxcb-shm0 \
     libxrender1 \
@@ -205,6 +229,7 @@ apt-get install -y --no-install-recommends \
     wget \
     xz-utils \
     zip \
+    zlib1g \
     zstd \
 
 

@@ -40,6 +40,8 @@ gcc-7-base
 gcc-8-base
 geoip-database
 ghostscript
+gir1.2-glib-2.0
+gir1.2-harfbuzz-0.0
 git
 git-man
 gnupg
@@ -72,6 +74,7 @@ libapt-pkg5.0
 libargon2-0
 libasan4
 libasn1-8-heimdal
+libass9
 libassuan0
 libatomic1
 libattr1
@@ -125,6 +128,7 @@ libffi6
 libfftw3-double3
 libfontconfig1
 libfreetype6
+libfribidi0
 libgcc-7-dev
 libgcc1
 libgcrypt20
@@ -134,6 +138,7 @@ libgdbm5
 libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
 libgeoip1
+libgirepository-1.0-1
 libglib2.0-0
 libgmp10
 libgnutls-openssl27
@@ -146,6 +151,8 @@ libgs9
 libgs9-common
 libgssapi-krb5-2
 libgssapi3-heimdal
+libharfbuzz-gobject0
+libharfbuzz-icu0
 libharfbuzz0b
 libhcrypto4-heimdal
 libheimbase1-heimdal
@@ -192,6 +199,7 @@ libmcrypt4
 libmemcached11
 libmnl0
 libmount1
+libmp3lame0
 libmpc3
 libmpdec2
 libmpfr6
@@ -202,8 +210,13 @@ libncursesw5
 libnettle6
 libnghttp2-14
 libnpth0
+libnuma1
+libogg0
 libonig4
+libopencore-amrnb0
+libopencore-amrwb0
 libopenexr22
+libopus0
 libp11-kit0
 libpam-modules
 libpam-modules-bin
@@ -245,6 +258,7 @@ libsemanage1
 libsepol1
 libsmartcols1
 libsodium23
+libspeex1
 libsqlite3-0
 libss2
 libssl1.0.0
@@ -254,6 +268,7 @@ libsystemd0
 libtasn1-6
 libthai-data
 libthai0
+libtheora0
 libtiff5
 libtinfo5
 libtsan0
@@ -262,6 +277,10 @@ libudev1
 libunistring2
 libuuid1
 libuv1
+libvorbis0a
+libvorbisenc2
+libvorbisfile3
+libvpx5
 libwebp6
 libwebpdemux2
 libwebpmux3
@@ -270,6 +289,8 @@ libwmf0.2-7
 libwrap0
 libx11-6
 libx11-data
+libx264-152
+libx265-146
 libxau6
 libxcb-render0
 libxcb-shm0
