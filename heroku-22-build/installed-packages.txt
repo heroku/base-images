@@ -520,6 +520,7 @@ openssh-sftp-server
 openssl
 passwd
 patch
+patchelf
 perl
 perl-base
 perl-modules-5.34
