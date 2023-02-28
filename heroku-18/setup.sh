@@ -188,6 +188,7 @@ apt-get install -y --no-install-recommends \
     libtheora0 \
     libunistring2 \
     libuv1 \
+    libvips42 \
     libvorbis0a \
     libvorbisenc2 \
     libvorbisfile3 \
