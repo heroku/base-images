@@ -29,6 +29,10 @@ For example:
 
     ./bin/build.sh 22
 
+If you're building on a machine with an architecture other than amd64, set `DOCKER_DEFAULT_PLATFORM` to the appropriate "`linux/amd64`" value in the environment:
+
+    DOCKER_DEFAULT_PLATFORM=linux/amd64 ./bin/build.sh 22
+
 The supported stacks are: `18`, `20`, and `22`. This script will build a family
 of 4 images:
 
@@ -50,7 +54,9 @@ When building Heroku Stack Images for release locally, youll need a number of ad
 
 NOTE: These steps do *not* apply to `*cnb*` images.
 
+    export DOCKER_DEFAULT_PLATFORM=linux/amd64
     # Build the stack image(s) as you would above
+    # …
     cd stack-images/tools
     # build the stack-image-tooling
     docker build . -t heroku/stack-image-tools
