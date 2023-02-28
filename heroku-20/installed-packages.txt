@@ -72,6 +72,7 @@ language-pack-en
 language-pack-en-base
 less
 libacl1
+libaec0
 libaom0
 libapt-pkg6.0
 libargon2-1
@@ -103,6 +104,7 @@ libcap2
 libcap2-bin
 libcbor0.6
 libcc1-0
+libcfitsio8
 libcom-err2
 libcroco3
 libcrypt-dev
@@ -145,6 +147,8 @@ libgdbm-compat4
 libgdbm6
 libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
+libgfortran5
+libgif7
 libgirepository-1.0-1
 libglib2.0-0
 libgmp10
@@ -156,12 +160,15 @@ libgpg-error0
 libgraphite2-3
 libgs9
 libgs9-common
+libgsf-1-114
+libgsf-1-common
 libgssapi-krb5-2
 libgssapi3-heimdal
 libharfbuzz-gobject0
 libharfbuzz-icu0
 libharfbuzz0b
 libhcrypto4-heimdal
+libhdf5-103
 libheimbase1-heimdal
 libheimntlm0-heimdal
 libhogweed5
@@ -171,6 +178,7 @@ libidn11
 libidn2-0
 libijs-0.35
 libilmbase24
+libimagequant0
 libisl22
 libitm1
 libjbig0
@@ -199,6 +207,7 @@ libmagic1
 libmagickcore-6.q16-6
 libmagickcore-6.q16-6-extra
 libmagickwand-6.q16-6
+libmatio9
 libmaxminddb0
 libmcrypt4
 libmemcached11
@@ -214,6 +223,8 @@ libncursesw6
 libnettle7
 libnghttp2-14
 libnpth0
+libnspr4
+libnss3
 libnuma1
 libogg0
 libonig5
@@ -221,7 +232,9 @@ libopencore-amrnb0
 libopencore-amrwb0
 libopenexr24
 libopenjp2-7
+libopenslide0
 libopus0
+liborc-0.4-0
 libp11-kit0
 libpam-modules
 libpam-modules-bin
@@ -236,6 +249,8 @@ libpcre3
 libperl5.30
 libpixman-1-0
 libpng16-16
+libpoppler-glib8
+libpoppler97
 libpopt0
 libpq5
 libprocps8
@@ -268,6 +283,7 @@ libssh-4
 libssl1.1
 libstdc++6
 libsystemd0
+libsz2
 libtasn1-6
 libthai-data
 libthai0
@@ -280,6 +296,7 @@ libudev1
 libunistring2
 libuuid1
 libuv1
+libvips42
 libvorbis0a
 libvorbisenc2
 libvorbisfile3
@@ -336,6 +353,7 @@ perl-base
 perl-modules-5.30
 pinentry-curses
 poppler-data
+poppler-utils
 postgresql-client-15
 postgresql-client-common
 procps

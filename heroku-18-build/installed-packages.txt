@@ -95,6 +95,7 @@ lib32gcc1
 lib32stdc++6
 libacl1
 libacl1-dev
+libaec0
 libapt-inst2.0
 libapt-pkg-dev
 libapt-pkg5.0
@@ -138,6 +139,7 @@ libcap-ng-dev
 libcap-ng0
 libcap2
 libcc1-0
+libcfitsio5
 libcilkrts5
 libclang-common-6.0-dev
 libclang1-6.0
@@ -201,6 +203,8 @@ libgdk-pixbuf2.0-common
 libgdk-pixbuf2.0-dev
 libgeoip-dev
 libgeoip1
+libgfortran4
+libgif7
 libgirepository-1.0-1
 libglib2.0-0
 libglib2.0-bin
@@ -223,6 +227,8 @@ libgraphite2-dev
 libgs-dev
 libgs9
 libgs9-common
+libgsf-1-114
+libgsf-1-common
 libgssapi-krb5-2
 libgssapi3-heimdal
 libgssrpc4
@@ -233,6 +239,7 @@ libharfbuzz0b
 libhashkit-dev
 libhashkit2
 libhcrypto4-heimdal
+libhdf5-100
 libheimbase1-heimdal
 libheimntlm0-heimdal
 libhogweed4
@@ -314,6 +321,7 @@ libmagickwand-6-headers
 libmagickwand-6.q16-3
 libmagickwand-6.q16-dev
 libmagickwand-dev
+libmatio4
 libmcrypt-dev
 libmcrypt4
 libmemcached-dev
@@ -337,6 +345,8 @@ libnetpbm10-dev
 libnettle6
 libnghttp2-14
 libnpth0
+libnspr4
+libnss3
 libnuma1
 libobjc-7-dev
 libobjc4
@@ -347,7 +357,10 @@ libopencore-amrnb0
 libopencore-amrwb0
 libopenexr-dev
 libopenexr22
+libopenjp2-7
+libopenslide0
 libopus0
+liborc-0.4-0
 libp11-kit-dev
 libp11-kit0
 libpam-modules
@@ -371,6 +384,8 @@ libpixman-1-0
 libpixman-1-dev
 libpng-dev
 libpng16-16
+libpoppler-glib8
+libpoppler73
 libpopt-dev
 libpopt0
 libpq-dev
@@ -429,6 +444,7 @@ libstdc++-7-dev
 libstdc++6
 libsystemd-dev
 libsystemd0
+libsz2
 libtasn1-6
 libtasn1-6-dev
 libthai-data
@@ -450,6 +466,7 @@ libunistring2
 libuuid1
 libuv1
 libuv1-dev
+libvips42
 libvorbis0a
 libvorbisenc2
 libvorbisfile3
@@ -532,6 +549,7 @@ perl-modules-5.26
 pinentry-curses
 pkg-config
 poppler-data
+poppler-utils
 postgresql-client-15
 postgresql-client-common
 postgresql-common
