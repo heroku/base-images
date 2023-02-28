@@ -549,6 +549,7 @@ perl-modules-5.26
 pinentry-curses
 pkg-config
 poppler-data
+poppler-utils
 postgresql-client-15
 postgresql-client-common
 postgresql-common

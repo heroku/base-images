@@ -358,6 +358,7 @@ perl-base
 perl-modules-5.34
 pinentry-curses
 poppler-data
+poppler-utils
 postgresql-client-15
 postgresql-client-common
 procps
