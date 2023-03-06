@@ -262,6 +262,17 @@ apt-get purge -y openjdk-8-jre-headless
 apt-get autoremove -y --purge
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
+# Install AWS RDS global CA bundle (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html#UsingWithRDS.SSL.CertificatesAllRegions)
+mkdir -p /usr/local/share/ca-certificates/rds-ca-certs
+pushd /usr/local/share/ca-certificates/rds-ca-certs && \
+wget -q https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem -O /tmp/global-bundle.pem && \
+echo "fefac91d6800404461cece76724bc0a2383f4f556a1c9beb0813fac6f2e1e49f /tmp/global-bundle.pem" | sha256sum -c && \
+awk '
+  split_after == 1 {n++;split_after=0}
+  /-----END CERTIFICATE-----/ {split_after=1}
+  {print > "/usr/local/share/ca-certificates/rds-ca-certs/rds-ca" n ".crt"}' < /tmp/global-bundle.pem && \
+popd && update-ca-certificates
+
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
