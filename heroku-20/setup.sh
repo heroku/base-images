@@ -123,6 +123,7 @@ apt-get install -y --no-install-recommends \
     fontconfig \
     gcc \
     geoip-database \
+    gettext-base \
     ghostscript \
     gir1.2-harfbuzz-0.0 \
     git \
