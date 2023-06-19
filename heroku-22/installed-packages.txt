@@ -41,6 +41,7 @@ gcc-11
 gcc-11-base
 gcc-12-base
 geoip-database
+gettext-base
 ghostscript
 gir1.2-glib-2.0
 gir1.2-harfbuzz-0.0
