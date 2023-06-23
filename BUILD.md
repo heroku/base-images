@@ -7,7 +7,7 @@ https://johndjameson.com/blog/updating-your-shell-with-homebrew/
 
 ## Adding packages to the stack image
 
-Add the package you want to the appropriate `setup.sh` for example `heroku-18/setup.sh`:
+Add the package you want to the appropriate `setup.sh` for example `heroku-22/setup.sh`:
 
 ```diff
 +    libc6-dev \
@@ -15,7 +15,7 @@ Add the package you want to the appropriate `setup.sh` for example `heroku-18/se
 
 Once done, run the `bin/build.sh` locally to generate the corresponding `installed-packages.txt`.
 
-The `*-build` variants include all the packages from the non-build variant by default. This means that if you're adding a package to both, you only need to add them to the non-build variant. The example above will add `libc6-dev` to both `heroku-18` and `heroku-18-build`.
+The `*-build` variants include all the packages from the non-build variant by default. This means that if you're adding a package to both, you only need to add them to the non-build variant. The example above will add `libc6-dev` to both `heroku-22` and `heroku-22-build`.
 
 The `*cnb*` variants inherit the installed packages from the non-`*cnb*` variant. Add packages to a non-`*cnb*` variant to add them to the `*cnb*` variant.
 
@@ -29,7 +29,11 @@ For example:
 
     ./bin/build.sh 22
 
-The supported stacks are: `18`, `20`, and `22`. This script will build a family
+If you're building on a machine with an architecture other than amd64, set `DOCKER_DEFAULT_PLATFORM` to the appropriate "`linux/amd64`" value in the environment:
+
+    DOCKER_DEFAULT_PLATFORM=linux/amd64 ./bin/build.sh 22
+
+The supported stacks are: `20` and `22`. This script will build a family
 of 4 images:
 
 * `heroku/heroku:{STACK_VERSION}` - The runtime stack image for the Heroku platform
@@ -50,7 +54,9 @@ When building Heroku Stack Images for release locally, youll need a number of ad
 
 NOTE: These steps do *not* apply to `*cnb*` images.
 
+    export DOCKER_DEFAULT_PLATFORM=linux/amd64
     # Build the stack image(s) as you would above
+    # …
     cd stack-images/tools
     # build the stack-image-tooling
     docker build . -t heroku/stack-image-tools
