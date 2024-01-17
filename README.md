@@ -7,18 +7,18 @@ The recipes are also rendered into Docker images that are available on Docker Hu
 
 | Image                                     | Base                                  | Type                      | Status      |
 |-------------------------------------------|---------------------------------------|---------------------------|-------------|
-| [heroku/heroku:18][heroku-tags]           | [ubuntu:18.04][ubuntu-tags]           | Heroku Runtime Base Image | End-of-life |
-| [heroku/heroku:18-build][heroku-tags]     | [heroku/heroku:18][heroku-tags]       | Heroku Build Base Image   | End-of-life |
-| [heroku/heroku:18-cnb][heroku-tags]       | [heroku/heroku:18][heroku-tags]       | CNB Runtime Base Image    | End-of-life |
-| [heroku/heroku:18-cnb-build][heroku-tags] | [heroku/heroku:18-build][heroku-tags] | CNB Build Base Image      | End-of-life |
-| [heroku/heroku:20][heroku-tags]           | [ubuntu:20.04][ubuntu-tags]           | Heroku Runtime Base Image | Available   |
-| [heroku/heroku:20-build][heroku-tags]     | [heroku/heroku:20][heroku-tags]       | Heroku Build Base Image   | Available   |
-| [heroku/heroku:20-cnb][heroku-tags]       | [heroku/heroku:20][heroku-tags]       | CNB Runtime Base Image    | Available   |
-| [heroku/heroku:20-cnb-build][heroku-tags] | [heroku/heroku:20-build][heroku-tags] | CNB Build Base Image      | Available   |
-| [heroku/heroku:22][heroku-tags]           | [ubuntu:22.04][ubuntu-tags]           | Heroku Runtime Base Image | Recommended |
-| [heroku/heroku:22-build][heroku-tags]     | [heroku/heroku:22][heroku-tags]       | Heroku Build Base Image   | Recommended |
-| [heroku/heroku:22-cnb][heroku-tags]       | [heroku/heroku:22][heroku-tags]       | CNB Runtime Base Image    | Recommended |
-| [heroku/heroku:22-cnb-build][heroku-tags] | [heroku/heroku:22-build][heroku-tags] | CNB Build Base Image      | Recommended |
+| [heroku/heroku:18][heroku-tags]           | [ubuntu:18.04][ubuntu-tags]           | Heroku Base Run Image     | End-of-life |
+| [heroku/heroku:18-build][heroku-tags]     | [heroku/heroku:18][heroku-tags]       | Heroku Base Build Image   | End-of-life |
+| [heroku/heroku:18-cnb][heroku-tags]       | [heroku/heroku:18][heroku-tags]       | CNB Base Run Image        | End-of-life |
+| [heroku/heroku:18-cnb-build][heroku-tags] | [heroku/heroku:18-build][heroku-tags] | CNB Base Build Image      | End-of-life |
+| [heroku/heroku:20][heroku-tags]           | [ubuntu:20.04][ubuntu-tags]           | Heroku Base Run Image     | Available   |
+| [heroku/heroku:20-build][heroku-tags]     | [heroku/heroku:20][heroku-tags]       | Heroku Base Build Image   | Available   |
+| [heroku/heroku:20-cnb][heroku-tags]       | [heroku/heroku:20][heroku-tags]       | CNB Base Run Image        | Available   |
+| [heroku/heroku:20-cnb-build][heroku-tags] | [heroku/heroku:20-build][heroku-tags] | CNB Base Build Image      | Available   |
+| [heroku/heroku:22][heroku-tags]           | [ubuntu:22.04][ubuntu-tags]           | Heroku Base Run Image     | Recommended |
+| [heroku/heroku:22-build][heroku-tags]     | [heroku/heroku:22][heroku-tags]       | Heroku Base Build Image   | Recommended |
+| [heroku/heroku:22-cnb][heroku-tags]       | [heroku/heroku:22][heroku-tags]       | CNB Base Run Image        | Recommended |
+| [heroku/heroku:22-cnb-build][heroku-tags] | [heroku/heroku:22-build][heroku-tags] | CNB Base Build Image      | Recommended |
 
 ### Learn more
 
