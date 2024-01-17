@@ -36,10 +36,10 @@ If you're building on a machine with an architecture other than amd64, set `DOCK
 The supported stacks are: `20` and `22`. This script will build a family
 of 4 images:
 
-* `heroku/heroku:{STACK_VERSION}` - The runtime base image for the Heroku platform
-* `heroku/heroku:{STACK_VERSION}-build` - The build-time base image for the Heroku platform
-* `heroku/heroku:{STACK_VERSION}-cnb` - The runtime base image for Cloud Native Buildpacks
-* `heroku/heroku:{STACK_VERSION}-cnb-build` - The build-time base image for Cloud Native Buildpacks
+* `heroku/heroku:{STACK_VERSION}` - The base run image for the Heroku platform
+* `heroku/heroku:{STACK_VERSION}-build` - The base build image for the Heroku platform
+* `heroku/heroku:{STACK_VERSION}-cnb` - The base run image for Cloud Native Buildpacks
+* `heroku/heroku:{STACK_VERSION}-cnb-build` - The base build image for Cloud Native Buildpacks
 
 # Releasing Heroku Base Images
 
