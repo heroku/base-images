@@ -268,10 +268,6 @@ apt-get purge -y openjdk-8-jre-headless
 apt-get autoremove -y --purge
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
-# Create required directories for compiled apps
-mkdir /app /workspace
-chown 1000:1000 /app /workspace
-
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
