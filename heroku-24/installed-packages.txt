@@ -160,12 +160,8 @@ libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
 libgirepository-1.0-1
 libglib2.0-0
-libgmp-dev
 libgmp10
-libgmpxx4ldbl
-libgnutls-dane0
 libgnutls-openssl27
-libgnutls28-dev
 libgnutls30
 libgomp1
 libgpg-error0
@@ -190,7 +186,6 @@ libice6
 libicu74
 libidn12
 libidn2-0
-libidn2-dev
 libijs-0.35
 libimagequant0
 libimath-3-1-29
@@ -253,7 +248,6 @@ libopenexr-3-1-30
 libopenjp2-7
 libopenslide0
 libopus0
-libp11-kit-dev
 libp11-kit0
 libpam-modules
 libpam-modules-bin
@@ -302,11 +296,11 @@ libss2
 libssh-4
 libssl3
 libstdc++6
+libsvtav1enc1d1
 libsystemd-shared
 libsystemd0
 libsz2
 libtasn1-6
-libtasn1-6-dev
 libthai-data
 libthai0
 libtheora0
@@ -318,7 +312,6 @@ libtirpc3
 libtsan2
 libubsan1
 libudev1
-libunbound8
 libunibreak5
 libunistring5
 libuuid1
@@ -369,7 +362,6 @@ ncurses-base
 ncurses-bin
 netbase
 netcat-openbsd
-nettle-dev
 openssh-client
 openssh-server
 openssh-sftp-server
