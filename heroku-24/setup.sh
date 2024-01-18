@@ -216,7 +216,6 @@ apt-get install -y --no-install-recommends \
     locales \
     lsb-release \
     make \
-    mtools \
     netcat-openbsd \
     openssh-client \
     openssh-server \
