@@ -50,7 +50,7 @@ We use GitHub Actions to build and release Heroku Base Images:
 
 # Releasing Heroku Base Images Locally (Prime)
 
-When building Heroku Base Images for release locally, youll need a number of additional steps.
+When building Heroku Base Images for release locally, you'll need a number of additional steps.
 
 NOTE: These steps do *not* apply to `*cnb*` images.
 

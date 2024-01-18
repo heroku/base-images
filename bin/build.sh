@@ -19,16 +19,16 @@ write_package_list() {
 RUN_IMAGE_TAG="heroku/heroku:${STACK_VERSION}"
 RUN_DOCKERFILE_DIR="heroku-${STACK_VERSION}"
 [[ -d "${RUN_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${RUN_DOCKERFILE_DIR} not found"
-display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} Heroku runtime image"
+display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} Heroku run image"
 docker build --pull --tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
 write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
 
 # The --pull option is not used for variants to ensure they are based on the
-# runtime stack image built above, rather than the one last published to DockerHub.
+# run image built above, rather than the one last published to Docker Hub.
 
 BUILD_IMAGE_TAG="${RUN_IMAGE_TAG}-build"
 BUILD_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-build"
-display "Building ${BUILD_DOCKERFILE_DIR} / ${BUILD_IMAGE_TAG} Heroku build-time image"
+display "Building ${BUILD_DOCKERFILE_DIR} / ${BUILD_IMAGE_TAG} Heroku build image"
 docker build --tag "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR" | indent
 write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 
@@ -37,12 +37,12 @@ write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 
 CNB_RUN_IMAGE_TAG="${RUN_IMAGE_TAG}-cnb"
 CNB_RUN_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-cnb"
-display "Building ${CNB_RUN_DOCKERFILE_DIR} / ${CNB_RUN_IMAGE_TAG} CNB runtime image"
+display "Building ${CNB_RUN_DOCKERFILE_DIR} / ${CNB_RUN_IMAGE_TAG} CNB run image"
 docker build --tag "$CNB_RUN_IMAGE_TAG" "$CNB_RUN_DOCKERFILE_DIR" | indent
 
 CNB_BUILD_IMAGE_TAG="${RUN_IMAGE_TAG}-cnb-build"
 CNB_BUILD_DOCKERFILE_DIR="${RUN_DOCKERFILE_DIR}-cnb-build"
-display "Building ${CNB_BUILD_DOCKERFILE_DIR} / ${CNB_BUILD_IMAGE_TAG} CNB build-time image"
+display "Building ${CNB_BUILD_DOCKERFILE_DIR} / ${CNB_BUILD_IMAGE_TAG} CNB build image"
 docker build --tag "$CNB_BUILD_IMAGE_TAG" "$CNB_BUILD_DOCKERFILE_DIR" | indent
 
 display "Size breakdown..."
