@@ -11,7 +11,7 @@ if ls /tmp/*64-*.manifest >& /dev/null; then
         }) | {stacks: .}' \
         /tmp/*64-*.manifest |
         curl \
-            --fail --user-agent 'Stack Image Tools' \
+            --fail --user-agent 'Base Image Tools' \
             --header "Authorization: Bearer $MANIFEST_APP_TOKEN" \
             --header "Content-Type: application/json" \
             --request PATCH \
