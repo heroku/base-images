@@ -16,7 +16,11 @@ bin/build.sh "${STACK_VERSION}"
 push_group() {
     local targetTagBase="$1"
     local targetTagSuffix="$2"
-    for variant in "" "-build" "-cnb" "-cnb-build"; do
+    variants=("" "-build")
+    if [ "$STACK_VERSION" -le 22 ]; then
+        variants+=("-cnb" "-cnb-build")
+    fi
+    for variant in "${variants[@]}"; do
       source="${publicTag}${variant}"
       target="${targetTagBase}${variant}${targetTagSuffix}"
       docker tag "${source}" "${target}"
