@@ -356,7 +356,6 @@ mawk
 media-types
 mlock
 mount
-mtools
 mysql-common
 ncurses-base
 ncurses-bin

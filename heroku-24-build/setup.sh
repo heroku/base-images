@@ -82,7 +82,6 @@ apt-get install -y --no-install-recommends \
     libyaml-dev \
     libzip-dev \
     libzstd-dev \
-    mercurial \
     patchelf \
     python3-dev \
     zlib1g-dev \
