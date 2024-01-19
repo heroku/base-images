@@ -41,7 +41,6 @@ apt-get install -y --no-install-recommends \
     libgeoip-dev \
     libglib2.0-dev \
     libgnutls28-dev \
-    libgs-dev \
     libheif-dev \
     libicu-dev \
     libidn11-dev \

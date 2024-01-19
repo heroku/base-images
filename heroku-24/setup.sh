@@ -128,10 +128,8 @@ apt-get install -y --no-install-recommends \
     gcc \
     geoip-database \
     gettext-base \
-    ghostscript \
     gir1.2-harfbuzz-0.0 \
     git \
-    gsfonts \
     imagemagick \
     iproute2 \
     iputils-tracepath \
@@ -162,7 +160,6 @@ apt-get install -y --no-install-recommends \
     libgnutls30 \
     libgraphite2-3 \
     libgraphite2-3 \
-    libgs10 \
     libharfbuzz-gobject0 \
     libharfbuzz-icu0 \
     libharfbuzz0b \

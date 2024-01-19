@@ -35,13 +35,11 @@ fontconfig
 fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-mono
-fonts-urw-base35
 gcc
 gcc-13
 gcc-13-base
 geoip-database
 gettext-base
-ghostscript
 gir1.2-freedesktop
 gir1.2-glib-2.0
 gir1.2-harfbuzz-0.0
@@ -58,7 +56,6 @@ gpgconf
 gpgsm
 gpgv
 grep
-gsfonts
 gzip
 hicolor-icon-theme
 hostname
@@ -86,9 +83,6 @@ libatomic1
 libattr1
 libaudit-common
 libaudit1
-libavahi-client3
-libavahi-common-data
-libavahi-common3
 libbinutils
 libblkid1
 libbpf1
@@ -115,13 +109,11 @@ libcrypt1
 libcryptsetup12
 libctf-nobfd0
 libctf0
-libcups2
 libcurl3-gnutls
 libcurl4
 libdatrie1
 libdav1d7
 libdb5.3
-libdbus-1-3
 libde265-0
 libdebconfclient0
 libdeflate0
@@ -145,7 +137,6 @@ libffi8
 libfftw3-double3
 libfido2-1
 libfontconfig1
-libfontenc1
 libfreetype6
 libfribidi0
 libgcc-13-dev
@@ -167,9 +158,6 @@ libgomp1
 libgpg-error0
 libgprofng0
 libgraphite2-3
-libgs-common
-libgs10
-libgs10-common
 libgssapi-krb5-2
 libharfbuzz-gobject0
 libharfbuzz-icu0
@@ -182,11 +170,8 @@ libheif1
 libhogweed6
 libhwasan0
 libhwy1
-libice6
 libicu74
-libidn12
 libidn2-0
-libijs-0.35
 libimagequant0
 libimath-3-1-29
 libip4tc2
@@ -194,7 +179,6 @@ libisl23
 libitm1
 libjansson4
 libjbig0
-libjbig2dec0
 libjpeg-turbo8
 libjpeg8
 libjson-c5
@@ -256,7 +240,6 @@ libpam0g
 libpango-1.0-0
 libpangocairo-1.0-0
 libpangoft2-1.0-0
-libpaper1
 libpcre2-8-0
 libperl5.36
 libpixman-1-0
@@ -286,7 +269,6 @@ libsemanage2
 libsepol2
 libsframe1
 libsharpyuv0
-libsm6
 libsmartcols1
 libsodium23
 libspeex1
@@ -340,7 +322,6 @@ libxml2
 libxpm4
 libxrender1
 libxslt1.1
-libxt6
 libxtables12
 libxxhash0
 libyaml-0-2
@@ -371,7 +352,6 @@ perl
 perl-base
 perl-modules-5.36
 pinentry-curses
-poppler-data
 poppler-utils
 postgresql-client-16
 postgresql-client-common
@@ -402,9 +382,6 @@ unzip
 usrmerge
 util-linux
 wget
-x11-common
-xfonts-encodings
-xfonts-utils
 xz-utils
 zip
 zlib1g

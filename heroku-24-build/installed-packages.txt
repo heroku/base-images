@@ -46,7 +46,6 @@ fontconfig
 fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-mono
-fonts-urw-base35
 g++
 g++-13
 gcc
@@ -56,7 +55,6 @@ geoip-bin
 geoip-database
 gettext
 gettext-base
-ghostscript
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0
 gir1.2-glib-2.0
@@ -75,7 +73,6 @@ gpgconf
 gpgsm
 gpgv
 grep
-gsfonts
 gzip
 hicolor-icon-theme
 hostname
@@ -112,9 +109,6 @@ libattr1-dev
 libaudit-common
 libaudit-dev
 libaudit1
-libavahi-client3
-libavahi-common-data
-libavahi-common3
 libbinutils
 libblas3
 libblkid-dev
@@ -152,7 +146,6 @@ libcrypt1
 libcryptsetup12
 libctf-nobfd0
 libctf0
-libcups2
 libcurl3-gnutls
 libcurl4
 libcurl4-openssl-dev
@@ -162,7 +155,6 @@ libdav1d7
 libdb-dev
 libdb5.3
 libdb5.3-dev
-libdbus-1-3
 libde265-0
 libde265-dev
 libdebconfclient0
@@ -196,7 +188,6 @@ libfftw3-double3
 libfido2-1
 libfontconfig-dev
 libfontconfig1
-libfontenc1
 libfreetype-dev
 libfreetype6
 libfribidi0
@@ -236,10 +227,6 @@ libgpg-error-dev
 libgpg-error0
 libgprofng0
 libgraphite2-3
-libgs-common
-libgs-dev
-libgs10
-libgs10-common
 libgssapi-krb5-2
 libgssrpc4
 libharfbuzz-gobject0
@@ -264,7 +251,6 @@ libidn11-dev
 libidn12
 libidn2-0
 libidn2-dev
-libijs-0.35
 libimagequant0
 libimath-3-1-29
 libimath-dev
@@ -274,7 +260,6 @@ libitm1
 libjansson4
 libjbig-dev
 libjbig0
-libjbig2dec0
 libjpeg-dev
 libjpeg-turbo8
 libjpeg-turbo8-dev
@@ -382,7 +367,6 @@ libpam0g-dev
 libpango-1.0-0
 libpangocairo-1.0-0
 libpangoft2-1.0-0
-libpaper1
 libpcre2-16-0
 libpcre2-32-0
 libpcre2-8-0
@@ -452,6 +436,7 @@ libssl-dev
 libssl3
 libstdc++-13-dev
 libstdc++6
+libsvtav1enc1d1
 libsystemd-dev
 libsystemd-shared
 libsystemd0
@@ -541,11 +526,8 @@ m4
 make
 mawk
 media-types
-mercurial
-mercurial-common
 mlock
 mount
-mtools
 mysql-common
 ncurses-base
 ncurses-bin
@@ -566,7 +548,6 @@ pinentry-curses
 pkg-config
 pkgconf
 pkgconf-bin
-poppler-data
 poppler-utils
 postgresql-client-16
 postgresql-client-common
@@ -619,8 +600,6 @@ wget
 x11-common
 x11proto-core-dev
 x11proto-dev
-xfonts-encodings
-xfonts-utils
 xorg-sgml-doctools
 xtrans-dev
 xz-utils
