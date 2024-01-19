@@ -30,6 +30,7 @@ if [ "$STACK_VERSION" -ge 24 ]; then
     # NOTE: To build multiarch images with buildx, setup a builder that uses
     # the `docker-container` driver, and/or turn on the `containerd`
     # snapshotter storage. https://docs.docker.com/build/building/multi-platform/
+    docker buildx create --use
 
     [[ -d "${RUN_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${RUN_DOCKERFILE_DIR} not found"
     display "Building multiarch ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} Heroku run image"
