@@ -41,6 +41,7 @@ if [ "$STACK_VERSION" -ge 24 ]; then
     [[ -d "${BUILD_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${BUILD_DOCKERFILE_DIR} not found"
     display "Building multiarch ${BUILD_DOCKERFILE_DIR} / ${BUILD_IMAGE_TAG} Heroku build image"
     docker buildx build --platform "linux/amd64,linux/arm64" --tag "${BUILD_IMAGE_TAG}" "${BUILD_DOCKERFILE_DIR}" | indent
+    write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 else
     # heroku/heroku:22 and prior does not support multiple chip architectures
     # or multiarch images. Additionally, separate *cnb* variants are created
