@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22"]
+        stack-version: ["20", "22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
