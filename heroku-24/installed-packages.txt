@@ -66,8 +66,6 @@ inetutils-telnet
 init-system-helpers
 iproute2
 iputils-tracepath
-language-pack-en
-language-pack-en-base
 less
 libacl1
 libaec0

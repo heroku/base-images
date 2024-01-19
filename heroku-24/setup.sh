@@ -113,7 +113,7 @@ Gtz3cydIohvNO9d90+29h0eGEDYti7j7maHkBKUAwlcPvMg5m3Y=
 PGDG_ACCC4CF8
 
 apt-get update
-apt-get upgrade -y
+apt-get upgrade -y --no-install-recommends
 apt-get install -y --no-install-recommends \
     apt-transport-https \
     apt-utils \
@@ -133,7 +133,6 @@ apt-get install -y --no-install-recommends \
     imagemagick \
     iproute2 \
     iputils-tracepath \
-    language-pack-en \
     less \
     libaom3 \
     libargon2-1 \

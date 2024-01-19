@@ -86,8 +86,6 @@ iproute2
 iputils-tracepath
 jq
 krb5-multidev
-language-pack-en
-language-pack-en-base
 less
 libacl1
 libacl1-dev
