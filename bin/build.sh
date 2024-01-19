@@ -34,14 +34,14 @@ if [ "$STACK_VERSION" -ge 24 ]; then
 
     [[ -d "${RUN_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${RUN_DOCKERFILE_DIR} not found"
     display "Building multiarch ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} Heroku run image"
-    docker buildx build --platform "linux/amd64,linux/arm64" --pull --tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
+    docker buildx build --platform "linux/amd64,linux/arm64" --pull --load --tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
     write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
 
     # The --pull option is not used for variants to ensure they are based on the
     # runtime stack image built above, rather than the one last published to DockerHub.
     [[ -d "${BUILD_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${BUILD_DOCKERFILE_DIR} not found"
     display "Building multiarch ${BUILD_DOCKERFILE_DIR} / ${BUILD_IMAGE_TAG} Heroku build image"
-    docker buildx build --platform "linux/amd64,linux/arm64" --tag "${BUILD_IMAGE_TAG}" "${BUILD_DOCKERFILE_DIR}" | indent
+    docker buildx build --platform "linux/amd64,linux/arm64" --load --tag "${BUILD_IMAGE_TAG}" "${BUILD_DOCKERFILE_DIR}" | indent
     write_package_list "$BUILD_IMAGE_TAG" "$BUILD_DOCKERFILE_DIR"
 else
     # heroku/heroku:22 and prior does not support multiple chip architectures
