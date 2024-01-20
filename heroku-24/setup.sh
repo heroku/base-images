@@ -235,6 +235,7 @@ apt-get install -y --no-install-recommends \
     zlib1g \
     zstd \
 
+locale-gen en_US.UTF-8
 
 cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
 <policymap>
