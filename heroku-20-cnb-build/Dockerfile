@@ -1,4 +1,5 @@
-FROM heroku/heroku:20-build
+ARG BASE_IMAGE=heroku/heroku:20-build
+FROM $BASE_IMAGE
 
 RUN groupadd heroku --gid 1000 && \
   useradd heroku -u 1000 -g 1000 -s /bin/bash -m

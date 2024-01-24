@@ -3,8 +3,6 @@
 set -euo pipefail
 set -x
 
-bin/build.sh "${STACK_VERSION}"
-
 (
   # Disable tracing (until the end of this subshell) to prevent logging registry tokens.
   set +x
@@ -12,6 +10,16 @@ bin/build.sh "${STACK_VERSION}"
   echo "Logging into Docker Hub..."
   echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
 )
+
+date=$(date -u '+%Y-%m-%d-%H.%M.%S')
+datedTagSuffix=".${date}"
+publicRepo="heroku/heroku"
+privateRepo="heroku/heroku-private"
+publicTag="${publicRepo}:${STACK_VERSION}"
+internalTag="${INTERNAL_REGISTRY_HOST}/s/${ID_SERVICE_USERNAME}/heroku:${STACK_VERSION}"
+
+# build+push dated tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
+bin/build.sh "${STACK_VERSION}" "${privateRepo}" "${datedTagSuffix}"
 
 push_group() {
     local targetTagBase="$1"
@@ -21,14 +29,12 @@ push_group() {
         variants+=("-cnb" "-cnb-build")
     fi
     for variant in "${variants[@]}"; do
-      source="${publicTag}${variant}"
+      source="${privateRepo}:${STACK_VERSION}${variant}${datedTagSuffix}"
       target="${targetTagBase}${variant}${targetTagSuffix}"
       docker tag "${source}" "${target}"
       docker push "${target}"
     done
 }
-
-publicTag="heroku/heroku:${STACK_VERSION}"
 
 # Push nightly tags to Docker Hub (e.g. heroku/heroku:22.nightly)
 push_group "${publicTag}" ".nightly"

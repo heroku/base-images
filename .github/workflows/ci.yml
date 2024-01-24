@@ -38,6 +38,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Use docker-container driver
+        run: docker buildx create --use
       - name: Build images
         run: bin/build.sh $STACK_VERSION
       - name: Check that the generated files are in sync
