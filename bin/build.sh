@@ -26,12 +26,15 @@ SUFFIX=${3:-}
 
 [[ $STACK_VERSION == +([0-9]) ]] || abort "usage: $(basename "${BASH_SOURCE[0]}") STACK_VERSION [IMAGE_REPO] [TAG_SUFFIX]"
 
-BUILD_ARGS="--progress=auto"
-VARIANTS=("-build:")
 if [ -n "$SUFFIX" ]; then
-    # If there is a tag suffix, assume we're pushing to a registry
-    BUILD_ARGS+=("--push")
+    # If there is a tag suffix, this script is pushing to a remote registry.
+    BUILD_ARGS=("--push")
+else
+    # Otherwise, load the image into the local image store.
+    BUILD_ARGS=("--load")
 fi
+
+VARIANTS=("-build:")
 if [ "$STACK_VERSION" -le 22 ]; then
     # heroku/heroku:22 and prior images do not support multiple chip
     # architectures or multiarch images. Instead, they are amd64 only.
