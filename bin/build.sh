@@ -54,6 +54,7 @@ else
     if [ -n "$SUFFIX" ] || docker version | grep -q 'Docker Desktop'; then
         BUILD_ARGS+=("--platform=linux/amd64,linux/arm64")
     else
+        BUILD_ARGS+=("--platform=linux/amd64")
         echo "Warning: building single architecture image due to platform limitations."
     fi
 fi
