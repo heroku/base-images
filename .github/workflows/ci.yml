@@ -38,8 +38,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Use docker-container driver
-        run: docker buildx create --use
       - name: Build images
         run: bin/build.sh $STACK_VERSION
       - name: Check that the generated files are in sync
@@ -52,7 +50,9 @@ jobs:
             exit 1
           fi
       - name: Publish to image registries
-        run: bin/publish-to-registries.sh
+        run: |-
+          docker buildx create --use
+          bin/publish-to-registries.sh
         if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
       - name: Convert docker image and release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
