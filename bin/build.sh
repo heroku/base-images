@@ -37,9 +37,10 @@ older. It works in the following scenarios:
   an image to a disposable tag, then retagging it. The \`default\` Docker
   driver will not work in this mode (it can't build cross-architecture).
 EOF
+  exit 1
 }
 
-[[ $STACK_VERSION == +([0-9]) ]] || print_usage && exit 1
+[[ $STACK_VERSION =~ ^[0-9]+$ ]] || print_usage
 
 docker_container_driver=$(docker buildx inspect | grep -q "docker-container"; echo -n "${PIPESTATUS[1]}")
 
