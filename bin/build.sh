@@ -1,33 +1,45 @@
 #!/usr/bin/env bash
 
-# This script is designed to build images and store package lists in the
-# following scenarios:
-# - Local builds with Docker Desktop and the `containerd` snapshotter. In this
-#   mode, all resulting images (multi-arch and single arch) will be loaded
-#   into the local container store. The `default` and `docker-container` drivers
-#   both work in this mode.
-# - For CI tests and package list generation with Docker and the `default`
-#   Docker driver. In this mode, resulting images will be loaded into the local
-#   container store, but only for amd64. Linux docker is not able to
-#   store/retreive multi-arch images locally. The `docker-container` driver will
-#   not work in this mode (it can't load images from the local store).
-# - Publishing images in CI with Docker and the `docker-container`
-#   driver. Pass in a REPO and PUBLISH_SUFFIX argument to publish images directly
-#   during the build. Since Docker is unable to store/reference multi-arch
-#   images locally, the publish process involves building/pushing an image to a
-#   disposable tag, then retagging it. The `default` Docker driver will not
-#   work in this mode (it can't build cross-architecture / multi-arch).
 
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 . bin/stack-helpers.sh
 
-STACK_VERSION=$1
+STACK_VERSION=${1:-"NAN"}
 REPO=${2:-"heroku/heroku"}
 PUBLISH_SUFFIX=${3:-}
 
-[[ $STACK_VERSION == +([0-9]) ]] || abort "usage: $(basename "${BASH_SOURCE[0]}") STACK_VERSION [IMAGE_REPO] [PUBLISH_SUFFIX]"
+print_usage(){
+    cat << EOF
+usage: $(basename "${BASH_SOURCE[0]}") STACK_VERSION [IMAGE_REPO] [PUBLISH_SUFFIX]
+
+This script builds heroku base images and writes package lists. It builds
+multi-arch images for heroku-24 and newer, and amd64 images for heroku-22 and
+older. It works in the following scenarios:
+
+- Local builds with Docker Desktop and the \`containerd\` snapshotter. In this
+  mode, all resulting images will be loaded into the local container store.
+  The \`default\` and \`docker-container\` drivers both work in this mode.
+
+- For CI tests and package list generation with Docker and the \`default\`
+  Docker driver. In this mode, resulting images will be loaded into the
+  local container store, but only for amd64. The \`default\` Docker driver
+  is not able to store/retreive multi-arch images locally with the default
+  snapshotter, and the \`containerd\` snapshotter is only available with Docker
+  Desktop. The \`docker-container\` driver will not work in this mode (it
+  can't load any images from the default local store).
+
+- Publishing images in CI with Docker and the \`docker-container\`
+  driver. Pass in a REPO and PUBLISH_SUFFIX argument to publish images
+  directly during the build. Since Docker is unable to store/reference
+  multi-arch images locally, the publish process involves building+pushing
+  an image to a disposable tag, then retagging it. The \`default\` Docker
+  driver will not work in this mode (it can't build cross-architecture).
+EOF
+}
+
+[[ $STACK_VERSION == +([0-9]) ]] || print_usage && exit 1
 
 docker_container_driver=$(docker buildx inspect | grep -q "docker-container"; echo -n "${PIPESTATUS[1]}")
 
@@ -49,12 +61,17 @@ else
         DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64,linux/arm64")
     elif [ -z "$PUBLISH_SUFFIX" ] && [ "$docker_container_driver" -ne 0 ]; then
         DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64")
-        echo "Warning: building single architecture images due to platform limitations."
+        echo "WARNING: heroku-24 and newer images are multi-arch images," \
+            "but this script is building single architecture images" \
+            "due to limitations of the current platform." \
+            "To build a multi-arch image, enable the \`containerd\`" \
+            "snapshotter in Docker Desktop and/or use a \`docker-container\`" \
+            "Docker BuildKit driver."
     else
-        echo "Error: don't know how to build images with this configuration." \
-            "You may need to enable the containerd snapshotter in Docker Desktop," \
-            "enable the \`docker-container\` driver in docker," \
-            "or use this script in build-only mode (don't provide PUBLISH TAG argument)."
+        echo "ERROR: Can't build images with this configuration. Enable" \
+            "the \`containerd\` snapshotter in Docker Desktop, enable" \
+            "the \`docker-container\` driver in Docker, or use this script" \
+            "in build-only mode (don't provide PUBLISH_SUFFIX argument)."
         exit 1
     fi
     # heroku/heroku:24 and beyond images include CNB specific
