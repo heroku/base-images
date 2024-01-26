@@ -51,6 +51,7 @@ g++-13
 gcc
 gcc-13
 gcc-13-base
+gcc-14-base
 geoip-bin
 geoip-database
 gettext

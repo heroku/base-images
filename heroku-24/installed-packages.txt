@@ -38,6 +38,7 @@ fonts-dejavu-mono
 gcc
 gcc-13
 gcc-13-base
+gcc-14-base
 geoip-database
 gettext-base
 gir1.2-freedesktop
