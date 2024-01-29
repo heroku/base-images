@@ -39,7 +39,6 @@ dnsutils
 dpkg
 dpkg-dev
 e2fsprogs
-ed
 file
 findutils
 fontconfig

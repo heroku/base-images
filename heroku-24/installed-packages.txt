@@ -30,7 +30,6 @@ dirmngr
 dnsutils
 dpkg
 e2fsprogs
-ed
 file
 findutils
 fontconfig
