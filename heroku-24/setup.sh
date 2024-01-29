@@ -223,10 +223,8 @@ apt-get install -y --no-install-recommends \
     rename \
     rsync \
     shared-mime-info \
-    socat \
     stunnel \
     tar \
-    telnet \
     tzdata \
     unzip \
     wget \

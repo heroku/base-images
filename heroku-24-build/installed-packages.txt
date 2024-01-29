@@ -85,7 +85,6 @@ icu-devtools
 imagemagick
 imagemagick-6-common
 imagemagick-6.q16
-inetutils-telnet
 init-system-helpers
 iproute2
 iputils-tracepath
@@ -568,13 +567,11 @@ rsync
 sed
 sensible-utils
 shared-mime-info
-socat
 stunnel4
 systemd
 systemd-dev
 sysvinit-utils
 tar
-telnet
 tzdata
 ubuntu-keyring
 ucf
