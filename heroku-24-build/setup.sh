@@ -14,7 +14,6 @@ apt-get install -y --no-install-recommends \
     automake \
     bison \
     build-essential \
-    bzr \
     cmake \
     gettext \
     git \
@@ -82,7 +81,6 @@ apt-get install -y --no-install-recommends \
     libzip-dev \
     libzstd-dev \
     patchelf \
-    python3-dev \
     zlib1g-dev \
 
 rm -rf /root/*
