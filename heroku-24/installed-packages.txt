@@ -19,6 +19,8 @@ ca-certificates-java
 coreutils
 cpp
 cpp-13
+cpp-13-x86-64-linux-gnu
+cpp-x86-64-linux-gnu
 curl
 dash
 debconf
@@ -38,7 +40,9 @@ fonts-dejavu-mono
 gcc
 gcc-13
 gcc-13-base
+gcc-13-x86-64-linux-gnu
 gcc-14-base
+gcc-x86-64-linux-gnu
 geoip-database
 gettext-base
 gir1.2-freedesktop

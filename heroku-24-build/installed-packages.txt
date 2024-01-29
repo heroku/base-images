@@ -27,6 +27,8 @@ comerr-dev
 coreutils
 cpp
 cpp-13
+cpp-13-x86-64-linux-gnu
+cpp-x86-64-linux-gnu
 curl
 dash
 debconf
@@ -46,10 +48,14 @@ fonts-dejavu-core
 fonts-dejavu-mono
 g++
 g++-13
+g++-13-x86-64-linux-gnu
+g++-x86-64-linux-gnu
 gcc
 gcc-13
 gcc-13-base
+gcc-13-x86-64-linux-gnu
 gcc-14-base
+gcc-x86-64-linux-gnu
 geoip-bin
 geoip-database
 gettext
@@ -546,11 +552,10 @@ postgresql-client-common
 procps
 python-is-python3
 python3
-python3-distutils
 python3-imath
-python3-lib2to3
 python3-minimal
 python3-numpy
+python3-packaging
 python3-pkg-resources
 python3.11
 python3.11-minimal
