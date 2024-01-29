@@ -122,7 +122,6 @@ apt-get install -y --no-install-recommends \
     coreutils \
     curl \
     dnsutils \
-    ed \
     file \
     fontconfig \
     gcc \
