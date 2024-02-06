@@ -20,14 +20,15 @@ older. It works in the following scenarios:
 - Local builds with Docker Desktop and the \`containerd\` snapshotter. In this
   mode, all resulting images will be loaded into the local container store.
   The \`default\` and \`docker-container\` drivers both work in this mode.
+  Note that the \`containerd\` snapshotter is not compatible with \`pack\`.
 
 - For CI tests and package list generation with Docker and the \`default\`
   Docker driver. In this mode, resulting images will be loaded into the
-  local container store, but only for amd64. The \`default\` Docker driver
-  is not able to store/retreive multi-arch images locally with the default
-  snapshotter, and the \`containerd\` snapshotter is only available with Docker
-  Desktop. The \`docker-container\` driver will not work in this mode (it
-  can't load any images from the default local store).
+  local container store, the package lists generated, but only for amd64.
+  The \`default\` Docker driver is not able to store/retreive multi-arch images
+  locally with the default snapshotter, and the \`containerd\` snapshotter is
+  only available with Docker Desktop. The \`docker-container\` driver will not
+  work in this mode (it can't load any images from the default local store).
 
 - Publishing images in CI with Docker and the \`docker-container\`
   driver. Pass in a REPO and PUBLISH_SUFFIX argument to publish images
@@ -89,9 +90,35 @@ fi
 
 write_package_list() {
     local image_tag="$1"
-    local output_file="${2}/installed-packages.txt"
-    echo '# List of packages present in the final image. Regenerate using bin/build.sh' > "$output_file"
-    docker run --rm "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
+    local dockerfile_dir="$2"
+
+    # Extract the stack version from the dockerfile_dir variable (e.g., heroku-24)
+    local stack_version
+    stack_version=$(echo "$dockerfile_dir" | sed -n 's/^heroku-\([0-9]*\).*$/\1/p')
+
+    local archs=("amd64")
+    # heroku-24 and newer are multiarch. If containerd is available,
+    # the package list for each architecture can be generated.
+    if [ "$stack_version" -ge 24 ]; then
+        if [ "$containerd_snapshotter" = 0 ]; then
+            archs+=(arm64)
+        else
+            echo "WARNING: Generating package list for single architecture." \
+                "Use the \`containerd\` snapshotter to generate package lists" \
+                "for all architectures."
+        fi
+    fi
+    local output_file=""
+    for arch in "${archs[@]}"; do
+        if [ "${stack_version}" -ge 24 ]; then
+            output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
+        else
+            output_file="${dockerfile_dir}/installed-packages.txt"
+        fi
+        echo "Generating package list: ${output_file}"
+        echo "# List of packages present in the final image. Regenerate using bin/build.sh" > "$output_file"
+        docker run --rm --platform="linux/${arch}" "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
+    done
 }
 
 RUN_IMAGE_TAG="${REPO}:${STACK_VERSION}${PUBLISH_SUFFIX}"
