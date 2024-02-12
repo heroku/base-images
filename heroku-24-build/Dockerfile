@@ -4,6 +4,7 @@ COPY setup.sh /tmp/setup.sh
 USER root
 RUN /tmp/setup.sh
 
+# https://github.com/buildpacks/spec/blob/main/platform.md#build-image
 USER 1000
 ENV CNB_USER_ID=1000
 ENV CNB_GROUP_ID=1000
