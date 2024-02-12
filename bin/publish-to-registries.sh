@@ -29,25 +29,20 @@ push_group() {
     done
 }
 
-date=$(date -u '+%Y-%m-%d-%H.%M.%S')
 publicTag="heroku/heroku:${STACK_VERSION}"
-privateTag="heroku/heroku-private:${STACK_VERSION}"
 internalTag="${INTERNAL_REGISTRY_HOST}/s/${ID_SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
-# Push nightly tags to dockerhub (e.g. heroku/heroku:22.nightly)
+# Push nightly tags to Docker Hub (e.g. heroku/heroku:22.nightly)
 push_group "${publicTag}" ".nightly"
 
-# Push date tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
-push_group "${privateTag}" ".${date}"
-
 if [ "$GITHUB_REF_TYPE" == 'tag' ]; then
-  # Push release tags to dockerhub (e.g. heroku/heroku:22.v99)
+  # Push release tags to Docker Hub (e.g. heroku/heroku:22.v99)
   push_group "${publicTag}" ".${GITHUB_REF_NAME}"
 
   # Push release tags to internal registry
   push_group "${internalTag}" ".${GITHUB_REF_NAME}"
 
-  # Push latest/no-suffix tags to dockerhub (e.g. heroku/heroku:22)
+  # Push latest/no-suffix tags to Docker Hub (e.g. heroku/heroku:22)
   push_group "${publicTag}" ""
 
   # Push latest/no-suffix tags to internal registry
