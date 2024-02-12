@@ -11,11 +11,6 @@ bin/build.sh "${STACK_VERSION}"
 
   echo "Logging into Docker Hub..."
   echo "${DOCKER_HUB_TOKEN}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
-
-  echo "Logging into internal container registry..."
-  curl -sSf --retry 3 -X POST "$ID_SERVICE_TOKEN_ENDPOINT" -d "{\"username\":\"${ID_SERVICE_USERNAME}\",\"password\":\"${ID_SERVICE_PASSWORD}\"}" \
-    | jq -er ".raw_id_token" \
-    | docker login "$INTERNAL_REGISTRY_HOST" -u "$INTERNAL_REGISTRY_USERNAME" --password-stdin
 )
 
 push_group() {
@@ -30,7 +25,6 @@ push_group() {
 }
 
 publicTag="heroku/heroku:${STACK_VERSION}"
-internalTag="${INTERNAL_REGISTRY_HOST}/s/${ID_SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
 # Push nightly tags to Docker Hub (e.g. heroku/heroku:22.nightly)
 push_group "${publicTag}" ".nightly"
@@ -39,12 +33,6 @@ if [ "$GITHUB_REF_TYPE" == 'tag' ]; then
   # Push release tags to Docker Hub (e.g. heroku/heroku:22.v99)
   push_group "${publicTag}" ".${GITHUB_REF_NAME}"
 
-  # Push release tags to internal registry
-  push_group "${internalTag}" ".${GITHUB_REF_NAME}"
-
   # Push latest/no-suffix tags to Docker Hub (e.g. heroku/heroku:22)
   push_group "${publicTag}" ""
-
-  # Push latest/no-suffix tags to internal registry
-  push_group "${internalTag}" ""
 fi

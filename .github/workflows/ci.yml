@@ -29,11 +29,6 @@ jobs:
       STACK_VERSION: "${{ matrix.stack-version }}"
       DOCKER_HUB_TOKEN: "${{ secrets.DOCKER_HUB_TOKEN }}"
       DOCKER_HUB_USERNAME: "${{ secrets.DOCKER_HUB_USERNAME }}"
-      ID_SERVICE_PASSWORD: "${{ secrets.ID_SERVICE_PASSWORD }}"
-      ID_SERVICE_TOKEN_ENDPOINT: "${{ secrets.ID_SERVICE_TOKEN_ENDPOINT }}"
-      ID_SERVICE_USERNAME: "${{ secrets.ID_SERVICE_USERNAME }}"
-      INTERNAL_REGISTRY_HOST: "${{ secrets.INTERNAL_REGISTRY_HOST }}"
-      INTERNAL_REGISTRY_USERNAME: "${{ secrets.INTERNAL_REGISTRY_USERNAME }}"
       MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
       MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     strategy:
