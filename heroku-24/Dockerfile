@@ -1,6 +1,5 @@
 FROM ubuntu:24.04
-COPY setup.sh /tmp/setup.sh
-RUN /tmp/setup.sh
+RUN --mount=target=/build /build/setup.sh
 
 # https://github.com/buildpacks/spec/blob/main/platform.md#run-image
 USER 1000

@@ -1,8 +1,7 @@
 ARG BASE_IMAGE=heroku/heroku:24
 FROM $BASE_IMAGE
-COPY setup.sh /tmp/setup.sh
 USER root
-RUN /tmp/setup.sh
+RUN --mount=target=/build /build/setup.sh
 
 # https://github.com/buildpacks/spec/blob/main/platform.md#build-image
 USER 1000
