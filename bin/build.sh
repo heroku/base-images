@@ -11,8 +11,8 @@ PUBLISH_SUFFIX=${3:-}
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
-	echo "usage: ${BASE_NAME}  STACK_VERSION [IMAGE_REPO] [PUBLISH_SUFFIX]"
-	cat <<-EOF
+    >&2 echo "usage: ${BASE_NAME}  STACK_VERSION [IMAGE_REPO] [PUBLISH_SUFFIX]"
+	>&2 cat <<-EOF
 
 		This script builds heroku base images and writes package lists. It builds
 		multi-arch images for heroku-24 and newer, and amd64 images for heroku-22 and
@@ -40,13 +40,18 @@ print_usage(){
 	EOF
 }
 
-[[ $STACK_VERSION =~ ^[0-9]+$ ]] || (print_usage >&2 && exit 2)
+[[ $STACK_VERSION =~ ^[0-9]+$ ]] || (>&2 print_usage && abort 2)
 
-docker_container_driver=$(docker buildx inspect | grep -q "docker-container"; echo -n "${PIPESTATUS[1]}")
+have_docker_container_driver=
+if (docker buildx inspect; true) | grep -q 'Driver:\s*docker-container$'; then
+    have_docker_container_driver=1
+fi
 
-containerd_snapshotter=$(docker info | grep -q "io.containerd.snapshotter"; echo -n "${PIPESTATUS[1]}")
+have_containerd_snapshotter=
+if docker info -f "{{ .DriverStatus }}" | grep -qF "io.containerd.snapshotter."; then have_containerd_snapshotter=1; fi
 
-if [ "$STACK_VERSION" -le 22 ]; then
+
+if (( STACK_VERSION <= 22 )); then
 	# heroku/heroku:22 and prior images do not support multiple chip
 	# architectures or multi-arch images. Instead, they are amd64 only.
 	DOCKER_ARGS=("build" "--platform=linux/amd64")
@@ -58,29 +63,29 @@ else
 	# Due to weak feature support parity between Docker on Linux and Docker
 	# Desktop building and publishing across platforms has caveats (see the
 	# top of this file).
-	if [ "$containerd_snapshotter" = 0 ] || { [ -n "$PUBLISH_SUFFIX" ] && [ "$docker_container_driver" -eq 0 ]; }; then
+	if [[ $have_containerd_snapshotter ]] || { [[ $PUBLISH_SUFFIX ]] && [[ $have_docker_container_driver ]]; }; then
 		DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64,linux/arm64")
-	elif [ -z "$PUBLISH_SUFFIX" ] && [ "$docker_container_driver" -ne 0 ]; then
+	elif [[ ! $PUBLISH_SUFFIX ]] && [[ ! $have_docker_container_driver ]]; then
 		DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64")
-		echo "WARNING: heroku-24 and newer images are multi-arch images," \
+		>&2 echo "WARNING: heroku-24 and newer images are multi-arch images," \
 			"but this script is building single architecture images" \
 			"due to limitations of the current platform." \
 			"To build a multi-arch image, enable the 'containerd'" \
 			"snapshotter in Docker Desktop and/or use a 'docker-container'" \
-			"Docker BuildKit driver." >&2
+			"Docker BuildKit driver."
 	else
-		echo "ERROR: Can't build images with this configuration. Enable" \
+		>&2 echo "ERROR: Can't build images with this configuration. Enable" \
 			"the 'containerd' snapshotter in Docker Desktop, enable" \
 			"the 'docker-container' driver in Docker, or use this script" \
-			"in build-only mode (don't provide PUBLISH_SUFFIX argument)." >&2
-		exit 1
+			"in build-only mode (don't provide PUBLISH_SUFFIX argument)."
+		abort 1
 	fi
 	# heroku/heroku:24 and beyond images include CNB specific
 	# modifications, so separate *cnb* variants are not created.
 	VARIANTS=("-build:")
 fi
 
-if [ -n "$PUBLISH_SUFFIX" ]; then
+if [[ $PUBLISH_SUFFIX ]]; then
 	# If there is a tag suffix, this script is pushing to a remote registry.
 	DOCKER_ARGS+=("--push")
 else
@@ -99,23 +104,23 @@ write_package_list() {
 	local archs=("amd64")
 	# heroku-24 and newer are multiarch. If containerd is available,
 	# the package list for each architecture can be generated.
-	if [ "$stack_version" -ge 24 ]; then
-		if [ "$containerd_snapshotter" = 0 ]; then
+    if (( stack_version >= 24 )); then
+		if [[ $have_containerd_snapshotter ]]; then
 			archs+=(arm64)
 		else
-			echo "WARNING: Generating package list for single architecture." \
-				"Use the \`containerd\` snapshotter to generate package lists" \
-				"for all architectures." >&2
+			>&2 echo "WARNING: Generating package list for single architecture." \
+				"Use the 'containerd' snapshotter to generate package lists" \
+				"for all architectures."
 		fi
 	fi
 	local output_file=""
 	for arch in "${archs[@]}"; do
-		if [ "${stack_version}" -ge 24 ]; then
+        if (( stack_version <= 24 )); then
 			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
 		else
 			output_file="${dockerfile_dir}/installed-packages.txt"
 		fi
-		echo "Generating package list: ${output_file}"
+		display "Generating package list: ${output_file}"
 		echo "# List of packages present in the final image. Regenerate using bin/build.sh" > "$output_file"
 		docker run --rm --platform="linux/${arch}" "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
 	done
