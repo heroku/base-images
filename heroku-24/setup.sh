@@ -261,6 +261,11 @@ apt-get purge -y openjdk-8-jre-headless
 apt-get autoremove -y --purge
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
+useradd heroku -u 1001 -g 1000 -s /bin/bash -m
+useradd heroku-build -u 1002 -g 1000 -s /bin/bash -m
+groupmod --new-name heroku ubuntu
+deluser --remove-home ubuntu
+
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
