@@ -30,6 +30,7 @@ dirmngr
 dnsutils
 dpkg
 e2fsprogs
+ed
 file
 findutils
 fontconfig
@@ -66,6 +67,7 @@ hostname
 imagemagick
 imagemagick-6-common
 imagemagick-6.q16
+inetutils-telnet
 init-system-helpers
 iproute2
 iputils-tracepath
@@ -175,7 +177,6 @@ libicu74
 libidn2-0
 libimagequant0
 libimath-3-1-29
-libip4tc2
 libisl23
 libitm1
 libjansson4
@@ -368,11 +369,13 @@ rsync
 sed
 sensible-utils
 shared-mime-info
+socat
 stunnel4
 systemd
 systemd-dev
 sysvinit-utils
 tar
+telnet
 tzdata
 ubuntu-keyring
 ucf

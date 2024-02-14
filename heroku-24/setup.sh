@@ -122,6 +122,7 @@ apt-get install -y --no-install-recommends \
     coreutils \
     curl \
     dnsutils \
+    ed \
     file \
     fontconfig \
     gcc \
@@ -222,8 +223,10 @@ apt-get install -y --no-install-recommends \
     rename \
     rsync \
     shared-mime-info \
+    socat \
     stunnel \
     tar \
+    telnet \
     tzdata \
     unzip \
     wget \
