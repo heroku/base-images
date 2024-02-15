@@ -16,7 +16,6 @@ datedTagSuffix=".${date}"
 publicRepo="heroku/heroku"
 privateRepo="heroku/heroku-private"
 publicTag="${publicRepo}:${STACK_VERSION}"
-internalTag="${INTERNAL_REGISTRY_HOST}/s/${ID_SERVICE_USERNAME}/heroku:${STACK_VERSION}"
 
 # build+push dated tags to private dockerhub (e.g. heroku/heroku-private:22.2022-06-01-17.00.00)
 bin/build.sh "${STACK_VERSION}" "${privateRepo}" "${datedTagSuffix}"
