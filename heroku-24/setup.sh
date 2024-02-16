@@ -164,7 +164,7 @@ apt-get install -y --no-install-recommends \
     libharfbuzz0b \
     libheif1 \
     liblzf1 \
-    libmagickcore-6.q16-3-extra \
+    libmagickcore-6.q16-7-extra \
     libmcrypt4 \
     libmemcached11 \
     libmp3lame0 \

@@ -204,8 +204,9 @@ liblzma5
 libmagic-mgc
 libmagic1
 libmagickcore-6.q16-6
-libmagickcore-6.q16-6-extra
-libmagickwand-6.q16-6
+libmagickcore-6.q16-7
+libmagickcore-6.q16-7-extra
+libmagickwand-6.q16-7
 libmatio11
 libmaxminddb0
 libmcrypt4
@@ -243,7 +244,7 @@ libpango-1.0-0
 libpangocairo-1.0-0
 libpangoft2-1.0-0
 libpcre2-8-0
-libperl5.36
+libperl5.38
 libpixman-1-0
 libpng16-16
 libpoppler-glib8
@@ -257,6 +258,7 @@ libpython3.11-minimal
 libpython3.11-stdlib
 libquadmath0
 librabbitmq4
+libraw23
 libreadline8
 librsvg2-2
 librsvg2-common
@@ -352,7 +354,7 @@ passwd
 patch
 perl
 perl-base
-perl-modules-5.36
+perl-modules-5.38
 pinentry-curses
 poppler-utils
 postgresql-client-16
@@ -381,7 +383,6 @@ tzdata
 ubuntu-keyring
 ucf
 unzip
-usrmerge
 util-linux
 wget
 xz-utils

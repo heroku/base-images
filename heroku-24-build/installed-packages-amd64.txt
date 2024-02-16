@@ -310,10 +310,11 @@ libmagic1
 libmagickcore-6-arch-config
 libmagickcore-6-headers
 libmagickcore-6.q16-6
-libmagickcore-6.q16-6-extra
+libmagickcore-6.q16-7
+libmagickcore-6.q16-7-extra
 libmagickcore-6.q16-dev
 libmagickwand-6-headers
-libmagickwand-6.q16-6
+libmagickwand-6.q16-7
 libmagickwand-6.q16-dev
 libmagickwand-dev
 libmatio11
@@ -371,7 +372,7 @@ libpcre2-32-0
 libpcre2-8-0
 libpcre2-dev
 libpcre2-posix3
-libperl5.36
+libperl5.38
 libpixman-1-0
 libpixman-1-dev
 libpkgconf3
@@ -395,6 +396,7 @@ libpython3.12-stdlib
 libquadmath0
 librabbitmq-dev
 librabbitmq4
+libraw23
 libreadline-dev
 libreadline8
 librhash0
@@ -540,7 +542,7 @@ patch
 patchelf
 perl
 perl-base
-perl-modules-5.36
+perl-modules-5.38
 pinentry-curses
 pkg-config
 pkgconf
@@ -578,7 +580,6 @@ tzdata
 ubuntu-keyring
 ucf
 unzip
-usrmerge
 util-linux
 uuid-dev
 wget
