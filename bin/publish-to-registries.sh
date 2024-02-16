@@ -24,7 +24,7 @@ push_group() {
     local targetTagBase="$1"
     local targetTagSuffix="$2"
     variants=("" "-build")
-    if [ "$STACK_VERSION" -le 22 ]; then
+    if (( $STACK_VERSION <= 22 )); then
         variants+=("-cnb" "-cnb-build")
     fi
     for variant in "${variants[@]}"; do
@@ -38,7 +38,7 @@ push_group() {
 # Push nightly tags to Docker Hub (e.g. heroku/heroku:22.nightly)
 push_group "${publicTag}" ".nightly"
 
-if [ "$GITHUB_REF_TYPE" == 'tag' ]; then
+if [[ "$GITHUB_REF_TYPE" == 'tag' ]]; then
   # Push release tags to Docker Hub (e.g. heroku/heroku:22.v99)
   push_group "${publicTag}" ".${GITHUB_REF_NAME}"
 
