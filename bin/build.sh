@@ -115,7 +115,7 @@ write_package_list() {
 	fi
 	local output_file=""
 	for arch in "${archs[@]}"; do
-        if (( stack_version <= 24 )); then
+        if (( stack_version >= 24 )); then
 			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
 		else
 			output_file="${dockerfile_dir}/installed-packages.txt"
