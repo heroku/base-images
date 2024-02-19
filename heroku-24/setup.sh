@@ -243,10 +243,10 @@ cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
   <policy domain="Undefined" rights="none"/>
   <policy domain="resource" name="memory" value="1024MiB"/>
   <policy domain="resource" name="map" value="2048MiB"/>
-  <policy domain="resource" name="width" value="32KP"/>
-  <policy domain="resource" name="height" value="32KP"/>
   <policy domain="resource" name="area" value="256MP"/>
   <policy domain="resource" name="disk" value="2GiB"/>
+  <policy domain="resource" name="width" value="32KP"/>
+  <policy domain="resource" name="height" value="32KP"/>
   <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
   <policy domain="path" rights="none" pattern="@*"/>
   <policy domain="delegate" rights="none" pattern="URL" />
