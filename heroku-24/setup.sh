@@ -234,6 +234,8 @@ apt-get install -y --no-install-recommends \
     zlib1g \
     zstd \
 
+# Generate locale data for "en_US", which is not available by default. Ubuntu
+# ships only with "C" and "POSIX" locales.
 locale-gen en_US.UTF-8
 
 cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
