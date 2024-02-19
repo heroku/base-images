@@ -26,9 +26,8 @@ apt-get install -y --no-install-recommends gnupg
 # In order to support all features offered by Heroku Postgres, we need newer postgresql-client
 # than is available in the Ubuntu repository, so use the upstream APT repository instead:
 # https://wiki.postgresql.org/wiki/Apt
-# TODO: Use `noble` not `mantic` when it becomes available
 cat >>/etc/apt/sources.list <<EOF
-deb http://apt.postgresql.org/pub/repos/apt/ mantic-pgdg main
+deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main
 EOF
 
 # From https://www.postgresql.org/media/keys/ACCC4CF8.asc
