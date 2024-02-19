@@ -5,9 +5,9 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 . bin/stack-helpers.sh
 
+REPO="heroku/heroku"
 STACK_VERSION=${1:-"NAN"}
-REPO=${2:-"heroku/heroku"}
-PUBLISH_SUFFIX=${3:-}
+PUBLISH_SUFFIX=${2:-}
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
