@@ -55,7 +55,7 @@ jobs:
           bin/publish-to-registries.sh
         if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
       - name: Unpublish temp tags from this run
-        run: bin/unpublish-temp-tags.sh
+        run: bin/unpublish-tags.sh
         if: always()
       - name: Convert docker image and release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh

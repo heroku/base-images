@@ -7,22 +7,28 @@ dockerhub_token=$(curl -s -f -H "Content-Type: application/json" -X POST -d "{\"
 unpublish_group() {
     local stackVersion="$1"
     local targetTagSuffix="$2"
+    local status=0
     variants=("" "-build")
     if (( stackVersion <= 22 )); then
         variants+=("-cnb" "-cnb-build")
     fi
     for variant in "${variants[@]}"; do
       echo "Deleting heroku/heroku:${stackVersion}${variant}${targetTagSuffix}"
-        code=$(curl -s -f -X DELETE \
-            -H "Authorization: JWT ${dockerhub_token}" --write-out "%{http_code}" \
+        response=$(curl -s -X DELETE \
+            -H "Authorization: JWT ${dockerhub_token}" \
             "https://hub.docker.com/v2/namespaces/heroku/repositories/heroku/tags/${stackVersion}${variant}${targetTagSuffix}"
         )
 
-      echo "status: ${code}"
-      if (( code != 404 )) || (( code != 200 )) || (( code != 201 )); then
-          echo "Couldn't delete heroku/heroku:${stackVersion}${variant}${targetTagSuffix}"
+      if [[ -z $response ]]; then
+          >&2 echo "Deleted."
+      elif [[ $response =~ "tag not found" ]]; then
+          >&2 echo "Tag does not exist."
+      else
+          >&2 echo "Couldn't delete. Response: ${response}"
+          status=22
       fi
     done
+    return $status
 }
 
 stackVersion="${1:-$STACK_VERSION}"
