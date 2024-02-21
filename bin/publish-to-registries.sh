@@ -27,7 +27,7 @@ push_group() {
     done
 }
 
-tempTagSuffix=".temp_${GITHUB_RUN_ID}"
+tempTagSuffix=".temp-${GITHUB_RUN_ID}"
 # build+push to a temporary tag (e.g. heroku/heroku:22.temp_12345678)
 bin/build.sh "${STACK_VERSION}" "${tempTagSuffix}"
 
