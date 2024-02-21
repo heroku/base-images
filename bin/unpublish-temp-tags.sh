@@ -14,8 +14,10 @@ unpublish_group() {
     fi
     for variant in "${variants[@]}"; do
       echo "Deleting heroku/heroku:${stackVersion}${variant}${targetTagSuffix}"
-      code=$(curl -s -f -X DELETE -H "Authorization: JWT ${dockerhub_token}" --write-out "%{http_code}"
-      "https://hub.docker.com/v2/repositories/heroku/heroku/tags/${stackVersion}${variant}${targetTagSuffix}/")
+        code=$(curl -s -f -X DELETE \
+            -H "Authorization: JWT ${dockerhub_token}" --write-out "%{http_code}" \
+            "https://hub.docker.com/v2/repositories/heroku/heroku/tags/${stackVersion}${variant}${targetTagSuffix}/"
+        )
 
       if (( code != 404 )) || (( code != 200 )) || (( code != 201 )); then
           echo "Couldn't delete heroku/heroku:${stackVersion}${variant}${targetTagSuffix}: ${code}"
