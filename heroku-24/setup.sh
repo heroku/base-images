@@ -238,22 +238,6 @@ apt-get install -y --no-install-recommends \
 # ships only with "C" and "POSIX" locales.
 locale-gen en_US.UTF-8
 
-cat > /etc/ImageMagick-6/policy.xml <<'IMAGEMAGICK_POLICY'
-<policymap>
-  <policy domain="Undefined" rights="none"/>
-  <policy domain="resource" name="memory" value="1024MiB"/>
-  <policy domain="resource" name="map" value="2048MiB"/>
-  <policy domain="resource" name="area" value="256MP"/>
-  <policy domain="resource" name="disk" value="2GiB"/>
-  <policy domain="resource" name="width" value="32KP"/>
-  <policy domain="resource" name="height" value="32KP"/>
-  <policy domain="path" rights="none" pattern="@*"/>
-  <policy domain="delegate" rights="none" pattern="URL" />
-  <policy domain="delegate" rights="none" pattern="HTTPS" />
-  <policy domain="delegate" rights="none" pattern="HTTP" />
-</policymap>
-IMAGEMAGICK_POLICY
-
 # Temporarily install ca-certificates-java to generate the certificates store used
 # by Java apps. Generation occurs in a post-install script which requires a JRE.
 # We're using OpenJDK 8 rather than something newer, to work around:
