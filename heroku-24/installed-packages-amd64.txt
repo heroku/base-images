@@ -51,12 +51,9 @@ gir1.2-harfbuzz-0.0
 git
 git-man
 gnupg
-gnupg-l10n
 gnupg-utils
 gpg
 gpg-agent
-gpg-wks-client
-gpg-wks-server
 gpgconf
 gpgsm
 gpgv
@@ -71,6 +68,7 @@ inetutils-telnet
 init-system-helpers
 iproute2
 iputils-tracepath
+keyboxd
 less
 libacl1
 libaec0
@@ -152,7 +150,6 @@ libgdk-pixbuf-2.0-0
 libgdk-pixbuf-xlib-2.0-0
 libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
-libgirepository-1.0-1
 libglib2.0-0
 libgmp10
 libgnutls-openssl27
@@ -203,7 +200,6 @@ liblzf1
 liblzma5
 libmagic-mgc
 libmagic1
-libmagickcore-6.q16-6
 libmagickcore-6.q16-7
 libmagickcore-6.q16-7-extra
 libmagickwand-6.q16-7
@@ -248,14 +244,14 @@ libperl5.38
 libpixman-1-0
 libpng16-16
 libpoppler-glib8
-libpoppler133
+libpoppler134
 libpopt0
 libpq5
 libproc2-0
 libpsl5
 libpython3-stdlib
-libpython3.11-minimal
-libpython3.11-stdlib
+libpython3.12-minimal
+libpython3.12-stdlib
 libquadmath0
 librabbitmq4
 libraw23
@@ -363,8 +359,8 @@ procps
 python-is-python3
 python3
 python3-minimal
-python3.11
-python3.11-minimal
+python3.12
+python3.12-minimal
 readline-common
 rename
 rpcsvc-proto
