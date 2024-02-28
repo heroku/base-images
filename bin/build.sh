@@ -11,7 +11,7 @@ PUBLISH_SUFFIX=${2:-}
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
-    >&2 echo "usage: ${BASE_NAME}  STACK_VERSION [IMAGE_REPO] [PUBLISH_SUFFIX]"
+    >&2 echo "usage: ${BASE_NAME}  STACK_VERSION [PUBLISH_SUFFIX]"
 	>&2 cat <<-EOF
 
 		This script builds heroku base images and writes package lists. It builds
@@ -40,7 +40,7 @@ print_usage(){
 	EOF
 }
 
-[[ $STACK_VERSION =~ ^[0-9]+$ ]] || (>&2 print_usage && abort 2)
+[[ $STACK_VERSION =~ ^[0-9]+$ ]] || (>&2 print_usage && abort "fatal: invalid STACK_VERSION")
 
 have_docker_container_driver=
 if (docker buildx inspect; true) | grep -q 'Driver:\s*docker-container$'; then
