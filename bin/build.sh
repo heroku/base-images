@@ -11,7 +11,7 @@ PUBLISH_SUFFIX=${2:-}
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
-    >&2 echo "usage: ${BASE_NAME}  STACK_VERSION [PUBLISH_SUFFIX]"
+	>&2 echo "usage: ${BASE_NAME}  STACK_VERSION [PUBLISH_SUFFIX]"
 	>&2 cat <<-EOF
 
 		This script builds heroku base images and writes package lists. It builds
@@ -44,7 +44,7 @@ print_usage(){
 
 have_docker_container_driver=
 if (docker buildx inspect; true) | grep -q 'Driver:\s*docker-container$'; then
-    have_docker_container_driver=1
+	have_docker_container_driver=1
 fi
 
 have_containerd_snapshotter=
@@ -104,7 +104,7 @@ write_package_list() {
 	local archs=("amd64")
 	# heroku-24 and newer are multiarch. If containerd is available,
 	# the package list for each architecture can be generated.
-    if (( stack_version >= 24 )); then
+	if (( stack_version >= 24 )); then
 		if [[ $have_containerd_snapshotter ]]; then
 			archs+=(arm64)
 		else
@@ -115,7 +115,7 @@ write_package_list() {
 	fi
 	local output_file=""
 	for arch in "${archs[@]}"; do
-        if (( stack_version >= 24 )); then
+		if (( stack_version >= 24 )); then
 			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
 		else
 			output_file="${dockerfile_dir}/installed-packages.txt"
