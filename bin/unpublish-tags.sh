@@ -14,7 +14,7 @@ unpublish_group() {
     fi
     for variant in "${variants[@]}"; do
       echo "Deleting heroku/heroku:${stackVersion}${variant}${targetTagSuffix}"
-        response=$(curl -s -X DELETE \
+      response=$(curl -sS --retry 3 --retry-connrefused --connect-timeout 5 --max-time 30 -X DELETE \
             -H "Authorization: JWT ${dockerhub_token}" \
             "https://hub.docker.com/v2/namespaces/heroku/repositories/heroku/tags/${stackVersion}${variant}${targetTagSuffix}"
         )
