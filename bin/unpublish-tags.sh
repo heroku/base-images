@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-dockerhub_token=$(curl -s -f -H "Content-Type: application/json" -X POST -d "{\"username\": \"${DOCKER_HUB_USERNAME}\", \"password\": \"${DOCKER_HUB_TOKEN}\"}" https://hub.docker.com/v2/users/login/ | jq -r .token)
+dockerhub_token=$(curl -sS -f --retry 3 --retry-connrefused --connect-timeout 5 --max-time 30 -H "Content-Type: application/json" -X POST -d "{\"username\": \"${DOCKER_HUB_USERNAME}\", \"password\": \"${DOCKER_HUB_TOKEN}\"}" https://hub.docker.com/v2/users/login/ | jq --exit-status -r .token)
 
 unpublish_group() {
     local stackVersion="$1"
