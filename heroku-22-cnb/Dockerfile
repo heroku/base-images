@@ -1,4 +1,5 @@
-FROM heroku/heroku:22
+ARG BASE_IMAGE=heroku/heroku:22
+FROM $BASE_IMAGE
 
 RUN ln -s /workspace /app
 

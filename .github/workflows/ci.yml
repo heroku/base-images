@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22"]
+        stack-version: ["20", "22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,8 +50,13 @@ jobs:
             exit 1
           fi
       - name: Publish to image registries
-        run: bin/publish-to-registries.sh
+        run: |-
+          docker buildx create --use
+          bin/publish-to-registries.sh
         if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
+      - name: Unpublish temp tags from this run
+        run: bin/unpublish-tags.sh
+        if: always()
       - name: Convert docker image and release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
         if: success() && github.ref_type == 'tag'
