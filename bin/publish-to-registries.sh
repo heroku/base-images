@@ -25,11 +25,11 @@ push_group() {
       if (( STACK_VERSION < 24 )); then
         # Re-tag amd64-only images
         docker tag "${source}" "${target}"
+        docker push "${target}"
       else
         # Make a carbon copy image index for multi-arch images
         docker buildx imagetools create -t "${target}" "${source}"
       fi
-      docker push "${target}"
     done
 }
 
