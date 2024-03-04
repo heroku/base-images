@@ -16,13 +16,19 @@ push_group() {
     local sourceTagSuffix="$2"
     local targetTagSuffix="$3"
     variants=("" "-build")
-    if (( STACK_VERSION <= 22 )); then
+    if (( STACK_VERSION < 24 )); then
         variants+=("-cnb" "-cnb-build")
     fi
     for variant in "${variants[@]}"; do
       source="${tagBase}${variant}${sourceTagSuffix}"
       target="${tagBase}${variant}${targetTagSuffix}"
-      docker tag "${source}" "${target}"
+      if (( STACK_VERSION < 24 )); then
+        # Re-tag amd64-only images
+        docker tag "${source}" "${target}"
+      else
+        # Make a carbon copy image index for multi-arch images
+        docker buildx imagetools create -t "${target}" "${source}"
+      fi
       docker push "${target}"
     done
 }
