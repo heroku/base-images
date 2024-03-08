@@ -8,14 +8,36 @@ set -x
 
 export DEBIAN_FRONTEND=noninteractive
 
-# The default sources list minus backports, restricted and multiverse.
-cat >/etc/apt/sources.list <<EOF
-deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ noble main universe
-deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ noble-security main universe
-deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ noble-updates main universe
-deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble main universe
-deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-security main universe
-deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates main universe
+# This is the default `ubuntu.sources` from both the AMD64 and ARM64 images
+# combined, with `noble-backports`, `restricted` and `multiverse` removed.
+cat >/etc/apt/sources.list.d/ubuntu.sources <<EOF
+Types: deb
+URIs: http://archive.ubuntu.com/ubuntu/
+Suites: noble noble-updates
+Components: main universe
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+Architectures: amd64
+
+Types: deb
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+Components: main universe
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+Architectures: amd64
+
+Types: deb
+URIs: http://ports.ubuntu.com/ubuntu-ports/
+Suites: noble noble-updates
+Components: main universe
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+Architectures: arm64
+
+Types: deb
+URIs: http://ports.ubuntu.com/ubuntu-ports/
+Suites: noble-security
+Components: main universe restricted multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+Architectures: arm64
 EOF
 
 apt-get update
