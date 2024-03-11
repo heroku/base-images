@@ -8,7 +8,7 @@ set -x
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
+apt-get update --error-on=any
 apt-get install -y --no-install-recommends \
     autoconf \
     automake \
