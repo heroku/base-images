@@ -38,16 +38,21 @@ EOF
 
 apt-get update --error-on=any
 
-# Required by apt-key and does not exist in the base image on newer Ubuntu.
-apt-get install -y --no-install-recommends gnupg
+# We have to install certificates first, so that APT can use HTTPS for apt.postgresql.org.
+apt-get install -y --no-install-recommends ca-certificates
 
 # In order to support all features offered by Heroku Postgres, we need newer postgresql-client
 # than is available in the Ubuntu repository, so use the upstream APT repository instead:
 # https://wiki.postgresql.org/wiki/Apt
-cat >>/etc/apt/sources.list <<EOF
-deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main
+cat >/etc/apt/sources.list.d/pgdg.sources <<'EOF'
+Types: deb
+URIs: https://apt.postgresql.org/pub/repos/apt
+Suites: noble-pgdg
+Components: main
+Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
 EOF
-apt-key add /build/postgresql-ACCC4CF8.asc
+mkdir -p /usr/share/postgresql-common/pgdg/
+cp /build/postgresql-ACCC4CF8.asc /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
 
 apt-get update --error-on=any
 apt-get upgrade -y --no-install-recommends
@@ -68,6 +73,7 @@ packages=(
   gettext-base
   gir1.2-harfbuzz-0.0
   git
+  gnupg
   imagemagick
   iproute2
   iputils-tracepath
