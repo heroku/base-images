@@ -40,7 +40,7 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 Architectures: arm64
 EOF
 
-apt-get update
+apt-get update --error-on=any
 
 # Required by apt-key and does not exist in the base image on newer Ubuntu.
 apt-get install -y --no-install-recommends gnupg
@@ -53,7 +53,7 @@ deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main
 EOF
 apt-key add /build/postgresql-ACCC4CF8.asc
 
-apt-get update
+apt-get update --error-on=any
 apt-get upgrade -y --no-install-recommends
 apt-get install -y --no-install-recommends \
     apt-transport-https \
