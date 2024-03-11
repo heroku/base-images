@@ -10,8 +10,6 @@ RUN mkdir /app && \
 ENV CNB_USER_ID=1000
 ENV CNB_GROUP_ID=1000
 ENV CNB_STACK_ID "heroku-20"
-ENV CNB_TARGET_OS="linux"
-ENV CNB_TARGET_ARCH="amd64"
 
 LABEL io.buildpacks.stack.id="heroku-20"
 
