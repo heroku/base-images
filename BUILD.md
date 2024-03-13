@@ -46,19 +46,14 @@ of 4 images:
 We use GitHub Actions to build and release Heroku Base Images:
 
 * Any push to `main` will build the images and push the nightly Docker tag variants (such as `heroku/heroku:22-build.nightly`).
-* Any new Git tag will build the image and push the latest Docker tag (such as `heroku/heroku:22-build`), as well as a versioned tag (such as `heroku/heroku:22-build.v89`).
+* Any new Git tag will build the image and push the latest Docker tag (such as `heroku/heroku:22-build`),
+  as well as a versioned tag (such as `heroku/heroku:22-build.v123`). The Docker image will then also be
+  converted to a Heroku-specific `.img` format and uploaded to S3 for consumption by the runtime hosts.
 
-# Releasing Heroku Base Images Locally (Prime)
+# Generating `.img` format Base Images locally
 
-When building Heroku Base Images for release locally, you'll need a number of additional steps.
+To test the generation of the Heroku-specific `.img` file:
 
-NOTE: These steps do *not* apply to `*cnb*` images.
-
-    export DOCKER_DEFAULT_PLATFORM=linux/amd64
-    # Build the base image(s) as you would above
-    # …
-    docker build ./tools -t heroku/image-tools
-    # SET MANIFEST_APP_URL and MANIFEST_APP_TOKEN values, this is the app that controls the bucket for images and metadata about the images (Cheverny)
-    docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -e "MANIFEST_APP_URL=$MANIFEST_APP_URL" -e "MANIFEST_APP_TOKEN=$MANIFEST_APP_TOKEN" heroku/image-tools STACK
-    # this will use your local docker image and convert it to a heroku base image
-    # it will then upload this image and the staging manifest via the MANIFEST_APP
+1. Build the Docker images for your chosen stack as normal above.
+2. `docker build --platform=linux/amd64 ./tools -t heroku-image-tools`
+3. `docker run -it --rm --platform=linux/amd64 --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK` (where `STACK` is the full stack name like `heroku-22`)
