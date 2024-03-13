@@ -57,6 +57,5 @@ jobs:
       - name: Unpublish temp tags from this run
         run: bin/unpublish-tags.sh
         if: always()
-      - name: Convert docker image and release to Heroku staging
+      - name: Convert docker image and for Git tags release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
-        if: success() && github.ref_type == 'tag'
