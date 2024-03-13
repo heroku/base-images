@@ -2,11 +2,15 @@
 
 set -euo pipefail
 
+STACK="${1:-}"
+
+[[ "${STACK}" =~ ^heroku-[0-9]+$ ]] || abort "fatal: invalid STACK"
+
 VERSION_PREFIX=$(date '+%Y%m%d-%H%M%S')
 
 while [ $# -gt 0 ]; do
-  capture-docker-stack "$1"       "$VERSION_PREFIX"
-  capture-docker-stack "$1-build" "$VERSION_PREFIX"
+  capture-docker-stack "${STACK}"       "$VERSION_PREFIX"
+  capture-docker-stack "${STACK}-build" "$VERSION_PREFIX"
   shift
 done
 

@@ -1,12 +1,11 @@
 # This Docker image is used only for local testing and not by the CI-based releases.
-FROM ubuntu:20.04
+# See BUILD.md for usage instructions.
+FROM ubuntu:22.04
 
-RUN apt-get update
-RUN apt-get install docker.io -y
-RUN apt-get install jq -y
-RUN apt-get install curl -y
+RUN apt-get update --error-on=any \
+  && apt-get install -y --no-install-recommends docker.io jq curl
 
 COPY bin /usr/local/bin
 
 VOLUME ["/var/run/docker.sock"]
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/convert-to-heroku-stack-image"]
