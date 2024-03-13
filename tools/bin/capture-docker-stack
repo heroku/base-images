@@ -12,12 +12,6 @@ STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
 DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
 
-if [[ ${GITHUB_REF_TYPE} == 'tag' ]]; then
-    GIT_REF=${GITHUB_REF_NAME:?'Error: GITHUB_REF_NAME must be set!'}
-else
-    abort "Error: Cannot publish without a Git tag!"
-fi
-
 IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
 IMG_MNT=/tmp/$IMG_BASE
@@ -47,12 +41,12 @@ display "SHA256ing and gzipping image"
 make-image-archive "${IMG}" "${IMG_SHA256}" |& indent
 cat "${IMG_SHA256}"
 
+display "Capture Package Versions"
+capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
+
 if update-manifest; then
-    display "Starting push at $(date)"
-    display "Capture Package Versions"
-    capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
     display "Uploading files"
-    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" "${GIT_REF}" |& indent
+    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" "${GITHUB_REF_NAME}" |& indent
 else
     display "Skipping image upload"
 fi
