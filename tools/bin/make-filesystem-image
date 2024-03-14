@@ -3,8 +3,23 @@
 set -euo pipefail
 
 IMG="$1"
+DOCKER_IMAGE_SIZE_IN_MB="$2"
+
+# We have to pick a fixed size in advance for the .img file we create, so base it on the size
+# of the original Docker image to avoid either wasting space or having the later tar extraction
+# step fail with out of disk space errors. The image will be mounted read-only at runtime, so
+# does not need free space for app files (separate mounts are used for those). The multiplier
+# here is to account for the 5-6% loss of usable space due to ext3 filesystem overhead, as well
+# as to ensure a few MB additional free space headroom.
+IMG_SIZE_IN_MB=$((DOCKER_IMAGE_SIZE_IN_MB * 107 / 100))
 
 mkdir -p "$(dirname "$IMG")"
-dd if=/dev/zero of="$IMG" bs=100M count=24
+
+# Create an empty file of the specified size.
+# Using `fallocate` instead of `dd` since it's faster, simpler for this use-case, and doesn't
+# suffer from `dd`'s non-determinism when attempting to copy an exact number of bytes:
+# https://unix.stackexchange.com/a/121888
+fallocate --length "${IMG_SIZE_IN_MB}MiB" "${IMG}"
+
 mkfs -t ext3 -m 1 "$IMG"
 tune2fs -c 0 -i 0 "$IMG"
