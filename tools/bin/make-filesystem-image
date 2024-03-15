@@ -21,5 +21,13 @@ mkdir -p "$(dirname "$IMG")"
 # https://unix.stackexchange.com/a/121888
 fallocate --length "${IMG_SIZE_IN_MB}MiB" "${IMG}"
 
+# Format that file as an ext3 filesystem.
+# The `-m` argument reduces reserved-blocks-percentage from its default of 5% to 1%.
+# TODO: Switch to calling `mkfs.ext3` or `mke2fs -t ext3` since the `mkfs` alias is deprecated:
+# https://manpages.ubuntu.com/manpages/jammy/en/man8/mkfs.8.html
 mkfs -t ext3 -m 1 "$IMG"
+
+# Adjust the filesystem parameters for improved performance on runtime instances.
+# The `-c` and `-i` arguments disable automatic filesystem checks, which are otherwise run based
+# on number of times the image is mounted, or how much time has passed since the last check.
 tune2fs -c 0 -i 0 "$IMG"
