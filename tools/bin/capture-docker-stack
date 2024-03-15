@@ -11,6 +11,11 @@ STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
 DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
+# Using `du` rather than the `Size` attribute from Docker inspect, since the latter appears to:
+#  - Under-report usage slightly when using the overlay2 storage driver
+#  - Be the compressed image size (instead of uncompressed) when using the containerd snapshotter
+# The `--user root` is required since the images for newer stacks default to a non-root user.
+DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform linux/amd64 --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -d 'M' -f 1)
 
 IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
@@ -23,7 +28,7 @@ IMG_PKG_VERSIONS=/tmp/$IMG_BASE.pkg.versions
 display "Starting capture for ${STACK} ${DOCKER_IMAGE_VERSION} at $(date)"
 
 display "Creating image file ${IMG}"
-make-filesystem-image "${IMG}" |& indent
+make-filesystem-image "${IMG}" "${DOCKER_IMAGE_SIZE_IN_MB}" |& indent
 
 display "Mounting image ${IMG_MNT}"
 mount-filesystem-image "${IMG}" "${IMG_MNT}" |& indent
@@ -35,6 +40,7 @@ display "Modifying image directories and files"
 install-heroku-files "${IMG_MNT}" |& indent
 
 display "Unmounting image"
+df --human-readable "${IMG_MNT}" |& indent
 umount "${IMG_MNT}" |& indent
 
 display "SHA256ing and gzipping image"
