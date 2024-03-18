@@ -17,7 +17,7 @@ DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':'
 # The `--user root` is required since the images for newer stacks default to a non-root user.
 DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform linux/amd64 --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -d 'M' -f 1)
 
-IMG_BASE=${STACK_NAME}64-$STACK_VERSION-$DOCKER_IMAGE_VERSION
+IMG_BASE=${STACK_NAME}-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
 IMG_MNT=/tmp/$IMG_BASE
 IMG_GZ=/tmp/$IMG_BASE.img.gz
