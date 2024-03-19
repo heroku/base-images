@@ -1,4 +1,5 @@
 FROM ubuntu:24.04
+
 RUN --mount=target=/build /build/setup.sh
 
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#run-image
