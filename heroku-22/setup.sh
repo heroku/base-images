@@ -135,7 +135,7 @@ packages=(
   openssh-server
   patch
   poppler-utils
-  postgresql-client-15
+  postgresql-client-16
   python-is-python3
   python3
   rename

@@ -355,7 +355,7 @@ perl-modules-5.30
 pinentry-curses
 poppler-data
 poppler-utils
-postgresql-client-15
+postgresql-client-16
 postgresql-client-common
 procps
 python-is-python3
