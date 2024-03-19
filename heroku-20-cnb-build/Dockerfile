@@ -1,11 +1,10 @@
 ARG BASE_IMAGE=heroku/heroku:20-build
 FROM $BASE_IMAGE
 
-RUN groupadd heroku --gid 1000 && \
-  useradd heroku -u 1000 -g 1000 -s /bin/bash -m
-
-RUN mkdir /app && \
-  chown heroku:heroku /app
+RUN groupadd heroku --gid 1000 \
+  && useradd heroku --uid 1000 --gid 1000 --shell /bin/bash --create-home \
+  && mkdir /app \
+  && chown heroku:heroku /app
 
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#build-image
 ENV CNB_USER_ID=1000
@@ -19,7 +18,7 @@ LABEL io.buildpacks.base.maintainer="Heroku"
 
 # Stack IDs are deprecated, but we still set these for backwards compatibility:
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#iobuildpacksstack-labels
-ENV CNB_STACK_ID "heroku-20"
+ENV CNB_STACK_ID="heroku-20"
 LABEL io.buildpacks.stack.id="heroku-20"
 
 USER heroku

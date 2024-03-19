@@ -1,10 +1,9 @@
 ARG BASE_IMAGE=heroku/heroku:20
 FROM $BASE_IMAGE
 
-RUN ln -s /workspace /app
-
-RUN groupadd heroku --gid 1000 && \
-  useradd heroku -u 1000 -g 1000 -s /bin/bash -m
+RUN groupadd heroku --gid 1000 \
+  && useradd heroku --uid 1000 --gid 1000 --shell /bin/bash --create-home \
+  && ln -s /workspace /app
 
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#run-image
 USER heroku
@@ -17,4 +16,4 @@ LABEL io.buildpacks.base.maintainer="Heroku"
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#iobuildpacksstack-labels
 LABEL io.buildpacks.stack.id="heroku-20"
 
-ENV HOME /app
+ENV HOME=/app
