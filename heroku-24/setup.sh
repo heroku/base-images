@@ -71,7 +71,6 @@ packages=(
   geoip-database
   gettext-base
   gir1.2-harfbuzz-0.0
-  git
   gnupg
   imagemagick
   iproute2
