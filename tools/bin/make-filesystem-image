@@ -13,6 +13,8 @@ DOCKER_IMAGE_SIZE_IN_MB="$2"
 # as to ensure a few MB additional free space headroom.
 IMG_SIZE_IN_MB=$((DOCKER_IMAGE_SIZE_IN_MB * 107 / 100))
 
+echo "Using file size of ${IMG_SIZE_IN_MB} MB based on Docker image size of ${DOCKER_IMAGE_SIZE_IN_MB} MB"
+
 mkdir -p "$(dirname "$IMG")"
 
 # Create an empty file of the specified size.
@@ -22,10 +24,12 @@ mkdir -p "$(dirname "$IMG")"
 fallocate --length "${IMG_SIZE_IN_MB}MiB" "${IMG}"
 
 # Format that file as an ext3 filesystem.
+# The `-T` argument forces the 'default' config profile to be used, since otherwise if the filesystem size
+# is less than 512 MB (as is the case for Heroku-24's run image) the 'small' profile would be used instead.
 # The `-m` argument reduces reserved-blocks-percentage from its default of 5% to 1%.
 # TODO: Switch to calling `mkfs.ext3` or `mke2fs -t ext3` since the `mkfs` alias is deprecated:
 # https://manpages.ubuntu.com/manpages/jammy/en/man8/mkfs.8.html
-mkfs -t ext3 -m 1 "$IMG"
+mkfs -t ext3 -T default -m 1 -v "$IMG"
 
 # Adjust the filesystem parameters for improved performance on runtime instances.
 # The `-c` and `-i` arguments disable automatic filesystem checks, which are otherwise run based
