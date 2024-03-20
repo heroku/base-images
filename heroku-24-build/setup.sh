@@ -8,6 +8,7 @@ packages=(
   autoconf
   automake
   bison
+  # Includes gcc, g++, make, patch, libc6-dev etc.
   build-essential
   cmake
   gettext
