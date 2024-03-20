@@ -541,7 +541,6 @@ poppler-utils
 postgresql-client-16
 postgresql-client-common
 procps
-python-is-python3
 python3
 python3-imath
 python3-minimal
