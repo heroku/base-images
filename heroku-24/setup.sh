@@ -164,7 +164,6 @@ packages=(
   rsync
   shared-mime-info
   socat
-  stunnel
   tar
   telnet
   tzdata
