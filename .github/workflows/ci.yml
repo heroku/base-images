@@ -56,6 +56,6 @@ jobs:
         if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
       - name: Unpublish temp tags from this run
         run: bin/unpublish-tags.sh
-        if: always()
+        if: always() && (github.ref_name == 'main' || github.ref_type == 'tag')
       - name: Convert docker image and for Git tags release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
