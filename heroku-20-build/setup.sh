@@ -78,7 +78,7 @@ packages=(
   libzstd-dev
   mercurial
   patchelf
-  postgresql-server-dev-15
+  postgresql-server-dev-16
   python3-dev
   ruby-dev
   zlib1g-dev

@@ -560,7 +560,7 @@ pinentry-curses
 pkg-config
 poppler-data
 poppler-utils
-postgresql-client-15
+postgresql-client-16
 postgresql-client-common
 procps
 python-is-python3
