@@ -68,7 +68,6 @@ packages=(
   ed
   file
   fontconfig
-  gcc
   geoip-database
   gettext-base
   gir1.2-harfbuzz-0.0
@@ -82,7 +81,6 @@ packages=(
   libargon2-1
   libass9
   libc-client2007e
-  libc6-dev
   libcairo2
   libcurl4
   libdatrie1
@@ -155,7 +153,6 @@ packages=(
   libzstd1
   locales
   lsb-release
-  make
   netcat-openbsd
   openssh-client
   openssh-server
