@@ -60,7 +60,6 @@ less
 libacl1
 libaec0
 libaom3
-libapparmor1
 libapt-pkg6.0
 libarchive13
 libargon2-1
@@ -87,7 +86,6 @@ libcfitsio10
 libcgif0
 libcom-err2
 libcrypt1
-libcryptsetup12
 libcurl3-gnutls
 libcurl4
 libdatrie1
@@ -96,7 +94,6 @@ libdb5.3
 libde265-0
 libdebconfclient0
 libdeflate0
-libdevmapper1.02.1
 libdjvulibre-text
 libdjvulibre21
 libedit2
@@ -110,7 +107,6 @@ libevent-pthreads-2.1-7
 libexif12
 libexpat1
 libext2fs2
-libfdisk1
 libffi8
 libfftw3-double3
 libfido2-1
@@ -155,7 +151,6 @@ libjson-c5
 libjxl0.7
 libk5crypto3
 libkeyutils1
-libkmod2
 libkrb5-3
 libkrb5support0
 libksba8
@@ -244,7 +239,6 @@ libssh-4
 libssl3
 libstdc++6
 libsvtav1enc1d1
-libsystemd-shared
 libsystemd0
 libsz2
 libtasn1-6
@@ -328,9 +322,6 @@ sed
 sensible-utils
 shared-mime-info
 socat
-stunnel4
-systemd
-systemd-dev
 sysvinit-utils
 tar
 telnet
