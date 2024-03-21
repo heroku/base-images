@@ -158,8 +158,6 @@ packages=(
   patch
   poppler-utils
   postgresql-client-16
-  python-is-python3
-  python3
   rename
   rsync
   shared-mime-info

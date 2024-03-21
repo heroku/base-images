@@ -211,9 +211,6 @@ libpopt0
 libpq5
 libproc2-0
 libpsl5
-libpython3-stdlib
-libpython3.12-minimal
-libpython3.12-stdlib
 librabbitmq4
 libraw23
 libreadline8
@@ -288,7 +285,6 @@ login
 logsave
 lsb-release
 mawk
-media-types
 mlock
 mount
 mysql-common
@@ -310,11 +306,6 @@ poppler-utils
 postgresql-client-16
 postgresql-client-common
 procps
-python-is-python3
-python3
-python3-minimal
-python3.12
-python3.12-minimal
 readline-common
 rename
 rsync

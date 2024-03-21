@@ -77,6 +77,9 @@ packages=(
   libzip-dev
   libzstd-dev
   patchelf
+  # Python is often needed during the build for non-Python apps, which aren't using the
+  # Python buildpack. e.g. Node.js packages that use node-gyp require Python during install.
+  python3
   zlib1g-dev
 )
 
