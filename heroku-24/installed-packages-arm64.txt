@@ -37,8 +37,6 @@ gettext-base
 gir1.2-freedesktop
 gir1.2-glib-2.0
 gir1.2-harfbuzz-0.0
-git
-git-man
 gnupg
 gnupg-utils
 gpg
@@ -103,7 +101,6 @@ libdjvulibre-text
 libdjvulibre21
 libedit2
 libelf1
-liberror-perl
 libev4
 libevent-2.1-7
 libevent-core-2.1-7
