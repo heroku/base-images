@@ -1,7 +1,6 @@
 # List of packages present in the final image. Regenerate using bin/build.sh
 adduser
 apt
-apt-transport-https
 apt-utils
 base-files
 base-passwd
@@ -20,7 +19,6 @@ debconf
 debianutils
 diffutils
 dirmngr
-dnsutils
 dpkg
 e2fsprogs
 ed
@@ -315,7 +313,6 @@ shared-mime-info
 socat
 sysvinit-utils
 tar
-telnet
 tzdata
 ubuntu-keyring
 ucf

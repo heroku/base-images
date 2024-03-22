@@ -1,7 +1,6 @@
 # List of packages present in the final image. Regenerate using bin/build.sh
 adduser
 apt
-apt-transport-https
 apt-utils
 autoconf
 automake
@@ -35,7 +34,6 @@ debconf
 debianutils
 diffutils
 dirmngr
-dnsutils
 dpkg
 dpkg-dev
 e2fsprogs
@@ -204,7 +202,7 @@ libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-bin
 libgdk-pixbuf2.0-common
 libgeoip-dev
-libgeoip1
+libgeoip1t64
 libgfortran5
 libgirepository-2.0-0
 libglib2.0-0
@@ -562,7 +560,6 @@ shared-mime-info
 socat
 sysvinit-utils
 tar
-telnet
 tzdata
 ubuntu-keyring
 ucf

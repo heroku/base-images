@@ -58,13 +58,12 @@ apt-get update --error-on=any
 apt-get upgrade -y --no-install-recommends
 
 packages=(
-  apt-transport-https
   apt-utils
-  bind9-host
+  # For dig, host and nslookup.
+  bind9-dnsutils
   bzip2
   coreutils
   curl
-  dnsutils
   ed
   file
   fontconfig
@@ -73,6 +72,7 @@ packages=(
   gir1.2-harfbuzz-0.0
   gnupg
   imagemagick
+  inetutils-telnet
   iproute2
   iputils-tracepath
   less
@@ -163,7 +163,6 @@ packages=(
   shared-mime-info
   socat
   tar
-  telnet
   tzdata
   unzip
   wget
