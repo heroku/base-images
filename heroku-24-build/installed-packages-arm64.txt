@@ -332,7 +332,6 @@ libnetpbm11
 libnettle8
 libnghttp2-14
 libnpth0
-libnsl-dev
 libnsl2
 libnspr4
 libnss3
@@ -439,7 +438,6 @@ libtiff6
 libtiffxx6
 libtinfo6
 libtirpc-common
-libtirpc-dev
 libtirpc3
 libtool
 libtsan2
