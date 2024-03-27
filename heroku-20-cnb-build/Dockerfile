@@ -7,6 +7,7 @@ RUN groupadd heroku --gid 1000 \
   && chown heroku:heroku /app
 
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#build-image
+USER heroku
 ENV CNB_USER_ID=1000
 ENV CNB_GROUP_ID=1000
 # Note: This image doesn't inherit from the CNB run image variant so we have
@@ -20,5 +21,3 @@ LABEL io.buildpacks.base.maintainer="Heroku"
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#iobuildpacksstack-labels
 ENV CNB_STACK_ID="heroku-20"
 LABEL io.buildpacks.stack.id="heroku-20"
-
-USER heroku
