@@ -189,10 +189,12 @@ apt-get purge -y openjdk-8-jre-headless
 apt-get autoremove -y --purge
 test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
-useradd heroku --uid 1001 --gid 1000 --shell /bin/bash --create-home
-useradd heroku-build --uid 1002 --gid 1000 --shell /bin/bash --create-home
-groupmod --new-name heroku ubuntu
-deluser --remove-home ubuntu
+# Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
+# that we have to remove before creating our own (`userdel` will remove the group too).
+userdel ubuntu --remove
+
+groupadd heroku --gid 1000
+useradd heroku --uid 1000 --gid 1000 --shell /bin/bash --create-home
 
 rm -rf /root/*
 rm -rf /tmp/*

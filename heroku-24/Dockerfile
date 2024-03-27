@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 RUN --mount=target=/build /build/setup.sh
 
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#run-image
-USER 1001
+USER heroku
 LABEL io.buildpacks.base.distro.name="ubuntu"
 LABEL io.buildpacks.base.distro.version="24.04"
 LABEL io.buildpacks.base.homepage="https://github.com/heroku/base-images"
