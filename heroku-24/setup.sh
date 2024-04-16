@@ -137,7 +137,7 @@ packages=(
   libvorbis0a
   libvorbisenc2
   libvorbisfile3
-  libvpx8
+  libvpx9
   libwebp7
   libwebpdemux2
   libwebpmux3
