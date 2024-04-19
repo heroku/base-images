@@ -132,7 +132,7 @@ libharfbuzz-icu0
 libharfbuzz0b
 libhashkit2t64
 libhdf5-103-1t64
-libheif-plugin-dav1d
+libheif-plugin-aomdec
 libheif-plugin-libde265
 libheif1
 libhogweed6t64
