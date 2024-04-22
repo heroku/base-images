@@ -21,7 +21,6 @@ diffutils
 dirmngr
 dpkg
 e2fsprogs
-ed
 file
 findutils
 fontconfig
@@ -284,6 +283,7 @@ mawk
 mlock
 mount
 mysql-common
+nano
 ncurses-base
 ncurses-bin
 netbase

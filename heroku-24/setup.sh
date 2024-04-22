@@ -64,7 +64,6 @@ packages=(
   bzip2
   coreutils
   curl
-  ed
   file
   fontconfig
   geoip-database
@@ -152,6 +151,8 @@ packages=(
   libzstd1
   locales
   lsb-release
+  # Nano is more usable than ed but still much smaller than vim.
+  nano
   netcat-openbsd
   openssh-client
   openssh-server
