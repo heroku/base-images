@@ -37,7 +37,6 @@ dirmngr
 dpkg
 dpkg-dev
 e2fsprogs
-ed
 file
 findutils
 fontconfig
@@ -509,6 +508,7 @@ media-types
 mlock
 mount
 mysql-common
+nano
 ncurses-base
 ncurses-bin
 netbase
