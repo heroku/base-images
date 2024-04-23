@@ -4,37 +4,17 @@ set -euxo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
-# This is the default `ubuntu.sources` from both the AMD64 and ARM64 images
-# combined, with `noble-backports`, `restricted` and `multiverse` removed.
-cat >/etc/apt/sources.list.d/ubuntu.sources <<EOF
-Types: deb
-URIs: http://archive.ubuntu.com/ubuntu/
-Suites: noble noble-updates
-Components: main universe
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-Architectures: amd64
-
-Types: deb
-URIs: http://security.ubuntu.com/ubuntu/
-Suites: noble-security
-Components: main universe
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-Architectures: amd64
-
-Types: deb
-URIs: http://ports.ubuntu.com/ubuntu-ports/
-Suites: noble noble-updates
-Components: main universe
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-Architectures: arm64
-
-Types: deb
-URIs: http://ports.ubuntu.com/ubuntu-ports/
-Suites: noble-security
-Components: main universe restricted multiverse
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-Architectures: arm64
-EOF
+# Disable APT repositories that contain packages with potentially problematic licenses.
+# We edit the existing file rather than using our own static file contents, since the repository
+# URIs vary across architectures, so we would otherwise have to hardcode multiple file variants.
+# There are multiple repository configuration lines in the file, all of form:
+# `Components: main universe restricted multiverse`
+# See: https://manpages.ubuntu.com/manpages/noble/en/man5/sources.list.5.html
+for repository_to_disable in multiverse restricted; do
+  # sed doesn't support lookbehind so we instead have to match against the line prefix too
+  # and then preserve it using `\1` in the replacement.
+  sed --in-place --regexp-extended "s/(Components:.*) ${repository_to_disable}/\1/g" /etc/apt/sources.list.d/ubuntu.sources
+done
 
 apt-get update --error-on=any
 
