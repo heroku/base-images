@@ -13,7 +13,7 @@ export DEBIAN_FRONTEND=noninteractive
 for repository_to_disable in multiverse restricted; do
   # sed doesn't support lookbehind so we instead have to match against the line prefix too
   # and then preserve it using `\1` in the replacement.
-  sed --in-place --regexp-extended "s/(Components:.*) ?${repository_to_disable}/\1/g" /etc/apt/sources.list.d/ubuntu.sources
+  sed --in-place --regexp-extended "s/(Components:.*) ${repository_to_disable}/\1/g" /etc/apt/sources.list.d/ubuntu.sources
 done
 
 apt-get update --error-on=any
