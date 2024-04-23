@@ -42,10 +42,8 @@ packages=(
   # For dig, host and nslookup.
   bind9-dnsutils
   bzip2
-  coreutils
   curl
   file
-  fontconfig
   geoip-database
   gettext-base
   gir1.2-harfbuzz-0.0
@@ -55,13 +53,9 @@ packages=(
   iproute2
   iputils-tracepath
   less
-  libaom3
   libargon2-1
   libass9
   libc-client2007e
-  libcairo2
-  libcurl4
-  libdatrie1
   libdav1d7
   libev4
   libevent-2.1-7
@@ -69,66 +63,38 @@ packages=(
   libevent-extra-2.1-7
   libevent-openssl-2.1-7
   libevent-pthreads-2.1-7
-  libexif12
-  libfreetype6
-  libfribidi0
   libgd3
   libgdk-pixbuf2.0-0
-  libgdk-pixbuf2.0-common
   libgnutls-openssl27
   libgnutls30
-  libgraphite2-3
-  libgraphite2-3
-  libharfbuzz-gobject0
   libharfbuzz-icu0
-  libharfbuzz0b
-  libheif1
   liblzf1
   libmagickcore-6.q16-7-extra
   libmcrypt4
   libmemcached11
   libmp3lame0
   libmysqlclient21
-  libnuma1
-  libogg0
   libonig5
   libopencore-amrnb0
   libopencore-amrwb0
   libopus0
-  libpango-1.0-0
-  libpangocairo-1.0-0
-  libpangoft2-1.0-0
-  libpixman-1-0
   librabbitmq4
-  librsvg2-2
   librsvg2-common
   libsasl2-modules
-  libseccomp2
   libsodium23
   libspeex1
   libsvtav1enc1d1
-  libthai-data
-  libthai0
   libtheora0
-  libunistring5
   libuv1
   libvips42
-  libvorbis0a
   libvorbisenc2
   libvorbisfile3
   libvpx9
-  libwebp7
-  libwebpdemux2
-  libwebpmux3
   libx264-164
   libx265-199
-  libxcb-render0
-  libxcb-shm0
-  libxrender1
   libxslt1.1
   libyaml-0-2
   libzip4
-  libzstd1
   locales
   lsb-release
   # Nano is more usable than ed but still much smaller than vim.
@@ -141,7 +107,6 @@ packages=(
   postgresql-client-16
   rename
   rsync
-  shared-mime-info
   socat
   tar
   tzdata
@@ -149,7 +114,6 @@ packages=(
   wget
   xz-utils
   zip
-  zlib1g
   zstd
 )
 
