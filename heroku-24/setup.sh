@@ -64,7 +64,7 @@ packages=(
   libevent-openssl-2.1-7
   libevent-pthreads-2.1-7
   libgd3
-  libgdk-pixbuf2.0-0
+  libgdk-pixbuf-2.0-0
   libgnutls-openssl27
   libgnutls30
   libharfbuzz-icu0
