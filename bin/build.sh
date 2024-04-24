@@ -135,21 +135,21 @@ display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} image"
 # from upstream ubuntu images are included.
 docker "${DOCKER_ARGS[@]}" --pull \
 	--tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
-	write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
+write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
 
-	for VARIANT in "${VARIANTS[@]}"; do
-		VARIANT_NAME=$(echo "$VARIANT" | cut -d ":" -f 1)
-		DEPENDENCY_NAME=$(echo "$VARIANT" | cut -d ":" -f 2)
-		VARIANT_IMAGE_TAG="${REPO}:${STACK_VERSION}${VARIANT_NAME}${PUBLISH_SUFFIX}"
-		VARIANT_DOCKERFILE_DIR="heroku-${STACK_VERSION}${VARIANT_NAME}"
-		DEPENDENCY_IMAGE_TAG="${REPO}:${STACK_VERSION}${DEPENDENCY_NAME}${PUBLISH_SUFFIX}"
+for VARIANT in "${VARIANTS[@]}"; do
+	VARIANT_NAME=$(echo "$VARIANT" | cut -d ":" -f 1)
+	DEPENDENCY_NAME=$(echo "$VARIANT" | cut -d ":" -f 2)
+	VARIANT_IMAGE_TAG="${REPO}:${STACK_VERSION}${VARIANT_NAME}${PUBLISH_SUFFIX}"
+	VARIANT_DOCKERFILE_DIR="heroku-${STACK_VERSION}${VARIANT_NAME}"
+	DEPENDENCY_IMAGE_TAG="${REPO}:${STACK_VERSION}${DEPENDENCY_NAME}${PUBLISH_SUFFIX}"
 
-		[[ -d "${VARIANT_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${VARIANT_DOCKERFILE_DIR} not found"
-		display "Building ${VARIANT_DOCKERFILE_DIR} / ${VARIANT_IMAGE_TAG} image"
-		# The --pull option is not used for variants since they depend on images
-		# built earlier in this script.
-		docker "${DOCKER_ARGS[@]}" --build-arg "BASE_IMAGE=${DEPENDENCY_IMAGE_TAG}" \
-			--tag "${VARIANT_IMAGE_TAG}" "${VARIANT_DOCKERFILE_DIR}" | indent
+	[[ -d "${VARIANT_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${VARIANT_DOCKERFILE_DIR} not found"
+	display "Building ${VARIANT_DOCKERFILE_DIR} / ${VARIANT_IMAGE_TAG} image"
+	# The --pull option is not used for variants since they depend on images
+	# built earlier in this script.
+	docker "${DOCKER_ARGS[@]}" --build-arg "BASE_IMAGE=${DEPENDENCY_IMAGE_TAG}" \
+		--tag "${VARIANT_IMAGE_TAG}" "${VARIANT_DOCKERFILE_DIR}" | indent
 
 	# generate the package list for non-cnb variants. cnb variants don't
 	# influence the list of installed packages.
