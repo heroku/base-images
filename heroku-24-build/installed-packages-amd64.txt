@@ -19,7 +19,7 @@ bsdutils
 build-essential
 bzip2
 ca-certificates
-ca-certificates-java
+ca-certificates-java (package status: config-files)
 cmake
 cmake-data
 comerr-dev

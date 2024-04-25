@@ -122,7 +122,11 @@ write_package_list() {
 		fi
 		display "Generating package list: ${output_file}"
 		echo "# List of packages present in the final image. Regenerate using bin/build.sh" > "$output_file"
-		docker run --rm --platform="linux/${arch}" "$image_tag" dpkg-query --show --showformat='${Package}\n' >> "$output_file"
+		# We include the package status in the output so we can differentiate between fully installed
+		# packages, and those that have been removed but not purged (either because we forgot to purge,
+		# or because we intentionally left config files behind, such as for `ca-certificates-java`).
+		docker run --rm --platform="linux/${arch}" "$image_tag" dpkg-query --show --showformat='${Package} (package status: ${db:Status-Status})\n' \
+			| sed -e 's/ (package status: installed)//' >> "$output_file"
 	done
 }
 
