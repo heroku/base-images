@@ -23,7 +23,7 @@ build-essential
 bzip2
 bzr
 ca-certificates
-ca-certificates-java
+ca-certificates-java (package status: config-files)
 clang-10
 cmake
 cmake-data

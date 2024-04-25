@@ -11,7 +11,7 @@ bind9-libs
 bsdutils
 bzip2
 ca-certificates
-ca-certificates-java
+ca-certificates-java (package status: config-files)
 coreutils
 curl
 dash

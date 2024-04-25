@@ -15,7 +15,7 @@ binutils-x86-64-linux-gnu
 bsdutils
 bzip2
 ca-certificates
-ca-certificates-java
+ca-certificates-java (package status: config-files)
 coreutils
 cpp
 cpp-9

@@ -22,7 +22,7 @@ build-essential
 bzip2
 bzr
 ca-certificates
-ca-certificates-java
+ca-certificates-java (package status: config-files)
 cmake
 cmake-data
 comerr-dev
