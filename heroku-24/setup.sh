@@ -119,8 +119,9 @@ packages=(
 
 apt-get install -y --no-install-recommends "${packages[@]}"
 
-# Generate locale data for "en_US", which is not available by default. Ubuntu
-# ships only with "C" and "POSIX" locales.
+# Generate locale data for "en_US.UTF-8" too, since the upstream Ubuntu image
+# only ships with the "C", "C.utf8" and "POSIX" locales:
+# https://github.com/docker-library/docs/blob/master/ubuntu/README.md#locales
 locale-gen en_US.UTF-8
 
 # Temporarily install ca-certificates-java to generate the certificates store used
