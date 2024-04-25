@@ -115,8 +115,6 @@ libgd3
 libgdbm-compat4t64
 libgdbm6t64
 libgdk-pixbuf-2.0-0
-libgdk-pixbuf-xlib-2.0-0
-libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
 libglib2.0-0t64
 libgmp10

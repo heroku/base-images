@@ -200,8 +200,6 @@ libgdbm-dev
 libgdbm6t64
 libgdk-pixbuf-2.0-0
 libgdk-pixbuf-2.0-dev
-libgdk-pixbuf-xlib-2.0-0
-libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-bin
 libgdk-pixbuf2.0-common
 libgeoip-dev
