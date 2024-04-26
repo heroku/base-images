@@ -17,7 +17,6 @@ packages=(
   libacl1-dev
   libapt-pkg-dev
   libargon2-dev
-  libattr1-dev
   libaudit-dev
   libbsd-dev
   libbz2-dev
@@ -34,7 +33,6 @@ packages=(
   libgd-dev
   libgdbm-dev
   libgeoip-dev
-  libglib2.0-dev
   libgnutls28-dev
   libheif-dev
   libicu-dev
@@ -51,17 +49,14 @@ packages=(
   libmcrypt-dev
   libmemcached-dev
   libmysqlclient-dev
-  libncurses-dev
   libnetpbm10-dev
   libonig-dev
-  libpam0g-dev
   libpopt-dev
   libpq-dev
   librabbitmq-dev
   libreadline-dev
   librtmp-dev
   libseccomp-dev
-  libselinux1-dev
   libsemanage-dev
   libsodium-dev
   libssl-dev
