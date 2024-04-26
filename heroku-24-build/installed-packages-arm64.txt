@@ -238,7 +238,6 @@ libice6
 libicu-dev
 libicu74
 libidn-dev
-libidn11-dev
 libidn12
 libidn2-0
 libidn2-dev
@@ -275,7 +274,6 @@ liblcms2-2
 liblcms2-dev
 libldap-dev
 libldap2
-libldap2-dev
 liblerc-dev
 liblerc4
 liblmdb0
