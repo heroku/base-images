@@ -38,12 +38,12 @@ packages=(
   libgnutls28-dev
   libheif-dev
   libicu-dev
-  libidn11-dev
+  libidn-dev
   libjpeg-dev
   libkeyutils-dev
   libkmod-dev
   libkrb5-dev
-  libldap2-dev
+  libldap-dev
   liblz4-dev
   liblzf-dev
   libmagic-dev
@@ -51,8 +51,7 @@ packages=(
   libmcrypt-dev
   libmemcached-dev
   libmysqlclient-dev
-  libncurses5-dev
-  libncursesw5-dev
+  libncurses-dev
   libnetpbm10-dev
   libonig-dev
   libpam0g-dev
