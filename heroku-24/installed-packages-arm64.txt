@@ -1,7 +1,6 @@
 # List of packages present in the final image. Regenerate using bin/build.sh
 adduser
 apt
-apt-utils
 base-files
 base-passwd
 bash
@@ -301,7 +300,6 @@ postgresql-client-16
 postgresql-client-common
 procps
 readline-common
-rename
 rsync
 sed
 sensible-utils
