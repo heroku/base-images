@@ -1,7 +1,6 @@
 # List of packages present in the final image. Regenerate using bin/build.sh
 adduser
 apt
-apt-utils
 autoconf
 automake
 autotools-dev
@@ -533,7 +532,6 @@ python3-packaging
 python3.12
 python3.12-minimal
 readline-common
-rename
 rpcsvc-proto
 rsync
 sed

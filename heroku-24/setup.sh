@@ -38,7 +38,6 @@ apt-get update --error-on=any
 apt-get upgrade -y --no-install-recommends
 
 packages=(
-  apt-utils
   # For dig, host and nslookup.
   bind9-dnsutils
   bzip2
@@ -105,7 +104,6 @@ packages=(
   patch
   poppler-utils
   postgresql-client-16
-  rename
   rsync
   socat
   tar
