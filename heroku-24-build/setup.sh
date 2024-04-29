@@ -8,10 +8,9 @@ packages=(
   autoconf
   automake
   bison
-  # Includes gcc, g++, make, patch, libc6-dev etc.
-  build-essential
+  build-essential # Includes gcc, g++, make, patch, libc6-dev etc.
   cmake
-  gettext
+  gettext # Internationalization utils used by Django, Rails etc.
   git
   jq
   libacl1-dev
@@ -71,9 +70,7 @@ packages=(
   libzip-dev
   libzstd-dev
   patchelf
-  # Python is often needed during the build for non-Python apps, which aren't using the
-  # Python buildpack. e.g. Node.js packages that use node-gyp require Python during install.
-  python3
+  python3 # Often needed during the building of non-Python apps. e.g. For Node.js packages that use node-gyp.
   zlib1g-dev
 )
 

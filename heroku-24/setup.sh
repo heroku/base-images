@@ -38,72 +38,70 @@ apt-get update --error-on=any
 apt-get upgrade -y --no-install-recommends
 
 packages=(
-  # For dig, host and nslookup.
-  bind9-dnsutils
+  bind9-dnsutils # For `dig`, `host` and `nslookup`.
   bzip2
   curl
   file
   geoip-database
-  gettext-base
-  gir1.2-harfbuzz-0.0
+  gettext-base # For `envsubst`.
+  gir1.2-harfbuzz-0.0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   gnupg
   imagemagick
   inetutils-telnet
-  iproute2
+  iproute2 # For `ip`, used by Heroku Exec.
   iputils-tracepath
   less
-  libargon2-1
-  libass9
-  libc-client2007e
-  libdav1d7
+  libargon2-1 # Used by the PHP runtime.
+  libass9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libc-client2007e # Used by the PHP IMAP extension.
+  libdav1d7 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libev4
-  libevent-2.1-7
-  libevent-core-2.1-7
-  libevent-extra-2.1-7
-  libevent-openssl-2.1-7
+  libevent-2.1-7 # Used by PgBouncer in heroku-buildpack-pgbouncer.
+  libevent-core-2.1-7 # Used by the PHP Event extension.
+  libevent-extra-2.1-7 # Used by the PHP Event extension.
+  libevent-openssl-2.1-7 # Used by the PHP Event extension.
   libevent-pthreads-2.1-7
   libgd3
   libgdk-pixbuf-2.0-0
   libgnutls-openssl27
-  libgnutls30
-  libharfbuzz-icu0
-  liblzf1
-  libmagickcore-6.q16-7-extra
+  libgnutls30 # Used by the Ruby and PHP runtimes.
+  libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  liblzf1 # Used by the PHP Redis extension.
+  libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmcrypt4
-  libmemcached11
-  libmp3lame0
+  libmemcached11 # Used by the PHP Memcached extension.
+  libmp3lame0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libmysqlclient21
-  libonig5
-  libopencore-amrnb0
-  libopencore-amrwb0
-  libopus0
-  librabbitmq4
+  libonig5 # Used by the PHP runtime.
+  libopencore-amrnb0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libopencore-amrwb0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libopus0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  librabbitmq4 # Used by the PHP AMQP extension.
   librsvg2-common
-  libsasl2-modules
-  libsodium23
-  libspeex1
-  libsvtav1enc1d1
-  libtheora0
+  libsasl2-modules # Used by the Ruby and PHP runtimes.
+  libsodium23 # Used by the PHP runtime.
+  libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libsvtav1enc1d1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libuv1
-  libvips42
-  libvorbisenc2
-  libvorbisfile3
-  libvpx9
-  libx264-164
-  libx265-199
-  libxslt1.1
-  libyaml-0-2
-  libzip4
+  libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
+  libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libvorbisfile3 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libvpx9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libx264-164 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libx265-199 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libxslt1.1 # Used by the PHP runtime.
+  libyaml-0-2 # Used by the Ruby runtime.
+  libzip4 # Used by the PHP runtime.
   locales
   lsb-release
-  # Nano is more usable than ed but still much smaller than vim.
-  nano
+  nano # More usable than ed but still much smaller than vim.
   netcat-openbsd
-  openssh-client
-  openssh-server
+  openssh-client # Used by Heroku Exec.
+  openssh-server # Used by Heroku Exec.
   patch
-  poppler-utils
-  postgresql-client-16
+  poppler-utils # For Rails Active Storage Previews PDF support.
+  postgresql-client-16 # We need `psql` (and not just libpq) for Shield DB workflows (where connections are only possible from the dyno).
   rsync
   socat
   tar
