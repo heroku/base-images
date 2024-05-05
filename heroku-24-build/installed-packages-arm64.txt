@@ -308,6 +308,7 @@ libmpc3
 libmpfr6
 libmysqlclient-dev
 libmysqlclient21
+libncurses6
 libncursesw6
 libnetpbm11t64
 libnettle8t64
