@@ -13,15 +13,11 @@ packages=(
   gettext # Internationalization utils used by Django, Rails etc.
   git
   jq
-  libacl1-dev
-  libapt-pkg-dev
   libargon2-dev
-  libaudit-dev
   libbsd-dev
   libbz2-dev
   libc-client2007e-dev
   libcairo2-dev
-  libcap-dev
   libcurl4-openssl-dev
   libdb-dev
   libev-dev
@@ -37,8 +33,6 @@ packages=(
   libicu-dev
   libidn-dev
   libjpeg-dev
-  libkeyutils-dev
-  libkmod-dev
   libkrb5-dev
   libldap-dev
   liblz4-dev
@@ -50,18 +44,12 @@ packages=(
   libmysqlclient-dev
   libnetpbm10-dev
   libonig-dev
-  libpopt-dev
   libpq-dev
   librabbitmq-dev
-  libreadline-dev
   librtmp-dev
-  libseccomp-dev
-  libsemanage-dev
   libsodium-dev
   libssl-dev
-  libsystemd-dev
   libtool
-  libudev-dev
   libuv1-dev
   libwrap0-dev
   libxml2-dev

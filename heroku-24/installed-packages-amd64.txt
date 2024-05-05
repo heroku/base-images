@@ -170,6 +170,7 @@ libmnl0
 libmount1
 libmp3lame0
 libmysqlclient21
+libncurses6
 libncursesw6
 libnettle8t64
 libnghttp2-14

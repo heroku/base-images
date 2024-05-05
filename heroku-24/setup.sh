@@ -72,6 +72,7 @@ packages=(
   libmemcached11 # Used by the PHP Memcached extension.
   libmp3lame0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libmysqlclient21
+  libncurses6 # Used by the Ruby runtime.
   libonig5 # Used by the PHP runtime.
   libopencore-amrnb0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libopencore-amrwb0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.

@@ -93,11 +93,9 @@ keyboxd
 krb5-multidev
 less
 libacl1
-libacl1-dev
 libaec0
 libaom-dev
 libaom3
-libapt-pkg-dev
 libapt-pkg6.0t64
 libarchive13t64
 libargon2-1
@@ -107,9 +105,7 @@ libass9
 libassuan0
 libatomic1
 libattr1
-libattr1-dev
 libaudit-common
-libaudit-dev
 libaudit1
 libbinutils
 libblkid-dev
@@ -131,8 +127,6 @@ libcairo-gobject2
 libcairo-script-interpreter2
 libcairo2
 libcairo2-dev
-libcap-dev
-libcap-ng-dev
 libcap-ng0
 libcap2
 libcap2-bin
@@ -268,10 +262,7 @@ libk5crypto3
 libkadm5clnt-mit12
 libkadm5srv-mit12
 libkdb5-10t64
-libkeyutils-dev
 libkeyutils1
-libkmod-dev
-libkmod2
 libkrb5-3
 libkrb5-dev
 libkrb5support0
@@ -324,7 +315,6 @@ libmpc3
 libmpfr6
 libmysqlclient-dev
 libmysqlclient21
-libncurses-dev
 libncurses6
 libncursesw6
 libnetpbm11t64
@@ -368,7 +358,6 @@ libpng-dev
 libpng16-16t64
 libpoppler-glib8t64
 libpoppler134
-libpopt-dev
 libpopt0
 libpq-dev
 libpq5
@@ -382,7 +371,6 @@ libquadmath0
 librabbitmq-dev
 librabbitmq4
 libraw23t64
-libreadline-dev
 libreadline8t64
 librhash0
 librsvg2-2
@@ -394,12 +382,10 @@ libsasl2-2
 libsasl2-dev
 libsasl2-modules
 libsasl2-modules-db
-libseccomp-dev
 libseccomp2
 libselinux1
 libselinux1-dev
 libsemanage-common
-libsemanage-dev
 libsemanage2
 libsepol-dev
 libsepol2
@@ -421,7 +407,6 @@ libssl3t64
 libstdc++-13-dev
 libstdc++6
 libsvtav1enc1d1
-libsystemd-dev
 libsystemd0
 libsz2
 libtasn1-6
@@ -438,7 +423,6 @@ libtirpc3t64
 libtool
 libtsan2
 libubsan1
-libudev-dev
 libudev1
 libunbound8
 libunibreak5
