@@ -163,7 +163,6 @@ libmagickcore-6.q16-7t64
 libmagickwand-6.q16-7t64
 libmatio11
 libmaxminddb0
-libmcrypt4
 libmd0
 libmemcached11t64
 libmnl0

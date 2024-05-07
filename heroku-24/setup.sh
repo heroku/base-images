@@ -68,7 +68,6 @@ packages=(
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
-  libmcrypt4
   libmemcached11 # Used by the PHP Memcached extension.
   libmp3lame0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libmysqlclient21

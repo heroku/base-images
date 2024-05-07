@@ -39,7 +39,6 @@ packages=(
   liblzf-dev
   libmagic-dev
   libmagickwand-dev
-  libmcrypt-dev
   libmemcached-dev
   libmysqlclient-dev
   libnetpbm10-dev
