@@ -42,7 +42,6 @@ packages=(
   bzip2
   curl
   file
-  geoip-database
   gettext-base # For `envsubst`.
   gir1.2-harfbuzz-0.0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   gnupg

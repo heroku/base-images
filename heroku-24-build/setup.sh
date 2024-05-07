@@ -27,7 +27,6 @@ packages=(
   libgcrypt20-dev
   libgd-dev
   libgdbm-dev
-  libgeoip-dev
   libgnutls28-dev
   libheif-dev
   libicu-dev

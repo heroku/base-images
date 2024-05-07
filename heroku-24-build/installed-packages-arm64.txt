@@ -52,8 +52,6 @@ gcc-13-aarch64-linux-gnu
 gcc-13-base
 gcc-14-base
 gcc-aarch64-linux-gnu
-geoip-bin
-geoip-database
 gettext
 gettext-base
 gir1.2-freedesktop
@@ -191,8 +189,6 @@ libgdk-pixbuf-2.0-0
 libgdk-pixbuf-2.0-dev
 libgdk-pixbuf2.0-bin
 libgdk-pixbuf2.0-common
-libgeoip-dev
-libgeoip1t64
 libgirepository-2.0-0
 libglib2.0-0t64
 libglib2.0-bin
