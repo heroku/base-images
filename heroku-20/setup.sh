@@ -157,16 +157,21 @@ apt-get install -y --no-install-recommends "${packages[@]}"
 
 cp /build/imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
-# Temporarily install ca-certificates-java to generate the certificates store used
-# by Java apps. Generation occurs in a post-install script which requires a JRE.
-# We're using OpenJDK 8 rather than something newer, to work around:
-# https://github.com/heroku/base-images/pull/103#issuecomment-389544431
+# Install ca-certificates-java so that the JVM buildpacks can configure Java apps to use the Java certs
+# store in the base image instead of the one that ships in each JRE release, allowing certs to be updated
+# via base image updates. Generation of the `cacerts` file occurs in a post-install script which requires
+# a JRE, however, we don't want a JRE in the final image so remove it afterwards.
 apt-get install -y --no-install-recommends ca-certificates-java openjdk-8-jre-headless
-# Using remove rather than purge so that the generated certs are left behind.
+# For Ubuntu versions prior to 24.04 the ca-certificates-java package has a direct dependency on a JRE, so
+# we can't remove the JRE without also removing ca-certificates-java. However, we can work around this by
+# not using `--purge` when removing ca-certificates-java, which leaves behind the generated certs store.
 apt-get remove -y ca-certificates-java
-apt-get purge -y openjdk-8-jre-headless
-apt-get autoremove -y --purge
-test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
+apt-get remove -y --purge --auto-remove openjdk-8-jre-headless
+# Check that the certs store (a) wasn't purged during removal of ca-certificates-java, (b) uses the JKS
+# format not PKCS12, since in the past there was an upstream regression for this:
+# https://github.com/heroku/base-images/pull/103#issuecomment-389544431
+# https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
+test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
 rm -rf /root/*
 rm -rf /tmp/*
