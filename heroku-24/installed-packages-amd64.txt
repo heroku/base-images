@@ -27,7 +27,6 @@ fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-mono
 gcc-14-base
-geoip-database
 gettext-base
 gir1.2-freedesktop
 gir1.2-glib-2.0
