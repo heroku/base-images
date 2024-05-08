@@ -119,16 +119,17 @@ apt-get install -y --no-install-recommends "${packages[@]}"
 # https://github.com/docker-library/docs/blob/master/ubuntu/README.md#locales
 locale-gen en_US.UTF-8
 
-# Temporarily install ca-certificates-java to generate the certificates store used
-# by Java apps. Generation occurs in a post-install script which requires a JRE.
-# We're using OpenJDK 8 rather than something newer, to work around:
-# https://github.com/heroku/stack-images/pull/103#issuecomment-389544431
-apt-get install -y --no-install-recommends ca-certificates-java openjdk-8-jre-headless
-# Using remove rather than purge so that the generated certs are left behind.
-apt-get remove -y ca-certificates-java
-apt-get purge -y openjdk-8-jre-headless
-apt-get autoremove -y --purge
-test "$(file -b /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
+# Install ca-certificates-java so that the JVM buildpacks can configure Java apps to use the Java certs
+# store in the base image instead of the one that ships in each JRE release, allowing certs to be updated
+# via base image updates. Generation of the `cacerts` file occurs in a post-install script which only runs
+# if a JRE is installed, however, we don't want a JRE in the final image so remove it afterwards.
+apt-get install -y --no-install-recommends ca-certificates-java default-jre-headless
+apt-get remove -y --purge --auto-remove default-jre-headless
+# Check that the certs store (a) still exists after the removal of default-jre-headless, (b) uses the JKS
+# format not PKCS12, since in the past there was an upstream regression for this:
+# https://github.com/heroku/base-images/pull/103#issuecomment-389544431
+# https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
+test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
 # Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
 # that we have to remove before creating our own (`userdel` will remove the group too).
