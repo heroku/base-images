@@ -143,8 +143,6 @@ libcurl4t64
 libdatrie1
 libdav1d-dev
 libdav1d7
-libdb-dev
-libdb5.3-dev
 libdb5.3t64
 libde265-0
 libde265-dev

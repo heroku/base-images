@@ -19,7 +19,6 @@ packages=(
   libc-client2007e-dev
   libcairo2-dev
   libcurl4-openssl-dev
-  libdb-dev
   libev-dev
   libevent-dev
   libexif-dev
