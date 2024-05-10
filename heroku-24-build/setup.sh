@@ -40,7 +40,6 @@ packages=(
   libmagickwand-dev
   libmemcached-dev
   libmysqlclient-dev
-  libnetpbm10-dev
   libonig-dev
   libpq-dev
   librabbitmq-dev

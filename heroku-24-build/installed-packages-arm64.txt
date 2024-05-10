@@ -304,7 +304,6 @@ libmysqlclient-dev
 libmysqlclient21
 libncurses6
 libncursesw6
-libnetpbm11t64
 libnettle8t64
 libnghttp2-14
 libnpth0t64
