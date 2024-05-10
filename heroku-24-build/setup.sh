@@ -24,7 +24,6 @@ packages=(
   libevent-dev
   libexif-dev
   libffi-dev
-  libgcrypt20-dev
   libgd-dev
   libgdbm-dev
   libgnutls28-dev

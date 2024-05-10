@@ -179,7 +179,6 @@ libfribidi0
 libgcc-13-dev
 libgcc-s1
 libgcrypt20
-libgcrypt20-dev
 libgd-dev
 libgd3
 libgdbm-compat4t64
@@ -203,7 +202,6 @@ libgnutls-openssl27t64
 libgnutls28-dev
 libgnutls30t64
 libgomp1
-libgpg-error-dev
 libgpg-error0
 libgprofng0
 libgraphite2-3
