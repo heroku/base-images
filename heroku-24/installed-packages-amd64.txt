@@ -7,6 +7,9 @@ bash
 bind9-dnsutils
 bind9-host
 bind9-libs
+binutils
+binutils-common
+binutils-x86-64-linux-gnu
 bsdutils
 bzip2
 ca-certificates
@@ -62,6 +65,7 @@ libassuan0
 libattr1
 libaudit-common
 libaudit1
+libbinutils
 libblkid1
 libbpf1
 libbrotli1
@@ -80,6 +84,8 @@ libcfitsio10t64
 libcgif0
 libcom-err2
 libcrypt1
+libctf-nobfd0
+libctf0
 libcurl3t64-gnutls
 libcurl4t64
 libdatrie1
@@ -120,6 +126,7 @@ libgnutls-openssl27t64
 libgnutls30t64
 libgomp1
 libgpg-error0
+libgprofng0
 libgraphite2-3
 libgssapi-krb5-2
 libharfbuzz-gobject0
@@ -136,6 +143,7 @@ libicu74
 libidn2-0
 libimagequant0
 libimath-3-1-29t64
+libjansson4
 libjbig0
 libjpeg-turbo8
 libjpeg8
@@ -216,6 +224,7 @@ libselinux1
 libsemanage-common
 libsemanage2
 libsepol2
+libsframe1
 libsharpyuv0
 libsmartcols1
 libsodium23
