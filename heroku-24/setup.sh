@@ -39,6 +39,7 @@ apt-get upgrade -y --no-install-recommends
 
 packages=(
   bind9-dnsutils # For `dig`, `host` and `nslookup`.
+  binutils # Python's `ctypes.util.find_library` requires `ld` to find libraries specified via `LD_LIBRARY_PATH`.
   bzip2
   curl
   file
