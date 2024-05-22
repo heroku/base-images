@@ -13,7 +13,6 @@ packages=(
   cmake
   gettext
   git
-  jq
   libacl1-dev
   libapt-pkg-dev
   libargon2-dev

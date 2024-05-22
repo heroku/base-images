@@ -48,6 +48,7 @@ packages=(
   imagemagick
   iproute2
   iputils-tracepath
+  jq # Used by Heroku Exec at run time, and buildpacks at build time.
   language-pack-en
   less
   libaom3

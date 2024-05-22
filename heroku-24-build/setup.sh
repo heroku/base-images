@@ -12,7 +12,6 @@ packages=(
   cmake
   gettext # Internationalization utils used by Django, Rails etc.
   git
-  jq
   libargon2-dev
   libbsd-dev
   libbz2-dev

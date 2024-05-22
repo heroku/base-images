@@ -50,6 +50,7 @@ packages=(
   inetutils-telnet
   iproute2 # For `ip`, used by Heroku Exec.
   iputils-tracepath
+  jq # Used by Heroku Exec at run time, and buildpacks at build time.
   less
   libargon2-1 # Used by the PHP runtime.
   libass9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
