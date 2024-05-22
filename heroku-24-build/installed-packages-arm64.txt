@@ -123,6 +123,7 @@ libcairo2-dev
 libcap-ng0
 libcap2
 libcap2-bin
+libcares2
 libcbor0.10
 libcc1-0
 libcfitsio10t64

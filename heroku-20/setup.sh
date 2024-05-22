@@ -53,6 +53,7 @@ packages=(
   libaom0
   libargon2-1
   libass9
+  libc-ares2 # Used by PgBouncer in heroku-buildpack-pgbouncer.
   libc-client2007e
   libc6-dev
   libcairo2

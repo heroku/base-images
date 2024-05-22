@@ -93,6 +93,7 @@ libblkid1
 libbrotli1
 libbsd0
 libbz2-1.0
+libc-ares2
 libc-bin
 libc-client2007e
 libc-dev-bin
