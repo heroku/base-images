@@ -52,6 +52,7 @@ inetutils-telnet
 init-system-helpers
 iproute2
 iputils-tracepath
+jq
 keyboxd
 less
 libacl1
@@ -148,6 +149,7 @@ libjansson4
 libjbig0
 libjpeg-turbo8
 libjpeg8
+libjq1
 libjson-c5
 libjxl0.7
 libk5crypto3
