@@ -79,6 +79,7 @@ libcairo2
 libcap-ng0
 libcap2
 libcap2-bin
+libcares2
 libcbor0.10
 libcfitsio10t64
 libcgif0
