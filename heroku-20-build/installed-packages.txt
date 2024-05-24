@@ -543,6 +543,7 @@ mlock
 mount
 mtools
 mysql-common
+nano
 ncurses-base
 ncurses-bin
 netbase
