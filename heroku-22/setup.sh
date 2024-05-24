@@ -132,6 +132,7 @@ packages=(
   locales
   lsb-release
   make
+  nano # More usable than ed but still much smaller than vim.
   netcat-openbsd
   openssh-client
   openssh-server
