@@ -5,7 +5,7 @@
 The build scripts in this repository require:
 
 - bash 4+. To update to newer bash on OS X, see: https://johndjameson.com/blog/updating-your-shell-with-homebrew/
-- Docker Desktop. To build multi-arch images (heroku-24 and beyond), enable
+- Docker Desktop. To build multi-arch images (heroku-24 and beyond),
   the `containerd` snapshotter feature should be enabled.
 
 ## Build
