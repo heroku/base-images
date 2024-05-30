@@ -39,7 +39,7 @@ This script will build a family of 4 images:
 Add the package you want to the appropriate `setup.sh` for example `heroku-24/setup.sh`:
 
 ```diff
-+    libc6-dev \
++    libc6-dev
 ```
 
 Once done, run the `bin/build.sh` locally to generate the corresponding `installed-packages*` files. Multi-arch base images (heroku-24 and beyond) will produce an `installed-packages-$ARCH.txt` for each architecture, while single architecture images will produce a singular `installed-packages.txt`.
