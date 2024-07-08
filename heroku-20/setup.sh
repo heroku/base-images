@@ -176,6 +176,9 @@ apt-get remove -y --purge --auto-remove openjdk-8-jre-headless
 # https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
 test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
+groupadd heroku --gid 1000
+useradd heroku --uid 1000 --gid 1000 --shell /bin/bash --create-home
+
 rm -rf /root/*
 rm -rf /tmp/*
 rm -rf /var/cache/apt/archives/*.deb
