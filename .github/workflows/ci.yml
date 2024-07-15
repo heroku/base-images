@@ -14,14 +14,14 @@ permissions:
 
 jobs:
   shellcheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run shellcheck
         run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
   build-stack:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - shellcheck
     env:
