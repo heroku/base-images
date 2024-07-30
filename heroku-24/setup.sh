@@ -65,12 +65,15 @@ packages=(
   libevent-pthreads-2.1-7
   libgd3
   libgdk-pixbuf-2.0-0
+  libgirepository-1.0-1 # Because libgirepository1.0-dev and libgirepository-1.0-dev are in the build image
   libgnutls-openssl27
   libgnutls30 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libidn12 # Because libidn-dev is in the build image
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmemcached11 # Used by the PHP Memcached extension.
+  libmemcachedutil2t64 # Same -dev headers as libmemcached11
   libmp3lame0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libmysqlclient21
   libncurses6 # Used by the Ruby runtime.
@@ -90,6 +93,8 @@ packages=(
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libvorbisfile3 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libvpx9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libwebpdecoder3 # Same -dev headers as the other libwebp* packages that get pulled in already
+  libwmf-0.2-7 # Because libwmf-dev is in the build image
   libx264-164 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libx265-199 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libxslt1.1 # Used by the PHP runtime.
