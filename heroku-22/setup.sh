@@ -73,6 +73,7 @@ packages=(
   libgd3
   libgdk-pixbuf2.0-0
   libgdk-pixbuf2.0-common
+  libgeoip1
   libgnutls-openssl27
   libgnutls30
   libgnutlsxx28
@@ -82,13 +83,16 @@ packages=(
   libharfbuzz-gobject0
   libharfbuzz-icu0
   libharfbuzz0b
+  libhashkit2
   libheif1
   liblzf1
   libmagickcore-6.q16-3-extra
   libmcrypt4
   libmemcached11
+  libmemcachedutil2
   libmp3lame0
   libmysqlclient21
+  libnetpbm10
   libnuma1
   libogg0
   libonig5
@@ -120,6 +124,7 @@ packages=(
   libwebp7
   libwebpdemux2
   libwebpmux3
+  libwmf-0.2-7
   libx264-163
   libx265-199
   libxcb-render0
