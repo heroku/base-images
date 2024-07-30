@@ -130,6 +130,7 @@ libgdbm-compat4t64
 libgdbm6t64
 libgdk-pixbuf-2.0-0
 libgdk-pixbuf2.0-common
+libgirepository-1.0-1
 libglib2.0-0t64
 libgmp10
 libgnutls-openssl27t64
@@ -190,6 +191,7 @@ libmatio11
 libmaxminddb0
 libmd0
 libmemcached11t64
+libmemcachedutil2t64
 libmnl0
 libmount1
 libmp3lame0
@@ -277,8 +279,10 @@ libvorbisenc2
 libvorbisfile3
 libvpx9
 libwebp7
+libwebpdecoder3
 libwebpdemux2
 libwebpmux3
+libwmf-0.2-7
 libwmflite-0.2-7
 libwrap0
 libx11-6
