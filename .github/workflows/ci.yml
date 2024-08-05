@@ -114,6 +114,7 @@ jobs:
             armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
             amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
             docker manifest create "$indexTag" "$amdTag" "$armTag"
+            docker push "$indexTag"
           done
 
   promote-images:
@@ -145,10 +146,10 @@ jobs:
             for variant in '' '-build' '-cnb' '-cnb-build'; do
               destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
             done
-          end
+          fi
           for destTag in "${destTags[@]}"; do
             sourceTag="${destTag}.${{ github.ref_name }}"
-            crane copy "${sourceTag}" "${destTag}"
+            echo "${sourceTag}" "${destTag}"
           done
 
   promote-stack:
