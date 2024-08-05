@@ -34,8 +34,8 @@ jobs:
         arch: ["amd64"]
         stack-version: ["20", "22", "24"]
         include:
-          arch: "arm64"
-          stack-version: "24"
+          - arch: "arm64"
+            stack-version: "24"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
