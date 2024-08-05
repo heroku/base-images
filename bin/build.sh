@@ -7,7 +7,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 REPO="heroku/heroku"
 STACK_VERSION=${1:-"NAN"}
-read -a ARCHS <<< "${@:2}"
+read -ra ARCHS <<< "${@:2}"
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
