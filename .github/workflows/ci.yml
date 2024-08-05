@@ -109,7 +109,7 @@ jobs:
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Publish multi-arch image index
         run: |
-          for variant in ("" "-build"); do
+          for variant in '' '-build'; do
             indexTag="heroku/heroku:${{ matrix.stack-version }}${variant}${TAG_SUFFIX}"
             armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
             amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
@@ -135,18 +135,18 @@ jobs:
         run: |
           destTags=( )
           if (( ${{ matrix.stack-version }} >= 24 )); then
-            for variant in ("" "-build"); do
-              for arch in ("amd64" "arm64"); do
+            for variant in '' '-build'; do
+              for arch in 'amd64' 'arm64'; do
                 destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}_linux-${arch}")
               done
               destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
             done
           else
-            for variant in ("" "-build" "-cnb" "-cnb-build"); do
+            for variant in '' '-build' '-cnb' '-cnb-build'; do
               destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
             done
           end
-          for destTag in "$destTags[@]"; do
+          for destTag in "${destTags[@]}"; do
             sourceTag="${destTag}.${{ github.ref_name }}"
             crane copy "${sourceTag}" "${destTag}"
           done
@@ -156,9 +156,13 @@ jobs:
     runs-on: ubuntu-24.04
     needs:
       - promote-images
+    strategy:
+      fail-fast: false
+      matrix:
+        stack-version: ["20", "22", "24"]
     env:
-     MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
-     MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
+      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
+      MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     steps:
       - name: Convert docker image and for Git tags release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
