@@ -65,7 +65,7 @@ jobs:
     needs:
       - build
     env:
-      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }"
+      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
     strategy:
       fail-fast: false
       matrix:
