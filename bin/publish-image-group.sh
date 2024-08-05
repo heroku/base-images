@@ -19,7 +19,7 @@ if (( stackVersion >= 24 )); then
 	# heroku-24 and beyond are published as multi-arch manifest lists. All
 	# platform-specific manifests must be published prior to creating the
 	# manifest list.
-	platformSuffix="_linux-$ARCH"
+	platformSuffix="_linux-$arch"
 else
 	# heroku-22 and prior have additional, specialized CNB variants to publish.
 	variants+=("-cnb" "-cnb-build")
@@ -27,7 +27,7 @@ fi
 
 for variant in "${variants[@]}"; do
 	source="${baseTag}${variant}"
-	target="${baseTag}${variant}${platformSuffix}${targetTagSuffix}"
+	target="${baseTag}${variant}${platformSuffix}${targetSuffix}"
 	docker tag "${source}" "${target}"
 	docker push "${target}"
 done

@@ -7,7 +7,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 REPO="heroku/heroku"
 STACK_VERSION=${1:-"NAN"}
-ARCHS=( ${@:2} )
+read -a ARCHS <<< "${@:2}"
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
@@ -70,7 +70,7 @@ else
 	VARIANTS=("-build:")
 fi
 
-if (( ${#ARCHS[@]} > 1 )) && (( $STACK_VERSION <= 22 )) ; then
+if (( ${#ARCHS[@]} > 1 )) && (( STACK_VERSION <= 22 )) ; then
 	>&2 echo "ERROR: Can't build multi-arch images for heroku-22 and prior." \
 		"Provide a single target architecture or use a newer stack version."
 	abort 1
@@ -88,7 +88,7 @@ write_package_list() {
 	local dockerfile_dir="$2"
 	local output_file=""
 	for arch in "${ARCHS[@]}"; do
-		if (( $STACK_VERSION <= 22 )) && [[ $arch -eq "amd64" ]]; then
+		if (( STACK_VERSION <= 22 )) && [[ $arch = "amd64" ]]; then
 			output_file="${dockerfile_dir}/installed-packages.txt"
 		else
 			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
