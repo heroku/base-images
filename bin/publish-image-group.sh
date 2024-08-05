@@ -9,7 +9,7 @@
 
 set -euxo pipefail
 
-baseTag="heroku/heroku"
+repo="heroku/heroku"
 stackVersion="$1"
 arch="$2"
 targetSuffix="$3"
@@ -19,15 +19,15 @@ if (( stackVersion >= 24 )); then
 	# heroku-24 and beyond are published as multi-arch manifest lists. All
 	# platform-specific manifests must be published prior to creating the
 	# manifest list.
-	platformSuffix="_linux-$arch"
+	platformSuffix="_linux-${arch}"
 else
 	# heroku-22 and prior have additional, specialized CNB variants to publish.
 	variants+=("-cnb" "-cnb-build")
 fi
 
 for variant in "${variants[@]}"; do
-	source="${baseTag}${variant}"
-	target="${baseTag}${variant}${platformSuffix}${targetSuffix}"
-	docker tag "${source}" "${target}"
-	docker push "${target}"
+	srcTag="${repo}:${stackVersion}${variant}"
+	destTag="${srcTag}${platformSuffix}${targetSuffix}"
+	docker tag "${srcTag}" "${destTag}"
+	docker push "${destTag}"
 done
