@@ -52,7 +52,7 @@ jobs:
           fi
       - name: Export base images from the Docker daemon
         run: |
-          docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
+          docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ matrix.stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
       - name: Save base images to the cache
         uses: actions/cache/save@v4
         with:
@@ -85,6 +85,8 @@ jobs:
           path: images.tar.zst
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+      - name: Load Docker images into the Docker daemon
+        run: zstd -dc --long=31 images.tar.zst | docker load
       - name: Log into Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Publish base images to registries
