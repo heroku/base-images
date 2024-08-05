@@ -99,7 +99,7 @@ jobs:
     needs:
       - publish-image
     env:
-      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }"
+      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
     strategy:
       fail-fast: false
       matrix:
@@ -137,13 +137,13 @@ jobs:
           if (( ${{ matrix.stack-version }} >= 24 )); then
             for variant in ("" "-build"); do
               for arch in ("amd64" "arm64"); do
-                destTags+=("heroku/heroku:${{ matrix-stack-version }}${variant}_linux-${arch}")
+                destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}_linux-${arch}")
               done
-              destTags+=("heroku/heroku:${{ matrix-stack-version }}${variant}")
+              destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
             done
           else
             for variant in ("" "-build" "-cnb" "-cnb-build"); do
-              destTags+=("heroku/heroku:${{ matrix-stack-version }}${variant}")
+              destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
             done
           end
           for destTag in "$destTags[@]"; do
