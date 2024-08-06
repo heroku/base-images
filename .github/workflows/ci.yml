@@ -25,9 +25,6 @@ jobs:
     runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
     needs:
       - shellcheck
-    env:
-      STACK: heroku-${{ matrix.stack-version }}
-      STACK_VERSION: "${{ matrix.stack-version }}"
     strategy:
       fail-fast: false
       matrix:
@@ -164,6 +161,7 @@ jobs:
       matrix:
         stack-version: ["20", "22", "24"]
     env:
+      STACK: heroku-${{ matrix.stack-version }}
       MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
       MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     steps:
