@@ -72,8 +72,6 @@ jobs:
           - arch: "arm64"
             stack-version: "24"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Restore base images from the cache
         uses: actions/cache/restore@v4
         with:
@@ -87,8 +85,20 @@ jobs:
       - name: Log into Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Publish base images to registries
-        run:
-            bin/publish-image-group.sh ${{ matrix.stack-version }} ${{ matrix.arch }} "${TAG_SUFFIX}"
+        run: |
+          variants=("" "-build")
+          platformSuffix=""
+          if (( ${{ matrix.stack-version }} >= 24 )); then
+            platformSuffix="_linux-${{ matrix.arch }}"
+          else
+            variants+=("-cnb" "-cnb-build")
+          fi
+          for variant in "${variants[@]}"; do
+            srcTag="heroku/heroku:${{ matrix.stack-version}}${variant}"
+            destTag="${srcTag}${platformSuffix}${TAG_SUFFIX}"
+            docker tag "${srcTag}" "${destTag}"
+            docker push "${destTag}"
+          done
 
   publish-index:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
@@ -147,8 +157,8 @@ jobs:
             done
           fi
           for destTag in "${destTags[@]}"; do
-            sourceTag="${destTag}.${{ github.ref_name }}"
-            echo "${sourceTag}" "${destTag}"
+            srcTag="${destTag}.${{ github.ref_name }}"
+            echo "${srcTag}" "${destTag}"
           done
 
   promote-stack:
