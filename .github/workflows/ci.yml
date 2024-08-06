@@ -133,7 +133,7 @@ jobs:
       - name: Log into Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Install crane
-        uses: buildpacks/github-actions/setup-tools@v5.0.0
+        uses: buildpacks/github-actions/setup-tools@v5.7.3
       - name: Promote images to stable tag
         run: |
           destTags=( )
