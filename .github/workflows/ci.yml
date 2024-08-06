@@ -117,7 +117,7 @@ jobs:
             docker manifest push "$indexTag"
           done
 
-  promote-images:
+  promote-tags:
     if: github.ref_type == 'tag'
     runs-on: ubuntu-24.04
     needs:
@@ -158,7 +158,7 @@ jobs:
     if: github.ref_type == 'tag'
     runs-on: ubuntu-24.04
     needs:
-      - promote-images
+      - promote-tags
     strategy:
       fail-fast: false
       matrix:
