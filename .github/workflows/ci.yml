@@ -167,5 +167,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Pull base images
+        run: |
+          docker pull heroku/heroku:${{matrix.stack-version}}
+          docker pull heroku/heroku:${{matrix.stack-version}}-build
       - name: Convert docker image and for Git tags release to Heroku staging
         run: bin/convert-and-publish-to-heroku.sh
