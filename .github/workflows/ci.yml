@@ -114,7 +114,7 @@ jobs:
             armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
             amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
             docker manifest create "$indexTag" "$amdTag" "$armTag"
-            docker push "$indexTag"
+            docker manifest push "$indexTag"
           done
 
   promote-images:
