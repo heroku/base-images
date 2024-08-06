@@ -48,9 +48,11 @@ jobs:
             exit 1
           fi
       - name: Export base images from the Docker daemon
+        if: github.ref_name == 'main' || github.ref_type == 'tag'
         run: |
           docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ matrix.stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
       - name: Save base images to the cache
+        if: github.ref_name == 'main' || github.ref_type == 'tag'
         uses: actions/cache/save@v4
         with:
           key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
