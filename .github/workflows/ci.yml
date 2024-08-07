@@ -29,11 +29,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["amd64"]
+        arch: ["amd64", "arm64"]
         stack-version: ["20", "22", "24"]
-        include:
+        exclude:
           - arch: "arm64"
-            stack-version: "24"
+            stack-version: "20"
+          - arch: "arm64"
+            stack-version: "22"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -70,11 +72,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["amd64"]
+        arch: ["amd64", "arm64"]
         stack-version: ["20", "22", "24"]
-        include:
+        exclude:
           - arch: "arm64"
-            stack-version: "24"
+            stack-version: "20"
+          - arch: "arm64"
+            stack-version: "22"
     steps:
       - name: Restore base images from the cache
         uses: actions/cache/restore@v4
