@@ -22,9 +22,10 @@ jobs:
         run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
 
   build-images:
-    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
+    name: "Build heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     needs:
       - shellcheck
+    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
       matrix:
@@ -33,7 +34,6 @@ jobs:
         include:
           - arch: "arm64"
             stack-version: "24"
-    name: "Build heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,9 +61,10 @@ jobs:
 
   publish-images:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
-    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
+    name: "Publish heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     needs:
       - build-images
+    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
     env:
       TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
     strategy:
@@ -74,7 +75,6 @@ jobs:
         include:
           - arch: "arm64"
             stack-version: "24"
-    name: "Publish heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     steps:
       - name: Restore base images from the cache
         uses: actions/cache/restore@v4
@@ -106,16 +106,16 @@ jobs:
 
   publish-indicies:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
-    runs-on: ubuntu-24.04
+    name: "Publish heroku-${{ matrix.stack-version }} indicies"
     needs:
       - publish-images
+    runs-on: ubuntu-24.04
     env:
       TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
     strategy:
       fail-fast: false
       matrix:
         stack-version: ["24"]
-    name: "Publish heroku-${{ matrix.stack-version }} index"
     steps:
       - name: Log into Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
@@ -131,15 +131,15 @@ jobs:
 
   promote-tags:
     if: github.ref_type == 'tag'
-    runs-on: ubuntu-24.04
+    name: "Promote heroku-${{ matrix.stack-version }} tags"
     needs:
       - publish-images
       - publish-indicies
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         stack-version: ["20", "22", "24"]
-    name: "Promote heroku-${{ matrix.stack-version }} tags"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -167,11 +167,12 @@ jobs:
             echo "${srcTag}" "${destTag}"
           done
 
-  update-runtime:
+  publish-stack:
     if: github.ref_type == 'tag'
-    runs-on: ubuntu-24.04
+    name: "Publish heroku-${{ matrix.stack-version }} stack"
     needs:
       - promote-tags
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
