@@ -14,13 +14,14 @@ print_usage(){
 	>&2 echo "usage: ${BASE_NAME}  STACK_VERSION [TARGET_ARCH]..."
 	>&2 cat <<-EOF
 
-		This script builds Heroku base image families, stores them in the local
-		image store, and writes package lists for those images. It is capable
-		of building single architecture images for all stack versions. It also
-		supports building multi-arch images for heroku-24 (and newer). It works
-		in the following scenarios:
+		This script builds Heroku base image groups, stores them in the local
+		image store, and writes package lists for those images. A base image
+		group consists of all image variants for a particular stack version.
+		This script is capable of building single architecture image groups
+		for all stack versions. It also supports building multi-arch image
+		groups for heroku-24 (and newer). It works in the following scenarios:
 
-		Single architecture builds -- build a base image family for a single
+		Single architecture builds -- build a base image group for a single
 		target architecture. Heroku-22 and prior support 'amd64' exclusively.
 		Heroku-24 and beyond additionally support 'arm64'. If targeting a
 		different architecture than the host machine, Docker Desktop and the
@@ -31,7 +32,7 @@ print_usage(){
 		${BASE_NAME} 22 amd64
 		${BASE_NAME} 24 arm64
 
-		Multi-architecture builds -- build a heroku base image index family for
+		Multi-architecture builds -- build a heroku base image index group for
 		multiple target architectures. This mode is only supported for
 		heroku-24 and beyond. This mode requires Docker Desktop and the
 		'containerd' snapshotter, and as a result will not work in CI
