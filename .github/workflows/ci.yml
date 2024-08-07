@@ -108,9 +108,9 @@ jobs:
             docker push "${destTag}"
           done
 
-  publish-indicies:
+  publish-indices:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
-    name: "Publish heroku-${{ matrix.stack-version }} indicies"
+    name: "Publish heroku-${{ matrix.stack-version }} indices"
     needs:
       - publish-images
     runs-on: ubuntu-24.04
@@ -138,7 +138,7 @@ jobs:
     name: "Promote heroku-${{ matrix.stack-version }} tags"
     needs:
       - publish-images
-      - publish-indicies
+      - publish-indices
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
