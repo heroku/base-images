@@ -168,7 +168,7 @@ jobs:
           fi
           for destTag in "${destTags[@]}"; do
             srcTag="${destTag}.${{ github.ref_name }}"
-            echo "${srcTag}" "${destTag}"
+            crane copy "${srcTag}" "${destTag}"
           done
 
   publish-stack:
