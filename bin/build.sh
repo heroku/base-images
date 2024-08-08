@@ -80,13 +80,8 @@ fi
 write_package_list() {
 	local image_tag="$1"
 	local dockerfile_dir="$2"
-	local output_file=""
 	for arch in "${ARCHS[@]}"; do
-		if (( STACK_VERSION <= 22 )) && [[ $arch = "amd64" ]]; then
-			output_file="${dockerfile_dir}/installed-packages.txt"
-		else
-			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
-		fi
+		output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
 		display "Generating package list: ${output_file}"
 		echo "# List of packages present in the final image. Regenerate using bin/build.sh" > "$output_file"
 		# We include the package status in the output so we can differentiate between fully installed
