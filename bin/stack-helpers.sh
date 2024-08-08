@@ -5,7 +5,7 @@ function display() {
 }
 
 function abort() {
-  echo "$1"
+  printf '\e[1;31m%s\n\e[0m' "$1"
   exit 1
 }
 

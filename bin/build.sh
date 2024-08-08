@@ -41,6 +41,7 @@ print_usage(){
 		Examples:
 		${BASE_NAME} 24
 		${BASE_NAME} 24 arm64 amd64
+
 	EOF
 }
 
@@ -71,18 +72,10 @@ else
 	VARIANTS=("-build:")
 fi
 
-if (( ${#ARCHS[@]} > 1 )) && (( STACK_VERSION <= 22 )) ; then
-	>&2 echo "ERROR: Can't build multi-arch images for heroku-22 and prior." \
-		"Provide a single target architecture or use a newer stack version."
-	abort 1
-fi
 if (( ${#ARCHS[@]} > 1 )) && [[ ! $have_containerd_snapshotter ]] ; then
-	>&2 echo "ERROR: Can't build images with this configuration. Enable" \
-		"the 'containerd' snapshotter in Docker Desktop, or specify a" \
-		"single target architecture"
-	abort 1
+	>&2 print_usage
+	abort "fatal: 'containerd' snapshotter required for multi-arch builds"
 fi
-
 
 write_package_list() {
 	local image_tag="$1"
