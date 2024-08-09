@@ -18,22 +18,6 @@ For example:
 
     ./bin/build.sh 24
 
-### Multi-architecture images (heroku-24 and later)
-
-This script will build a family of 2 images:
-
-* `heroku/heroku:{STACK_VERSION}` - A multi-architecture manifest list of Heroku base runtime images supporting `amd64` and `arm64` architectures
-* `heroku/heroku:{STACK_VERSION}-build` - A multi-architecture manifest list of Heroku base build images supporting `amd64` and `arm64` architectures
-
-### Single architecture images (heroku-22 and prior)
-
-This script will build a family of 4 images:
-
-* `heroku/heroku:{STACK_VERSION}` - The Heroku base run image supporting `amd64` architecture
-* `heroku/heroku:{STACK_VERSION}-build` - The Heroku base build image supporting `amd64` architecture
-* `heroku/heroku:{STACK_VERSION}-cnb` - The Heroku base run image for Cloud Native Buildpacks supporting `amd64` architecture
-* `heroku/heroku:{STACK_VERSION}-cnb-build` - The Heroku base build image for Cloud Native Buildpacks supporting `amd64` architecture
-
 ## Adding packages to the base image
 
 Add the package you want to the appropriate `setup.sh` for example `heroku-24/setup.sh`:
@@ -63,4 +47,4 @@ To test the generation of the Heroku-specific, amd64-only `.img` file:
 
 1. Build the Docker images for your chosen stack as normal above.
 2. `docker build --platform=linux/amd64 ./tools -t heroku-image-tools`
-3. `docker run -it --rm --platform=linux/amd64 --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK` (where `STACK` is the full stack name like `heroku-22`)
+3. `docker run -it --rm --platform=linux/amd64 --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK_VERSION` (where `STACK_VERSION` is a integer version like `24`)
