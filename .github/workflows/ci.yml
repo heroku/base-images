@@ -20,26 +20,27 @@ jobs:
         uses: actions/checkout@v4
       - name: Run shellcheck
         run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
-  build-stack:
-    runs-on: ubuntu-24.04
+
+  build:
+    name: "Build heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     needs:
       - shellcheck
-    env:
-      STACK: heroku-${{ matrix.stack-version }}
-      STACK_VERSION: "${{ matrix.stack-version }}"
-      DOCKER_HUB_TOKEN: "${{ secrets.DOCKER_HUB_TOKEN }}"
-      DOCKER_HUB_USERNAME: "${{ secrets.DOCKER_HUB_USERNAME }}"
-      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
-      MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
+    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
       matrix:
+        arch: ["amd64", "arm64"]
         stack-version: ["20", "22", "24"]
+        exclude:
+          - arch: "arm64"
+            stack-version: "20"
+          - arch: "arm64"
+            stack-version: "22"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build images
-        run: bin/build.sh $STACK_VERSION
+      - name: Build base image groups
+        run: bin/build.sh "${{ matrix.stack-version }}" "${{ matrix.arch }}"
       - name: Check that the generated files are in sync
         run: |-
           status="$(git status --porcelain)"
@@ -49,13 +50,160 @@ jobs:
             git diff
             exit 1
           fi
-      - name: Publish to image registries
-        run: |-
-          docker buildx create --use
-          bin/publish-to-registries.sh
-        if: success() && (github.ref_name == 'main' || github.ref_type == 'tag')
-      - name: Unpublish temp tags from this run
-        run: bin/unpublish-tags.sh
-        if: always() && (github.ref_name == 'main' || github.ref_type == 'tag')
-      - name: Convert docker image and for Git tags release to Heroku staging
-        run: bin/convert-and-publish-to-heroku.sh
+      - name: Generate Heroku runtime image files
+        if: matrix.arch == 'amd64'
+        run: |
+          bin/generate-runtime-images.sh ${{ matrix.stack-version }}
+      - name: Export base images from the Docker daemon
+        if: github.ref_name == 'main' || github.ref_type == 'tag'
+        run: |
+          docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ matrix.stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
+      - name: Save OCI base image exports to the cache
+        if: github.ref_name == 'main' || github.ref_type == 'tag'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
+          path: images.tar.zst
+      - name: Save Heroku runtime image files to the cache
+        if: matrix.arch == 'amd64' && github.ref_type == 'tag'
+        uses: actions/cache/save@v4
+        with:
+          key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
+          path: /tmp/heroku-${{ matrix.stack-version }}*
+
+  upload-runtime-images:
+    if: github.ref_type == 'tag'
+    name: "Upload heroku-${{ matrix.stack-version }} runtime images"
+    needs:
+      - build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        stack-version: ["20", "22", "24"]
+    env:
+      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
+      MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Restore heroku runtime images from the cache
+        uses: actions/cache/restore@v4
+        with:
+          fail-on-cache-miss: true
+          key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
+          path: /tmp/heroku-${{ matrix.stack-version }}*
+      - name: Upload heroku runtime images to staging
+        run: |
+          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+
+  publish-images:
+    if: github.ref_name == 'main' || github.ref_type == 'tag'
+    name: "Publish heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
+    needs:
+      - build
+    runs-on: ${{ matrix.arch == 'arm64' && 'pub-hk-ubuntu-24.04-arm-medium' || 'ubuntu-24.04' }}
+    env:
+      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: ["amd64", "arm64"]
+        stack-version: ["20", "22", "24"]
+        exclude:
+          - arch: "arm64"
+            stack-version: "20"
+          - arch: "arm64"
+            stack-version: "22"
+    steps:
+      - name: Restore base images from the cache
+        uses: actions/cache/restore@v4
+        with:
+          fail-on-cache-miss: true
+          key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
+          path: images.tar.zst
+        env:
+          SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+      - name: Load Docker images into the Docker daemon
+        run: zstd -dc --long=31 images.tar.zst | docker load
+      - name: Log into Docker Hub
+        run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Publish base images to registries
+        run: |
+          variants=("" "-build")
+          platformSuffix=""
+          if (( ${{ matrix.stack-version }} >= 24 )); then
+            platformSuffix="_linux-${{ matrix.arch }}"
+          else
+            variants+=("-cnb" "-cnb-build")
+          fi
+          for variant in "${variants[@]}"; do
+            srcTag="heroku/heroku:${{ matrix.stack-version}}${variant}"
+            destTag="${srcTag}${platformSuffix}${TAG_SUFFIX}"
+            docker tag "${srcTag}" "${destTag}"
+            docker push "${destTag}"
+          done
+
+
+  publish-indices:
+    if: github.ref_name == 'main' || github.ref_type == 'tag'
+    name: "Publish heroku-${{ matrix.stack-version }} indices"
+    needs:
+      - publish-images
+    runs-on: ubuntu-24.04
+    env:
+      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        stack-version: ["24"]
+    steps:
+      - name: Log into Docker Hub
+        run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Publish multi-arch image index
+        run: |
+          for variant in '' '-build'; do
+            indexTag="heroku/heroku:${{ matrix.stack-version }}${variant}${TAG_SUFFIX}"
+            armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
+            amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
+            docker manifest create "$indexTag" "$amdTag" "$armTag"
+            docker manifest push "$indexTag"
+          done
+
+  promote-tags:
+    if: github.ref_type == 'tag'
+    name: "Promote heroku-${{ matrix.stack-version }} tags"
+    needs:
+      - publish-images
+      - publish-indices
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        stack-version: ["20", "22", "24"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Log into Docker Hub
+        run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Install crane
+        uses: buildpacks/github-actions/setup-tools@v5.7.3
+      - name: Promote images to stable tag
+        run: |
+          destTags=( )
+          if (( ${{ matrix.stack-version }} >= 24 )); then
+            for variant in '' '-build'; do
+              for arch in 'amd64' 'arm64'; do
+                destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}_linux-${arch}")
+              done
+              destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
+            done
+          else
+            for variant in '' '-build' '-cnb' '-cnb-build'; do
+              destTags+=("heroku/heroku:${{ matrix.stack-version }}${variant}")
+            done
+          fi
+          for destTag in "${destTags[@]}"; do
+            srcTag="${destTag}.${{ github.ref_name }}"
+            crane copy "${srcTag}" "${destTag}"
+          done

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-[[ "${GITHUB_REF_TYPE:-}" == 'tag' ]] || { echo "Skipping upload since GITHUB_REF_TYPE != 'tag'" && exit 1; }
-[[ -v MANIFEST_APP_URL ]] || { echo "Missing manifest app url" && exit 1; }
-[[ -v MANIFEST_APP_TOKEN ]] || { echo "Missing manifest app token" && exit 1; }

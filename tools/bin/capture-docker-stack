@@ -20,9 +20,7 @@ DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform linux/amd64 --user root "${
 IMG_BASE=${STACK_NAME}-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
 IMG_MNT=/tmp/$IMG_BASE
-IMG_GZ=/tmp/$IMG_BASE.img.gz
 IMG_SHA256=/tmp/$IMG_BASE.img.sha256
-IMG_MANIFEST=/tmp/$IMG_BASE.manifest
 IMG_PKG_VERSIONS=/tmp/$IMG_BASE.pkg.versions
 
 display "Starting capture for ${STACK} ${DOCKER_IMAGE_VERSION} at $(date)"
@@ -49,12 +47,5 @@ cat "${IMG_SHA256}"
 
 display "Capture Package Versions"
 capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
-
-if update-manifest; then
-    display "Uploading files"
-    upload-image "${IMG_GZ}" "${IMG_SHA256}" "${IMG_MANIFEST}" "${STACK}" "${DOCKER_IMAGE_VERSION}" "${IMG_PKG_VERSIONS}" "${GITHUB_REF_NAME}" |& indent
-else
-    display "Skipping image upload"
-fi
 
 display "Finished capture for ${STACK} ${DOCKER_IMAGE_VERSION}"

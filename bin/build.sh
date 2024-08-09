@@ -7,119 +7,81 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 REPO="heroku/heroku"
 STACK_VERSION=${1:-"NAN"}
-PUBLISH_SUFFIX=${2:-}
+read -ra ARCHS <<< "${@:2}"
 BASE_NAME=$(basename "${BASH_SOURCE[0]}")
 
 print_usage(){
-	>&2 echo "usage: ${BASE_NAME}  STACK_VERSION [PUBLISH_SUFFIX]"
+	>&2 echo "usage: ${BASE_NAME}  STACK_VERSION [TARGET_ARCH]..."
 	>&2 cat <<-EOF
 
-		This script builds heroku base images and writes package lists. It builds
-		multi-arch images for heroku-24 and newer, and amd64 images for heroku-22 and
-		older. It works in the following scenarios:
+		This script builds Heroku base image groups, stores them in the local
+		image store, and writes package lists for those images. A base image
+		group consists of all image variants for a particular stack version.
+		This script is capable of building single architecture image groups
+		for all stack versions. It also supports building multi-arch image
+		groups for heroku-24 (and newer). It works in the following scenarios:
 
-		Local builds with Docker Desktop and the 'containerd' snapshotter. In this
-		mode, all resulting images will be loaded into the local container store.
-		The 'default' and 'docker-container' drivers both work in this mode.
-		Note that the 'containerd' snapshotter is not compatible with 'pack'.
+		Single architecture builds -- build a base image group for a single
+		target architecture. Heroku-22 and prior support 'amd64' exclusively.
+		Heroku-24 and beyond additionally support 'arm64'. If targeting a
+		different architecture than the host machine, Docker Desktop and the
+		'containerd' snapshotter are required.
 
-		For CI tests and package list generation with Docker and the 'default'
-		Docker driver. In this mode, resulting images will be loaded into the
-		local container store, the package lists generated, but only for amd64.
-		The 'default' Docker driver is not able to store/retreive multi-arch images
-		locally with the default snapshotter, and the 'containerd' snapshotter is
-		only available with Docker Desktop. The 'docker-container' driver will not
-		work in this mode (it can't load any images from the default local store).
+		Examples:
+		${BASE_NAME} 20
+		${BASE_NAME} 22 amd64
+		${BASE_NAME} 24 arm64
 
-		Publishing images in CI with Docker and the 'docker-container'
-		driver. Pass in a REPO and PUBLISH_SUFFIX argument to publish images
-		directly during the build. Since Docker is unable to store/reference
-		multi-arch images locally, the publish process involves building+pushing
-		an image to a disposable tag, then retagging it. The 'default' Docker
-		driver will not work in this mode (it can't build cross-architecture).
+		Multi-architecture builds -- build a heroku base image index group for
+		multiple target architectures. This mode is only supported for
+		heroku-24 and beyond. This mode requires Docker Desktop and the
+		'containerd' snapshotter, and as a result will not work in CI
+		environments.
+
+		Examples:
+		${BASE_NAME} 24
+		${BASE_NAME} 24 arm64 amd64
+
 	EOF
 }
 
 [[ $STACK_VERSION =~ ^[0-9]+$ ]] || (>&2 print_usage && abort "fatal: invalid STACK_VERSION")
 
-have_docker_container_driver=
-if (docker buildx inspect; true) | grep -q 'Driver:\s*docker-container$'; then
-	have_docker_container_driver=1
-fi
-
 have_containerd_snapshotter=
-if docker info -f "{{ .DriverStatus }}" | grep -qF "io.containerd.snapshotter."; then have_containerd_snapshotter=1; fi
-
+if docker info -f "{{ .DriverStatus }}" | grep -qF "io.containerd.snapshotter."; then
+	have_containerd_snapshotter=1;
+fi
 
 if (( STACK_VERSION <= 22 )); then
 	# heroku/heroku:22 and prior images do not support multiple chip
 	# architectures or multi-arch images. Instead, they are amd64 only.
-	DOCKER_ARGS=("build" "--platform=linux/amd64")
+	if (( ${#ARCHS[@]} == 0 )); then
+		ARCHS=("amd64")
+	fi
 	# heroku/heroku:22 and prior images need separate *cnb* variants that
 	# add compatibility for Cloud Native Buildpacks.
 	VARIANTS=("-build:" "-cnb:" "-cnb-build:-build")
 else
-	# heroku/heroku:24 images and beyond are multi-arch (amd64+arm64) images.
-	# Due to weak feature support parity between Docker on Linux and Docker
-	# Desktop building and publishing across platforms has caveats (see the
-	# top of this file).
-	if [[ $have_containerd_snapshotter ]] || { [[ $PUBLISH_SUFFIX ]] && [[ $have_docker_container_driver ]]; }; then
-		DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64,linux/arm64")
-	elif [[ ! $PUBLISH_SUFFIX ]] && [[ ! $have_docker_container_driver ]]; then
-		DOCKER_ARGS=("buildx" "build" "--platform=linux/amd64")
-		>&2 echo "WARNING: heroku-24 and newer images are multi-arch images," \
-			"but this script is building single architecture images" \
-			"due to limitations of the current platform." \
-			"To build a multi-arch image, enable the 'containerd'" \
-			"snapshotter in Docker Desktop and/or use a 'docker-container'" \
-			"Docker BuildKit driver."
-	else
-		>&2 echo "ERROR: Can't build images with this configuration. Enable" \
-			"the 'containerd' snapshotter in Docker Desktop, enable" \
-			"the 'docker-container' driver in Docker, or use this script" \
-			"in build-only mode (don't provide PUBLISH_SUFFIX argument)."
-		abort 1
+	# heroku/heroku:24 and beyond support amd64 and arm64 and are published
+	# as multi-arch images.
+	if (( ${#ARCHS[@]} == 0 )); then
+		ARCHS=("amd64" "arm64")
 	fi
 	# heroku/heroku:24 and beyond images include CNB specific
 	# modifications, so separate *cnb* variants are not created.
 	VARIANTS=("-build:")
 fi
 
-if [[ $PUBLISH_SUFFIX ]]; then
-	# If there is a tag suffix, this script is pushing to a remote registry.
-	DOCKER_ARGS+=("--push")
-else
-	# Otherwise, load the image into the local image store.
-	DOCKER_ARGS+=("--load")
+if (( ${#ARCHS[@]} > 1 )) && [[ ! $have_containerd_snapshotter ]] ; then
+	>&2 print_usage
+	abort "fatal: 'containerd' snapshotter required for multi-arch builds"
 fi
 
 write_package_list() {
 	local image_tag="$1"
 	local dockerfile_dir="$2"
-
-	# Extract the stack version from the dockerfile_dir variable (e.g., heroku-24)
-	local stack_version
-	stack_version=$(echo "$dockerfile_dir" | sed -n 's/^heroku-\([0-9]*\).*$/\1/p')
-
-	local archs=("amd64")
-	# heroku-24 and newer are multiarch. If containerd is available,
-	# the package list for each architecture can be generated.
-	if (( stack_version >= 24 )); then
-		if [[ $have_containerd_snapshotter ]]; then
-			archs+=(arm64)
-		else
-			>&2 echo "WARNING: Generating package list for single architecture." \
-				"Use the 'containerd' snapshotter to generate package lists" \
-				"for all architectures."
-		fi
-	fi
-	local output_file=""
-	for arch in "${archs[@]}"; do
-		if (( stack_version >= 24 )); then
-			output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
-		else
-			output_file="${dockerfile_dir}/installed-packages.txt"
-		fi
+	for arch in "${ARCHS[@]}"; do
+		output_file="${dockerfile_dir}/installed-packages-${arch}.txt"
 		display "Generating package list: ${output_file}"
 		echo "# List of packages present in the final image. Regenerate using bin/build.sh" > "$output_file"
 		# We include the package status in the output so we can differentiate between fully installed
@@ -130,29 +92,37 @@ write_package_list() {
 	done
 }
 
-RUN_IMAGE_TAG="${REPO}:${STACK_VERSION}${PUBLISH_SUFFIX}"
+RUN_IMAGE_TAG="${REPO}:${STACK_VERSION}"
 RUN_DOCKERFILE_DIR="heroku-${STACK_VERSION}"
-
 [[ -d "${RUN_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${RUN_DOCKERFILE_DIR} not found"
-display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} image"
+DOCKER_PLATFORM="linux/${ARCHS[0]}"
+for arch in "${ARCHS[@]:1}"; do
+	DOCKER_PLATFORM="${DOCKER_PLATFORM},linux/${arch}"
+done
+
+display "Building ${RUN_DOCKERFILE_DIR} / ${RUN_IMAGE_TAG} image for ${DOCKER_PLATFORM}"
 # The --pull option is used for the run image, so that the latest updates
 # from upstream ubuntu images are included.
-docker "${DOCKER_ARGS[@]}" --pull \
+docker buildx build --pull --load --no-cache \
+	--platform "${DOCKER_PLATFORM}" \
 	--tag "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}" | indent
+
 write_package_list "${RUN_IMAGE_TAG}" "${RUN_DOCKERFILE_DIR}"
 
 for VARIANT in "${VARIANTS[@]}"; do
 	VARIANT_NAME=$(echo "$VARIANT" | cut -d ":" -f 1)
 	DEPENDENCY_NAME=$(echo "$VARIANT" | cut -d ":" -f 2)
-	VARIANT_IMAGE_TAG="${REPO}:${STACK_VERSION}${VARIANT_NAME}${PUBLISH_SUFFIX}"
+	VARIANT_IMAGE_TAG="${REPO}:${STACK_VERSION}${VARIANT_NAME}"
 	VARIANT_DOCKERFILE_DIR="heroku-${STACK_VERSION}${VARIANT_NAME}"
-	DEPENDENCY_IMAGE_TAG="${REPO}:${STACK_VERSION}${DEPENDENCY_NAME}${PUBLISH_SUFFIX}"
+	DEPENDENCY_IMAGE_TAG="${REPO}:${STACK_VERSION}${DEPENDENCY_NAME}"
 
 	[[ -d "${VARIANT_DOCKERFILE_DIR}" ]] || abort "fatal: directory ${VARIANT_DOCKERFILE_DIR} not found"
-	display "Building ${VARIANT_DOCKERFILE_DIR} / ${VARIANT_IMAGE_TAG} image"
+	display "Building ${VARIANT_DOCKERFILE_DIR} / ${VARIANT_IMAGE_TAG} image for ${DOCKER_PLATFORM}"
 	# The --pull option is not used for variants since they depend on images
 	# built earlier in this script.
-	docker "${DOCKER_ARGS[@]}" --build-arg "BASE_IMAGE=${DEPENDENCY_IMAGE_TAG}" \
+	docker buildx build --load --no-cache \
+		--platform "${DOCKER_PLATFORM}" \
+		--build-arg "BASE_IMAGE=${DEPENDENCY_IMAGE_TAG}" \
 		--tag "${VARIANT_IMAGE_TAG}" "${VARIANT_DOCKERFILE_DIR}" | indent
 
 	# generate the package list for non-cnb variants. cnb variants don't
