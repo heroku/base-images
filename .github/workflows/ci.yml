@@ -129,13 +129,11 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        if: matrix.tag_ecr_public != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
-        if: matrix.tag_ecr_public != ''
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
         with:
@@ -174,13 +172,11 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        if: matrix.tag_ecr_public != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
-        if: matrix.tag_ecr_public != ''
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
         with:
@@ -214,13 +210,11 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        if: matrix.tag_ecr_public != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
-        if: matrix.tag_ecr_public != ''
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
         with:
