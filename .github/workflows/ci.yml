@@ -126,8 +126,20 @@ jobs:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
       - name: Load Docker images into the Docker daemon
         run: zstd -dc --long=31 images.tar.zst | docker load
-      - name: Log into Docker Hub
+      - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Configure AWS credentials
+        if: matrix.tag_ecr_public != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Log in to Amazon ECR Public
+        if: matrix.tag_ecr_public != ''
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
       - name: Publish base images to registries
         run: |
           variants=("" "-build")
@@ -140,10 +152,11 @@ jobs:
           for variant in "${variants[@]}"; do
             srcTag="heroku/heroku:${{ matrix.stack-version}}${variant}"
             destTag="${srcTag}${platformSuffix}${TAG_SUFFIX}"
-            docker tag "${srcTag}" "${destTag}"
-            docker push "${destTag}"
+            for host in "docker.io" "public.ecr.aws"; do
+              docker tag "${srcTag}" "${host}/${destTag}"
+              docker push "${host}/${destTag}"
+            done
           done
-
 
   publish-indices:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
@@ -158,16 +171,30 @@ jobs:
       matrix:
         stack-version: ["24"]
     steps:
-      - name: Log into Docker Hub
+      - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Configure AWS credentials
+        if: matrix.tag_ecr_public != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Log in to Amazon ECR Public
+        if: matrix.tag_ecr_public != ''
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
       - name: Publish multi-arch image index
         run: |
           for variant in '' '-build'; do
             indexTag="heroku/heroku:${{ matrix.stack-version }}${variant}${TAG_SUFFIX}"
             armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
             amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
-            docker manifest create "$indexTag" "$amdTag" "$armTag"
-            docker manifest push "$indexTag"
+            for host in 'docker.io' 'public.ecr.aws'; do
+              docker manifest create "${host}/${indexTag}" "${host}/${amdTag}" "${host}/${armTag}"
+              docker manifest push "${host}/${indexTag}"
+            done
           done
 
   promote-tags:
@@ -184,8 +211,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Log into Docker Hub
+      - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+      - name: Configure AWS credentials
+        if: matrix.tag_ecr_public != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Log in to Amazon ECR Public
+        if: matrix.tag_ecr_public != ''
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
       - name: Install crane
         uses: buildpacks/github-actions/setup-tools@v5.7.3
       - name: Promote images to stable tag
@@ -205,5 +244,7 @@ jobs:
           fi
           for destTag in "${destTags[@]}"; do
             srcTag="${destTag}.${{ github.ref_name }}"
-            crane copy "${srcTag}" "${destTag}"
+            for host in "docker.io" "public.ecr.aws"; do
+              crane copy "${host}/${srcTag}" "${host}/${destTag}"
+            done
           done
