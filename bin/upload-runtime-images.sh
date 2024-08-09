@@ -12,9 +12,8 @@ GIT_REF="${2:-}"
 [[ $GIT_REF =~ ^[a-f0-9]+$ ]] || (abort "fatal: invalid GIT_REF")
 
 for STACK in "heroku-${STACK_VERSION}" "heroku-${STACK_VERSION}-build"; do
-    IMG_BASE=$(ls /tmp | grep -E "^${STACK}-[a-f0-9]+$" | head -n 1)
-    IMG_VERSION=${IMG_BASE##*-}
-    IMG_PATH="/tmp/${IMG_BASE}"
+    IMG_PATH=$(find /tmp/ -type d -maxdepth 1 | grep -E "/${STACK}-[a-f0-9]+$" | head -n 1)
+    IMG_VERSION=${IMG_PATH##*-}
     IMG_GZ="${IMG_PATH}.img.gz"
     IMG_PKG_VERSIONS="${IMG_PATH}.pkg.versions"
     IMG_SHA256="${IMG_PATH}.img.sha256"
