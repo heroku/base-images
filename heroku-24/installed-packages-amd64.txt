@@ -29,6 +29,7 @@ fontconfig
 fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-mono
+fonts-urw-base35
 gcc-14-base
 gettext-base
 gir1.2-freedesktop
@@ -113,6 +114,7 @@ libffi8
 libfftw3-double3
 libfido2-1
 libfontconfig1
+libfontenc1
 libfreetype6
 libfribidi0
 libgcc-s1
@@ -324,6 +326,9 @@ ucf
 unzip
 util-linux
 wget
+x11-common
+xfonts-encodings
+xfonts-utils
 xz-utils
 zip
 zlib1g

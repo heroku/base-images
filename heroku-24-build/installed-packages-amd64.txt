@@ -42,6 +42,7 @@ fontconfig
 fontconfig-config
 fonts-dejavu-core
 fonts-dejavu-mono
+fonts-urw-base35
 g++
 g++-13
 g++-13-x86-64-linux-gnu
@@ -175,6 +176,7 @@ libfftw3-double3
 libfido2-1
 libfontconfig-dev
 libfontconfig1
+libfontenc1
 libfreetype-dev
 libfreetype6
 libfribidi0
@@ -535,6 +537,8 @@ wget
 x11-common
 x11proto-core-dev
 x11proto-dev
+xfonts-encodings
+xfonts-utils
 xorg-sgml-doctools
 xtrans-dev
 xz-utils
