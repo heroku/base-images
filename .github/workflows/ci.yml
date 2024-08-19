@@ -204,7 +204,7 @@ jobs:
     steps:
       - name: Obtain CTC Lock via TPS API
         run: |
-          curl -vv -X PUT \
+          curl -sS -X PUT \
             -H "ACCEPT: application/json" \
             -H "Content-Type: application/json" \
             -H "Authorization: Token ${{ secrets.TPS_TOKEN }}" \
