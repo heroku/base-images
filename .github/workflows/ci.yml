@@ -197,10 +197,28 @@ jobs:
             done
           done
 
+  ctc-check:
+    name: Obtain CTC Lock
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Obtain CTC Lock via TPS API
+        run: |
+          curl -vv -X PUT \
+            -H "ACCEPT: application/json" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Token ${{ secrets.tps_token }}" \
+            -d '{"lock": {"sha": "${{ github.sha }}", "component_name": "${{ vars.tps_component }}"}}' \
+            ${{ secrets.tps_ctc_api_url }}
+
+          echo "successful"
+          exit 1
+
   promote-tags:
     if: github.ref_type == 'tag'
     name: "Promote heroku-${{ matrix.stack-version }} tags"
     needs:
+      - ctc-check
       - publish-images
       - publish-indices
     runs-on: ubuntu-24.04
