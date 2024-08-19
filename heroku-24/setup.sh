@@ -43,6 +43,8 @@ packages=(
   bzip2
   curl
   file
+  fonts-dejavu-core
+  fonts-dejavu-mono
   fonts-urw-base35 # ImageMagick's default type.xml config points to these, includes e.g. Courier or Helvetica
   gettext-base # For `envsubst`.
   gir1.2-harfbuzz-0.0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
