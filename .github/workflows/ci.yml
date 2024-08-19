@@ -211,9 +211,6 @@ jobs:
             -d '{"lock": {"sha": "${{ github.sha }}", "component_name": "${{ vars.tps_component }}"}}' \
             ${{ secrets.TPS_CTC_API_URL }}
 
-          echo "successful"
-          exit 1
-
   promote-tags:
     if: github.ref_type == 'tag'
     name: "Promote heroku-${{ matrix.stack-version }} tags"
