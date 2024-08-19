@@ -207,9 +207,9 @@ jobs:
           curl -vv -X PUT \
             -H "ACCEPT: application/json" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Token ${{ secrets.tps_token }}" \
+            -H "Authorization: Token ${{ secrets.TPS_TOKEN }}" \
             -d '{"lock": {"sha": "${{ github.sha }}", "component_name": "${{ vars.tps_component }}"}}' \
-            ${{ secrets.tps_ctc_api_url }}
+            ${{ secrets.TPS_CTC_API_URL }}
 
           echo "successful"
           exit 1
