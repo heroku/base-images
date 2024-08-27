@@ -47,6 +47,7 @@ packages=(
   fonts-dejavu-mono
   fonts-urw-base35 # ImageMagick's default type.xml config points to these, includes e.g. Courier or Helvetica
   gettext-base # For `envsubst`.
+  ghostscript # Used by ImageMagick's PDF functionality
   gir1.2-harfbuzz-0.0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   gnupg
   imagemagick
