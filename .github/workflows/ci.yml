@@ -99,7 +99,7 @@ jobs:
           path: /tmp/heroku-${{ matrix.stack-version }}*
       - name: Upload heroku runtime images to staging
         run: |
-          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.ref_name }}
 
   publish-images:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
