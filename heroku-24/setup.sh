@@ -72,7 +72,6 @@ packages=(
   libgnutls-openssl27
   libgnutls30 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libidn12 # Because libidn-dev is in the build image
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmemcached11 # Used by the PHP Memcached extension.
