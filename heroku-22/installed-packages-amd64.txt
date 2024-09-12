@@ -156,7 +156,6 @@ libgdk-pixbuf-2.0-0
 libgdk-pixbuf-xlib-2.0-0
 libgdk-pixbuf2.0-0
 libgdk-pixbuf2.0-common
-libgeoip1
 libgirepository-1.0-1
 libglib2.0-0
 libgmp10

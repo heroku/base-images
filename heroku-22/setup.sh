@@ -73,7 +73,6 @@ packages=(
   libgd3
   libgdk-pixbuf2.0-0
   libgdk-pixbuf2.0-common
-  libgeoip1
   libgnutls-openssl27
   libgnutls30
   libgnutlsxx28
