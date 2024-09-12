@@ -122,12 +122,6 @@ packages=(
   zstd
 )
 
-if [[ $(dpkg --print-architecture) == "amd64" ]]; then
-  packages+=(
-    libgirepository-1.0-1 # Because libgirepository1.0-dev and libgirepository-1.0-dev are in the build image
-  )
-fi
-
 apt-get install -y --no-install-recommends "${packages[@]}"
 
 # Generate locale data for "en_US.UTF-8" too, since the upstream Ubuntu image

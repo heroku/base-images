@@ -130,7 +130,6 @@ libgdbm-compat4t64
 libgdbm6t64
 libgdk-pixbuf-2.0-0
 libgdk-pixbuf2.0-common
-libgirepository-1.0-1
 libglib2.0-0t64
 libgmp10
 libgnutls-openssl27t64
