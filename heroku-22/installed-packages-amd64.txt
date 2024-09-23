@@ -173,6 +173,7 @@ libgssapi-krb5-2
 libharfbuzz-gobject0
 libharfbuzz-icu0
 libharfbuzz0b
+libhashkit2
 libhdf5-103-1
 libheif1
 libhogweed6
@@ -216,6 +217,7 @@ libmaxminddb0
 libmcrypt4
 libmd0
 libmemcached11
+libmemcachedutil2
 libmnl0
 libmount1
 libmp3lame0
@@ -225,6 +227,7 @@ libmpfr6
 libmysqlclient21
 libncurses6
 libncursesw6
+libnetpbm10
 libnettle8
 libnghttp2-14
 libnpth0
@@ -313,6 +316,7 @@ libvpx7
 libwebp7
 libwebpdemux2
 libwebpmux3
+libwmf-0.2-7
 libwmflite-0.2-7
 libwrap0
 libx11-6
