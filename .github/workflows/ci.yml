@@ -99,7 +99,7 @@ jobs:
           path: /tmp/heroku-${{ matrix.stack-version }}*
       - name: Upload heroku runtime images to staging
         run: |
-          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.ref_name }}
 
   publish-images:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
@@ -209,7 +209,7 @@ jobs:
             -H "ACCEPT: application/json" \
             -H "Content-Type: application/json" \
             -H "Authorization: Token ${{ secrets.TPS_TOKEN }}" \
-            -d '{"lock": {"sha": "${{ github.sha }}", "component_name": "${{ vars.tps_component }}"}}' \
+            -d '{"lock": {"sha": "${{ github.ref_name }}", "component_name": "${{ vars.tps_component }}"}}' \
             "${{ secrets.TPS_CTC_API_URL }}"
 
   promote-tags:
