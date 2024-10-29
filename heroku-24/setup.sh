@@ -131,12 +131,10 @@ locale-gen en_US.UTF-8
 
 # Install AWS RDS global CA bundle (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html#UsingWithRDS.SSL.CertificatesAllRegions)
 mkdir -p /usr/local/share/ca-certificates/rds-ca-certs
-pushd /usr/local/share/ca-certificates/rds-ca-certs
 awk '
   split_after == 1 {n++;split_after=0}
   /-----END CERTIFICATE-----/ {split_after=1}
   {print > "/usr/local/share/ca-certificates/rds-ca-certs/rds-ca" n ".crt"}' < /build/rds-global-bundle.pem
-popd
 update-ca-certificates
 
 # Install ca-certificates-java so that the JVM buildpacks can configure Java apps to use the Java certs
