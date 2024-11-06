@@ -129,6 +129,14 @@ apt-get install -y --no-install-recommends "${packages[@]}"
 # https://github.com/docker-library/docs/blob/master/ubuntu/README.md#locales
 locale-gen en_US.UTF-8
 
+# Install AWS RDS global CA bundle (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html#UsingWithRDS.SSL.CertificatesAllRegions)
+mkdir -p /usr/local/share/ca-certificates/rds-ca-certs
+awk '
+  split_after == 1 {n++;split_after=0}
+  /-----END CERTIFICATE-----/ {split_after=1}
+  {print > "/usr/local/share/ca-certificates/rds-ca-certs/rds-ca" n ".crt"}' < /build/rds-global-bundle.pem
+update-ca-certificates
+
 # Install ca-certificates-java so that the JVM buildpacks can configure Java apps to use the Java certs
 # store in the base image instead of the one that ships in each JRE release, allowing certs to be updated
 # via base image updates. Generation of the `cacerts` file occurs in a post-install script which only runs
@@ -140,6 +148,7 @@ apt-get remove -y --purge --auto-remove default-jre-headless
 # https://github.com/heroku/base-images/pull/103#issuecomment-389544431
 # https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
 test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
+
 
 # Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
 # that we have to remove before creating our own (`userdel` will remove the group too).
