@@ -182,6 +182,8 @@ libidn2-0
 libijs-0.35
 libilmbase24
 libimagequant0
+libio-pty-perl
+libipc-run-perl
 libisl22
 libitm1
 libjbig0
