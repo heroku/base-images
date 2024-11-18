@@ -264,6 +264,8 @@ libijs-0.35
 libilmbase-dev
 libilmbase24
 libimagequant0
+libio-pty-perl
+libipc-run-perl
 libisl22
 libitm1
 libjbig-dev
