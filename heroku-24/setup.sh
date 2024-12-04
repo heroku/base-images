@@ -154,8 +154,8 @@ test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 # that we have to remove before creating our own (`userdel` will remove the group too).
 userdel ubuntu --remove
 
-groupadd heroku --gid 1000
-useradd heroku --uid 1000 --gid 1000 --shell /bin/bash --create-home
+groupadd dyno --gid 1000
+useradd dyno --uid 1000 --gid 1000 --shell /bin/bash --home /app --create-home
 
 rm -rf /root/*
 rm -rf /tmp/*

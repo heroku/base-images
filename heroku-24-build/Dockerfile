@@ -14,3 +14,7 @@ ENV CNB_GROUP_ID=1000
 # Stack IDs are deprecated, but we still set this for backwards compatibility:
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#iobuildpacksstack-labels
 ENV CNB_STACK_ID="heroku-24"
+
+# Match HOME operation done in [heroku-22](https://github.com/usiegj00/base-images/blob/3bed84a6cf88bc6535b1ef18acbc454f88c854d8/heroku-22-cnb/Dockerfile#L17). 
+# This is related to [the user HOME issue exposed here](https://github.com/heroku/base-images/pull/332).
+ENV HOME=/workspace
