@@ -345,6 +345,7 @@ tar
 tzdata
 ubuntu-keyring
 ucf
+unminimize
 unzip
 util-linux
 wget
