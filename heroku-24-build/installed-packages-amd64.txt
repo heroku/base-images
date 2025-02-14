@@ -248,8 +248,6 @@ libijs-0.35
 libimagequant0
 libimath-3-1-29t64
 libimath-dev
-libio-pty-perl
-libipc-run-perl
 libisl23
 libitm1
 libjansson4
