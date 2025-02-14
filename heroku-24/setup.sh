@@ -110,7 +110,7 @@ packages=(
   openssh-server # Used by Heroku Exec.
   patch
   poppler-utils # For Rails Active Storage Previews PDF support.
-  postgresql-client-16 # We need `psql` (and not just libpq) for Shield DB workflows (where connections are only possible from the dyno).
+  postgresql-client-17 # We need `psql` (and not just libpq) for Shield DB workflows (where connections are only possible from the dyno).
   rsync
   socat
   tar

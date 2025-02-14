@@ -520,7 +520,7 @@ pkgconf
 pkgconf-bin
 poppler-data
 poppler-utils
-postgresql-client-16
+postgresql-client-17
 postgresql-client-common
 procps
 python3
