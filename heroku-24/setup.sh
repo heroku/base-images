@@ -149,6 +149,12 @@ apt-get remove -y --purge --auto-remove default-jre-headless
 # https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
 test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
+# Remove /usr/lib/ssl/cert.pem symlink.
+# We remove this so that libraries calling X509_STORE_set_default_paths
+# don't have to load the unhashed bundle.
+if [ -f "/usr/lib/ssl/cert.pem" ]; then
+  rm "/usr/lib/ssl/cert.pem"
+fi
 
 # Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
 # that we have to remove before creating our own (`userdel` will remove the group too).
