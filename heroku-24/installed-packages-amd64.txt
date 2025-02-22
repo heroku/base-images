@@ -178,6 +178,9 @@ liblerc4
 liblmdb0
 liblqr-1-0
 libltdl7
+liblttng-ust-common1t64
+liblttng-ust-ctl5t64
+liblttng-ust1t64
 liblz4-1
 liblzf1
 liblzma5

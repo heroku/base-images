@@ -85,6 +85,7 @@ packages=(
   libharfbuzz0b
   libhashkit2
   libheif1
+  liblttng-ust1
   liblzf1
   libmagickcore-6.q16-3-extra
   libmcrypt4
