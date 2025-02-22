@@ -159,8 +159,6 @@ libidn2-0
 libijs-0.35
 libimagequant0
 libimath-3-1-29t64
-libio-pty-perl
-libipc-run-perl
 libjansson4
 libjbig0
 libjbig2dec0
