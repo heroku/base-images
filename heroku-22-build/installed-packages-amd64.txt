@@ -475,6 +475,7 @@ libudev-dev
 libudev1
 libunbound8
 libunistring2
+libunwind8
 libuuid1
 libuv1
 libuv1-dev

@@ -309,6 +309,7 @@ libtsan0
 libubsan1
 libudev1
 libunistring2
+libunwind8
 libuuid1
 libuv1
 libvips42

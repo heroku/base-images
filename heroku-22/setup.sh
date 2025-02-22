@@ -116,6 +116,7 @@ packages=(
   libthai0
   libtheora0
   libunistring2
+  libunwind8
   libuv1
   libvips42
   libvorbis0a

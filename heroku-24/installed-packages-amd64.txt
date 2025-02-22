@@ -273,6 +273,7 @@ libtirpc3t64
 libudev1
 libunibreak5
 libunistring5
+libunwind8
 libuuid1
 libuv1t64
 libvips42t64

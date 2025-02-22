@@ -424,6 +424,7 @@ libudev1
 libunbound8
 libunibreak5
 libunistring5
+libunwind8
 libuuid1
 libuv1-dev
 libuv1t64
