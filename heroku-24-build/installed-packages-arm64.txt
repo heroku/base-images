@@ -277,6 +277,9 @@ liblqr-1-0-dev
 liblsan0
 libltdl-dev
 libltdl7
+liblttng-ust-common1t64
+liblttng-ust-ctl5t64
+liblttng-ust1t64
 liblz4-1
 liblz4-dev
 liblzf-dev
