@@ -528,6 +528,7 @@ socat
 sysvinit-utils
 tar
 tzdata
+tzdata-legacy
 ubuntu-keyring
 ucf
 unminimize
