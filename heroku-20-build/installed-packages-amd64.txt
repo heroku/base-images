@@ -568,6 +568,7 @@ poppler-utils
 postgresql-client-16
 postgresql-client-common
 postgresql-common
+postgresql-common-dev
 postgresql-server-dev-16
 procps
 python-is-python3
