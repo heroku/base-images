@@ -72,6 +72,7 @@ packages=(
   libgnutls-openssl27
   libgnutls30 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  liblttng-ust1 # Used by the .NET runtime.
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmemcached11 # Used by the PHP Memcached extension.
@@ -90,6 +91,7 @@ packages=(
   libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libsvtav1enc1d1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libunwind8 # Used by the .NET runtime.
   libuv1
   libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.

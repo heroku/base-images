@@ -305,6 +305,9 @@ liblqr-1-0-dev
 liblsan0
 libltdl-dev
 libltdl7
+liblttng-ust-common1
+liblttng-ust-ctl5
+liblttng-ust1
 liblz4-1
 liblz4-dev
 liblzf-dev
@@ -472,6 +475,7 @@ libudev-dev
 libudev1
 libunbound8
 libunistring2
+libunwind8
 libuuid1
 libuv1
 libuv1-dev
