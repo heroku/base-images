@@ -85,9 +85,6 @@ jobs:
       fail-fast: false
       matrix:
         stack-version: ["20", "22", "24"]
-    env:
-      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
-      MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -98,8 +95,10 @@ jobs:
           key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
           path: /tmp/heroku-${{ matrix.stack-version }}*
       - name: Upload heroku runtime images to staging
-        run: |
-          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+        run: bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+        env:
+          MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
+          MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
 
   publish-images:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
