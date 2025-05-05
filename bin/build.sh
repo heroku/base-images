@@ -28,7 +28,6 @@ print_usage(){
 		'containerd' snapshotter are required.
 
 		Examples:
-		${BASE_NAME} 20
 		${BASE_NAME} 22 amd64
 		${BASE_NAME} 24 arm64
 
