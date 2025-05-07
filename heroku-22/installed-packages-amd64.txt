@@ -204,6 +204,9 @@ liblmdb0
 liblqr-1-0
 liblsan0
 libltdl7
+liblttng-ust-common1
+liblttng-ust-ctl5
+liblttng-ust1
 liblz4-1
 liblzf1
 liblzma5
@@ -368,7 +371,7 @@ perl-modules-5.34
 pinentry-curses
 poppler-data
 poppler-utils
-postgresql-client-16
+postgresql-client-17
 postgresql-client-common
 procps
 python-is-python3

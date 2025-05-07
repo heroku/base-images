@@ -305,6 +305,9 @@ liblqr-1-0-dev
 liblsan0
 libltdl-dev
 libltdl7
+liblttng-ust-common1
+liblttng-ust-ctl5
+liblttng-ust1
 liblz4-1
 liblz4-dev
 liblzf-dev
@@ -562,7 +565,7 @@ pinentry-curses
 pkg-config
 poppler-data
 poppler-utils
-postgresql-client-16
+postgresql-client-17
 postgresql-client-common
 procps
 python-is-python3

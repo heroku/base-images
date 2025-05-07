@@ -85,9 +85,6 @@ jobs:
       fail-fast: false
       matrix:
         stack-version: ["20", "22", "24"]
-    env:
-      MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
-      MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -98,8 +95,10 @@ jobs:
           key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
           path: /tmp/heroku-${{ matrix.stack-version }}*
       - name: Upload heroku runtime images to staging
-        run: |
-          bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+        run: bin/upload-runtime-images.sh ${{ matrix.stack-version }} ${{ github.sha }}
+        env:
+          MANIFEST_APP_TOKEN: "${{ secrets.MANIFEST_APP_TOKEN }}"
+          MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
 
   publish-images:
     if: github.ref_name == 'main' || github.ref_type == 'tag'
@@ -133,13 +132,13 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
         with:
           registry-type: public
       - name: Publish base images to registries
@@ -176,13 +175,13 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
         with:
           registry-type: public
       - name: Publish multi-arch image index
@@ -230,17 +229,17 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
         with:
           registry-type: public
       - name: Install crane
-        uses: buildpacks/github-actions/setup-tools@v5.8.8
+        uses: buildpacks/github-actions/setup-tools@c502bcff683efa6f6d56a325df3fbe1722e21881 # v5.8.11
       - name: Promote images to stable tag
         run: |
           destTags=( )

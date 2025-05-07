@@ -85,6 +85,7 @@ packages=(
   libharfbuzz0b
   libhashkit2
   libheif1
+  liblttng-ust1
   liblzf1
   libmagickcore-6.q16-3-extra
   libmcrypt4
@@ -143,7 +144,7 @@ packages=(
   openssh-server
   patch
   poppler-utils
-  postgresql-client-16
+  postgresql-client-17
   python-is-python3
   python3
   rename

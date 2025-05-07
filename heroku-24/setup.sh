@@ -72,6 +72,7 @@ packages=(
   libgnutls-openssl27
   libgnutls30 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  liblttng-ust1 # Used by the .NET runtime.
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmemcached11 # Used by the PHP Memcached extension.
@@ -110,7 +111,7 @@ packages=(
   openssh-server # Used by Heroku Exec.
   patch
   poppler-utils # For Rails Active Storage Previews PDF support.
-  postgresql-client-16 # We need `psql` (and not just libpq) for Shield DB workflows (where connections are only possible from the dyno).
+  postgresql-client-17 # We need `psql` (and not just libpq) for Shield DB workflows (where connections are only possible from the dyno).
   rsync
   socat
   tar

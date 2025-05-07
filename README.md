@@ -7,10 +7,10 @@ The recipes are also rendered into Docker images that are available on Docker Hu
 
 | Image                                     | Type                   | OS           | Supported Architectures | Default `USER` | Status       |
 |-------------------------------------------|------------------------|--------------|-------------------------|----------------| -------------|
-| [heroku/heroku:20][heroku-tags]           | Heroku Run Image       | Ubuntu 20.04 | AMD64                   | `root`         |  Deprecated  |
-| [heroku/heroku:20-build][heroku-tags]     | Heroku Build Image     | Ubuntu 20.04 | AMD64                   | `root`         |  Deprecated  |
-| [heroku/heroku:20-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 20.04 | AMD64                   | `heroku`       |  Deprecated  |
-| [heroku/heroku:20-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 20.04 | AMD64                   | `heroku`       |  Deprecated  |
+| [heroku/heroku:20][heroku-tags]           | Heroku Run Image       | Ubuntu 20.04 | AMD64                   | `root`         |  End-of-life |
+| [heroku/heroku:20-build][heroku-tags]     | Heroku Build Image     | Ubuntu 20.04 | AMD64                   | `root`         |  End-of-life |
+| [heroku/heroku:20-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 20.04 | AMD64                   | `heroku`       |  End-of-life |
+| [heroku/heroku:20-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 20.04 | AMD64                   | `heroku`       |  End-of-life |
 | [heroku/heroku:22][heroku-tags]           | Heroku Run Image       | Ubuntu 22.04 | AMD64                   | `root`         |  Available   |
 | [heroku/heroku:22-build][heroku-tags]     | Heroku Build Image     | Ubuntu 22.04 | AMD64                   | `root`         |  Available   |
 | [heroku/heroku:22-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 22.04 | AMD64                   | `heroku`       |  Available   |
