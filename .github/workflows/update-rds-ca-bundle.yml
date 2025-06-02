@@ -1,0 +1,58 @@
+name: Update RDS CA Bundle
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 4 * * 1-5'
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-rds-ca-inventory:
+    name: Update RDS CA Bundle
+    runs-on: pub-hk-ubuntu-24.04-ip
+    steps:
+      # - uses: actions/create-github-app-token@v1
+      #   id: generate-token
+      #   with:
+      #     app-id: ${{ vars.LINGUIST_GH_APP_ID }}
+      #     private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compare
+        id: compare
+        run: | 
+          wget -q https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem -O /tmp/global-bundle.pem
+          if cmp —silent — /tmp/global-bundle.pem heroku-24/rds-global-bundle.pem; then
+            echo "files_match=true" >> $GITHUB_OUTPUT
+          else
+            echo "files_match=false" >> $GITHUB_OUTPUT
+            cp /tmp/global-bundle.pem heroku-24/rds-global-bundle.pem
+            cp /tmp/global-bundle.pem heroku-22/rds-global-bundle.pem
+            cp /tmp/global-bundle.pem heroku-20/rds-global-bundle.pem
+          fi
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.files_match == 'false'
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          # token: ${{ steps.generate-token.outputs.token }}
+          title: "Update RDS CA Bundle"
+          commit-message: "Update RDS CA Bundle to latest version"
+          # committer: ${{ vars.LINGUIST_GH_APP_USERNAME }} <${{ vars.LINGUIST_GH_APP_EMAIL }}>
+          # author: ${{ vars.LINGUIST_GH_APP_USERNAME }} <${{ vars.LINGUIST_GH_APP_EMAIL }}>
+          branch: update-rds-ca-bundle
+          body: "Automated pull-request to update the RDS CA bundle"
+
+      - name: Configure PR
+        if: steps.pr.outputs.pull-request-operation == 'created'
+        # env:
+          # GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge --squash --auto "${{ steps.pr.outputs.pull-request-number }}"
