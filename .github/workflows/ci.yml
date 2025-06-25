@@ -34,10 +34,8 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
         exclude:
-          - arch: "arm64"
-            stack-version: "20"
           - arch: "arm64"
             stack-version: "22"
     steps:
@@ -84,7 +82,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -112,10 +110,8 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
         exclude:
-          - arch: "arm64"
-            stack-version: "20"
           - arch: "arm64"
             stack-version: "22"
     steps:
@@ -222,7 +218,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
