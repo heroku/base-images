@@ -34,10 +34,8 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
         exclude:
-          - arch: "arm64"
-            stack-version: "20"
           - arch: "arm64"
             stack-version: "22"
     steps:
@@ -84,7 +82,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -112,10 +110,8 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
         exclude:
-          - arch: "arm64"
-            stack-version: "20"
           - arch: "arm64"
             stack-version: "22"
     steps:
@@ -132,7 +128,7 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
+        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -175,7 +171,7 @@ jobs:
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
+        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -222,14 +218,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["20", "22", "24"]
+        stack-version: ["22", "24"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
+        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ECR_ROLE }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -239,7 +235,7 @@ jobs:
         with:
           registry-type: public
       - name: Install crane
-        uses: buildpacks/github-actions/setup-tools@c502bcff683efa6f6d56a325df3fbe1722e21881 # v5.8.11
+        uses: buildpacks/github-actions/setup-tools@bc04fbfd78e903050bab17a2dcf907e71e3c4afa # v5.9.2
       - name: Promote images to stable tag
         run: |
           destTags=( )
