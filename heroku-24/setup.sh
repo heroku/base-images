@@ -150,12 +150,15 @@ apt-get remove -y --purge --auto-remove default-jre-headless
 # https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1771363
 test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 
-# Remove /usr/lib/ssl/cert.pem symlink.
-# We remove this so that libraries calling X509_STORE_set_default_paths
-# don't have to load the unhashed bundle.
-if [ -f "/usr/lib/ssl/cert.pem" ]; then
-  rm "/usr/lib/ssl/cert.pem"
-fi
+# Starting in Ubuntu 24.04, OpenSSL includes a symlink from `/usr/lib/ssl/cert.pem` to
+# `/etc/ssl/certs/ca-certificates.crt`, inherited from the upstream Debian package:
+# https://git.launchpad.net/ubuntu/+source/openssl/commit/?h=applied/ubuntu/noble&id=3bf1e1c1e4125bc1a51bf5113969270e1ba72b2e
+# https://bugs-devel.debian.org/cgi-bin/bugreport.cgi?bug=805646
+# However, this causes a significant performance regression for use-cases where the
+# certs or clients aren't cached/reused. As such, we remove the symlink to restore the
+# behaviour and performance of Ubuntu 22.04 and older. For more details see:
+# https://github.com/heroku/base-images/pull/344
+rm /usr/lib/ssl/cert.pem
 
 # Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
 # that we have to remove before creating our own (`userdel` will remove the group too).
