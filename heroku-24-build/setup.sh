@@ -53,7 +53,6 @@ packages=(
   patchelf
   python3 # Often needed during the building of non-Python apps. e.g. For Node.js packages that use node-gyp.
   zlib1g-dev
-  libtirpc3t64 # used to be a dependency of iproute2 (e.g. /bin/ip linked against libtirpc.so.3), now requiring explicitly to prevent package removal - can be removed for heroku-26
 )
 
 apt-get update --error-on=any
