@@ -415,6 +415,8 @@ libtiff-dev
 libtiff6
 libtiffxx6
 libtinfo6
+libtirpc-common
+libtirpc3t64
 libtool
 libtsan2
 libubsan1
