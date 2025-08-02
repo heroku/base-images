@@ -91,6 +91,7 @@ packages=(
   libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libsvtav1enc1d1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libtirpc3t64 # used to be a dependency of iproute2 (e.g. /bin/ss linked against libtirpc.so.3), now requiring explicitly to prevent package removal - can be removed for heroku-26
   libuv1
   libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
