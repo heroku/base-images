@@ -117,6 +117,7 @@ packages=(
   socat
   tar
   tzdata
+  tzdata-legacy # Provides older/non-standard timezones like US/Central.
   unzip
   wget
   xz-utils
