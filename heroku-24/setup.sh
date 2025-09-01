@@ -106,6 +106,7 @@ packages=(
   libzip4 # Used by the PHP runtime.
   locales
   lsb-release
+  media-types # Provides /etc/mime.types, used by Python's `mimetypes` stdlib module.
   nano # More usable than ed but still much smaller than vim.
   netcat-openbsd
   openssh-client # Used by Heroku Exec.

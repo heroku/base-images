@@ -312,6 +312,7 @@ login
 logsave
 lsb-release
 mawk
+media-types
 mlock
 mount
 mysql-common
