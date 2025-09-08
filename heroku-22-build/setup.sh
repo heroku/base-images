@@ -79,6 +79,7 @@ packages=(
   mercurial
   patchelf
   python3-dev
+  python3-tomli
   zlib1g-dev
 )
 
