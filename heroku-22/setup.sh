@@ -55,6 +55,7 @@ packages=(
   libaom3
   libargon2-1
   libass9
+  libatomic1 # Used by Node.js >= 25
   libc-ares2 # Used by PgBouncer in heroku-buildpack-pgbouncer.
   libc-client2007e
   libc6-dev
