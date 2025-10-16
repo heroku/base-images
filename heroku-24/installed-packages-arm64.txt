@@ -65,6 +65,7 @@ libarchive13t64
 libargon2-1
 libass9
 libassuan0
+libatomic1
 libattr1
 libaudit-common
 libaudit1

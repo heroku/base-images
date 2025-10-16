@@ -58,6 +58,7 @@ packages=(
   less
   libargon2-1 # Used by the PHP runtime.
   libass9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libatomic1 # Used by Node.js >= 25
   libc-client2007e # Used by the PHP IMAP extension.
   libcares2 # Used by PgBouncer in heroku-buildpack-pgbouncer.
   libdav1d7 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
