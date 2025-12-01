@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Run shellcheck
         run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
 
@@ -40,7 +40,7 @@ jobs:
             stack-version: "22"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Build base image groups
         run: bin/build.sh "${{ matrix.stack-version }}" "${{ matrix.arch }}"
       - name: Check that the generated files are in sync
@@ -85,7 +85,7 @@ jobs:
         stack-version: ["22", "24"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Restore heroku runtime images from the cache
         uses: actions/cache/restore@v4
         with:
@@ -221,7 +221,7 @@ jobs:
         stack-version: ["22", "24"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
