@@ -62,13 +62,13 @@ jobs:
           docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ matrix.stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
       - name: Save OCI base image exports to the cache
         if: github.ref_name == 'main' || github.ref_type == 'tag'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
           path: images.tar.zst
       - name: Save Heroku runtime image files to the cache
         if: matrix.arch == 'amd64' && github.ref_type == 'tag'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
           path: /tmp/heroku-${{ matrix.stack-version }}*
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Restore heroku runtime images from the cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           fail-on-cache-miss: true
           key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
@@ -116,7 +116,7 @@ jobs:
             stack-version: "22"
     steps:
       - name: Restore base images from the cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           fail-on-cache-miss: true
           key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
