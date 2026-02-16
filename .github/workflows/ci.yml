@@ -187,8 +187,10 @@ jobs:
             armTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-arm64${TAG_SUFFIX}"
             amdTag="heroku/heroku:${{ matrix.stack-version }}${variant}_linux-amd64${TAG_SUFFIX}"
             for host in 'docker.io' 'public.ecr.aws'; do
-              docker manifest create "${host}/${indexTag}" "${host}/${amdTag}" "${host}/${armTag}"
-              docker manifest push "${host}/${indexTag}"
+              docker buildx imagetools create \
+                --tag "${host}/${indexTag}" \
+                "${host}/${amdTag}" \
+                "${host}/${armTag}"
             done
           done
 
