@@ -5,17 +5,19 @@ set -euo pipefail
 [ $# -ge 1 ] || abort "usage: $(basename "$0") STACK [VERSION]"
 [ $UID = 0 ] || abort "fatal: must be called with sudo"
 
+ARCH=$(dpkg --print-architecture)
+
 STACK=$1
 STACK_NAME=$(echo "${STACK}" | cut -d '-' -f 1)
 STACK_VERSION=$(echo "${STACK}" | cut -d '-' -f 2-)
 
 DOCKER_IMAGE=heroku/$STACK_NAME:$STACK_VERSION
-DOCKER_IMAGE_VERSION=$(docker inspect "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
+DOCKER_IMAGE_VERSION=$(docker image inspect --platform "linux/${ARCH}" "${DOCKER_IMAGE}" | jq .[].Id | cut -d ':' -f 2 | cut -b 1-12)
 # Using `du` rather than the `Size` attribute from Docker inspect, since the latter appears to:
 #  - Under-report usage slightly when using the overlay2 storage driver
 #  - Be the compressed image size (instead of uncompressed) when using the containerd snapshotter
 # The `--user root` is required since the images for newer stacks default to a non-root user.
-DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform linux/amd64 --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -d 'M' -f 1)
+DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform "linux/${ARCH}" --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -d 'M' -f 1)
 
 IMG_BASE=${STACK_NAME}-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
@@ -23,7 +25,7 @@ IMG_MNT=/tmp/$IMG_BASE
 IMG_SHA256=/tmp/$IMG_BASE.img.sha256
 IMG_PKG_VERSIONS=/tmp/$IMG_BASE.pkg.versions
 
-display "Starting capture for ${STACK} ${DOCKER_IMAGE_VERSION} at $(date)"
+display "Starting capture for ${STACK} (${ARCH}) ${DOCKER_IMAGE_VERSION} at $(date)"
 
 display "Creating image file ${IMG}"
 make-filesystem-image "${IMG}" "${DOCKER_IMAGE_SIZE_IN_MB}" |& indent
@@ -48,4 +50,4 @@ cat "${IMG_SHA256}"
 display "Capture Package Versions"
 capture-package-versions "${DOCKER_IMAGE}" "${IMG_PKG_VERSIONS}"
 
-display "Finished capture for ${STACK} ${DOCKER_IMAGE_VERSION}"
+display "Finished capture for ${STACK} (${ARCH}) ${DOCKER_IMAGE_VERSION}"

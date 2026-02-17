@@ -2,10 +2,17 @@
 
 set -euo pipefail
 
+ARCH=$(dpkg --print-architecture)
+
 DOCKER_IMAGE="$1"
 MNT="$2"
 
-CONTAINER="$(docker create --platform linux/amd64 "$DOCKER_IMAGE")"
+CONTAINER="$(docker create --platform "linux/${ARCH}" "$DOCKER_IMAGE")"
 trap 'docker rm "$CONTAINER" > /dev/null' EXIT
 
-docker export "$CONTAINER" | tar -x -C "$MNT" --exclude=lib/modules bin etc lib lib64 sbin usr var/lib
+includes=(bin etc lib sbin usr var/lib)
+if [[ "$ARCH" == "amd64" ]]; then
+	includes+=(lib64)
+fi
+
+docker export "$CONTAINER" | tar -x -C "$MNT" --exclude=lib/modules "${includes[@]}"

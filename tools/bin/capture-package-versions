@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
+ARCH=$(dpkg --print-architecture)
+
 DOCKER_IMAGE=$1
 OUTPUT_FILE=$2
 
-docker run --platform=linux/amd64 --rm "${DOCKER_IMAGE}" dpkg-query -W -f "\${package},\${version}\n" | jq -s -R -f /usr/local/bin/csv-to-array.jq > "${OUTPUT_FILE}"
+docker run --platform "linux/${ARCH}" --rm "${DOCKER_IMAGE}" dpkg-query -W -f "\${package},\${version}\n" | jq -s -R -f /usr/local/bin/csv-to-array.jq > "${OUTPUT_FILE}"
