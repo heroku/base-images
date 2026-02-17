@@ -6,4 +6,12 @@ IMG="$1"
 IMG_SHA256="$2"
 
 sha256sum "$IMG" | cut -d ' ' -f 1 | tr -d '\n' > "$IMG_SHA256"
-gzip "$IMG"
+
+OUTFILE=
+if [[ -d /output ]]; then
+  OUTFILE=/output/$(basename "$IMG").gz
+  echo >&2 "Writing image archive to ${OUTFILE}"
+  cp "$IMG_SHA256" /output
+fi
+
+gzip ${OUTFILE:+--to-stdout} "$IMG" > "${OUTFILE:-/dev/stdout}"

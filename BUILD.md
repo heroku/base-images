@@ -50,3 +50,5 @@ To test the generation of the Heroku-specific `.img` file:
 3. `docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK_VERSION` (where `STACK_VERSION` is a integer version like `24`)
 
 You can also pass `--platform linux/amd64` or `--platform linux/arm64` to the `docker run` call above to test the generation for a specific architecture instead of using the same architecture as the host.
+
+To get the resulting `.img.gz` and `.img.sha256` files written to a local output directory on the host machine, pass `-v <localoutdir>:/output` to the `docker run` call.
