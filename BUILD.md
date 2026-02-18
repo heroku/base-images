@@ -38,13 +38,17 @@ We use GitHub Actions to build and release Heroku Base Images:
 
 * Any push to `main` will build the images and push the nightly Docker tag variants (such as `heroku/heroku:24-build.nightly`).
 * Any new Git tag will build the image and push the latest Docker tag (such as `heroku/heroku:24-build`),
-  as well as a versioned tag (such as `heroku/heroku:24-build.v123`). The `arm64` images will then also be
+  as well as a versioned tag (such as `heroku/heroku:24-build.v123`). The `amd64` images will then also be
   converted to a Heroku-specific `.img` format and uploaded to S3 for consumption by the runtime hosts.
 
 # Generating `.img` format Base Images locally
 
-To test the generation of the Heroku-specific, amd64-only `.img` file:
+To test the generation of the Heroku-specific `.img` file:
 
 1. Build the Docker images for your chosen stack as normal above.
-2. `docker build --platform=linux/amd64 ./tools -t heroku-image-tools`
-3. `docker run -it --rm --platform=linux/amd64 --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK_VERSION` (where `STACK_VERSION` is a integer version like `24`)
+2. `docker buildx build --platform "linux/amd64,linux/arm64" -t heroku-image-tools ./tools`
+3. `docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock heroku-image-tools STACK_VERSION` (where `STACK_VERSION` is a integer version like `24`)
+
+You can also pass `--platform linux/amd64` or `--platform linux/arm64` to the `docker run` call above to test the generation for a specific architecture instead of using the same architecture as the host.
+
+To get the resulting `.img.gz` and `.img.sha256` files written to a local output directory on the host machine, pass `-v <localoutdir>:/output` to the `docker run` call.
