@@ -38,7 +38,7 @@ display "Modifying image directories and files"
 install-heroku-files "${IMG_MNT}" |& indent
 
 display "Unmounting image"
-df --human-readable "${IMG_MNT}" |& indent
+df --sync --human-readable "${IMG_MNT}" |& indent
 umount "${IMG_MNT}" |& indent
 
 display "SHA256ing and gzipping image"

@@ -9,7 +9,7 @@ DOCKER_IMAGE_SIZE_IN_MB="$2"
 # of the original Docker image to avoid either wasting space or having the later tar extraction
 # step fail with out of disk space errors. The image will be mounted read-only at runtime, so
 # does not need free space for app files (separate mounts are used for those). The multiplier
-# here is to account for the 5-6% loss of usable space due to ext3 filesystem overhead, as well
+# here is to account for the 5-6% loss of usable space due to ext4 filesystem overhead, as well
 # as to ensure a few MB additional free space headroom.
 IMG_SIZE_IN_MB=$((DOCKER_IMAGE_SIZE_IN_MB * 107 / 100))
 
@@ -23,13 +23,11 @@ mkdir -p "$(dirname "$IMG")"
 # https://unix.stackexchange.com/a/121888
 fallocate --length "${IMG_SIZE_IN_MB}MiB" "${IMG}"
 
-# Format that file as an ext3 filesystem.
+# Format that file as an ext4 filesystem.
 # The `-T` argument forces the 'default' config profile to be used, since otherwise if the filesystem size
 # is less than 512 MB (as is the case for Heroku-24's run image) the 'small' profile would be used instead.
 # The `-m` argument reduces reserved-blocks-percentage from its default of 5% to 1%.
-# TODO: Switch to calling `mkfs.ext3` or `mke2fs -t ext3` since the `mkfs` alias is deprecated:
-# https://manpages.ubuntu.com/manpages/jammy/en/man8/mkfs.8.html
-mkfs -t ext3 -T default -m 1 -v "$IMG"
+mkfs.ext4 -T default -m 1 -v "$IMG"
 
 # Adjust the filesystem parameters for improved performance on runtime instances.
 # The `-c` and `-i` arguments disable automatic filesystem checks, which are otherwise run based
