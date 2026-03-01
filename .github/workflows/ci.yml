@@ -237,7 +237,7 @@ jobs:
         with:
           registry-type: public
       - name: Install crane
-        uses: buildpacks/github-actions/setup-tools@f3ec16c6d708761c6e87bbc8fe7f97375f80e7cd # v5.10.1
+        uses: buildpacks/github-actions/setup-tools@06e250da5bb4ccb9a2103719a21d2a7f2252fe83 # v5.11.0
       - name: Promote images to stable tag
         run: |
           destTags=( )
