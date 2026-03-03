@@ -9,7 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 # URIs vary across architectures, so we would otherwise have to hardcode multiple file variants.
 # There are multiple repository configuration lines in the file, all of form:
 # `Components: main universe restricted multiverse`
-# See: https://manpages.ubuntu.com/manpages/noble/en/man5/sources.list.5.html
+# See: https://manpages.ubuntu.com/manpages/resolute/en/man5/sources.list.5.html
 for repository_to_disable in multiverse restricted; do
   # sed doesn't support lookbehind so we instead have to match against the line prefix too
   # and then preserve it using `\1` in the replacement.
@@ -27,7 +27,7 @@ apt-get install -y --no-install-recommends ca-certificates
 cat >/etc/apt/sources.list.d/pgdg.sources <<'EOF'
 Types: deb
 URIs: https://apt.postgresql.org/pub/repos/apt
-Suites: noble-pgdg
+Suites: resolute-pgdg
 Components: main
 Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
 EOF
@@ -163,7 +163,7 @@ test "$(file --brief /etc/ssl/certs/java/cacerts)" = "Java KeyStore"
 # https://github.com/heroku/base-images/pull/344
 rm /usr/lib/ssl/cert.pem
 
-# Ubuntu 24.04 ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
+# Ubuntu 24.04+ ships with a default user and group named 'ubuntu' (with user+group ID of 1000)
 # that we have to remove before creating our own (`userdel` will remove the group too).
 userdel ubuntu --remove
 

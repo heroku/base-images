@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=heroku/heroku:24
+ARG BASE_IMAGE=heroku/heroku:26
 FROM $BASE_IMAGE
 
 # We have to temporarily switch back to root, since the run image sets a non-root default `USER`.
@@ -13,4 +13,4 @@ ENV CNB_GROUP_ID=1000
 
 # Stack IDs are deprecated, but we still set this for backwards compatibility:
 # https://github.com/buildpacks/spec/blob/platform/0.13/platform.md#iobuildpacksstack-labels
-ENV CNB_STACK_ID="heroku-24"
+ENV CNB_STACK_ID="heroku-26"
