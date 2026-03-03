@@ -17,6 +17,8 @@ The recipes are also rendered into Docker images that are available on Docker Hu
 | [heroku/heroku:22-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 22.04 | AMD64                   | `heroku`       |  Available   |
 | [heroku/heroku:24][heroku-tags]           | Heroku/CNB Run Image   | Ubuntu 24.04 | AMD64 + ARM64           | `heroku`       |  Recommended |
 | [heroku/heroku:24-build][heroku-tags]     | Heroku/CNB Build Image | Ubuntu 24.04 | AMD64 + ARM64           | `heroku`       |  Recommended |
+| [heroku/heroku:26][heroku-tags]           | Heroku/CNB Run Image   | Ubuntu 26.04 | AMD64 + ARM64           | `heroku`       |  In development |
+| [heroku/heroku:26-build][heroku-tags]     | Heroku/CNB Build Image | Ubuntu 26.04 | AMD64 + ARM64           | `heroku`       |  In development |
 
 The build image variants use the run images as their base, but include additional packages needed
 at build time such as development headers and compilation toolchains.
