@@ -41,6 +41,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Set up the latest Docker version
+        uses: docker/setup-docker-action@v5
+        with:
+          set-host: true
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
       - name: Build base image groups
         run: bin/build.sh "${{ matrix.stack-version }}" "${{ matrix.arch }}"
       - name: Check that the generated files are in sync
@@ -123,6 +133,16 @@ jobs:
           path: images.tar.zst
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+      - name: Set up the latest Docker version
+        uses: docker/setup-docker-action@v5
+        with:
+          set-host: true
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
       - name: Load Docker images into the Docker daemon
         run: zstd -dc --long=31 images.tar.zst | docker load
       - name: Log in to Docker Hub
@@ -168,6 +188,16 @@ jobs:
       matrix:
         stack-version: ["24"]
     steps:
+      - name: Set up the latest Docker version
+        uses: docker/setup-docker-action@v5
+        with:
+          set-host: true
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
@@ -224,6 +254,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Set up the latest Docker version
+        uses: docker/setup-docker-action@v5
+        with:
+          set-host: true
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
       - name: Log in to Docker Hub
         run: echo '${{ secrets.DOCKER_HUB_TOKEN }}' | docker login -u '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
       - name: Configure AWS credentials
