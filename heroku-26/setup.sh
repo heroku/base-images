@@ -75,11 +75,11 @@ packages=(
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   liblttng-ust1 # Used by the .NET runtime.
   liblzf1 # Used by the PHP Redis extension.
-  libmagickcore-6.q16-7-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
+  libmagickcore-7.q16-10-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).
   libmemcached11 # Used by the PHP Memcached extension.
   libmemcachedutil2t64 # Same -dev headers as libmemcached11
   libmp3lame0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libmysqlclient21
+  libmysqlclient24
   libncurses6 # Used by the Ruby runtime.
   libonig5 # Used by the PHP runtime.
   libopencore-amrnb0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
@@ -90,21 +90,21 @@ packages=(
   libsasl2-modules # Used by the Ruby and PHP runtimes.
   libsodium23 # Used by the PHP runtime.
   libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libsvtav1enc1d1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libsvtav1enc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libtirpc3t64 # used to be a dependency of iproute2 (e.g. /bin/ss linked against libtirpc.so.3), now requiring explicitly to prevent package removal - can be removed for heroku-26
   libuv1
   libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libvorbisfile3 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libvpx9 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libvpx12 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libwebpdecoder3 # Same -dev headers as the other libwebp* packages that get pulled in already
   libwmf-0.2-7 # Because libwmf-dev is in the build image
-  libx264-164 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libx265-199 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libx264-165 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libx265-215 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libxslt1.1 # Used by the PHP runtime.
   libyaml-0-2 # Used by the Ruby runtime.
-  libzip4 # Used by the PHP runtime.
+  libzip5 # Used by the PHP runtime.
   locales
   lsb-release
   media-types # Provides /etc/mime.types, used by Python's `mimetypes` stdlib module.
