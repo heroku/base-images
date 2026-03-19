@@ -70,8 +70,8 @@ packages=(
   libevent-pthreads-2.1-7
   libgd3
   libgdk-pixbuf-2.0-0
-  libgnutls-openssl27
-  libgnutls30 # Used by the Ruby and PHP runtimes.
+  libgnutls-openssl27t64
+  libgnutls30t64 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   liblttng-ust1 # Used by the .NET runtime.
   liblzf1 # Used by the PHP Redis extension.
@@ -92,7 +92,7 @@ packages=(
   libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libsvtav1enc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libuv1
+  libuv1t64
   libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libvorbisfile3 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
