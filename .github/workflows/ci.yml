@@ -34,7 +34,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["22", "24"]
+        stack-version: ["22", "24", "26"]
         exclude:
           - arch: "arm64"
             stack-version: "22"
@@ -92,7 +92,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["22", "24"]
+        stack-version: ["22", "24", "26"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -120,7 +120,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["22", "24"]
+        stack-version: ["22", "24", "26"]
         exclude:
           - arch: "arm64"
             stack-version: "22"
@@ -186,7 +186,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["24"]
+        stack-version: ["24", "26"]
     steps:
       - name: Set up the latest Docker version
         uses: docker/setup-docker-action@v5
@@ -250,7 +250,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["22", "24"]
+        stack-version: ["22", "24", "26"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
