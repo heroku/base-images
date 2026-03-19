@@ -17,7 +17,7 @@ DOCKER_IMAGE_VERSION=$(docker image inspect --platform "linux/${ARCH}" "${DOCKER
 #  - Under-report usage slightly when using the overlay2 storage driver
 #  - Be the compressed image size (instead of uncompressed) when using the containerd snapshotter
 # The `--user root` is required since the images for newer stacks default to a non-root user.
-DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform "linux/${ARCH}" --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -d 'M' -f 1)
+DOCKER_IMAGE_SIZE_IN_MB=$(docker run --rm --platform "linux/${ARCH}" --user root "${DOCKER_IMAGE}" du -sx --block-size=M | cut -f 1 | tr -d 'M')
 
 IMG_BASE=${STACK_NAME}-$STACK_VERSION-$DOCKER_IMAGE_VERSION
 IMG=/tmp/$IMG_BASE.img
