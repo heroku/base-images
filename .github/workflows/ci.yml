@@ -1,15 +1,6 @@
 name: CI
 
 on:
-  push:
-    # Avoid duplicate builds on PRs.
-    branches:
-      - main
-    tags:
-      - v*
-  schedule:
-    - cron: "0 0 * * 1-5"
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -34,7 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["22", "24", "26"]
+        stack-version: ["26"]
         exclude:
           - arch: "arm64"
             stack-version: "22"
@@ -67,24 +58,21 @@ jobs:
         run: |
           bin/generate-runtime-images.sh ${{ matrix.stack-version }}
       - name: Export base images from the Docker daemon
-        if: github.ref_name == 'main' || github.ref_type == 'tag'
         run: |
           docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "heroku/heroku:${{ matrix.stack-version }}") |  zstd -T0 --long=31 -o images.tar.zst
       - name: Save OCI base image exports to the cache
-        if: github.ref_name == 'main' || github.ref_type == 'tag'
         uses: actions/cache/save@v5
         with:
           key: ${{ github.run_id}}-${{ matrix.stack-version }}-${{ matrix.arch }}
           path: images.tar.zst
       - name: Save Heroku runtime image files to the cache
-        if: matrix.arch == 'amd64' && github.ref_type == 'tag'
+        if: matrix.arch == 'amd64'
         uses: actions/cache/save@v5
         with:
           key: runtime-images-${{ github.run_id}}-${{ matrix.stack-version }}
           path: /tmp/heroku-${{ matrix.stack-version }}*
 
   upload-runtime-images:
-    if: github.ref_type == 'tag'
     name: "Upload heroku-${{ matrix.stack-version }} runtime images"
     needs:
       - build
@@ -92,7 +80,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["22", "24", "26"]
+        stack-version: ["26"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -109,18 +97,17 @@ jobs:
           MANIFEST_APP_URL: "${{ secrets.MANIFEST_APP_URL }}"
 
   publish-images:
-    if: github.ref_name == 'main' || github.ref_type == 'tag'
     name: "Publish heroku-${{ matrix.stack-version }} (${{ matrix.arch }})"
     needs:
       - build
     runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
     env:
-      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
+      TAG_SUFFIX: ".nightly"
     strategy:
       fail-fast: false
       matrix:
         arch: ["amd64", "arm64"]
-        stack-version: ["22", "24", "26"]
+        stack-version: ["26"]
         exclude:
           - arch: "arm64"
             stack-version: "22"
@@ -176,17 +163,16 @@ jobs:
           done
 
   publish-indices:
-    if: github.ref_name == 'main' || github.ref_type == 'tag'
     name: "Publish heroku-${{ matrix.stack-version }} indices"
     needs:
       - publish-images
     runs-on: ubuntu-24.04
     env:
-      TAG_SUFFIX: ".${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}"
+      TAG_SUFFIX: ".nightly"
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["24", "26"]
+        stack-version: ["26"]
     steps:
       - name: Set up the latest Docker version
         uses: docker/setup-docker-action@v5
@@ -224,33 +210,16 @@ jobs:
             done
           done
 
-  ctc-check:
-    name: Obtain CTC Lock
-    if: github.ref_type == 'tag'
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Obtain CTC Lock via TPS API
-        run: |
-          curl -sS --connect-timeout 5 --fail-with-body --retry-connrefused --retry 5 \
-            -X PUT \
-            -H "ACCEPT: application/json" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Token ${{ secrets.TPS_TOKEN }}" \
-            -d '{"lock": {"sha": "${{ github.sha }}", "component_slug": "${{ vars.tps_component }}"}}' \
-            "${{ secrets.TPS_CTC_API_URL }}"
-
   promote-tags:
-    if: github.ref_type == 'tag'
     name: "Promote heroku-${{ matrix.stack-version }} tags"
     needs:
-      - ctc-check
       - publish-images
       - publish-indices
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        stack-version: ["22", "24", "26"]
+        stack-version: ["26"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -294,7 +263,7 @@ jobs:
             done
           fi
           for destTag in "${destTags[@]}"; do
-            srcTag="${destTag}.${{ github.ref_name }}"
+            srcTag="${destTag}.nightly"
             for host in "docker.io" "public.ecr.aws"; do
               crane copy "${host}/${srcTag}" "${host}/${destTag}"
             done
