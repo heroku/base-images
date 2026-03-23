@@ -357,7 +357,7 @@ libpcre2-posix3
 libperl5.40
 libpixman-1-0
 libpixman-1-dev
-libpkgconf3
+libpkgconf7
 libpng-dev
 libpng16-16t64
 libpoppler-glib8t64
