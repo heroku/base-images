@@ -275,9 +275,7 @@ libtext-charwidth-perl
 libtext-wrapi18n-perl
 libthai-data
 libthai0
-libtheora0
-libtheoradec1
-libtheoraenc1
+libtheora1
 libtiff6
 libtinfo6
 libtirpc-common

@@ -91,7 +91,7 @@ packages=(
   libsodium23 # Used by the PHP runtime.
   libspeex1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libsvtav1enc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
-  libtheora0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libtheora1 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
   libuv1t64
   libvips42 # Used by the ruby-vips gem / Rails Active Storage Previews.
   libvorbisenc2 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
