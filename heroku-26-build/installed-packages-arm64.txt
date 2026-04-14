@@ -420,6 +420,8 @@ libtext-wrapi18n-perl
 libthai-data
 libthai0
 libtheora1
+libtheoradec2
+libtheoraenc2
 libtiff-dev
 libtiff6
 libtiffxx6
