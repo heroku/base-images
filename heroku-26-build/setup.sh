@@ -16,6 +16,7 @@ packages=(
   libbsd-dev
   libbz2-dev
   libcairo2-dev
+  libcrypt-dev
   libcurl4-openssl-dev
   libev-dev
   libevent-dev
