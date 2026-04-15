@@ -133,6 +133,7 @@ libcc1-0
 libcfitsio10t64
 libcgif0
 libcom-err2
+libcrypt-dev
 libcrypt1
 libctf-nobfd0
 libctf0
