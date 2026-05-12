@@ -224,7 +224,6 @@ libhashkit2t64
 libhdf5-103-1t64
 libheif-dev
 libheif-plugin-aomdec
-libheif-plugin-libde265
 libheif1
 libhogweed6t64
 libhwasan0
@@ -513,7 +512,7 @@ pkgconf
 pkgconf-bin
 poppler-data
 poppler-utils
-postgresql-client-17
+postgresql-client-18
 postgresql-client-common
 procps
 python3
