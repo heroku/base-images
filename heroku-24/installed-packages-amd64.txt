@@ -334,7 +334,7 @@ perl-modules-5.38
 pinentry-curses
 poppler-data
 poppler-utils
-postgresql-client-17
+postgresql-client-18
 postgresql-client-common
 procps
 readline-common
