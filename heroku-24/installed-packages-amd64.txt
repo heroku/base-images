@@ -101,6 +101,7 @@ libdatrie1
 libdav1d7
 libdb5.3t64
 libdbus-1-3
+libde265-0
 libdebconfclient0
 libdeflate0
 libdjvulibre-text
@@ -148,6 +149,7 @@ libharfbuzz0b
 libhashkit2t64
 libhdf5-103-1t64
 libheif-plugin-aomdec
+libheif-plugin-libde265
 libheif1
 libhogweed6t64
 libhwy1t64
