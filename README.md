@@ -11,10 +11,10 @@ The recipes are also rendered into Docker images that are available on Docker Hu
 | [heroku/heroku:20-build][heroku-tags]     | Heroku Build Image     | Ubuntu 20.04 | AMD64                   | `root`         |  End-of-life |
 | [heroku/heroku:20-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 20.04 | AMD64                   | `heroku`       |  End-of-life |
 | [heroku/heroku:20-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 20.04 | AMD64                   | `heroku`       |  End-of-life |
-| [heroku/heroku:22][heroku-tags]           | Heroku Run Image       | Ubuntu 22.04 | AMD64                   | `root`         |  Available   |
-| [heroku/heroku:22-build][heroku-tags]     | Heroku Build Image     | Ubuntu 22.04 | AMD64                   | `root`         |  Available   |
-| [heroku/heroku:22-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 22.04 | AMD64                   | `heroku`       |  Available   |
-| [heroku/heroku:22-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 22.04 | AMD64                   | `heroku`       |  Available   |
+| [heroku/heroku:22][heroku-tags]           | Heroku Run Image       | Ubuntu 22.04 | AMD64                   | `root`         |  Deprecated  |
+| [heroku/heroku:22-build][heroku-tags]     | Heroku Build Image     | Ubuntu 22.04 | AMD64                   | `root`         |  Deprecated  |
+| [heroku/heroku:22-cnb][heroku-tags]       | CNB Run Image          | Ubuntu 22.04 | AMD64                   | `heroku`       |  Deprecated  |
+| [heroku/heroku:22-cnb-build][heroku-tags] | CNB Build Image        | Ubuntu 22.04 | AMD64                   | `heroku`       |  Deprecated  |
 | [heroku/heroku:24][heroku-tags]           | Heroku/CNB Run Image   | Ubuntu 24.04 | AMD64 + ARM64           | `heroku`       |  Available   |
 | [heroku/heroku:24-build][heroku-tags]     | Heroku/CNB Build Image | Ubuntu 24.04 | AMD64 + ARM64           | `heroku`       |  Available   |
 | [heroku/heroku:26][heroku-tags]           | Heroku/CNB Run Image   | Ubuntu 26.04 | AMD64 + ARM64           | `heroku`       |  Recommended |
