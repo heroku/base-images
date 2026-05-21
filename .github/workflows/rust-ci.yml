@@ -1,0 +1,52 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    name: Rust Code Linting
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: stack-package-report
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Update Rust toolchain
+        run: rustup update
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
+        with:
+          workspaces: stack-package-report
+      - name: Clippy
+        run: cargo clippy --all-targets --locked -- --deny warnings
+      - name: rustfmt
+        run: cargo fmt -- --check
+
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: stack-package-report
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Update Rust toolchain
+        run: rustup update
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
+        with:
+          workspaces: stack-package-report
+      - name: Run unit tests
+        run: cargo test --locked
