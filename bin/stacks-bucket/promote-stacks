@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=lib.sh
+source "$(dirname "${0}")/lib.sh"
+
+exit_with_usage_message() {
+	cat >&2 <<-EOF
+		Usage: ${0} --from-env <env> --to-env <env> [--stacks <csv>] [--dry-run]
+
+		Environments: ${VALID_ENVS[*]}
+		Stacks:  comma-separated stack names (e.g. heroku-24,heroku-24-build).
+		         If omitted, all stacks from <from-env> are promoted.
+		Dry-run: Print what would change without publishing.
+	EOF
+	exit 1
+}
+
+from_env=""
+to_env=""
+stacks=""
+do_dry_run=0
+while [[ ${#} -gt 0 ]]; do
+	case "${1}" in
+		--from-env) from_env="${2}"; shift 2 ;;
+		--to-env)   to_env="${2}";   shift 2 ;;
+		--stacks)   stacks="${2}";   shift 2 ;;
+		--dry-run)  do_dry_run=1;    shift ;;
+		*)
+			print_err "Unknown argument: ${1}"
+			exit_with_usage_message
+			;;
+	esac
+done
+
+if [[ -z "${from_env}" || -z "${to_env}" ]]; then
+	exit_with_usage_message
+fi
+
+validate_deployment_env "${from_env}"
+validate_deployment_env "${to_env}"
+
+# These scripts rely on a set of common env vars, CLI tools, AWS access, and a GPG key.
+# Verify they're all in place before doing any real work.
+verify_setup
+
+WORKDIR="$(mktemp -d)"
+trap 'rm -rf "${WORKDIR}"' EXIT
+
+from_manifest_file="${WORKDIR}/${from_env}.yml"
+to_manifest_file="${WORKDIR}/${to_env}.yml"
+modified_manifest_file="${WORKDIR}/${to_env}-modified.yml"
+
+print_info "Fetching manifest for ${from_env}"
+fetch_manifest "${from_env}" "${from_manifest_file}"
+print_info "Fetching manifest for ${to_env}"
+fetch_manifest "${to_env}" "${to_manifest_file}"
+
+if [[ -n "${stacks}" ]]; then
+	validate_stacks_in "${stacks}" "${from_manifest_file}" "${from_env}"
+fi
+
+if [[ -z "${stacks}" ]]; then
+	print_info "Copying ${from_env} manifest as the new ${to_env} manifest"
+	cp "${from_manifest_file}" "${modified_manifest_file}"
+else
+	print_info "Promoting ${stacks} from ${from_env} to ${to_env}"
+	# Drop the selected stacks from the to-manifest, append them from the from-manifest.
+	# yq strips the YAML document marker when a filter rewrites the doc, so we prepend it ourselves.
+	{
+		echo '---'
+		from_manifest_file="${from_manifest_file}" to_manifest_file="${to_manifest_file}" stacks="${stacks}" \
+			yq -P --null-input '
+				(load(strenv(to_manifest_file)) | map(select(.name as $name | (strenv(stacks) | split(",")) | contains([$name]) | not)))
+				+ (load(strenv(from_manifest_file)) | map(select(.name as $name | (strenv(stacks) | split(",")) | contains([$name]))))
+				| sort_by(.name)
+			'
+	} >"${modified_manifest_file}"
+fi
+
+print_info "Diffing the manifests"
+diff -u "${to_manifest_file}" "${modified_manifest_file}" || true
+
+if diff -q "${to_manifest_file}" "${modified_manifest_file}" >/dev/null; then
+	print_warn "No effective change; nothing to do."
+	exit 0
+fi
+
+if [[ "${do_dry_run}" -eq 1 ]]; then
+	print_warn "Dry-run: not publishing."
+	exit 0
+fi
+
+print_info "Publishing to ${to_env}"
+publish_signed_manifest "${to_env}" "${modified_manifest_file}"
