@@ -1,5 +1,5 @@
 //! HTML-table rendering of the current package set across stacks for the
-//! Heroku DevCenter stack-packages article.
+//! Heroku Dev Center stack-packages article.
 
 use std::collections::{BTreeMap, BTreeSet};
 
