@@ -73,6 +73,7 @@ packages=(
   libgnutls-openssl27t64
   libgnutls30t64 # Used by the Ruby and PHP runtimes.
   libharfbuzz-icu0 # Used by FFmpeg in heroku-buildpack-activestorage-preview.
+  libheif-plugin-libde265 # HEIC/HEVC decode plugin for libheif (used by libvips, ImageMagick and libgd).
   liblttng-ust1 # Used by the .NET runtime.
   liblzf1 # Used by the PHP Redis extension.
   libmagickcore-7.q16-10-extra # Used by the PHP Imagick extension (using the `-extra` package for SVG support).

@@ -145,6 +145,7 @@ libdatrie1
 libdav1d7
 libdb5.3t64
 libdbus-1-3
+libde265-0
 libdebconfclient0
 libdeflate-dev
 libdeflate0
@@ -228,6 +229,7 @@ libhashkit2t64
 libhdf5-310
 libheif-dev
 libheif-plugin-aomdec
+libheif-plugin-libde265
 libheif1
 libhogweed6t64
 libhwasan0
