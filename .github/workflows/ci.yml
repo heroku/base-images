@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Run shellcheck
         run: find . -type f \( -name "*.sh" -o -path "*/bin/*" \) ! -name '*.jq' | xargs -t shellcheck
 
@@ -40,7 +40,7 @@ jobs:
             stack-version: "22"
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up the latest Docker version
         uses: docker/setup-docker-action@v5
         with:
@@ -95,7 +95,7 @@ jobs:
         stack-version: ["22", "24", "26"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Restore heroku runtime images from the cache
         uses: actions/cache/restore@v5
         with:
@@ -253,7 +253,7 @@ jobs:
         stack-version: ["22", "24", "26"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up the latest Docker version
         uses: docker/setup-docker-action@v5
         with:
