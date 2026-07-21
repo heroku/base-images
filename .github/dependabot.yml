@@ -9,3 +9,12 @@ updates:
         update-types:
           - "minor"
           - "patch"
+  - package-ecosystem: "cargo"
+    directory: "/stack-package-report"
+    schedule:
+      interval: "monthly"
+    groups:
+      cargo:
+        update-types:
+          - "minor"
+          - "patch"
