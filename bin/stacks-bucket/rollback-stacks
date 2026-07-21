@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=lib.sh
+source "$(dirname "${0}")/lib.sh"
+
+exit_with_usage_message() {
+	cat >&2 <<-EOF
+		Usage: ${0} --env <env> [--stacks <csv>] [--at <date-or-timestamp>] [--dry-run]
+
+		Environments: ${VALID_ENVS[*]}
+		Stacks:       comma-separated stack names. If omitted, the whole manifest is rolled back.
+		At:           ISO date (2026-05-19) or timestamp (2026-05-19T14:00:00Z).
+		              Resolves to the most recent release on or before that point.
+		              If omitted, resolves to the previous release (one before current).
+		Dry-run:      Print what would change without publishing.
+
+		To list available releases for an env, use list-manifest-releases.
+	EOF
+	exit 1
+}
+
+env=""
+stacks=""
+at=""
+do_dry_run=0
+while [[ ${#} -gt 0 ]]; do
+	case "${1}" in
+		--env)     env="${2}";    shift 2 ;;
+		--stacks)  stacks="${2}"; shift 2 ;;
+		--at)      at="${2}";     shift 2 ;;
+		--dry-run) do_dry_run=1;  shift ;;
+		*)
+			print_err "Unknown argument: ${1}"
+			exit_with_usage_message
+			;;
+	esac
+done
+if [[ -z "${env}" ]]; then
+	exit_with_usage_message
+fi
+validate_deployment_env "${env}"
+
+# These scripts rely on a set of common env vars, CLI tools, AWS access, and a GPG key.
+# Verify they're all in place before doing any real work.
+verify_setup
+
+WORKDIR="$(mktemp -d)"
+trap 'rm -rf "${WORKDIR}"' EXIT
+
+# Returns release timestamps (no path, no extension) for the env, oldest first.
+list_release_timestamps() {
+	aws s3 ls "$(build_s3_uri "$(get_release_prefix "${env}")")" \
+		| awk '{print $4}' \
+		| grep -E '\.yml\.signed$' \
+		| sed -E 's/\.yml\.signed$//' \
+		| sort
+}
+
+# Download a release file (by timestamp) and write its decrypted YAML.
+fetch_release_manifest() {
+	local release_ts="${1}" output_file="${2}"
+	aws s3 cp "$(build_s3_uri "$(get_release_prefix "${env}")${release_ts}.yml.signed")" - \
+		| gpg --decrypt --no-tty >"${output_file}"
+	if [[ ! -s "${output_file}" ]]; then
+		print_err "Empty release for ${release_ts}"
+		return 1
+	fi
+}
+
+mapfile -t release_timestamps < <(list_release_timestamps)
+if [[ "${#release_timestamps[@]}" -eq 0 ]]; then
+	print_err "No releases for ${env}"
+	exit 1
+fi
+
+current_release_ts="${release_timestamps[-1]}"
+print_info "Current release: ${current_release_ts}"
+
+# Filter candidates to "everything except current."
+candidate_release_timestamps=("${release_timestamps[@]:0:${#release_timestamps[@]}-1}")
+if [[ "${#candidate_release_timestamps[@]}" -eq 0 ]]; then
+	print_err "Only one release exists for ${env}; nothing to roll back to."
+	exit 1
+fi
+
+# If --at, narrow candidates to those <= that point in time.
+# A bare date (YYYY-MM-DD) is treated as end-of-day UTC.
+if [[ -n "${at}" ]]; then
+	if [[ "${at}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+		at_cmp="${at}T23:59:59Z"
+	else
+		at_cmp="${at}"
+	fi
+	filtered_release_timestamps=()
+	for release_ts in "${candidate_release_timestamps[@]}"; do
+		if [[ "${release_ts}" < "${at_cmp}" || "${release_ts}" == "${at_cmp}" ]]; then
+			filtered_release_timestamps+=("${release_ts}")
+		fi
+	done
+	candidate_release_timestamps=("${filtered_release_timestamps[@]}")
+	if [[ "${#candidate_release_timestamps[@]}" -eq 0 ]]; then
+		print_err "No release on or before ${at}"
+		exit 1
+	fi
+fi
+
+# Resolve current YAML once for diffs and per-stack lookups.
+current_manifest_file="${WORKDIR}/${env}-current.yml"
+fetch_release_manifest "${current_release_ts}" "${current_manifest_file}"
+
+if [[ -n "${stacks}" ]]; then
+	validate_stacks_in "${stacks}" "${current_manifest_file}" "${env}"
+fi
+
+if [[ -z "${stacks}" ]]; then
+	# Whole-env rollback: the target is the most recent candidate.
+	target_release_ts="${candidate_release_timestamps[-1]}"
+	print_info "Target release: ${target_release_ts}"
+	target_manifest_file="${WORKDIR}/${env}-target.yml"
+	fetch_release_manifest "${target_release_ts}" "${target_manifest_file}"
+
+	print_info "Diff (- current, + target):"
+	diff -u "${current_manifest_file}" "${target_manifest_file}" || true
+
+	if diff -q "${current_manifest_file}" "${target_manifest_file}" >/dev/null; then
+		print_warn "Current and target are identical; nothing to do."
+		exit 0
+	fi
+
+	if [[ "${do_dry_run}" -eq 1 ]]; then
+		print_warn "Dry-run: not publishing."
+		exit 0
+	fi
+
+	publish_signed_manifest "${env}" "${target_manifest_file}"
+	exit 0
+fi
+
+# Per-stack rollback: for each named stack, find the most recent candidate
+# release where its entry differs from current.
+IFS=',' read -ra stack_list <<<"${stacks}"
+declare -A target_release_for_stack
+missing=()
+
+for stack in "${stack_list[@]}"; do
+	stack="${stack// /}"
+	if [[ -z "${stack}" ]]; then
+		continue
+	fi
+	found_release_ts=""
+	for ((i=${#candidate_release_timestamps[@]}-1; i>=0; i--)); do
+		release_ts="${candidate_release_timestamps[i]}"
+		release_manifest_file="${WORKDIR}/${env}-release-${release_ts}.yml"
+		if [[ ! -s "${release_manifest_file}" ]]; then
+			fetch_release_manifest "${release_ts}" "${release_manifest_file}"
+		fi
+		current_entry="$(yq -o=json ".[] | select(.name == \"${stack}\")" "${current_manifest_file}")"
+		release_entry="$(yq -o=json ".[] | select(.name == \"${stack}\")" "${release_manifest_file}")"
+		if [[ -z "${release_entry}" ]]; then
+			continue
+		fi
+		if [[ "${current_entry}" != "${release_entry}" ]]; then
+			found_release_ts="${release_ts}"
+			break
+		fi
+	done
+	if [[ -z "${found_release_ts}" ]]; then
+		missing+=("${stack}")
+		continue
+	fi
+	target_release_for_stack["${stack}"]="${found_release_ts}"
+	print_info "  ${stack} -> ${found_release_ts}"
+done
+
+if [[ "${#missing[@]}" -gt 0 ]]; then
+	print_err "No previous version in ${env} for: ${missing[*]}"
+	exit 1
+fi
+
+# Build a new manifest = current + selected substitutions.
+# Start from current, then for each rolled-back stack swap its entry with the
+# version from the chosen release. yq strips the document marker when a filter
+# rewrites the doc, so we prepend it ourselves on each pass.
+modified_manifest_file="${WORKDIR}/${env}-modified.yml"
+cp "${current_manifest_file}" "${modified_manifest_file}"
+for stack in "${!target_release_for_stack[@]}"; do
+	release_ts="${target_release_for_stack[${stack}]}"
+	release_manifest_file="${WORKDIR}/${env}-release-${release_ts}.yml"
+	next_manifest_file="${WORKDIR}/${env}-modified-next.yml"
+	{
+		echo '---'
+		stack="${stack}" release_manifest_file="${release_manifest_file}" modified_manifest_file="${modified_manifest_file}" \
+			yq -P --null-input '
+				load(strenv(modified_manifest_file))
+				| (.[] | select(.name == strenv(stack))) |=
+					(load(strenv(release_manifest_file)) | .[] | select(.name == strenv(stack)))
+			'
+	} >"${next_manifest_file}"
+	mv "${next_manifest_file}" "${modified_manifest_file}"
+done
+
+print_info "Diff (- current, + new):"
+diff -u "${current_manifest_file}" "${modified_manifest_file}" || true
+
+if diff -q "${current_manifest_file}" "${modified_manifest_file}" >/dev/null; then
+	print_warn "No effective change; nothing to do."
+	exit 0
+fi
+
+if [[ "${do_dry_run}" -eq 1 ]]; then
+	print_warn "Dry-run: not publishing."
+	exit 0
+fi
+
+publish_signed_manifest "${env}" "${modified_manifest_file}"
