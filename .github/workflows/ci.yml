@@ -154,7 +154,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2.1.6
+        uses: aws-actions/amazon-ecr-login@03f1aad4c6c7ffd436567f42f9384779290529bd # v2.1.7
         with:
           registry-type: public
       - name: Publish base images to registries
@@ -207,7 +207,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2.1.6
+        uses: aws-actions/amazon-ecr-login@03f1aad4c6c7ffd436567f42f9384779290529bd # v2.1.7
         with:
           registry-type: public
       - name: Publish multi-arch image index
@@ -273,11 +273,11 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
       - name: Log in to Amazon ECR Public
         id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2.1.6
+        uses: aws-actions/amazon-ecr-login@03f1aad4c6c7ffd436567f42f9384779290529bd # v2.1.7
         with:
           registry-type: public
       - name: Install crane
-        uses: buildpacks/github-actions/setup-tools@c1c71086a0e89a65c04ea113390227fd7f05d9df # v6.0.0
+        uses: buildpacks/github-actions/setup-tools@36416a96be10a6cc7170e7c9c63656d4092f78b2 # v6.1.0
       - name: Promote images to stable tag
         run: |
           destTags=( )
