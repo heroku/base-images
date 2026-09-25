@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=lib.sh
+source "$(dirname "${0}")/lib.sh"
+
+exit_with_usage_message() {
+	cat >&2 <<-EOF
+		Usage: ${0} --env <env>
+
+		Lists releases for the given env, oldest first. Marks the current one.
+
+		Environments: ${VALID_ENVS[*]}
+	EOF
+	exit 1
+}
+
+env=""
+while [[ ${#} -gt 0 ]]; do
+	case "${1}" in
+		--env) env="${2}"; shift 2 ;;
+		*)
+			print_err "Unknown argument: ${1}"
+			exit_with_usage_message
+			;;
+	esac
+done
+
+if [[ -z "${env}" ]]; then
+	exit_with_usage_message
+fi
+
+validate_deployment_env "${env}"
+
+# These scripts rely on a set of common env vars, CLI tools, AWS access, and a GPG key.
+# Verify they're all in place before doing any real work.
+verify_setup
+
+mapfile -t release_timestamps < <(aws s3 ls "$(build_s3_uri "$(get_release_prefix "${env}")")" \
+	| awk '{print $4}' \
+	| grep -E '\.yml\.signed$' \
+	| sed -E 's/\.yml\.signed$//' \
+	| sort)
+
+if [[ "${#release_timestamps[@]}" -eq 0 ]]; then
+	print_err "No releases for ${env}"
+	exit 1
+fi
+
+current_release_ts="${release_timestamps[-1]}"
+
+echo "Current release for ${env}:"
+printf '  %s\n' "${current_release_ts}"
+
+if [[ "${#release_timestamps[@]}" -gt 1 ]]; then
+	echo "Previous releases for ${env}:"
+	# Iterate from second-newest down to oldest so the list reads top-down by recency.
+	for ((i=${#release_timestamps[@]}-2; i>=0; i--)); do
+		printf '  %s\n' "${release_timestamps[i]}"
+	done
+fi
