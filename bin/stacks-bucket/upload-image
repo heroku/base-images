@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=lib.sh
+source "$(dirname "${0}")/lib.sh"
+
+exit_with_usage_message() {
+	cat >&2 <<-EOF
+		Usage: ${0} --env staging --stack <name> --version <ver> --git-ref <sha> --file <path>
+
+		Uploads a single image's gz tarball to s3://\$MANIFEST_BUCKET/images/, computes
+		its sha256, builds a manifest entry, replaces the existing entry for that stack
+		in the staging manifest (or inserts if absent), and publishes a new release.
+
+		Only --env staging is allowed. Promotions to canary/production go via
+		promote-stacks, rollbacks via rollback-stacks.
+	EOF
+	exit 1
+}
+
+env=""
+stack_name=""
+version=""
+git_ref=""
+file=""
+while [[ ${#} -gt 0 ]]; do
+	case "${1}" in
+		--env)     env="${2}";        shift 2 ;;
+		--stack)   stack_name="${2}"; shift 2 ;;
+		--version) version="${2}";    shift 2 ;;
+		--git-ref) git_ref="${2}";    shift 2 ;;
+		--file)    file="${2}";       shift 2 ;;
+		*)
+			print_err "Unknown argument: ${1}"
+			exit_with_usage_message
+			;;
+	esac
+done
+
+# Uploading images is only allowed to staging. We keep it as an explicit argument to make
+# it more explicit, but also allowing manual emergency uploads by removing this check here.
+if [[ "${env}" != "staging" ]]; then
+	print_err "--env must be staging"
+	exit_with_usage_message
+fi
+
+if [[ -z "${stack_name}" || -z "${version}" || -z "${git_ref}" || -z "${file}" ]]; then
+	exit_with_usage_message
+fi
+
+if [[ ! -f "${file}" ]]; then
+	print_err "File does not exist: ${file}"
+	exit 1
+fi
+
+# These scripts rely on a set of common env vars, CLI tools, AWS access, and a GPG key.
+# Verify they're all in place before doing any real work.
+verify_setup
+
+WORKDIR="$(mktemp -d)"
+trap 'rm -rf "${WORKDIR}"' EXIT
+
+image_filename="${stack_name}-${version}.img.gz"
+image_sha256="$(shasum -a 256 "${file}" | awk '{print $1}')"
+# IMAGE_DOWNLOAD_URL_PREFIX is the public https prefix consumers fetch images from.
+# It's distinct from MANIFEST_BUCKET (the write target) so we can front the bucket
+# with a CDN or use a different host without changing where we upload.
+image_url="${IMAGE_DOWNLOAD_URL_PREFIX%/}/${image_filename}"
+
+current_manifest_file="${WORKDIR}/${env}-current.yml"
+modified_manifest_file="${WORKDIR}/${env}-modified.yml"
+
+print_info "Fetching manifest for ${env}"
+fetch_manifest "${env}" "${current_manifest_file}"
+
+print_info "Updating ${stack_name} in ${env} manifest"
+
+# Drop any existing entry with the same stack name, then append the new one and sort.
+# yq reads values via strenv(); the env vars are scoped to this single command.
+# yq strips the YAML document marker when a filter rewrites the doc, so we prepend it ourselves.
+{
+	echo '---'
+	stack_name="${stack_name}" version="${version}" git_ref="${git_ref}" image_url="${image_url}" image_sha256="${image_sha256}" \
+		yq -P '
+			map(select(.name != strenv(stack_name)))
+			+ [{
+				"name": strenv(stack_name),
+				"version": strenv(version),
+				"git_ref": strenv(git_ref),
+				"url": strenv(image_url),
+				"sha256": strenv(image_sha256),
+				"primary": true,
+			}]
+			| sort_by(.name)
+		' "${current_manifest_file}"
+} >"${modified_manifest_file}"
+
+print_info "Diffing the manifests"
+diff -u "${current_manifest_file}" "${modified_manifest_file}" || true
+
+if diff -q "${current_manifest_file}" "${modified_manifest_file}" >/dev/null; then
+	print_warn "No effective change, stopping"
+	exit 0
+fi
+
+print_info "Uploading ${image_filename}"
+aws s3 cp "${file}" "s3://${MANIFEST_BUCKET}/images/${image_filename}" \
+	--content-type application/gzip >/dev/null
+
+publish_signed_manifest "${env}" "${modified_manifest_file}"
